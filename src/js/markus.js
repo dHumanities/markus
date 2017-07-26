@@ -1,5 +1,5 @@
 /**
- * @api {head} /markus.js Configuration object.
+ * @api {head} markus.js markus
  * @apiName ConfigurationMarkus
  * @apiGroup Markus
  *
@@ -15,7 +15,7 @@ var markus = {
 };
 
 /**
-* @api {head} /markus.js Define JQuery Goto
+* @api {head} markus.js $.goto()
  * @apiName GotoMarkus
  * @apiGroup Markus
  *
@@ -37,7 +37,7 @@ $.fn.goto = function() {
 } )(window.jQuery);
 
 /**
-* @api {head} /markus.js Define JQuery ReplaceTagName
+* @api {head} markus.js $.replaceTagName()
  * @apiName ReplaceTagNameMarkus
  * @apiGroup Markus
  *
