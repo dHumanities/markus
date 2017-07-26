@@ -17,5 +17,9 @@
     "grunt-jsonlint": "^1.0.4",
     "grunt-markdown": "^0.6.1",
     "grunt-replace": "^0.7.8"
+  },
+  "apidoc": {
+    "title": "MARKUS API Documentation",
+    "url": "https://github.com/dHumanities/markus"
   }
 }
