@@ -1,6 +1,19 @@
 {
     "project": {},
     "files": {
+        "src\\js\\comment.js": {
+            "name": "src\\js\\comment.js",
+            "modules": {
+                "comment.js": 1
+            },
+            "classes": {
+                "comment.js_anonymous": 1
+            },
+            "fors": {
+                "Global": 1
+            },
+            "namespaces": {}
+        },
         "src\\js\\markus.js": {
             "name": "src\\js\\markus.js",
             "modules": {
@@ -29,6 +42,22 @@
         }
     },
     "modules": {
+        "comment.js": {
+            "name": "comment.js",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "comment.js_anonymous": 1
+            },
+            "fors": {
+                "Global": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\js\\comment.js",
+            "line": 6,
+            "description": "Comment.js base file"
+        },
         "markus.js": {
             "name": "markus.js",
             "submodules": {},
@@ -63,6 +92,28 @@
         }
     },
     "classes": {
+        "comment.js_anonymous": {
+            "name": "comment.js_anonymous",
+            "shortname": "comment.js_anonymous",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "comment.js",
+            "namespace": "",
+            "file": "src\\js\\comment.js",
+            "line": 6,
+            "description": "The class that holds the variables and functions created in the namespace of this file.\nThe constrcutor of this object is only called once, because it is an anonymous function",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "_m",
+                    "description": "a reference to the Markus Configuration Object is passed",
+                    "type": "Object"
+                }
+            ]
+        },
         "Global": {
             "name": "Global",
             "shortname": "Global",
@@ -75,7 +126,7 @@
             "namespace": "",
             "file": "src\\js\\markus.js",
             "line": 5,
-            "description": "The global namespace"
+            "description": "The global namespace. This is the Global namespace in **all** the files"
         },
         "JQuery": {
             "name": "JQuery",
@@ -130,6 +181,90 @@
     },
     "elements": {},
     "classitems": [
+        {
+            "file": "src\\js\\comment.js",
+            "line": 15,
+            "description": "Finds all comments for this element, stores their text contents into an array,\nand sets this array as value atribute (after Unicode Escaping) for the `span`\ncomment Container. Finally it triggers a click event on the commentIcon span",
+            "itemtype": "method",
+            "name": "saveComment",
+            "class": "comment.js_anonymous",
+            "module": "comment.js"
+        },
+        {
+            "file": "src\\js\\comment.js",
+            "line": 54,
+            "description": "Handles the removing of a comment. It first removes the comment, and then\nresaves all the ones that are still left.",
+            "itemtype": "method",
+            "name": "removeAnySync",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "The event Object that is passed",
+                    "type": "Event"
+                }
+            ],
+            "class": "comment.js_anonymous",
+            "module": "comment.js"
+        },
+        {
+            "file": "src\\js\\comment.js",
+            "line": 90,
+            "description": "Enables the editing of the provided comment. It starts the editing of it\nby setting the panel-body to contenteditable and chaning the edit to a save\nbutton.",
+            "itemtype": "method",
+            "name": "edit",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "the propagated event from the DOM",
+                    "type": "Event"
+                }
+            ],
+            "class": "comment.js_anonymous",
+            "module": "comment.js"
+        },
+        {
+            "file": "src\\js\\comment.js",
+            "line": 110,
+            "description": "Saves the current commentField. It escape Unicode Characters",
+            "itemtype": "method",
+            "name": "save",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "[description]",
+                    "type": "[type]"
+                }
+            ],
+            "class": "comment.js_anonymous",
+            "module": "comment.js"
+        },
+        {
+            "file": "src\\js\\comment.js",
+            "line": 142,
+            "description": "Called upon parsing of the document to parse the comment UI from the data in the html\ndocument. This goes through all the comments and sanitizes them.",
+            "itemtype": "method",
+            "name": "startAddingCommentHolder",
+            "class": "comment.js_anonymous",
+            "module": "comment.js"
+        },
+        {
+            "file": "src\\js\\comment.js",
+            "line": 208,
+            "description": "Adds all the UI Event handles for the Comment UI. This class links the UI to\nthe functions behind the scenes.",
+            "itemtype": "method",
+            "name": "registerCommentUI",
+            "class": "Global",
+            "module": "comment.js"
+        },
+        {
+            "file": "src\\js\\comment.js",
+            "line": 227,
+            "description": "Defines what happens when you click the commentIcon. It generates a new commentHolder",
+            "itemtype": "method",
+            "name": "registerCommentIcon",
+            "class": "Global",
+            "module": "comment.js"
+        },
         {
             "file": "src\\js\\markus.js",
             "line": 10,

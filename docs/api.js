@@ -4,13 +4,20 @@ YUI.add("yuidoc-meta", function(Y) {
         "Global",
         "JQuery",
         "WebDictionary",
+        "comment.js_anonymous",
         "webDictionary.js_anonymous"
     ],
     "modules": [
+        "comment.js",
         "markus.js",
         "webDictionary.js"
     ],
     "allModules": [
+        {
+            "displayName": "comment.js",
+            "name": "comment.js",
+            "description": "Comment.js base file"
+        },
         {
             "displayName": "markus.js",
             "name": "markus.js",
