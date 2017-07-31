@@ -7,6 +7,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "JQuery",
         "WebDictionary",
         "comment.js_anonymous",
+        "navbar.js_anonymous",
         "webDictionary.js_anonymous"
     ],
     "modules": [

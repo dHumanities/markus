@@ -43,6 +43,7 @@
                                 <li><a href="../classes/Data.html">Data</a></li>
                                 <li><a href="../classes/Global.html">Global</a></li>
                                 <li><a href="../classes/JQuery.html">JQuery</a></li>
+                                <li><a href="../classes/navbar.js_anonymous.html">navbar.js_anonymous</a></li>
                                 <li><a href="../classes/WebDictionary.html">WebDictionary</a></li>
                                 <li><a href="../classes/webDictionary.js_anonymous.html">webDictionary.js_anonymous</a></li>
                             </ul>
@@ -100,26 +101,381 @@
 
 
 <div class="box intro">
-    <p>Here the Markus.Data methods are defined and added to the Global Markus Singleton.</p>
+    <p>Here the Markus.Data methods are defined and added to the Global Markus Singleton.
+The Data methods handle mostly data conversion</p>
 
 </div>
 
+    <div class="constructor">
+        <h2>Constructor</h2>
+<div id="method_Data" class="method item">
+    <h3 class="name"><code>Data</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_data.js.html#l6"><code>src\js\data.js:6</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+
+
+
+</div>
+    </div>
 
 <div id="classdocs" class="tabview">
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
     </ul>
 
     <div>
         <div id="index" class="api-class-tabpanel index">
             <h2 class="off-left">Item Index</h2>
 
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#method_getMarkupsArray">getMarkupsArray</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_objArrayToCSV">objArrayToCSV</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_objArrayToHTML">objArrayToHTML</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_objArrayToTSV">objArrayToTSV</a>
+
+                            </li>
+                    </ul>
+                </div>
 
 
 
         </div>
 
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method_getMarkupsArray" class="method item">
+    <h3 class="name"><code>getMarkupsArray</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>withPassage</code>
+                </li>
+                <li class="arg">
+                        <code>withSupportText</code>
+                </li>
+                <li class="arg">
+                        <code>noOfChars</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_data.js.html#l15"><code>src\js\data.js:15</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Returns an array that, depending on the provided parameters will return the
+markups in the passage or in the whole document. And depending on the Boolean flag
+withSupportText it returns its surrounding text.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">withPassage</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>Do we want to include the passage</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">withSupportText</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>Do we want to include support Text</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">noOfChars</code>
+                        <span class="type">Int</span>
+
+
+                    <div class="param-description">
+                        <p>The number of chars to get</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Array</span>:
+                    <p>An Array of markups</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_objArrayToCSV" class="method item">
+    <h3 class="name"><code>objArrayToCSV</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>objArray</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_data.js.html#l149"><code>src\js\data.js:149</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Turns an array of objects into a CSV array.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">objArray</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>the array to turn into a CSV</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>The CSV data string</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_objArrayToHTML" class="method item">
+    <h3 class="name"><code>objArrayToHTML</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>objArray</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_data.js.html#l228"><code>src\js\data.js:228</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Returns the provided array as a HTML table.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">objArray</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>the array of objects we want to convert</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>the table of the array</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_objArrayToTSV" class="method item">
+    <h3 class="name"><code>objArrayToTSV</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>objArray</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_data.js.html#l192"><code>src\js\data.js:192</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Turns an array of objects into a TSV array.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">objArray</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>the array to turn into a TSV</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>The TSV data string</p>
+
+            </div>
+        </div>
+
+
+</div>
+            </div>
 
 
 

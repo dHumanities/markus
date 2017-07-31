@@ -1,3 +1,17 @@
+/**
+ * navbar.js base file.
+ * @module navbar.js
+ */
+
+
+  /**
+  The class that holds the variables and functions created in the namespace of this file.
+  The constrcutor of this object is only called once, because it is an anonymous function.
+
+  @class helpInfo.js_anonymous
+  @constructor
+  @param {Object}  _m a reference to the Markus Configuration Object is passed
+  **/
 ( function(_m) {
 
     _m.helpInfo = {};
@@ -67,7 +81,7 @@
         // console.log("sample1Popover");
         /*
           start
-          Nested multi tags detect and show popup 
+          Nested multi tags detect and show popup
         */
 
         var typePopoverContent = popover.find(".typePopoverContent");
@@ -152,7 +166,4 @@
     _m.helpInfo.register = function() {
         loadHelpInfo();
     }
-
-
-
 } )(markus);

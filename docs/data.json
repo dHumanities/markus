@@ -18,9 +18,7 @@
         },
         "src\\js\\data.js": {
             "name": "src\\js\\data.js",
-            "modules": {
-                "data.js": 1
-            },
+            "modules": {},
             "classes": {
                 "Data": 1
             },
@@ -35,6 +33,17 @@
             "classes": {
                 "Global": 1,
                 "JQuery": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\js\\navbar.js": {
+            "name": "src\\js\\navbar.js",
+            "modules": {
+                "data.js": 1
+            },
+            "classes": {
+                "navbar.js_anonymous": 1
             },
             "fors": {},
             "namespaces": {}
@@ -78,12 +87,13 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "Data": 1
+                "Data": 1,
+                "navbar.js_anonymous": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src\\js\\data.js",
+            "file": "src\\js\\navbar.js",
             "line": 6,
             "description": "data.js base file."
         },
@@ -183,7 +193,8 @@
             "namespace": "",
             "file": "src\\js\\data.js",
             "line": 6,
-            "description": "Here the Markus.Data methods are defined and added to the Global Markus Singleton."
+            "description": "Here the Markus.Data methods are defined and added to the Global Markus Singleton.\nThe Data methods handle mostly data conversion",
+            "is_constructor": 1
         },
         "JQuery": {
             "name": "JQuery",
@@ -198,6 +209,28 @@
             "file": "src\\js\\markus.js",
             "line": 20,
             "description": "Some JQuery extensions"
+        },
+        "navbar.js_anonymous": {
+            "name": "navbar.js_anonymous",
+            "shortname": "navbar.js_anonymous",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "data.js",
+            "namespace": "",
+            "file": "src\\js\\navbar.js",
+            "line": 6,
+            "description": "The class that holds the variables and functions created in the namespace of this file.\nThe constrcutor of this object is only called once, because it is an anonymous function.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "_m",
+                    "description": "a reference to the Markus Configuration Object is passed",
+                    "type": "Object"
+                }
+            ]
         },
         "webDictionary.js_anonymous": {
             "name": "webDictionary.js_anonymous",
@@ -323,6 +356,96 @@
             "module": "comment.js"
         },
         {
+            "file": "src\\js\\data.js",
+            "line": 15,
+            "description": "Returns an array that, depending on the provided parameters will return the\nmarkups in the passage or in the whole document. And depending on the Boolean flag\nwithSupportText it returns its surrounding text.",
+            "itemtype": "method",
+            "name": "getMarkupsArray",
+            "params": [
+                {
+                    "name": "withPassage",
+                    "description": "Do we want to include the passage",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "withSupportText",
+                    "description": "Do we want to include support Text",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "noOfChars",
+                    "description": "The number of chars to get",
+                    "type": "Int"
+                }
+            ],
+            "return": {
+                "description": "An Array of markups",
+                "type": "Array"
+            },
+            "class": "Data",
+            "module": "data.js"
+        },
+        {
+            "file": "src\\js\\data.js",
+            "line": 149,
+            "description": "Turns an array of objects into a CSV array.",
+            "itemtype": "method",
+            "name": "objArrayToCSV",
+            "params": [
+                {
+                    "name": "objArray",
+                    "description": "the array to turn into a CSV",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "The CSV data string",
+                "type": "String"
+            },
+            "class": "Data",
+            "module": "data.js"
+        },
+        {
+            "file": "src\\js\\data.js",
+            "line": 192,
+            "description": "Turns an array of objects into a TSV array.",
+            "itemtype": "method",
+            "name": "objArrayToTSV",
+            "params": [
+                {
+                    "name": "objArray",
+                    "description": "the array to turn into a TSV",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "The TSV data string",
+                "type": "String"
+            },
+            "class": "Data",
+            "module": "data.js"
+        },
+        {
+            "file": "src\\js\\data.js",
+            "line": 228,
+            "description": "Returns the provided array as a HTML table.",
+            "itemtype": "method",
+            "name": "objArrayToHTML",
+            "params": [
+                {
+                    "name": "objArray",
+                    "description": "the array of objects we want to convert",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "the table of the array",
+                "type": "String"
+            },
+            "class": "Data",
+            "module": "data.js"
+        },
+        {
             "file": "src\\js\\markus.js",
             "line": 10,
             "description": "This is the global object that holds the version and build info",
@@ -363,6 +486,15 @@
             ],
             "class": "JQuery",
             "module": "markus.js"
+        },
+        {
+            "file": "src\\js\\navbar.js",
+            "line": 18,
+            "description": "Defines the loadNavBar function that will later be register to the `markus.navbar.register`\nfunctions.\n\nThis function defines all the behaviour of the navBar and the registers all the listeners to\nthe NavBar UI objects.",
+            "itemtype": "method",
+            "name": "loadNavBar",
+            "class": "navbar.js_anonymous",
+            "module": "data.js"
         },
         {
             "file": "src\\js\\webDictionary.js",
