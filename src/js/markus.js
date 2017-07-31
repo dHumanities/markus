@@ -3,7 +3,7 @@
  * @module markus.js
  */
  /**
- The global namespace
+ The global namespace. This is the Global namespace in **all** the files
  @class Global
  */
 
