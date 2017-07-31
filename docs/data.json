@@ -511,6 +511,22 @@
             "module": "navbar.js"
         },
         {
+            "file": "src\\js\\helpInfo.js",
+            "line": 74,
+            "description": "Defines what happens when you click the sampleMarkup. Basically, creates contents\nand shows/hides things depending on what you clicked.",
+            "itemtype": "method",
+            "name": "sampleMarkupClicked",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "the event that is passed from the DOM (i.e. the mouse click)",
+                    "type": "Event"
+                }
+            ],
+            "class": "helpInfo.js_anonymous",
+            "module": "navbar.js"
+        },
+        {
             "file": "src\\js\\markus.js",
             "line": 10,
             "description": "This is the global object that holds the version and build info",

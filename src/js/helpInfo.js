@@ -71,7 +71,13 @@
         $(document).on("click", ".markupSample", sampleMarkupClicked);
     };
 
-
+    /**
+     * Defines what happens when you click the sampleMarkup. Basically, creates contents
+     * and shows/hides things depending on what you clicked.
+     *
+     * @method sampleMarkupClicked
+     * @param  {Event} event the event that is passed from the DOM (i.e. the mouse click)
+     */
     var sampleMarkupClicked = function(event) {
         //Logging for debug purposes
         console.log("sampleName");
