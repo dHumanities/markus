@@ -1,25 +1,23 @@
 /**
- * @api {head} webDictionary.js Init Function
- * @apiName InitWebDictionary
- * @apiGroup WebDictionary
- *
- * @apiDescription Web dictionary module handles the interaction between tab, input, spinner and iframe interactions.
- * It does basic iframe URL construction from input value.
- *
- * This method is called upon loading of the file.
- *
- * @apiParam {Object}  _m a reference to the Markus Configuration Object is passed
- **/
+webDictionary.js file. This file contains the webDictionary definitions
+@module webDictionary.js
+*/
+
+/**
+The class that holds the variables and functions created in the namespace of this file.
+The constrcutor of this object is only called once, because it is an anonymous function
+@class webDictionary.js_anonymous
+@constructor
+@param {Object}  _m a reference to the Markus Configuration Object is passed
+**/
 (function(_m) {
 
     /**
-     * @api {head} webDictionary.js _jobBeforeSearch()
-     * @apiName JBSWebDictionary
-     * @apiGroup WebDictionary
-     *
-     * @apiDescription Function called before search. It hides the iframe of
-     * the dictionary and shows the spinHolder.
-     * @apiParam {Object} dictionary The dictionary Object
+     Function called before search. It hides the iframe of
+     the dictionary and shows the spinHolder.
+
+     @method _jobBeforeSearch
+     @param {Object} dictionary The dictionary Object
      */
     var _jobBeforeSearch = function(dictionary) {
         $(dictionary.iframe).hide();
@@ -27,62 +25,61 @@
     };
 
     /**
-     * @api {head} webDictionary.js searchDictionary()
-     * @apiName SDWebDictionary
-     * @apiGroup WebDictionary
-     *
-     * @apiDescription Seaches the dictionary for itself.
-     * @apiParam {Object} dictionary the passed dictionary parameter
+     Searches the dictionary for itself.
+
+     @method searchDictionary
+     @param {Object} dictionary the passed dictionary parameter
      */
     var searchDictionary = function(dictionary) {
         dictionary.search(dictionary);
     };
 
     /**
-     * @api {head} webDictionary.js dictionaries
-     * @apiName DictsWebDictionary
-     * @apiGroup WebDictionary
-     *
-     * @apiDescription All dictionaries are held in one object
+     All dictionaries are held in this one object
+     @property dictionaries
+     @type {Object}
      */
     var dictionaries = {};
 
     //Both local and markus referenced dictionary are set to new Object
+    /**
+    @property webDict
+    @type {WebDictionary}
+    */
     var webDict = _m.webDict = {};
 
     /**
-     * @api {head} webDictionary.js search()
-     * @apiName searchWebDictionary
-     * @apiGroup WebDictionary
-     *
-     * @apiDescription Define a search function. Uses the webDict object to open the URL
-     * specified in the dictionary object.
-     * @apiParam {Object} dictionary the dictionary object
+     Define a search function. Uses the webDict object to open the URL
+     specified in the dictionary object.
+     @method _search
+     @param {Object} dictionary the dictionary object
      */
     var _search = function(dictionary) {
         webDict.openURL(dictionary, dictionary.src.replace(dictionary.param, encodeURI($(dictionary.input).val())));
     };
 
     /**
-     * @api {head} webDictionary.js resize()
-     * @apiName resizeWebDictionary
-     * @apiGroup WebDictionary
-     *
-     * @apiDescription Resizes the passed object to match the window height.
-     * @apiParam {Object} obj HTML object that has to match the window height
+     Web dictionary module handles the interaction between tab, input, spinner and iframe interactions.
+    It does basic iframe URL construction from input value.
+    @class WebDictionary
+    */
+
+    /**
+     Resizes the passed object to match the window height.
+
+     @method resize
+     @param {Object} obj HTML object that has to match the window height
      */
     webDict.resize = function(obj) {
         $(obj).height($(window).height());
     };
 
     /**
-     * @api {head} webDictionary.js openURL()
-     * @apiName openURLWebDictionary
-     * @apiGroup WebDictionary
-     *
-     * @apiDescription Sets all the parameters in a dictionary object to open the passed URL
-     * @apiParam {Object} dictionary the passed dictionary object
-     * @apiParam {String} url the URL string
+     Sets all the parameters in a dictionary object to open the passed URL.
+
+     @method openURL
+     @param {Object} dictionary the passed dictionary object
+     @param {String} url the URL string
      */
     webDict.openURL = function(dictionary, url) {
         //first call the preparation function before search
@@ -102,12 +99,10 @@
     };
 
     /**
-     * @api {head} webDictionary.js searchAllDictionary()
-     * @apiName serachAllWebDictionary
-     * @apiGroup WebDictionary
+     Searches through all dictionaries by looping through the object that
+     holds all defined dictionaries by key.
 
-     * @apiDescription Searches through all dictionaries by looping through the object that
-     * holds all defined dictionaries by key.
+     @method searchAllDictionary
      */
     webDict.searchAllDictionary = function() {
         for (var key in dictionaries) {
@@ -117,24 +112,20 @@
     };
 
     /**
-     * @api {head} webDictionary.js getDictionary()
-     * @apiName getDictWebDictionary
-     * @apiGroup WebDictionary
-     *
-     * @apiDescription Returns the specified webDictionary referenced by its name
-     * @apiParam {String} web_dictionary_name the name of the webDictionary you want to get
-     * @apiParam {Object} RETURNS the referenced webDictionary object
+     Returns the specified webDictionary referenced by its name
+
+     @method getDictionary
+     @param {String} web_dictionary_name the name of the webDictionary you want to get
+     @return {Object} the referenced webDictionary object
      */
     webDict.getDictionary = function(web_dictionary_name) {
         return dictionaries[web_dictionary_name];
     };
 
     /**
-     * @api {head} webDictionary.js registWebDictionary()
-     * @apiName registWebDictionary
-     * @apiGroup WebDictionary
-     *
-     * @apiDescription Registers a new Web Dictionary
+     Registers a new Web Dictionary
+
+     @method registWebDictionary
      */
     webDict.registWebDictionary = function() {
         //Setting position for the web dictionary container
@@ -222,9 +213,12 @@
         });
 
         /**
-         * Debonces the specified function call
-         * @param  {Function} func    the function you called and want to be debounced
-         * @param  {int} timeout the timeout of the debounce
+         Debounces the specified function call.
+
+         @for webDictionary.js_anonymous
+         @method debouncer
+         @param  {Function} func    the function you called and want to be debounced
+         @param  {int} timeout the timeout of the debounce
          */
         var debouncer = function(func, timeout) {
             var timeoutID;
