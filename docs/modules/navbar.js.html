@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\js\markus.js</title>
+    <title>navbar.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -89,88 +89,44 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src\js\markus.js</h1>
+<h1>navbar.js Module</h1>
+<div class="box clearfix meta">
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-/**
- * Markus.js base file
- * @module markus.js
- */
- /**
- The global namespace. This is the Global namespace in **all** the files
- @class Global
- */
 
-/**
-This is the global object that holds the version and build info
-@property markus
-@type Object
-*/
-var markus = {
-    version: &quot;0.3.4.1&quot;,
-    build: &quot;201602005&quot;
-};
+        <div class="foundat">
+            Defined in: <a href="../files/src_js_navbar.js.html#l6"><code>src\js\navbar.js:6</code></a>
+        </div>
 
-/**
-Some JQuery extensions
-@class JQuery
-**/
+</div>
 
-/**
-New JQuery function definition. Scrolls to the element that is passed
-as a parameter.
-Example Usage:
-  &#x60;$(&#x27;#div_element2&#x27;).goTo();&#x60;
-*Source:*
-https://stackoverflow.com/questions/4801655/how-to-go-to-a-specific-element-on-page
 
-@method goto
-@param {Object} element the element we want to scroll to
- */
-( function($) {
-$.fn.goto = function() {
-    $(&#x27;html, body&#x27;).animate({
-        scrollTop: $(this).offset().top + &#x27;px&#x27;
-    }, &#x27;fast&#x27;);
-    return this; // for chaining...
-}
-} )(window.jQuery);
+<div class="box intro">
+    <p>navbar.js base file.</p>
 
-/**
-New JQuery function definition. Replaces all elements passed to this functions
-with the specified element name.
+</div>
 
-Example Usage:
-&#x60;&#x60;$(&#x27;div&#x27;).replaceTagName(&#x27;span&#x27;);&#x60;
 
-*Source:*
-https://stackoverflow.com/questions/2815683/jquery-javascript-replace-tag-type
-@method replaceTagName
-@param {String} replaceWith the string you want to replace the element name with
-*/
-( function($) {
-$.fn.replaceTagName = function(replaceWith) {
-    var tags = [],
-        i = this.length;
-    while (i--) {
-        var newElement = document.createElement(replaceWith),
-            thisi = this[i],
-            thisia = thisi.attributes;
-        for (var a = thisia.length - 1; a &gt;= 0; a--) {
-            var attrib = thisia[a];
-            newElement.setAttribute(attrib.name, attrib.value);
-        }
-        ;
-        newElement.innerHTML = thisi.innerHTML;
-        $(thisi).after(newElement).remove();
-        tags[i] = newElement;
-    }
-    return $(tags);
-};
-} )(window.jQuery);
+<div class="yui3-g">
+    <div class="yui3-u-1-2">
+            <p>This module provides the following classes:</p>
 
-    </pre>
+            <ul class="module-classes">
+                <li class="module-class">
+                    <a href="../classes/helpInfo.js_anonymous.html">
+                        helpInfo.js_anonymous
+                    </a>
+                </li>
+                <li class="module-class">
+                    <a href="../classes/navbar.js_anonymous.html">
+                        navbar.js_anonymous
+                    </a>
+                </li>
+            </ul>
+    </div>
+
+
+    <div class="yui3-u-1-2">
+    </div>
 </div>
                     </div>
                 </div>

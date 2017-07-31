@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Comment</title>
+    <title>helpInfo.js_anonymous</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -89,27 +89,81 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Comment Class</h1>
+<h1>helpInfo.js_anonymous Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_js_comment.js.html#l206"><code>src\js\comment.js:206</code></a>
+            Defined in: <a href="../files/src_js_helpInfo.js.html#l7"><code>src\js\helpInfo.js:7</code></a>
         </div>
 
-            Module: <a href="../modules/comment.js.html">comment.js</a>
+            Module: <a href="../modules/navbar.js.html">navbar.js</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>This class' method are defined in the above anonymous class of this file and
-are only reassigned here.</p>
-<p>Make all the functions that have been defined above availabe through
-markus.comment.FUNCTION, to allow calling of them throughout the DOM</p>
+    <p>The class that holds the variables and functions created in the namespace of this file.
+The constrcutor of this object is only called once, because it is an anonymous function.</p>
 
 </div>
 
+    <div class="constructor">
+        <h2>Constructor</h2>
+<div id="method_helpInfo.js_anonymous" class="method item">
+    <h3 class="name"><code>helpInfo.js_anonymous</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>_m</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_helpInfo.js.html#l7"><code>src\js\helpInfo.js:7</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">_m</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>a reference to the Markus Configuration Object is passed</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+    </div>
 
 <div id="classdocs" class="tabview">
     <ul class="api-class-tabs">
@@ -127,23 +181,11 @@ markus.comment.FUNCTION, to allow calling of them throughout the DOM</p>
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_edit">edit</a>
+                                <a href="#method_loadHelpInfo">loadHelpInfo</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_removeAnySync">removeAnySync</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_save">save</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_saveComment">saveComment</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_startAddingCommentHolder">startAddingCommentHolder</a>
+                                <a href="#method_registHelp">registHelp</a>
 
                             </li>
                     </ul>
@@ -156,173 +198,8 @@ markus.comment.FUNCTION, to allow calling of them throughout the DOM</p>
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_edit" class="method item">
-    <h3 class="name"><code>edit</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>event</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_comment.js.html#l96"><code>src\js\comment.js:96</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Enables the editing of the provided comment. It starts the editing of it
-by setting the panel-body to contenteditable and chaning the edit to a save
-button.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">event</code>
-                        <span class="type">Event</span>
-
-
-                    <div class="param-description">
-                        <p>the propagated event from the DOM</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_removeAnySync" class="method item">
-    <h3 class="name"><code>removeAnySync</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>event</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_comment.js.html#l59"><code>src\js\comment.js:59</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Handles the removing of a comment. It first removes the comment, and then
-resaves all the ones that are still left.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">event</code>
-                        <span class="type">Event</span>
-
-
-                    <div class="param-description">
-                        <p>The event Object that is passed</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_save" class="method item">
-    <h3 class="name"><code>save</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>event</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_comment.js.html#l117"><code>src\js\comment.js:117</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Saves the current commentField. It escape Unicode Characters</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">event</code>
-                        <span class="type">Event</span>
-
-
-                    <div class="param-description">
-                        <p>The event that is passed from the DOM</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_saveComment" class="method item">
-    <h3 class="name"><code>saveComment</code></h3>
+<div id="method_loadHelpInfo" class="method item">
+    <h3 class="name"><code>loadHelpInfo</code></h3>
 
         <span class="paren">()</span>
 
@@ -336,7 +213,7 @@ resaves all the ones that are still left.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_comment.js.html#l19"><code>src\js\comment.js:19</code></a>
+        <a href="../files/src_js_helpInfo.js.html#l20"><code>src\js\helpInfo.js:20</code></a>
         </p>
 
 
@@ -344,9 +221,8 @@ resaves all the ones that are still left.</p>
     </div>
 
     <div class="description">
-        <p>Finds all comments for this element, stores their text contents into an array,
-and sets this array as value atribute (after Unicode Escaping) for the <code>span</code>
-comment Container. Finally it triggers a click event on the commentIcon span</p>
+        <p>In this method we load the specific help template according to the language
+cookie.</p>
 
     </div>
 
@@ -354,8 +230,8 @@ comment Container. Finally it triggers a click event on the commentIcon span</p>
 
 
 </div>
-<div id="method_startAddingCommentHolder" class="method item">
-    <h3 class="name"><code>startAddingCommentHolder</code></h3>
+<div id="method_registHelp" class="method item">
+    <h3 class="name"><code>registHelp</code></h3>
 
         <span class="paren">()</span>
 
@@ -369,7 +245,7 @@ comment Container. Finally it triggers a click event on the commentIcon span</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_comment.js.html#l150"><code>src\js\comment.js:150</code></a>
+        <a href="../files/src_js_helpInfo.js.html#l36"><code>src\js\helpInfo.js:36</code></a>
         </p>
 
 
@@ -377,8 +253,7 @@ comment Container. Finally it triggers a click event on the commentIcon span</p>
     </div>
 
     <div class="description">
-        <p>Called upon parsing of the document to parse the comment UI from the data in the html
-document. This goes through all the comments and sanitizes them.</p>
+        <p>Registers the eventHandlers for the help menu.</p>
 
     </div>
 

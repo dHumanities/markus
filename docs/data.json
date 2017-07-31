@@ -18,9 +18,20 @@
         },
         "src\\js\\data.js": {
             "name": "src\\js\\data.js",
-            "modules": {},
+            "modules": {
+                "data.js": 1
+            },
             "classes": {
                 "Data": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\js\\helpInfo.js": {
+            "name": "src\\js\\helpInfo.js",
+            "modules": {},
+            "classes": {
+                "helpInfo.js_anonymous": 1
             },
             "fors": {},
             "namespaces": {}
@@ -40,7 +51,7 @@
         "src\\js\\navbar.js": {
             "name": "src\\js\\navbar.js",
             "modules": {
-                "data.js": 1
+                "navbar.js": 1
             },
             "classes": {
                 "navbar.js_anonymous": 1
@@ -87,7 +98,21 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "Data": 1,
+                "Data": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\js\\data.js",
+            "line": 6,
+            "description": "data.js base file."
+        },
+        "navbar.js": {
+            "name": "navbar.js",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "helpInfo.js_anonymous": 1,
                 "navbar.js_anonymous": 1
             },
             "fors": {},
@@ -95,7 +120,7 @@
             "tag": "module",
             "file": "src\\js\\navbar.js",
             "line": 6,
-            "description": "data.js base file."
+            "description": "navbar.js base file."
         },
         "markus.js": {
             "name": "markus.js",
@@ -196,6 +221,28 @@
             "description": "Here the Markus.Data methods are defined and added to the Global Markus Singleton.\nThe Data methods handle mostly data conversion",
             "is_constructor": 1
         },
+        "helpInfo.js_anonymous": {
+            "name": "helpInfo.js_anonymous",
+            "shortname": "helpInfo.js_anonymous",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "navbar.js",
+            "namespace": "",
+            "file": "src\\js\\helpInfo.js",
+            "line": 7,
+            "description": "The class that holds the variables and functions created in the namespace of this file.\nThe constrcutor of this object is only called once, because it is an anonymous function.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "_m",
+                    "description": "a reference to the Markus Configuration Object is passed",
+                    "type": "Object"
+                }
+            ]
+        },
         "JQuery": {
             "name": "JQuery",
             "shortname": "JQuery",
@@ -218,7 +265,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "data.js",
+            "module": "navbar.js",
             "namespace": "",
             "file": "src\\js\\navbar.js",
             "line": 6,
@@ -446,6 +493,24 @@
             "module": "data.js"
         },
         {
+            "file": "src\\js\\helpInfo.js",
+            "line": 20,
+            "description": "In this method we load the specific help template according to the language\ncookie.",
+            "itemtype": "method",
+            "name": "loadHelpInfo",
+            "class": "helpInfo.js_anonymous",
+            "module": "navbar.js"
+        },
+        {
+            "file": "src\\js\\helpInfo.js",
+            "line": 36,
+            "description": "Registers the eventHandlers for the help menu.",
+            "itemtype": "method",
+            "name": "registHelp",
+            "class": "helpInfo.js_anonymous",
+            "module": "navbar.js"
+        },
+        {
             "file": "src\\js\\markus.js",
             "line": 10,
             "description": "This is the global object that holds the version and build info",
@@ -489,12 +554,12 @@
         },
         {
             "file": "src\\js\\navbar.js",
-            "line": 18,
-            "description": "Defines the loadNavBar function that will later be register to the `markus.navbar.register`\nfunctions.\n\nThis function defines all the behaviour of the navBar and the registers all the listeners to\nthe NavBar UI objects.",
+            "line": 19,
+            "description": "Defines the loadNavBar function that will later be register to the `markus.navbar.register`\nfunctions.\n\nThis function defines all the behaviour of the navBar and the registers all the listeners to\nthe NavBar UI objects.\n\nPlease read through the source to understand what the actual navBar buttons do.",
             "itemtype": "method",
             "name": "loadNavBar",
             "class": "navbar.js_anonymous",
-            "module": "data.js"
+            "module": "navbar.js"
         },
         {
             "file": "src\\js\\webDictionary.js",
