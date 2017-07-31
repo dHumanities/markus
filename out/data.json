@@ -1,0 +1,400 @@
+{
+    "project": {},
+    "files": {
+        "src\\js\\markus.js": {
+            "name": "src\\js\\markus.js",
+            "modules": {
+                "markus.js": 1
+            },
+            "classes": {
+                "Global": 1,
+                "JQuery": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\js\\webDictionary.js": {
+            "name": "src\\js\\webDictionary.js",
+            "modules": {
+                "webDictionary.js": 1
+            },
+            "classes": {
+                "webDictionary.js_anonymous": 1,
+                "WebDictionary": 1
+            },
+            "fors": {
+                "webDictionary.js_anonymous": 1
+            },
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "markus.js": {
+            "name": "markus.js",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Global": 1,
+                "JQuery": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\js\\markus.js",
+            "line": 20,
+            "description": "Markus.js base file"
+        },
+        "webDictionary.js": {
+            "name": "webDictionary.js",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "webDictionary.js_anonymous": 1,
+                "WebDictionary": 1
+            },
+            "fors": {
+                "webDictionary.js_anonymous": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\js\\webDictionary.js",
+            "line": 61,
+            "description": "webDictionary.js file. This file contains the webDictionary definitions"
+        }
+    },
+    "classes": {
+        "Global": {
+            "name": "Global",
+            "shortname": "Global",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "markus.js",
+            "namespace": "",
+            "file": "src\\js\\markus.js",
+            "line": 5,
+            "description": "The global namespace"
+        },
+        "JQuery": {
+            "name": "JQuery",
+            "shortname": "JQuery",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "markus.js",
+            "namespace": "",
+            "file": "src\\js\\markus.js",
+            "line": 20,
+            "description": "Some JQuery extensions"
+        },
+        "webDictionary.js_anonymous": {
+            "name": "webDictionary.js_anonymous",
+            "shortname": "webDictionary.js_anonymous",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "webDictionary.js",
+            "namespace": "",
+            "file": "src\\js\\webDictionary.js",
+            "line": 6,
+            "description": "The class that holds the variables and functions created in the namespace of this file.\nThe constrcutor of this object is only called once, because it is an anonymous function",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "_m",
+                    "description": "a reference to the Markus Configuration Object is passed",
+                    "type": "Object"
+                }
+            ]
+        },
+        "WebDictionary": {
+            "name": "WebDictionary",
+            "shortname": "WebDictionary",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "webDictionary.js",
+            "namespace": "",
+            "file": "src\\js\\webDictionary.js",
+            "line": 61,
+            "description": "Web dictionary module handles the interaction between tab, input, spinner and iframe interactions.\n    It does basic iframe URL construction from input value."
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "src\\js\\markus.js",
+            "line": 10,
+            "description": "This is the global object that holds the version and build info",
+            "itemtype": "property",
+            "name": "markus",
+            "type": "Object",
+            "class": "Global",
+            "module": "markus.js"
+        },
+        {
+            "file": "src\\js\\markus.js",
+            "line": 25,
+            "description": "New JQuery function definition. Scrolls to the element that is passed\nas a parameter.\nExample Usage:\n  `$('#div_element2').goTo();`\n*Source:*\nhttps://stackoverflow.com/questions/4801655/how-to-go-to-a-specific-element-on-page",
+            "itemtype": "method",
+            "name": "goto",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "the element we want to scroll to",
+                    "type": "Object"
+                }
+            ],
+            "class": "JQuery",
+            "module": "markus.js"
+        },
+        {
+            "file": "src\\js\\markus.js",
+            "line": 45,
+            "description": "New JQuery function definition. Replaces all elements passed to this functions\nwith the specified element name.\n\nExample Usage:\n``$('div').replaceTagName('span');`\n\n*Source:*\nhttps://stackoverflow.com/questions/2815683/jquery-javascript-replace-tag-type",
+            "itemtype": "method",
+            "name": "replaceTagName",
+            "params": [
+                {
+                    "name": "replaceWith",
+                    "description": "the string you want to replace the element name with",
+                    "type": "String"
+                }
+            ],
+            "class": "JQuery",
+            "module": "markus.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 15,
+            "description": "Function called before search. It hides the iframe of\nthe dictionary and shows the spinHolder.",
+            "itemtype": "method",
+            "name": "_jobBeforeSearch",
+            "params": [
+                {
+                    "name": "dictionary",
+                    "description": "The dictionary Object",
+                    "type": "Object"
+                }
+            ],
+            "class": "webDictionary.js_anonymous",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 27,
+            "description": "Searches the dictionary for itself.",
+            "itemtype": "method",
+            "name": "searchDictionary",
+            "params": [
+                {
+                    "name": "dictionary",
+                    "description": "the passed dictionary parameter",
+                    "type": "Object"
+                }
+            ],
+            "class": "webDictionary.js_anonymous",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 37,
+            "description": "All dictionaries are held in this one object",
+            "itemtype": "property",
+            "name": "dictionaries",
+            "type": "{Object}",
+            "class": "webDictionary.js_anonymous",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 45,
+            "itemtype": "property",
+            "name": "webDict",
+            "type": "{WebDictionary}",
+            "class": "webDictionary.js_anonymous",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 51,
+            "description": "Define a search function. Uses the webDict object to open the URL\nspecified in the dictionary object.",
+            "itemtype": "method",
+            "name": "_search",
+            "params": [
+                {
+                    "name": "dictionary",
+                    "description": "the dictionary object",
+                    "type": "Object"
+                }
+            ],
+            "class": "webDictionary.js_anonymous",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 67,
+            "description": "Resizes the passed object to match the window height.",
+            "itemtype": "method",
+            "name": "resize",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "HTML object that has to match the window height",
+                    "type": "Object"
+                }
+            ],
+            "class": "WebDictionary",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 77,
+            "description": "Sets all the parameters in a dictionary object to open the passed URL.",
+            "itemtype": "method",
+            "name": "openURL",
+            "params": [
+                {
+                    "name": "dictionary",
+                    "description": "the passed dictionary object",
+                    "type": "Object"
+                },
+                {
+                    "name": "url",
+                    "description": "the URL string",
+                    "type": "String"
+                }
+            ],
+            "class": "WebDictionary",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 101,
+            "description": "Searches through all dictionaries by looping through the object that\nholds all defined dictionaries by key.",
+            "itemtype": "method",
+            "name": "searchAllDictionary",
+            "class": "WebDictionary",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 114,
+            "description": "Returns the specified webDictionary referenced by its name",
+            "itemtype": "method",
+            "name": "getDictionary",
+            "params": [
+                {
+                    "name": "web_dictionary_name",
+                    "description": "the name of the webDictionary you want to get",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the referenced webDictionary object",
+                "type": "Object"
+            },
+            "class": "WebDictionary",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 125,
+            "description": "Registers a new Web Dictionary",
+            "itemtype": "method",
+            "name": "registWebDictionary",
+            "class": "WebDictionary",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 215,
+            "description": "Debounces the specified function call.",
+            "itemtype": "method",
+            "name": "debouncer",
+            "params": [
+                {
+                    "name": "func",
+                    "description": "the function you called and want to be debounced",
+                    "type": "Function"
+                },
+                {
+                    "name": "timeout",
+                    "description": "the timeout of the debounce",
+                    "type": "Int"
+                }
+            ],
+            "class": "webDictionary.js_anonymous",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 236,
+            "description": "Defines what happens when you click on a tab. It shows the specified\ntab, hides all webDicts, shows the correct one and triggers the\nresetSize event.",
+            "return": {
+                "description": "[description]",
+                "type": "[type]"
+            },
+            "class": "webDictionary.js_anonymous",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 258,
+            "description": "ResetSize handler for the iframe of the Web Dictionary",
+            "class": "webDictionary.js_anonymous",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 266,
+            "description": "ResetSize handler for the container of the Web Dictionary",
+            "class": "webDictionary.js_anonymous",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 273,
+            "description": "Affix handler for the container of the Web Dictionary",
+            "class": "webDictionary.js_anonymous",
+            "module": "webDictionary.js"
+        },
+        {
+            "file": "src\\js\\webDictionary.js",
+            "line": 280,
+            "description": "Load handler for the iframe of the Web Dictionary. Handles initializing",
+            "class": "webDictionary.js_anonymous",
+            "module": "webDictionary.js"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nDefines what happens when you click on a tab. It shows the specified\ntab, hides all webDicts, shows the correct one and triggers the\nresetSize event.",
+            "line": " src\\js\\webDictionary.js:236"
+        },
+        {
+            "message": "Missing item type\nResetSize handler for the iframe of the Web Dictionary",
+            "line": " src\\js\\webDictionary.js:258"
+        },
+        {
+            "message": "Missing item type\nResetSize handler for the container of the Web Dictionary",
+            "line": " src\\js\\webDictionary.js:266"
+        },
+        {
+            "message": "Missing item type\nAffix handler for the container of the Web Dictionary",
+            "line": " src\\js\\webDictionary.js:273"
+        },
+        {
+            "message": "Missing item type\nLoad handler for the iframe of the Web Dictionary. Handles initializing",
+            "line": " src\\js\\webDictionary.js:280"
+        }
+    ]
+}
