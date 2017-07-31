@@ -1,11 +1,15 @@
 /**
- * Comment.js base file
+ * Comment.js base file.
  * @module comment.js
  */
 
  /**
  The class that holds the variables and functions created in the namespace of this file.
- The constrcutor of this object is only called once, because it is an anonymous function
+ The constrcutor of this object is only called once, because it is an anonymous function.
+
+ The functions defined in this class are later added to the MARKUS global object and can
+ from that point on be called as `markus.comments.FUNCTION_NAME`
+
  @class comment.js_anonymous
  @constructor
  @param {Object}  _m a reference to the Markus Configuration Object is passed
@@ -17,6 +21,7 @@
  * and sets this array as value atribute (after Unicode Escaping) for the `span`
  * comment Container. Finally it triggers a click event on the commentIcon span
  *
+ * @for Comment
  * @method saveComment
  */
 var saveComment = function() {
@@ -55,6 +60,7 @@ var saveComment = function() {
  * Handles the removing of a comment. It first removes the comment, and then
  * resaves all the ones that are still left.
  *
+ * @for Comment
  * @method removeAnySync
  * @param  {Event} event The event Object that is passed
  */
@@ -92,6 +98,7 @@ var removeAnySync = function(event) {
  * by setting the panel-body to contenteditable and chaning the edit to a save
  * button.
  *
+ * @for Comment
  * @method edit
  * @param  {Event} event the propagated event from the DOM
  */
@@ -110,8 +117,9 @@ var edit = function(event) {
 /**
  * Saves the current commentField. It escape Unicode Characters
  *
+ * @for Comment
  * @method save
- * @param  {[type]} event [description]
+ * @param  {Event} event The event that is passed from the DOM
  */
 var save = function(event) {
     event.stopPropagation();
@@ -142,6 +150,8 @@ var save = function(event) {
 /**
  * Called upon parsing of the document to parse the comment UI from the data in the html
  * document. This goes through all the comments and sanitizes them.
+ *
+ * @for Comment
  * @method startAddingCommentHolder
  */
 var startAddingCommentHolder = function() {
@@ -193,8 +203,14 @@ var startAddingCommentHolder = function() {
     });
 
 };
-//Make all the functions that have been defined above availabe through
-//markus.comment.FUNCTION, to allow calling of them throughout the DOM
+/**
+ * This class' method are defined in the above anonymous class of this file and
+ * are only reassigned here.
+ *
+ * Make all the functions that have been defined above availabe through
+ * markus.comment.FUNCTION, to allow calling of them throughout the DOM
+ * @class Comment
+ */
 _m.comment = {
     saveComment: saveComment,
     removeAnySync: removeAnySync,

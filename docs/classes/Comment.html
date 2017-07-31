@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>WebDictionary</title>
+    <title>Comment</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -86,22 +86,24 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>WebDictionary Class</h1>
+<h1>Comment Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_js_webDictionary.js.html#l61"><code>src\js\webDictionary.js:61</code></a>
+            Defined in: <a href="../files/src_js_comment.js.html#l206"><code>src\js\comment.js:206</code></a>
         </div>
 
-            Module: <a href="../modules/webDictionary.js.html">webDictionary.js</a>
+            Module: <a href="../modules/comment.js.html">comment.js</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Web dictionary module handles the interaction between tab, input, spinner and iframe interactions.
-It does basic iframe URL construction from input value.</p>
+    <p>This class' method are defined in the above anonymous class of this file and
+are only reassigned here.</p>
+<p>Make all the functions that have been defined above availabe through
+markus.comment.FUNCTION, to allow calling of them throughout the DOM</p>
 
 </div>
 
@@ -122,23 +124,23 @@ It does basic iframe URL construction from input value.</p>
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_getDictionary">getDictionary</a>
+                                <a href="#method_edit">edit</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_openURL">openURL</a>
+                                <a href="#method_removeAnySync">removeAnySync</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_registWebDictionary">registWebDictionary</a>
+                                <a href="#method_save">save</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_resize">resize</a>
+                                <a href="#method_saveComment">saveComment</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_searchAllDictionary">searchAllDictionary</a>
+                                <a href="#method_startAddingCommentHolder">startAddingCommentHolder</a>
 
                             </li>
                     </ul>
@@ -151,82 +153,13 @@ It does basic iframe URL construction from input value.</p>
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_getDictionary" class="method item">
-    <h3 class="name"><code>getDictionary</code></h3>
+<div id="method_edit" class="method item">
+    <h3 class="name"><code>edit</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>web_dictionary_name</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_webDictionary.js.html#l114"><code>src\js\webDictionary.js:114</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Returns the specified webDictionary referenced by its name</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">web_dictionary_name</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the name of the webDictionary you want to get</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Object</span>:
-                    <p>the referenced webDictionary object</p>
-
-            </div>
-        </div>
-
-
-</div>
-<div id="method_openURL" class="method item">
-    <h3 class="name"><code>openURL</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>dictionary</code>
-                </li>
-                <li class="arg">
-                        <code>url</code>
+                        <code>event</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -241,7 +174,7 @@ It does basic iframe URL construction from input value.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_webDictionary.js.html#l77"><code>src\js\webDictionary.js:77</code></a>
+        <a href="../files/src_js_comment.js.html#l96"><code>src\js\comment.js:96</code></a>
         </p>
 
 
@@ -249,7 +182,9 @@ It does basic iframe URL construction from input value.</p>
     </div>
 
     <div class="description">
-        <p>Sets all the parameters in a dictionary object to open the passed URL.</p>
+        <p>Enables the editing of the provided comment. It starts the editing of it
+by setting the panel-body to contenteditable and chaning the edit to a save
+button.</p>
 
     </div>
 
@@ -258,23 +193,12 @@ It does basic iframe URL construction from input value.</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">dictionary</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">event</code>
+                        <span class="type">Event</span>
 
 
                     <div class="param-description">
-                        <p>the passed dictionary object</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">url</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the URL string</p>
+                        <p>the propagated event from the DOM</p>
 
                     </div>
 
@@ -285,8 +209,117 @@ It does basic iframe URL construction from input value.</p>
 
 
 </div>
-<div id="method_registWebDictionary" class="method item">
-    <h3 class="name"><code>registWebDictionary</code></h3>
+<div id="method_removeAnySync" class="method item">
+    <h3 class="name"><code>removeAnySync</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>event</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_comment.js.html#l59"><code>src\js\comment.js:59</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Handles the removing of a comment. It first removes the comment, and then
+resaves all the ones that are still left.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">event</code>
+                        <span class="type">Event</span>
+
+
+                    <div class="param-description">
+                        <p>The event Object that is passed</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_save" class="method item">
+    <h3 class="name"><code>save</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>event</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_comment.js.html#l117"><code>src\js\comment.js:117</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Saves the current commentField. It escape Unicode Characters</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">event</code>
+                        <span class="type">Event</span>
+
+
+                    <div class="param-description">
+                        <p>The event that is passed from the DOM</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_saveComment" class="method item">
+    <h3 class="name"><code>saveComment</code></h3>
 
         <span class="paren">()</span>
 
@@ -300,7 +333,7 @@ It does basic iframe URL construction from input value.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_webDictionary.js.html#l125"><code>src\js\webDictionary.js:125</code></a>
+        <a href="../files/src_js_comment.js.html#l19"><code>src\js\comment.js:19</code></a>
         </p>
 
 
@@ -308,7 +341,9 @@ It does basic iframe URL construction from input value.</p>
     </div>
 
     <div class="description">
-        <p>Registers a new Web Dictionary</p>
+        <p>Finds all comments for this element, stores their text contents into an array,
+and sets this array as value atribute (after Unicode Escaping) for the <code>span</code>
+comment Container. Finally it triggers a click event on the commentIcon span</p>
 
     </div>
 
@@ -316,62 +351,8 @@ It does basic iframe URL construction from input value.</p>
 
 
 </div>
-<div id="method_resize" class="method item">
-    <h3 class="name"><code>resize</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>obj</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_webDictionary.js.html#l67"><code>src\js\webDictionary.js:67</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Resizes the passed object to match the window height.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">obj</code>
-                        <span class="type">Object</span>
-
-
-                    <div class="param-description">
-                        <p>HTML object that has to match the window height</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_searchAllDictionary" class="method item">
-    <h3 class="name"><code>searchAllDictionary</code></h3>
+<div id="method_startAddingCommentHolder" class="method item">
+    <h3 class="name"><code>startAddingCommentHolder</code></h3>
 
         <span class="paren">()</span>
 
@@ -385,7 +366,7 @@ It does basic iframe URL construction from input value.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_webDictionary.js.html#l101"><code>src\js\webDictionary.js:101</code></a>
+        <a href="../files/src_js_comment.js.html#l150"><code>src\js\comment.js:150</code></a>
         </p>
 
 
@@ -393,8 +374,8 @@ It does basic iframe URL construction from input value.</p>
     </div>
 
     <div class="description">
-        <p>Searches through all dictionaries by looping through the object that
-holds all defined dictionaries by key.</p>
+        <p>Called upon parsing of the document to parse the comment UI from the data in the html
+document. This goes through all the comments and sanitizes them.</p>
 
     </div>
 

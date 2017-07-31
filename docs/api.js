@@ -1,6 +1,8 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "Comment",
+        "Data",
         "Global",
         "JQuery",
         "WebDictionary",
@@ -9,6 +11,7 @@ YUI.add("yuidoc-meta", function(Y) {
     ],
     "modules": [
         "comment.js",
+        "data.js",
         "markus.js",
         "webDictionary.js"
     ],
@@ -16,7 +19,12 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "comment.js",
             "name": "comment.js",
-            "description": "Comment.js base file"
+            "description": "Comment.js base file."
+        },
+        {
+            "displayName": "data.js",
+            "name": "data.js",
+            "description": "data.js base file."
         },
         {
             "displayName": "markus.js",
