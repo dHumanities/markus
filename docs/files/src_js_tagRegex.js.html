@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>navbar.js</title>
+    <title>src\js\tagRegex.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -99,39 +99,66 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>navbar.js Module</h1>
-<div class="box clearfix meta">
+<h1 class="file-heading">File: src\js\tagRegex.js</h1>
 
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * tagRegex.js base file.
+ * @module tagRegex.js
+ */
 
-        <div class="foundat">
-            Defined in: <a href="../files/src_js_navbar.js.html#l6"><code>src\js\navbar.js:6</code></a>
-        </div>
+ /**
+ The class that holds the variables and functions created in the namespace of this file.
+ The constrcutor of this object is only called once, because it is an anonymous function.
 
-</div>
+ @class tagRegex.js_anonymous
+ @constructor
+ @param {Object}  _m a reference to the Markus Configuration Object is passed
+ **/
+(function(_m) {
+    /**
+     * A function that returns a regular expresion based on the input
+     *
+     * @method tagRegexReplace
+     * @param  {String} a UNUSED
+     * @param  {String} b The tag name
+     */
+    var tagRegexReplace = function(a, b) {
+        return &quot;&lt;[^&gt;]{0,}&quot; + b + &quot;[^&gt;]{0,}&gt;[^&lt;]{0,}&lt;[^&gt;]{0,}span&gt;&quot;;
+    };
 
+    /**
+     * Holds the regular expression pattern used to match against
+     *
+     * @property tagRegexPat
+     * @type {Regex}
+     */
+    var tagRegexPat = /&lt;([^&gt;]{1,})&gt;/g;
 
-<div class="box intro">
-    <p>navbar.js base file.</p>
+    /**
+     * Creates the Regex class, that holds just one function: &#x60;translate&#x60;.
+     * This translate function assembles a regular Expression based on the input.
+     *
+     * @class Regex
+     */
+    _m.regex = {
 
-</div>
+        /**
+         * Translates one regular expression into another by replacing parts of it.
+         *
+         * @method translate
+         * @param  {Regex} tagRegex the unmodified regular expression you want to translate
+         */
+        translate: function(tagRegex) {
+            var regex = tagRegex.replace(tagRegexPat, tagRegexReplace);
+            return regex;
+        }
+    };
 
+})(markus);
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-            <p>This module provides the following classes:</p>
-
-            <ul class="module-classes">
-                <li class="module-class">
-                    <a href="../classes/navbar.js_anonymous.html">
-                        navbar.js_anonymous
-                    </a>
-                </li>
-            </ul>
-    </div>
-
-
-    <div class="yui3-u-1-2">
-    </div>
+    </pre>
 </div>
                     </div>
                 </div>

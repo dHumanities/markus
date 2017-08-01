@@ -77,6 +77,18 @@
             "fors": {},
             "namespaces": {}
         },
+        "src\\js\\tagRegex.js": {
+            "name": "src\\js\\tagRegex.js",
+            "modules": {
+                "tagRegex.js": 1
+            },
+            "classes": {
+                "tagRegex.js_anonymous": 1,
+                "Regex": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src\\js\\ui.js": {
             "name": "src\\js\\ui.js",
             "modules": {
@@ -201,6 +213,21 @@
             "file": "src\\js\\navbar.js",
             "line": 6,
             "description": "navbar.js base file."
+        },
+        "tagRegex.js": {
+            "name": "tagRegex.js",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "tagRegex.js_anonymous": 1,
+                "Regex": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\js\\tagRegex.js",
+            "line": 34,
+            "description": "tagRegex.js base file."
         },
         "ui.js": {
             "name": "ui.js",
@@ -398,6 +425,42 @@
                     "type": "Object"
                 }
             ]
+        },
+        "tagRegex.js_anonymous": {
+            "name": "tagRegex.js_anonymous",
+            "shortname": "tagRegex.js_anonymous",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "tagRegex.js",
+            "namespace": "",
+            "file": "src\\js\\tagRegex.js",
+            "line": 6,
+            "description": "The class that holds the variables and functions created in the namespace of this file.\nThe constrcutor of this object is only called once, because it is an anonymous function.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "_m",
+                    "description": "a reference to the Markus Configuration Object is passed",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Regex": {
+            "name": "Regex",
+            "shortname": "Regex",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "tagRegex.js",
+            "namespace": "",
+            "file": "src\\js\\tagRegex.js",
+            "line": 34,
+            "description": "Creates the Regex class, that holds just one function: `translate`.\nThis translate function assembles a regular Expression based on the input."
         },
         "ui.js_anonymous": {
             "name": "ui.js_anonymous",
@@ -1054,6 +1117,53 @@
             "module": "navbar.js"
         },
         {
+            "file": "src\\js\\tagRegex.js",
+            "line": 15,
+            "description": "A function that returns a regular expresion based on the input",
+            "itemtype": "method",
+            "name": "tagRegexReplace",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "UNUSED",
+                    "type": "String"
+                },
+                {
+                    "name": "b",
+                    "description": "The tag name",
+                    "type": "String"
+                }
+            ],
+            "class": "tagRegex.js_anonymous",
+            "module": "tagRegex.js"
+        },
+        {
+            "file": "src\\js\\tagRegex.js",
+            "line": 26,
+            "description": "Holds the regular expression pattern used to match against",
+            "itemtype": "property",
+            "name": "tagRegexPat",
+            "type": "{Regex}",
+            "class": "tagRegex.js_anonymous",
+            "module": "tagRegex.js"
+        },
+        {
+            "file": "src\\js\\tagRegex.js",
+            "line": 42,
+            "description": "Translates one regular expression into another by replacing parts of it.",
+            "itemtype": "method",
+            "name": "translate",
+            "params": [
+                {
+                    "name": "tagRegex",
+                    "description": "the unmodified regular expression you want to translate",
+                    "type": "Regex"
+                }
+            ],
+            "class": "Regex",
+            "module": "tagRegex.js"
+        },
+        {
             "file": "src\\js\\ui.js",
             "line": 22,
             "description": "Create a new keyPress listener that listens to all keypresses in the whole window,\nregardless of focus element. This object holds that listener",
@@ -1102,7 +1212,7 @@
             "line": 179,
             "description": "Finds the previous markup before the currently selected markup instance and will transfer\nthe focus by generating a click on the previous element. This will only go through the instances\nof the same markup_type.",
             "itemtype": "method",
-            "name": "lastSameTyeMarkup",
+            "name": "lastSameTypeMarkup",
             "class": "ui.js_anonymous",
             "module": "ui.js"
         },

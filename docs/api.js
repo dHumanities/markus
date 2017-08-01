@@ -6,12 +6,14 @@ YUI.add("yuidoc-meta", function(Y) {
         "Global",
         "IO",
         "JQuery",
+        "Regex",
         "UI",
         "WebDictionary",
         "comment.js_anonymous",
         "helpInfo.js_anonymous",
         "io.js_anonymous",
         "navbar.js_anonymous",
+        "tagRegex.js_anonymous",
         "ui.js_anonymous",
         "webDictionary.js_anonymous"
     ],
@@ -22,6 +24,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "io.js",
         "markus.js",
         "navbar.js",
+        "tagRegex.js",
         "ui.js",
         "webDictionary.js"
     ],
@@ -55,6 +58,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "navbar.js",
             "name": "navbar.js",
             "description": "navbar.js base file."
+        },
+        {
+            "displayName": "tagRegex.js",
+            "name": "tagRegex.js",
+            "description": "tagRegex.js base file."
         },
         {
             "displayName": "ui.js",
