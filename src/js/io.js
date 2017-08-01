@@ -379,6 +379,7 @@ var loadCSSFromCSS_TagAtt = function() {
  * Calling this method automates the download/export of the file. This generates
  * a click event on the `#export` button
  *
+ * @for io.js_anonymous
  * @method autoDownload
  * @param  {Object} fileEntry The fileEntry object that contains the file
  * @param  {String} suffix    Filetype extension as String, or just a suffix
@@ -393,6 +394,7 @@ var autoDownload = function(fileEntry, suffix) {
  * Calling this method will clean the data from the document into a newly spawned,
  * temporary element to use JQuery to clean it from unwanted elements and classes
  *
+ * @for io.js_anonymous
  * @method saveSave
  * @param  {String} filename the fileName for the new File
  * @param  {Object} _fn      The fileEntry object
@@ -428,6 +430,7 @@ var saveSave = function(filename, _fn) {
 /**
  * Generates a TEI XML document from the HTML document that is generated in the browser.
  *
+ * @for io.js_anonymous
  * @method saveTEI
  * @param  {String} filename the fileName for the new File
  */
@@ -451,6 +454,7 @@ var saveTEI = function(filename) {
  * document stored in it, including the stylesheet CSS rules that have been parsed into one single
  * `<style>` tag in the head of the HTML document.
  *
+ * @for io.js_anonymous
  * @method saveHTML
  * @param  {String} filename the name of the new file
  */
