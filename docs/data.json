@@ -47,6 +47,7 @@
             },
             "fors": {
                 "IO": 1,
+                "io.js_anonymous": 1,
                 "Global": 1
             },
             "namespaces": {}
@@ -147,12 +148,13 @@
             },
             "fors": {
                 "IO": 1,
+                "io.js_anonymous": 1,
                 "Global": 1
             },
             "namespaces": {},
             "tag": "module",
             "file": "src\\js\\io.js",
-            "line": 594,
+            "line": 598,
             "description": "io.js base file."
         },
         "markus.js": {
@@ -309,7 +311,7 @@
             "module": "io.js",
             "namespace": "",
             "file": "src\\js\\io.js",
-            "line": 594,
+            "line": 598,
             "description": "Defines the `markus.io` object that can be accessed globally. Uses some functions that have\nbeen defined in the io.js anonymous namespace, but also defines some functions in the object\ncreation itself.",
             "is_constructor": 1
         },
@@ -699,12 +701,12 @@
                     "type": "String"
                 }
             ],
-            "class": "IO",
+            "class": "io.js_anonymous",
             "module": "io.js"
         },
         {
             "file": "src\\js\\io.js",
-            "line": 392,
+            "line": 393,
             "description": "Calling this method will clean the data from the document into a newly spawned,\ntemporary element to use JQuery to clean it from unwanted elements and classes",
             "itemtype": "method",
             "name": "saveSave",
@@ -720,12 +722,12 @@
                     "type": "Object"
                 }
             ],
-            "class": "IO",
+            "class": "io.js_anonymous",
             "module": "io.js"
         },
         {
             "file": "src\\js\\io.js",
-            "line": 428,
+            "line": 430,
             "description": "Generates a TEI XML document from the HTML document that is generated in the browser.",
             "itemtype": "method",
             "name": "saveTEI",
@@ -736,12 +738,12 @@
                     "type": "String"
                 }
             ],
-            "class": "IO",
+            "class": "io.js_anonymous",
             "module": "io.js"
         },
         {
             "file": "src\\js\\io.js",
-            "line": 449,
+            "line": 452,
             "description": "Generates a standalone HTML document that you can view offline. This has all the data from the\ndocument stored in it, including the stylesheet CSS rules that have been parsed into one single\n`<style>` tag in the head of the HTML document.",
             "itemtype": "method",
             "name": "saveHTML",
@@ -752,12 +754,12 @@
                     "type": "String"
                 }
             ],
-            "class": "IO",
+            "class": "io.js_anonymous",
             "module": "io.js"
         },
         {
             "file": "src\\js\\io.js",
-            "line": 507,
+            "line": 511,
             "description": "Saves a file using the FileSystem. It requests write access and in return Gets\na fileEntry (basically a filePointer) that can be written to. Once we have that object\nwe write all the data that needs to be saved to there and call the callback function once the\nwriting of data is complete",
             "itemtype": "method",
             "name": "saveFile",
@@ -788,7 +790,7 @@
         },
         {
             "file": "src\\js\\io.js",
-            "line": 563,
+            "line": 567,
             "description": "Removes the specified file from the fileSystem.",
             "itemtype": "method",
             "name": "removeFile",
@@ -814,7 +816,7 @@
         },
         {
             "file": "src\\js\\io.js",
-            "line": 605,
+            "line": 609,
             "description": "Defines the readFile function. This allows you to read a file specified by the fileName\nand calls the callback on succes",
             "itemtype": "method",
             "name": "readFile",
@@ -840,7 +842,7 @@
         },
         {
             "file": "src\\js\\io.js",
-            "line": 651,
+            "line": 655,
             "description": "Exports a MARKUS save file and automatically saves it",
             "itemtype": "method",
             "name": "exportSave",
@@ -856,7 +858,7 @@
         },
         {
             "file": "src\\js\\io.js",
-            "line": 675,
+            "line": 679,
             "description": "Exports a TEI save file of the document and automatically saves it",
             "itemtype": "method",
             "name": "exportTEI",
@@ -872,7 +874,7 @@
         },
         {
             "file": "src\\js\\io.js",
-            "line": 695,
+            "line": 699,
             "description": "Exports a HTML save of the document and its layout and automatically saves it",
             "itemtype": "method",
             "name": "exportHTML",
@@ -888,7 +890,7 @@
         },
         {
             "file": "src\\js\\io.js",
-            "line": 715,
+            "line": 719,
             "description": "A simple basic save to the normal MARKUS format. Cleans the data, processes it\nfor download and then automatically downloads it.",
             "params": [
                 {
@@ -907,7 +909,7 @@
         },
         {
             "file": "src\\js\\io.js",
-            "line": 749,
+            "line": 753,
             "description": "Global method that registers the Global Tag Management UI, it also takes care of all its\nevent handlers etc.",
             "itemtype": "method",
             "name": "registeTagManageUI",
@@ -1171,7 +1173,7 @@
     "warnings": [
         {
             "message": "Missing item type\nA simple basic save to the normal MARKUS format. Cleans the data, processes it\nfor download and then automatically downloads it.",
-            "line": " src\\js\\io.js:715"
+            "line": " src\\js\\io.js:719"
         },
         {
             "message": "Missing item type\nDefines what happens when you click on a tab. It shows the specified\ntab, hides all webDicts, shows the correct one and triggers the\nresetSize event.",
