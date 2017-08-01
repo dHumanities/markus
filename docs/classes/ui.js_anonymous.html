@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>comment.js_anonymous</title>
+    <title>ui.js_anonymous</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -96,15 +96,15 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>comment.js_anonymous Class</h1>
+<h1>ui.js_anonymous Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_js_comment.js.html#l6"><code>src\js\comment.js:6</code></a>
+            Defined in: <a href="../files/src_js_ui.js.html#l6"><code>src\js\ui.js:6</code></a>
         </div>
 
-            Module: <a href="../modules/comment.js.html">comment.js</a>
+            Module: <a href="../modules/ui.js.html">ui.js</a>
 
 </div>
 
@@ -112,15 +112,15 @@
 <div class="box intro">
     <p>The class that holds the variables and functions created in the namespace of this file.
 The constrcutor of this object is only called once, because it is an anonymous function.</p>
-<p>The functions defined in this class are later added to the MARKUS global object and can
-from that point on be called as <code>markus.comments.FUNCTION_NAME</code></p>
+<p>Some of the functions defined in this class are later added to the MARKUS global object and can
+from that point on be called as <code>markus.ui.FUNCTION_NAME</code></p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_comment.js_anonymous" class="method item">
-    <h3 class="name"><code>comment.js_anonymous</code></h3>
+<div id="method_ui.js_anonymous" class="method item">
+    <h3 class="name"><code>ui.js_anonymous</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
@@ -140,7 +140,7 @@ from that point on be called as <code>markus.comments.FUNCTION_NAME</code></p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_comment.js.html#l6"><code>src\js\comment.js:6</code></a>
+        <a href="../files/src_js_ui.js.html#l6"><code>src\js\ui.js:6</code></a>
         </p>
 
 
@@ -178,17 +178,196 @@ from that point on be called as <code>markus.comments.FUNCTION_NAME</code></p>
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
     </ul>
 
     <div>
         <div id="index" class="api-class-tabpanel index">
             <h2 class="off-left">Item Index</h2>
 
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#method_lastMarkup">lastMarkup</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_lastSameTyeMarkup">lastSameTyeMarkup</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_nextMarkup">nextMarkup</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_nextSameTypeMarkup">nextSameTypeMarkup</a>
+
+                            </li>
+                    </ul>
+                </div>
 
 
 
         </div>
 
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method_lastMarkup" class="method item">
+    <h3 class="name"><code>lastMarkup</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_ui.js.html#l142"><code>src\js\ui.js:142</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Finds the previous markup before the currently selected markup instance and will transfer
+the focus by generating a click on the previous element. This is markup_type agnostic.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_lastSameTyeMarkup" class="method item">
+    <h3 class="name"><code>lastSameTyeMarkup</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_ui.js.html#l179"><code>src\js\ui.js:179</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Finds the previous markup before the currently selected markup instance and will transfer
+the focus by generating a click on the previous element. This will only go through the instances
+of the same markup_type.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_nextMarkup" class="method item">
+    <h3 class="name"><code>nextMarkup</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>_sameType</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_ui.js.html#l102"><code>src\js\ui.js:102</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Finds the next markup after the currently selected markup instance and will transfer
+the focus by generating a click on the next element. This is markup_type agnostic.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">_sameType</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>This Parameter is currently unused. TODO: Remove it, or fix it</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_nextSameTypeMarkup" class="method item">
+    <h3 class="name"><code>nextSameTypeMarkup</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_ui.js.html#l62"><code>src\js\ui.js:62</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>This method will transfer your focus from the currently selected markup instance
+to the next one in the document with the same type.</p>
+
+    </div>
+
+
+
+
+</div>
+            </div>
 
 
 

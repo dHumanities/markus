@@ -6,11 +6,13 @@ YUI.add("yuidoc-meta", function(Y) {
         "Global",
         "IO",
         "JQuery",
+        "UI",
         "WebDictionary",
         "comment.js_anonymous",
         "helpInfo.js_anonymous",
         "io.js_anonymous",
         "navbar.js_anonymous",
+        "ui.js_anonymous",
         "webDictionary.js_anonymous"
     ],
     "modules": [
@@ -20,6 +22,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "io.js",
         "markus.js",
         "navbar.js",
+        "ui.js",
         "webDictionary.js"
     ],
     "allModules": [
@@ -52,6 +55,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "navbar.js",
             "name": "navbar.js",
             "description": "navbar.js base file."
+        },
+        {
+            "displayName": "ui.js",
+            "name": "ui.js",
+            "description": "ui.js base file."
         },
         {
             "displayName": "webDictionary.js",

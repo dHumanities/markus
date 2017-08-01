@@ -77,6 +77,21 @@
             "fors": {},
             "namespaces": {}
         },
+        "src\\js\\ui.js": {
+            "name": "src\\js\\ui.js",
+            "modules": {
+                "ui.js": 1
+            },
+            "classes": {
+                "ui.js_anonymous": 1,
+                "UI": 1
+            },
+            "fors": {
+                "UI": 1,
+                "ui.js_anonymous": 1
+            },
+            "namespaces": {}
+        },
         "src\\js\\webDictionary.js": {
             "name": "src\\js\\webDictionary.js",
             "modules": {
@@ -186,6 +201,24 @@
             "file": "src\\js\\navbar.js",
             "line": 6,
             "description": "navbar.js base file."
+        },
+        "ui.js": {
+            "name": "ui.js",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "ui.js_anonymous": 1,
+                "UI": 1
+            },
+            "fors": {
+                "UI": 1,
+                "ui.js_anonymous": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\js\\ui.js",
+            "line": 252,
+            "description": "ui.js base file."
         },
         "webDictionary.js": {
             "name": "webDictionary.js",
@@ -365,6 +398,42 @@
                     "type": "Object"
                 }
             ]
+        },
+        "ui.js_anonymous": {
+            "name": "ui.js_anonymous",
+            "shortname": "ui.js_anonymous",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ui.js",
+            "namespace": "",
+            "file": "src\\js\\ui.js",
+            "line": 6,
+            "description": "The class that holds the variables and functions created in the namespace of this file.\nThe constrcutor of this object is only called once, because it is an anonymous function.\n\nSome of the functions defined in this class are later added to the MARKUS global object and can\nfrom that point on be called as `markus.ui.FUNCTION_NAME`",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "_m",
+                    "description": "a reference to the Markus Configuration Object is passed",
+                    "type": "Object"
+                }
+            ]
+        },
+        "UI": {
+            "name": "UI",
+            "shortname": "UI",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ui.js",
+            "namespace": "",
+            "file": "src\\js\\ui.js",
+            "line": 252,
+            "description": "Creates the markus.ui object and associates its member varaible listener with\nthe predefined listener variable from the ui.js_anonymous class. You can use this\nclass to gain access to the keyPress listener that was registered here."
         },
         "webDictionary.js_anonymous": {
             "name": "webDictionary.js_anonymous",
@@ -983,6 +1052,59 @@
             "name": "loadNavBar",
             "class": "navbar.js_anonymous",
             "module": "navbar.js"
+        },
+        {
+            "file": "src\\js\\ui.js",
+            "line": 22,
+            "description": "Create a new keyPress listener that listens to all keypresses in the whole window,\nregardless of focus element. This object holds that listener",
+            "itemtype": "property",
+            "name": "listener",
+            "type": "{Listener}",
+            "class": "UI",
+            "module": "ui.js"
+        },
+        {
+            "file": "src\\js\\ui.js",
+            "line": 62,
+            "description": "This method will transfer your focus from the currently selected markup instance\nto the next one in the document with the same type.",
+            "itemtype": "method",
+            "name": "nextSameTypeMarkup",
+            "class": "ui.js_anonymous",
+            "module": "ui.js"
+        },
+        {
+            "file": "src\\js\\ui.js",
+            "line": 102,
+            "description": "Finds the next markup after the currently selected markup instance and will transfer\nthe focus by generating a click on the next element. This is markup_type agnostic.",
+            "itemtype": "method",
+            "name": "nextMarkup",
+            "params": [
+                {
+                    "name": "_sameType",
+                    "description": "This Parameter is currently unused. TODO: Remove it, or fix it",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "ui.js_anonymous",
+            "module": "ui.js"
+        },
+        {
+            "file": "src\\js\\ui.js",
+            "line": 142,
+            "description": "Finds the previous markup before the currently selected markup instance and will transfer\nthe focus by generating a click on the previous element. This is markup_type agnostic.",
+            "itemtype": "method",
+            "name": "lastMarkup",
+            "class": "ui.js_anonymous",
+            "module": "ui.js"
+        },
+        {
+            "file": "src\\js\\ui.js",
+            "line": 179,
+            "description": "Finds the previous markup before the currently selected markup instance and will transfer\nthe focus by generating a click on the previous element. This will only go through the instances\nof the same markup_type.",
+            "itemtype": "method",
+            "name": "lastSameTyeMarkup",
+            "class": "ui.js_anonymous",
+            "module": "ui.js"
         },
         {
             "file": "src\\js\\webDictionary.js",
