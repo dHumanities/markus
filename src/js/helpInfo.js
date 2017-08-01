@@ -1,6 +1,6 @@
 /**
- * navbar.js base file.
- * @module navbar.js
+ * helpInfo.js base file.
+ * @module helpInfo.js
  */
 
 

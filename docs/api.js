@@ -16,6 +16,7 @@ YUI.add("yuidoc-meta", function(Y) {
     "modules": [
         "comment.js",
         "data.js",
+        "helpInfo.js",
         "io.js",
         "markus.js",
         "navbar.js",
@@ -31,6 +32,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "data.js",
             "name": "data.js",
             "description": "data.js base file."
+        },
+        {
+            "displayName": "helpInfo.js",
+            "name": "helpInfo.js",
+            "description": "helpInfo.js base file."
         },
         {
             "displayName": "io.js",

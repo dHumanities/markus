@@ -29,7 +29,9 @@
         },
         "src\\js\\helpInfo.js": {
             "name": "src\\js\\helpInfo.js",
-            "modules": {},
+            "modules": {
+                "helpInfo.js": 1
+            },
             "classes": {
                 "helpInfo.js_anonymous": 1
             },
@@ -123,20 +125,19 @@
             "line": 6,
             "description": "data.js base file."
         },
-        "navbar.js": {
-            "name": "navbar.js",
+        "helpInfo.js": {
+            "name": "helpInfo.js",
             "submodules": {},
             "elements": {},
             "classes": {
-                "helpInfo.js_anonymous": 1,
-                "navbar.js_anonymous": 1
+                "helpInfo.js_anonymous": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src\\js\\navbar.js",
-            "line": 6,
-            "description": "navbar.js base file."
+            "file": "src\\js\\helpInfo.js",
+            "line": 7,
+            "description": "helpInfo.js base file."
         },
         "io.js": {
             "name": "io.js",
@@ -171,6 +172,20 @@
             "file": "src\\js\\markus.js",
             "line": 20,
             "description": "Markus.js base file"
+        },
+        "navbar.js": {
+            "name": "navbar.js",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "navbar.js_anonymous": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\js\\navbar.js",
+            "line": 6,
+            "description": "navbar.js base file."
         },
         "webDictionary.js": {
             "name": "webDictionary.js",
@@ -264,7 +279,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "navbar.js",
+            "module": "helpInfo.js",
             "namespace": "",
             "file": "src\\js\\helpInfo.js",
             "line": 7,
@@ -571,7 +586,7 @@
             "itemtype": "method",
             "name": "loadHelpInfo",
             "class": "helpInfo.js_anonymous",
-            "module": "navbar.js"
+            "module": "helpInfo.js"
         },
         {
             "file": "src\\js\\helpInfo.js",
@@ -580,7 +595,7 @@
             "itemtype": "method",
             "name": "registHelp",
             "class": "helpInfo.js_anonymous",
-            "module": "navbar.js"
+            "module": "helpInfo.js"
         },
         {
             "file": "src\\js\\helpInfo.js",
@@ -596,7 +611,7 @@
                 }
             ],
             "class": "helpInfo.js_anonymous",
-            "module": "navbar.js"
+            "module": "helpInfo.js"
         },
         {
             "file": "src\\js\\io.js",
@@ -892,6 +907,8 @@
             "file": "src\\js\\io.js",
             "line": 719,
             "description": "A simple basic save to the normal MARKUS format. Cleans the data, processes it\nfor download and then automatically downloads it.",
+            "itemtype": "method",
+            "name": "save",
             "params": [
                 {
                     "name": "filename",
@@ -909,7 +926,7 @@
         },
         {
             "file": "src\\js\\io.js",
-            "line": 753,
+            "line": 754,
             "description": "Global method that registers the Global Tag Management UI, it also takes care of all its\nevent handlers etc.",
             "itemtype": "method",
             "name": "registeTagManageUI",
@@ -1171,10 +1188,6 @@
         }
     ],
     "warnings": [
-        {
-            "message": "Missing item type\nA simple basic save to the normal MARKUS format. Cleans the data, processes it\nfor download and then automatically downloads it.",
-            "line": " src\\js\\io.js:719"
-        },
         {
             "message": "Missing item type\nDefines what happens when you click on a tab. It shows the specified\ntab, hides all webDicts, shows the correct one and triggers the\nresetSize event.",
             "line": " src\\js\\webDictionary.js:236"

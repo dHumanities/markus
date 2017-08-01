@@ -720,6 +720,7 @@ _m.io = {
      * A simple basic save to the normal MARKUS format. Cleans the data, processes it
      * for download and then automatically downloads it.
      *
+     * @method save
      * @param  {String} filename The filename of the new file we want to create
      * @param  {Function} _fn     The callback function called uppon completion
      */
