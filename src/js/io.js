@@ -31,6 +31,9 @@ var ERROR_HANDLER = function(e) {
  * hides or shows buttons depending on their visibility and changes the color-switcher-class
  * based on their status
  *
+ * This method is defined in the io.js anonymous function but later attached to the `markus.io` object
+ *
+ * @for IO
  * @method updateSwitchers
  */
 var updateSwitchers = function() {
@@ -73,6 +76,9 @@ var updateSwitchers = function() {
  * based on the 'visible' property and sets the button text according to either
  * the tagName or a predefined buttonName that can override the tagName.
  *
+ * This method is defined in the io.js anonymous function but later attached to the `markus.io` object
+ *
+ * @for IO
  * @method updateManualPopover
  */
 var updateManualPopover = function() {
@@ -115,6 +121,9 @@ if (typeof attr !== typeof undefined && attr !== false) {
  * overwrite already existing definitions so you can use this to redefine the styling of existing
  * tags too.
  *
+ * This method is defined in the io.js anonymous function but later attached to the `markus.io` object
+ *
+ * @for IO
  * @method newTagCSS
  * @param  {String} tagName    the name of the tagClass we want to generate in CSS
  * @param  {String} buttonName the name we want the button to have for this tagCSS
@@ -198,6 +207,9 @@ var newTagCSS = function(tagName, buttonName, tagColor) {
  * Called before defining new CSS rules for a tagType. This removes any pre-existing rules for
  * the provided tagType from the markus.tag and markus.tagCSS objects.
  *
+ * This method is defined in the io.js anonymous function but later attached to the `markus.io` object
+ *
+ * @for IO
  * @method removeTagCSS
  * @param  {String} tagName The tag you want to remove
  */
@@ -214,6 +226,9 @@ var removeTagCSS = function(tagName) {
  * the tag and tagCSS attributes. It has a couple of failsafes in case the data is missing
  * and also contains the defaults for the standard tagNames (i.e. placeName, officialTitle, timePeriod etc.)
  *
+ * This method is defined in the io.js anonymous function but later attached to the `markus.io` object
+ *
+ * @for IO
  * @method loadCSSFromCSS_TagAtt
  */
 var loadCSSFromCSS_TagAtt = function() {
@@ -374,7 +389,14 @@ var autoDownload = function(fileEntry, suffix) {
     $('#export')[0].click();
 };
 
-
+/**
+ * Calling this method will clean the data from the document into a newly spawned,
+ * temporary element to use JQuery to clean it from unwanted elements and classes
+ *
+ * @method saveSave
+ * @param  {String} filename the fileName for the new File
+ * @param  {Object} _fn      The fileEntry object
+ */
 var saveSave = function(filename, _fn) {
     //Prepends the temporary saving span, this is an invisible span
     $("body").prepend($("<span id='saving_temp' style='display:none'></span>"));
@@ -403,22 +425,45 @@ var saveSave = function(filename, _fn) {
 
 };
 
+/**
+ * Generates a TEI XML document from the HTML document that is generated in the browser.
+ *
+ * @method saveTEI
+ * @param  {String} filename the fileName for the new File
+ */
 var saveTEI = function(filename) {
+    //Define the TEI head
     var head = '<?xml version="1.0" encoding="UTF-8"?><TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude"><teiHeader><fileDesc><titleStmt><title>' + filename + '</title></titleStmt><publicationStmt><p/></publicationStmt><sourceDesc><p/></sourceDesc></fileDesc></teiHeader><text><body>';
+    //The closing tags needed to close of the TEI document
     var tail = "</body></text></TEI>";
+    //Concatenate the head, content and tail
     var saveContent = head + convertTEI(($(".doc")[0]).outerHTML) + tail;
+
+    //Call the saveFile function
     saveFile(filename, saveContent, function(fileEntry) {
         $('#export').attr("href", fileEntry.toURL()).attr("download", $('.doc').attr('filename') + "_tei.xml");
         $('#export')[0].click();
     });
 };
 
+/**
+ * Generates a standalone HTML document that you can view offline. This has all the data from the
+ * document stored in it, including the stylesheet CSS rules that have been parsed into one single
+ * `<style>` tag in the head of the HTML document.
+ *
+ * @method saveHTML
+ * @param  {String} filename the name of the new file
+ */
 var saveHTML = function(filename) {
+    //Define the head of the document for a standalone HTML document
     var head = "<html><head><meta charset='utf-8'/></head><link rel='stylesheet' href='http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css'><style>.noCBDBID{border-bottom:thin solid red}.previous{display:none}name,persName{background:red}pre{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.unsolved{font-size:large}.fullName{color:#b94a48}.partialName{color:orange}.nianhao{color:green}.markup .markup.unsolved{border-right:medium dotted red}.placeName{color:#428bca}.doc{padding:10px}.moreThanOneId{border-bottom:medium dotted red}.moreThanOneId.wrong{border-bottom:0}#drop_zone{border:2px dashed #fff;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;padding:25px;text-align:center;font:20pt bold Vollkorn;color:#fff}#content{padding-top:20px}div.layout{text-align:center}div.centre{text-align:left;width:10px;display:block;margin-left:auto;margin-right:auto}.stop-scrolling{height:100%;overflow:hidden}.markup.noColor{color:inherit}.officialTitle{color:#5f9ea0}.btn.noColor{background-color:silver;border-color:rgba(0,0,0,0);color:inherit}.markup.selected{padding-right:5px;padding-left:5px;line-height:1.5;border-radius:3px;color:#fff}.selected .markup{color:#fff}.fullName.selected{background-color:#d9534f;border-color:#d43f3a}.partialName.selected{background-color:#f0ad4e;border-color:#eea236}.nianhao.selected{background-color:#5cb85c;border-color:#4cae4c}.placeName.selected{background-color:#428bca;border-color:#357ebd}.officialTitle.selected{background-color:#5bc0de;border-color:#46b8da}#helpModal .modal-header{display:none}.popover .btn{color:#fff}.hidden {display:none}.halfTransparent {opacity:0.3}</style>";
-    var style = "<style>";
+    //Define some more tails and heads for needed HMTL structure
     var bodyhead = "<body><div class='container'><div class='row row-offcanvas row-offcanvas-right'>";
     var bodytail = "</div></div>";
     var tail = "</body></html>";
+
+    //Turn all of the styleTags that have been created into a single style tag embedded in the document
+    var style = "<style>";
     var tagCSS = _m.tagCSS;
     for (var tag in tagCSS) {
         cssArray = tagCSS[tag];
@@ -428,21 +473,30 @@ var saveHTML = function(filename) {
             style += $.stylesheet(css.tagName).rules()[0].cssText;
         }
     }
-
+    //append the closing style tag, completing the style element.
     style += "</style>";
+
+    //Add the invisible temporary saving element that holds the data while it is being cleaned
     $("body").prepend($("<span id='saving_temp' style='display:none'></span>"));
 
+    //Get a ref to the temp element
     var div = $("#saving_temp");
-    // $("#saving_temp").html($("#content").html());
+
+    //Get the HTML and convert it back to unicode
     div.html(_m.util.converBackToUnicode(($(".doc")[0]).outerHTML));
+
+    //Remove any classes and elements we don't want to end up in the finished product
     div.find(".notSave,iframe").remove();
     div.find(".justSelected,.justExtended").removeClass("justSelected").removeClass("justExtended");
     div.find(".markup[randomID]").removeAttr("randomID");
 
-    // $.copyAttrs($("#content .doc"),div);
-
+    //Concatentate, the head, style, bodyhead, content, bodytail and tail to create the saveContent
     var saveContent = head + style + bodyhead + $("#saving_temp").html() + bodytail + tail;
+
+    //Log the data to be saved for debugging purposes
     console.log($("#saving_temp").html());
+
+    //Call the saveFile function with the following parameters
     saveFile(filename, saveContent, function(fileEntry) {
         $("#saving_temp").remove();
         $('#export').attr("href", fileEntry.toURL()).attr("download", $('.doc').attr('filename') + "_layout.html");
@@ -450,45 +504,83 @@ var saveHTML = function(filename) {
     });
 };
 
-
+/**
+ * Saves a file using the FileSystem. It requests write access and in return Gets
+ * a fileEntry (basically a filePointer) that can be written to. Once we have that object
+ * we write all the data that needs to be saved to there and call the callback function once the
+ * writing of data is complete
+ *
+ * @for IO
+ * @method saveFile
+ * @param  {String} filename     the name of the file we want to create
+ * @param  {String} text         the textdata of the file we want to create
+ * @param  {Function} _fn        the callback function, called once the file has been written
+ * @param  {Function} errorHandler A custom errorHandler, does not need to specified, can also be kept default
+ */
 var saveFile = function(filename, text, _fn, errorHandler) {
+    //If an errorHandler has not explicitly set, use the default one
     if (errorHandler === null) {
         errorHandler = ERROR_HANDLER;
     }
+    //Saying we're started in the console, for debugging purposes
     console.log("exporting start");
+
+    //Request access to the fileSystem
     window.webkitRequestFileSystem(window.TEMPORARY, 1024 * 1024, function(fs) {
+        //Logging that we got this far, debugging purposes
         console.log("exporting file");
+
+        //With access to the fileSystem, say we want to create a file
         fs.root.getFile(filename, {
             create: true
         }, function(fileEntry) {
+            //At this point we have a fileEntry object, which is a filepointer
+
             // fileEntry.remove(function(){}, function(){});
+            //We then create a writer that can write to this fileEntry
             fileEntry.createWriter(function(fileWriter) {
-                // console.log($("#temp").html());
+                //This blob variable holds the text we want to save
                 var blob = new Blob([text], {
                     type: 'text/plain'
                 });
 
+                //once we're done with saving, call the callback function
                 fileWriter.addEventListener("writeend", function() {
                     if (_fn) {
                         _fn(fileEntry);
                     }
                 }, false);
+
+                //Start writing the blob data to the file
                 fileWriter.write(blob);
+
+                //ALL the error handlers in case something goes to hell
             }, ERROR_HANDLER);
         }, ERROR_HANDLER);
     }, ERROR_HANDLER);
 };
 
-
+/**
+ * Removes the specified file from the fileSystem.
+ *
+ * @for IO
+ * @method removeFile
+ * @param  {String} filename     the name of the file we want to remove
+ * @param  {Function} _fn          the callback function, called once the file has successfully been removed
+ * @param  {Function} errorHandler the errorHandler, does not need to be defined, can fallback to default handler
+ */
 var removeFile = function(filename, _fn, errorHandler) {
+    //If the error handler has not explicitly been set, use the default errorHandler
     if (errorHandler === null) {
         errorHandler = ERROR_HANDLER;
     }
+
+    //Request access to the fileSystem.
     window.webkitRequestFileSystem(window.TEMPORARY, 1024 * 1024, function(fs) {
         fs.root.getFile(filename, {
             create: false
         }, function(fileEntry) {
-
+            //Once we have a FilePoitner to work with, we remove it and call the callBack function
             fileEntry.remove(function() {
                 if (_fn) {
                     _fn(fileEntry);
@@ -499,20 +591,43 @@ var removeFile = function(filename, _fn, errorHandler) {
     }, errorHandler);
 };
 
+/**
+ * Defines the `markus.io` object that can be accessed globally. Uses some functions that have
+ * been defined in the io.js anonymous namespace, but also defines some functions in the object
+ * creation itself.
+ *
+ * @class IO
+ * @constructor
+ */
 _m.io = {
     removeFile: removeFile,
     saveFile: saveFile,
+    /**
+     * Defines the readFile function. This allows you to read a file specified by the fileName
+     * and calls the callback on succes
+     *
+     * @method readFile
+     * @param  {String} _file        the fileName as a String
+     * @param  {Function} _fn          The callBack function
+     * @param  {Function} errorHandler custom error handler
+     */
     readFile: function(_file, _fn, errorHandler) {
+        //If the errorHnadler has not been explicitly set, use the default one
         if (errorHandler === null) {
             errorHandler = ERROR_HANDLER;
         }
+
+        //Define the onInitFS function, use right below this function
         function onInitFs(fs) {
             fs.root.getFile(_file, {}, function(fileEntry) {
                 // fs.root.getFile(file+'.html', {}, function(fileEntry) {
                 // Get a File object representing the file,
                 // then use FileReader to read its contents.
                 fileEntry.file(function(_file) {
+                    //Defines a new FileReader.
                     var reader = new FileReader();
+                    //Once we are finished loading call the callback with the resulting data
+                    //and start parsing the CSS from the css TagAttr
                     reader.onloadend = ( function(file) {
                         return function(evt) {
                             if (_fn) {
@@ -521,17 +636,31 @@ _m.io = {
                             }
                         };
                     } )(_file);
+
+                    //Start reading the file
                     reader.readAsText(_file);
                 }, errorHandler);
 
             }, errorHandler);
 
         }
+        //Request acces to the fileSystem to kick the whole process off
         window.webkitRequestFileSystem(window.TEMPORARY, 1024 * 1024, onInitFs, errorHandler);
     },
+
+    /**
+     * Exports a MARKUS save file and automatically saves it
+     *
+     * @method exportSave
+     * @param  {String} filename the fileName of the file you download
+     */
     exportSave: function(filename) {
+        //Set the tag attribute to the JSON version of markus.tag
         $(".doc").attr("tag", _m.util.convertToEscapeUnicode($.toJSON(_m.tag)));
+        //Remove the tagCSS attribute
         $(".doc").removeAttr("tagCSS");
+
+        //First removes the file and then saves the file, triggering an autoDownload
         removeFile(filename + ".html", function() {
             saveSave(filename + ".html", function(fileEntry) {
                 autoDownload(fileEntry, "_markus.html");
@@ -542,54 +671,95 @@ _m.io = {
             });
         });
     },
+
+    /**
+     * Exports a TEI save file of the document and automatically saves it
+     *
+     * @method exportTEI
+     * @param  {String} filename the fileName of the file you download
+     */
     exportTEI: function(filename) {
+        //Set the tag attribute to the JSON version of markus.tag
         $(".doc").attr("tag", _m.util.convertToEscapeUnicode($.toJSON(_m.tag)));
+        //Remove the tagCSS attribute
         $(".doc").removeAttr("tagCSS");
+
+        //First removes the file and then saves the file, triggering an autoDownload
         removeFile(filename + "_tei.xml", function() {
             saveTEI(filename + "_tei.xml");
         }, function() {
             saveTEI(filename + "_tei.xml");
         });
     },
+
+    /**
+     * Exports a HTML save of the document and its layout and automatically saves it
+     *
+     * @method exportHTML
+     * @param  {String} filename the fileName of the file you download
+     */
     exportHTML: function(filename) {
+        //Set the tag attribute to the JSON version of markus.tag
         $(".doc").attr("tag", _m.util.convertToEscapeUnicode($.toJSON(_m.tag)));
+        //Remove the tagCSS attribute
         $(".doc").removeAttr("tagCSS");
+
+        //First removes the file and then saves the file, triggering an autoDownload
         removeFile(filename + "_layout.html", function() {
             saveHTML(filename + "_layout.html");
         }, function() {
             saveHTML(filename + "_layout.html");
         });
     },
-    save: function(filename, _fn) {
 
+    /**
+     * A simple basic save to the normal MARKUS format. Cleans the data, processes it
+     * for download and then automatically downloads it.
+     *
+     * @param  {String} filename The filename of the new file we want to create
+     * @param  {Function} _fn     The callback function called uppon completion
+     */
+    save: function(filename, _fn) {
+        //If there are any defined tags in `markus.tag`
         if (Object.keys(_m.tag).length > 0) {
+            //Add them to the tag attribute of the doc
             $(".doc").attr("tag", _m.util.convertToEscapeUnicode($.toJSON(_m.tag)));
         }
-
+        //Remove the tagCSS attribute
         $(".doc").removeAttr("tagCSS");
+
+        //After that it removes the file and then uses the basic save
         removeFile(filename + ".html", function() {
             saveSave(filename + ".html", _fn);
         }, function() {
             saveSave(filename + ".html", _fn);
         });
     },
+
+    //Define these markus.io functions by pointing to the functions that have
+    //been defined in the anonymous namespace above
     newTagCSS: newTagCSS,
     removeTagCSS: removeTagCSS,
     updateSwitchers: updateSwitchers,
     updateManualPopover: updateManualPopover,
     loadCSSFromCSS_TagAtt: loadCSSFromCSS_TagAtt
-
-
 };
-
 } )(markus);
 
+/**
+ * Global method that registers the Global Tag Management UI, it also takes care of all its
+ * event handlers etc.
+ *
+ * @for Global
+ * @method registeTagManageUI
+ */
 var registeTagManageUI = function() {
+    //When we show the manageTag Modal
     $("#manageTagModal").on("show.bs.modal", function() {
         var tbody = $("#manageTagModal .modal-body .manageTagTable");
         tbody.empty();
 
-
+        //For each of the color-switcher-class we append a table
         $("#buttonsRow [color-switcher-class]").each(function() {
             var fix = ($(this).attr("data-markus-default") == "true");
             var tr = $("<tr class='tagSetting' color-switcher-class='" + $(this).attr("color-switcher-class") + "'' />");
@@ -601,35 +771,49 @@ var registeTagManageUI = function() {
             tbody.append(tr);
         });
     });
+
+    //When you click the setManageTagBtn
     $("#setManageTagBtn").on("click", function() {
         $("#manageTagModal .modal-body .tagSetting").each(function() {
-
+            //For each of the tagSettings
             var tagSwitcher = $(this).attr("color-switcher-class");
             var fix = ($("#buttonsRow [color-switcher-class='" + tagSwitcher + "']").attr("data-markus-default") == "true");
             var buttonName = $(this).find("input.form-control[data-markus-value='color-switcher-class']").val();
             var tagName = markus.util.chineseToPingYin($(this).find("input.form-control[data-markus-value='tagName']").val()).trim();
 
+            //If the buttonName is just a space, assure that it remains that
             if (buttonName.trim() === "") {
                 buttonName = "　";
             }
 
+            //If the tagName and tagSwitcher are not the same
             if (tagName != tagSwitcher) {
+                //Get the color from the markus.tag object
                 var tagColor = markus.tag[tagSwitcher].color;
+                //Remove the CSS and re-add it back
                 markus.io.removeTagCSS(tagSwitcher);
                 markus.io.newTagCSS(tagName, tagColor);
 
+                //Remove and add the necessary classes
                 $("#buttonsRow [color-switcher-class='" + tagSwitcher + "']").removeClass(tagSwitcher).addClass(tagName).attr("color-switcher-class", tagName);
                 $("#manualPopover .singleTagContent button." + tagSwitcher).removeClass(tagSwitcher).addClass(tagName).attr("_type", tagName);
                 $(".doc ." + tagSwitcher).removeClass(tagSwitcher).addClass(tagName).attr("type", tagName);
             }
 
+            //Define the markus.tag[tagSwitcher] object if it not already has been set
             markus.tag[tagSwitcher] = markus.tag[tagSwitcher] || {
                 color: tagColor,
                 buttonName: buttonName,
                 status: ""
             };
+
+            //set the buttonName
             markus.tag[tagSwitcher].buttonName = buttonName;
+
+            //Set the visible status and act upon it
             var visble = markus.tag[tagSwitcher]["visible"] = $(this).find("input[data-markus-action='shortcut']").is(":checked");
+
+            //If it is visible, show the buttons and set the text for the elements
             if (visble) {
                 $("#buttonsRow [color-switcher-class='" + tagSwitcher + "']").show();
                 $("#manualPopover .singleTagContent button." + tagSwitcher).show();
@@ -637,6 +821,7 @@ var registeTagManageUI = function() {
                 $("#manualPopover .singleTagContent button." + tagSwitcher).text(buttonName);
 
             } else {
+              //If it is not visible, hide the buttons and manualPopover and text for the elements
                 $("#buttonsRow [color-switcher-class='" + tagSwitcher + "']").text(buttonName);
                 $("#manualPopover .singleTagContent button." + tagSwitcher).text(buttonName);
                 $("#buttonsRow [color-switcher-class='" + tagSwitcher + "']").hide();
@@ -656,29 +841,38 @@ var registeTagManageUI = function() {
                 $(".doc ." + tagSwitcher).contents().unwrap();
                 markus.io.removeTagCSS(tagSwitcher);
             }
-
-
         });
         $(".doc").attr("tag", JSON.stringify(markus.tag));
         // $(".doc").attr("tagCSS", "");
         $("#manageTagModal").modal('toggle');
     });
+
+    //Defines what happens when you click the new Tag button
     $("#newTagBtn").on("click", function() {
+        //Create a tagname by changing Chinese to pingYin
         var tagName = markus.util.chineseToPingYin($("#manageTagModal .newTagTable [data-markus-value='tagName']").val()).trim();
+        //The unchanged version of the tagName
         var buttonName = $("#manageTagModal .newTagTable [data-markus-value='color-switcher-class']").val();
+        //If the buttonName is only a space, make sure it remains only a space
         if (buttonName.trim() === "") {
             buttonName = "　";
         }
+
+        //Find the tagColor we want to use
         var tagColor = $("#manageTagModal .tagColor").val();
 
+        //Define the newTag CSS by calling the function to do just that
         markus.io.newTagCSS(tagName, buttonName, tagColor);
+
+        //Reset the newTagTable now that the newTag has been registered
         $("#manageTagModal .newTagTable [data-markus-value='tagName']").val("");
         $("#manageTagModal .newTagTable [data-markus-value='color-switcher-class']").val("");
+
+        //Update the switchers and manualPopover to show the newly added tag
         markus.io.updateSwitchers();
         markus.io.updateManualPopover();
+
+        //Toggle the manageModal
         $("#manageTagModal").modal("toggle");
-
-
-
     });
 };
