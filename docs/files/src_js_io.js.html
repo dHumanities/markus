@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\js\io.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Comment.html">Comment</a></li>
+                                <li><a href="../classes/comment.js_anonymous.html">comment.js_anonymous</a></li>
+                                <li><a href="../classes/Data.html">Data</a></li>
+                                <li><a href="../classes/Global.html">Global</a></li>
+                                <li><a href="../classes/helpInfo.js_anonymous.html">helpInfo.js_anonymous</a></li>
+                                <li><a href="../classes/IO.html">IO</a></li>
+                                <li><a href="../classes/io.js_anonymous.html">io.js_anonymous</a></li>
+                                <li><a href="../classes/JQuery.html">JQuery</a></li>
+                                <li><a href="../classes/navbar.js_anonymous.html">navbar.js_anonymous</a></li>
+                                <li><a href="../classes/WebDictionary.html">WebDictionary</a></li>
+                                <li><a href="../classes/webDictionary.js_anonymous.html">webDictionary.js_anonymous</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/comment.js.html">comment.js</a></li>
+                                <li><a href="../modules/data.js.html">data.js</a></li>
+                                <li><a href="../modules/io.js.html">io.js</a></li>
+                                <li><a href="../modules/markus.js.html">markus.js</a></li>
+                                <li><a href="../modules/navbar.js.html">navbar.js</a></li>
+                                <li><a href="../modules/webDictionary.js.html">webDictionary.js</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: src\js\io.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * io.js base file.
+ * @module io.js
+ */
+
+ /**
+ The class that holds the variables and functions created in the namespace of this file.
+ The constrcutor of this object is only called once, because it is an anonymous function.
+
+ The functions defined in this class are later added to the MARKUS global object and can
+ from that point on be called as &#x60;markus.io.FUNCTION_NAME&#x60;
+
+ @class io.js_anonymous
+ @constructor
+ @param {Object}  _m a reference to the Markus Configuration Object is passed
+ **/
+( function(_m) {
+/**
+ * Creates an error Handler function. This function prints out the error message
+ * prefaced by &#x27;Error&#x27;, to make it easier to spot in the console log.
+ *
+ * @method ERROR_HANDLER
+ * @param  {Error} e The error that has happened
+ */
+var ERROR_HANDLER = function(e) {
+    console.log(&#x27;Error: &#x27; + e.message);
+};
+
+/**
+ * Updates the color switchers for the tagNames. This is called on load. It
+ * hides or shows buttons depending on their visibility and changes the color-switcher-class
+ * based on their status
+ *
+ * This method is defined in the io.js anonymous function but later attached to the &#x60;markus.io&#x60; object
+ *
+ * @for IO
+ * @method updateSwitchers
+ */
+var updateSwitchers = function() {
+    //If there are buttons on the buttonsRow
+    if ($(&quot;#buttonsRow&quot;).length &gt; 0) {
+
+        //For each of the tagNames that have been defined in the markus tag module
+        for (var tagName in _m.tag) {
+            //Either use the predefined buttonName or just the tagname and get the status of the tag
+            var buttonName = _m.tag[tagName][&quot;buttonName&quot;] || tagName;
+            var status = _m.tag[tagName][&quot;status&quot;] || &quot;&quot;;
+
+            //If we can&#x27;t find the color-switcher-class for that tagName
+            if ($(&quot;#buttonsRow&quot;).find(&quot;button[color-switcher-class=&#x27;&quot; + tagName + &quot;&#x27;]&quot;).length == 0) {
+                //We add a color-switcher-class for that tagName
+                $(&quot;#buttonsRow&quot;).prepend(&#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-sm switcher &#x27; + tagName + &#x27; &#x27; + status + &#x27;&quot; color-switcher-class=&quot;&#x27; + tagName + &#x27;&quot; data-toggle=&quot;tooltip&quot; data-placement=&quot;auto&quot; title=&quot;&quot; data-original-title=&quot;click to change color&quot;&gt;&#x27; + buttonName + &#x27;&lt;/button&gt; &#x27;);
+            } else {
+                if (_m.tag[tagName][&quot;buttonName&quot;]) {
+                  //Else just update the class and add &#x27;status&#x27;
+                    $(&quot;#buttonsRow&quot;).find(&quot;button[color-switcher-class=&#x27;&quot; + tagName + &quot;&#x27;]&quot;).text(buttonName).addClass(status);
+                }
+            }
+
+            //If the current tag is visible
+            var visible = _m.tag[tagName][&quot;visible&quot;];
+            if (!visible) {
+                //If the button is not visible, hide it
+                $(&quot;#buttonsRow&quot;).find(&quot;button[color-switcher-class=&#x27;&quot; + tagName + &quot;&#x27;]&quot;).hide();
+            }
+        }
+    } else {
+        //If there are no buttons yet, try again in 3 seconds
+        setTimeout(updateSwitchers, 3000);
+    }
+};
+
+
+/**
+ * Updates the .singleTagContent in the manualPopover. It handles their visibility
+ * based on the &#x27;visible&#x27; property and sets the button text according to either
+ * the tagName or a predefined buttonName that can override the tagName.
+ *
+ * This method is defined in the io.js anonymous function but later attached to the &#x60;markus.io&#x60; object
+ *
+ * @for IO
+ * @method updateManualPopover
+ */
+var updateManualPopover = function() {
+    //For each of the tagNames defined in the markus.tag module
+    for (var tagName in _m.tag) {
+        //get the predefined buttonName or just use the tagName
+        var buttonName = _m.tag[tagName][&quot;buttonName&quot;] || tagName;
+
+        //If it cant find a button witht the type of tagName in the manualPopover
+        if ($(&quot;#manualPopover .singleTagContent&quot;).find(&quot;button[_type=&#x27;&quot; + tagName + &quot;&#x27;]&quot;).length == 0) {
+            //We add one if it can&#x27;t be found
+            $(&quot;#manualPopover .singleTagContent&quot;).prepend(&#x27;&lt;button type=&quot;button&quot; _type=&quot;&#x27; + tagName + &#x27;&quot; class=&quot;btn btn-xs switch &#x27; + tagName + &#x27; switcher noColor&quot;&gt;&#x27; + buttonName + &#x27;&lt;/button&gt;&#x27;);
+        } else {
+            if (_m.tag[tagName][&quot;buttonName&quot;]) {
+                //If it can be found we set the buttonName if it has been explicitly set (predefined)
+                $(&quot;#manualPopover .singleTagContent&quot;).find(&quot;button[_type=&#x27;&quot; + tagName + &quot;&#x27;]&quot;).text(buttonName);
+            }
+        }
+
+        //Hide or show the button based on their &#x27;visible&#x27; status
+        var visible = _m.tag[tagName][&quot;visible&quot;];
+        if (!visible) {
+            $(&quot;#manualPopover .singleTagContent&quot;).find(&quot;button[_type=&#x27;&quot; + tagName + &quot;&#x27;]&quot;).hide();
+        }
+    }
+};
+
+/*
+var attr = $(this).attr(&#x27;name&#x27;);
+
+// For some browsers, &#x60;attr&#x60; is undefined; for others,
+// &#x60;attr&#x60; is false.  Check for both.
+if (typeof attr !== typeof undefined &amp;&amp; attr !== false) {
+    // ...
+}
+*/
+
+/**
+ * This method generates all the necessary CSS classes for a new tagType. It will Also
+ * overwrite already existing definitions so you can use this to redefine the styling of existing
+ * tags too.
+ *
+ * This method is defined in the io.js anonymous function but later attached to the &#x60;markus.io&#x60; object
+ *
+ * @for IO
+ * @method newTagCSS
+ * @param  {String} tagName    the name of the tagClass we want to generate in CSS
+ * @param  {String} buttonName the name we want the button to have for this tagCSS
+ * @param  {String} tagColor   16 bit hex color (e.g. &#x60;&#x60;#FF0000&#x60; = red.) you can use css shortcuts like &#x60;red&#x60; or &#x60;#f00&#x60;
+ */
+var newTagCSS = function(tagName, buttonName, tagColor) {
+    //before adding a new tagCSS definition, remove any already existing definition for this tagName
+    removeTagCSS(tagName);
+    buttonName = buttonName || tagName;
+    _m.tag = _m.tag || {};
+
+    //If the tag has not been defined yet, we define an object for it in the markus.tag global object
+    if (_m.tag[tagName] == null) {
+        _m.tag[tagName] = {
+            color: tagColor,
+            buttonName: buttonName,
+            visible: true,
+            status: &quot;&quot;
+        };
+    } else {
+        //If it has already been defined, overwrite the color setting to the color we apparently want.
+        _m.tag[tagName].color = tagColor;
+    }
+
+    //Set the markus.tagCSS object to an empty array that we&#x27;re going to redefine
+    _m.tagCSS[tagName] = [];
+
+    //we set both the border and background for this button to the provided tagColor
+    $.stylesheet(&#x27;button.&#x27; + tagName, [&#x27;background-color&#x27;, &#x27;border-color&#x27;], tagColor);
+    //set the foreground color (i.e. text) to white
+    $.stylesheet(&#x27;button.&#x27; + tagName, [&#x27;color&#x27;], &quot;#fff&quot;);
+
+    //Also push the foreground color rule into the markus.tagCSS array
+    _m.tagCSS[tagName].push({
+        tagName: &#x27;button.&#x27; + tagName,
+        cssKey: [&quot;color&quot;],
+        cssValue: &quot;#fff&quot;
+    });
+    //Now push the background and border color rule into the markus.tagCSS array
+    _m.tagCSS[tagName].push({
+        tagName: &#x27;button.&#x27; + tagName,
+        cssKey: [&#x27;background-color&#x27;, &#x27;border-color&#x27;],
+        cssValue: tagColor
+    });
+
+    // tagCSS[&#x27;.&#x27;+tagName].push($.stylesheet(&#x27;.&#x27;+tagName).rules()[0].cssText);
+
+    //We set the color for any element that just has the class of &#x60;tagName&#x60; to the tagColor
+    $.stylesheet(&#x27;.&#x27; + tagName, {
+        &quot;color&quot;: tagColor
+    });
+    //Duplicate the above rule into the markus.tagCSS array
+    _m.tagCSS[tagName].push({
+        tagName: &#x27;.&#x27; + tagName,
+        cssKey: [&quot;color&quot;],
+        cssValue: tagColor
+    });
+
+
+    //set the background color and border color of a selected and tagName element to tagColor
+    $.stylesheet(&#x27;.selected.&#x27; + tagName, [&#x27;background-color&#x27;, &#x27;border-color&#x27;], tagColor);
+    //Duplicate the above rule into the markus.tagCSS array
+    _m.tagCSS[tagName].push({
+        tagName: &#x27;.selected.&#x27; + tagName,
+        cssKey: [&#x27;background-color&#x27;, &#x27;border-color&#x27;],
+        cssValue: tagColor
+    });
+
+    //Set the border color of the &#x27;bordered&#x27; and tagname element to the provided tagColor
+    $.stylesheet(&#x27;.bordered.&#x27; + tagName, [&#x27;border-color&#x27;], tagColor);
+    //Duplicate the above rule into the markus.tagCSS array
+    _m.tagCSS[tagName].push({
+        tagName: &#x27;.bordered.&#x27; + tagName,
+        cssKey: [&#x27;border-color&#x27;],
+        cssValue: tagColor
+    });
+
+};
+
+/**
+ * Called before defining new CSS rules for a tagType. This removes any pre-existing rules for
+ * the provided tagType from the markus.tag and markus.tagCSS objects.
+ *
+ * This method is defined in the io.js anonymous function but later attached to the &#x60;markus.io&#x60; object
+ *
+ * @for IO
+ * @method removeTagCSS
+ * @param  {String} tagName The tag you want to remove
+ */
+var removeTagCSS = function(tagName) {
+    //Remove the CSS for the reference from both the markus.tagCSS and markus.tag object
+    delete _m.tagCSS[tagName]
+    ;
+    delete _m.tag[tagName]
+    ;
+};
+
+/**
+ * This function handles the loading of the CSS rules from the saved HTML document using
+ * the tag and tagCSS attributes. It has a couple of failsafes in case the data is missing
+ * and also contains the defaults for the standard tagNames (i.e. placeName, officialTitle, timePeriod etc.)
+ *
+ * This method is defined in the io.js anonymous function but later attached to the &#x60;markus.io&#x60; object
+ *
+ * @for IO
+ * @method loadCSSFromCSS_TagAtt
+ */
+var loadCSSFromCSS_TagAtt = function() {
+    //find the tagCSS and tag attributes of the doc
+    var tagCSSAttr = $(&quot;.doc&quot;).attr(&quot;tagCSS&quot;);
+    var tagAttr = $(&quot;.doc&quot;).attr(&quot;tag&quot;);
+
+    //If the found the tagCSS variables are indeed actually populated with data, we try to populate them
+    //But at the same time, the tag attribute for the CSS has not been set yet, so we need to redefine those
+    if ((typeof tagCSSAttr !== typeof undefined &amp;&amp; tagCSSAttr !== false) &amp;&amp; (typeof tagAttr === typeof undefined || tagAttr === false || tagAttr === &quot;{}&quot;)) {
+        //Read the tagCSS by evaluating JSON from the tagCSS attr.
+        var tagCSS = _m.tagCSS = $.evalJSON($(&quot;.doc&quot;).attr(&quot;tagCSS&quot;));
+        var tagRebuilt = {};
+
+        //For each of the predefined tags we re-add them back to the stylesheet
+        for (var tag in _m.tagCSS) {
+            var cssArray = tagCSS[tag];
+            for (var cssIndex in cssArray) {
+                css = cssArray[cssIndex];
+                //We re-create the css rules
+                if (css.tagName == &quot;.&quot; + tag) {
+                    newTagCSS(css.tagName, css.tagName, css.cssValue);
+                }
+            }
+        }
+        //redefine the document attribute tag to the JSON stringified version of the markus.tag object
+        $(&quot;.doc&quot;).attr(&quot;tag&quot;, JSON.stringify(_m.tag));
+        tagAttr = $(&quot;.doc&quot;).attr(&quot;tag&quot;);
+    }
+
+    //If we find tagCSS attribute we also add the stuff to the styleSheet in the same manner as above
+    if (typeof tagCSSAttr !== typeof undefined &amp;&amp; tagCSSAttr !== false) {
+        var tagCSS = _m.tagCSS = $.evalJSON($(&quot;.doc&quot;).attr(&quot;tagCSS&quot;));
+        var cssArray;
+        var css;
+        for (var tag in tagCSS) {
+            cssArray = tagCSS[tag];
+            for (var cssIndex in cssArray) {
+                css = cssArray[cssIndex];
+                $.stylesheet(css.tagName, css.cssKey, css.cssValue);
+            //style += $.stylesheet(css.tagName).rules()[0].cssText;
+            }
+        }
+    }
+
+    //If we found a tagAttribute we load its definitions into the markus.tag object using JQuery.evalJSON
+    //Converting escaped Unicode Characters back
+    if (typeof tagAttr !== typeof undefined &amp;&amp; tagAttr !== false) {
+        _m.tag = $.evalJSON(markus.util.converBackToUnicode($(&quot;.doc&quot;).attr(&quot;tag&quot;)));
+
+        //For each of the tagNames defined in the markus.tag object
+        //We write the css class to the markus.tagCSS object and the JQuery stylesheet
+        for (var tagName in _m.tag) {
+            var tagColor = _m.tag[tagName].color;
+            _m.tagCSS[tagName] = [];
+
+            //Set the foreground color for the .tagName class
+            $.stylesheet(&#x27;.&#x27; + tagName, {
+                &quot;color&quot;: tagColor
+            });
+            //Duplicate into CSS
+            _m.tagCSS[tagName].push({
+                tagName: &#x27;.&#x27; + tagName,
+                cssKey: [&quot;color&quot;],
+                cssValue: tagColor
+            });
+
+            //Set the selected.tagName class&#x27; background and border color to the provided tagColor
+            $.stylesheet(&#x27;.selected.&#x27; + tagName, [&#x27;background-color&#x27;, &#x27;border-color&#x27;], tagColor);
+            //Duplicate into the markus.tagCSS array
+            _m.tagCSS[tagName].push({
+                tagName: &#x27;.selected.&#x27; + tagName,
+                cssKey: [&#x27;background-color&#x27;, &#x27;border-color&#x27;],
+                cssValue: tagColor
+            });
+
+            //Set the .bordered.tagName class&#x27; border-color to the tagColor
+            $.stylesheet(&#x27;.bordered.&#x27; + tagName, [&#x27;border-color&#x27;], tagColor);
+            //Duplicate into the markus.tagCSS array
+            _m.tagCSS[tagName].push({
+                tagName: &#x27;.bordered.&#x27; + tagName,
+                cssKey: [&#x27;border-color&#x27;],
+                cssValue: tagColor
+            });
+
+            //Set the button.tagName class&#x27; back and border color to the provided tagColor
+            $.stylesheet(&#x27;button.&#x27; + tagName, [&#x27;background-color&#x27;, &#x27;border-color&#x27;], tagColor);
+            //Set the foreground color for the button.tagName class to the provided tagColor
+            $.stylesheet(&#x27;button.&#x27; + tagName, [&#x27;color&#x27;], &quot;#fff&quot;);
+            //Duplicate into the markus.tagCSS array
+            _m.tagCSS[tagName].push({
+                tagName: &#x27;button.&#x27; + tagName,
+                cssKey: [&quot;color&quot;],
+                cssValue: &quot;#fff&quot;
+            });
+            //Duplicate into the markus.tagCSS array
+            _m.tagCSS[tagName].push({
+                tagName: &#x27;button.&#x27; + tagName,
+                cssKey: [&#x27;background-color&#x27;, &#x27;border-color&#x27;],
+                cssValue: tagColor
+            });
+        }
+
+    }
+
+    //Check if the definition for fullName exists, if not, redefine it
+    _m.tag[&quot;fullName&quot;] = _m.tag[&quot;fullName&quot;] || {
+        buttonName: &quot;姓名&quot;,
+        visible: true,
+        color: &quot;#d9534f&quot;,
+        status: &quot;&quot;
+    };
+    //Check if the definition for partialName exists, if not, redefine it
+    _m.tag[&quot;partialName&quot;] = _m.tag[&quot;partialName&quot;] || {
+        buttonName: &quot;別名&quot;,
+        visible: true,
+        color: &quot;#f0ad4e&quot;,
+        status: &quot;&quot;
+    };
+    //Check if the definition for placeName exists, if not, redefine it
+    _m.tag[&quot;placeName&quot;] = _m.tag[&quot;placeName&quot;] || {
+        buttonName: &quot;地名&quot;,
+        visible: true,
+        color: &quot;#428bca&quot;,
+        status: &quot;&quot;
+    };
+    //Check if the definition for officialTitle exists, if not, redefine it
+    _m.tag[&quot;officialTitle&quot;] = _m.tag[&quot;officialTitle&quot;] || {
+        buttonName: &quot;官名&quot;,
+        visible: true,
+        color: &quot;#5bc0de&quot;,
+        status: &quot;&quot;
+    };
+    //Check if the definition for timePeriod exists, if not, redefine it
+    _m.tag[&quot;timePeriod&quot;] = _m.tag[&quot;timePeriod&quot;] || {
+        buttonName: &quot;時間&quot;,
+        visible: true,
+        color: &quot;green&quot;,
+        status: &quot;&quot;
+    };
+
+    //Update the switchers and the manualPopovers
+    updateSwitchers();
+    updateManualPopover();
+};
+
+/**
+ * Calling this method automates the download/export of the file. This generates
+ * a click event on the &#x60;#export&#x60; button
+ *
+ * @method autoDownload
+ * @param  {Object} fileEntry The fileEntry object that contains the file
+ * @param  {String} suffix    Filetype extension as String, or just a suffix
+ */
+var autoDownload = function(fileEntry, suffix) {
+    $(&quot;#saving_temp&quot;).remove();
+    $(&#x27;#export&#x27;).attr(&quot;href&quot;, fileEntry.toURL()).attr(&quot;download&quot;, $(&#x27;.doc&#x27;).attr(&#x27;filename&#x27;) + suffix);
+    $(&#x27;#export&#x27;)[0].click();
+};
+
+/**
+ * Calling this method will clean the data from the document into a newly spawned,
+ * temporary element to use JQuery to clean it from unwanted elements and classes
+ *
+ * @method saveSave
+ * @param  {String} filename the fileName for the new File
+ * @param  {Object} _fn      The fileEntry object
+ */
+var saveSave = function(filename, _fn) {
+    //Prepends the temporary saving span, this is an invisible span
+    $(&quot;body&quot;).prepend($(&quot;&lt;span id=&#x27;saving_temp&#x27; style=&#x27;display:none&#x27;&gt;&lt;/span&gt;&quot;));
+
+    //Gets a jquery ref to the just prepened element
+    var div = $(&quot;#saving_temp&quot;);
+
+    // Set the html content of this temp element to the document outerHTML.
+    div.html(($(&quot;.doc&quot;)[0]).outerHTML);
+
+    //Remove all instances of .notSave and iframes
+    div.find(&quot;.notSave,iframe&quot;).remove();
+    //If we find a .justSelected or .justExtend instance, remove that class
+    div.find(&quot;.justSelected,.justExtended&quot;).removeClass(&quot;justSelected&quot;).removeClass(&quot;justExtended&quot;);
+    //If there is any markup left with the randomID, remove that attribute
+    div.find(&quot;.markup[randomID]&quot;).removeAttr(&quot;randomID&quot;);
+
+    //get the saveContent, now that it is cleaned before saving back from the temp element
+    var saveContent = $(&quot;#saving_temp&quot;).html();
+
+    //Call the saveFile function
+    saveFile(filename, _m.util.recoverAllExistTag(saveContent), _fn);
+
+    //Now that we&#x27;re done with the temporary element, remove it from the doc
+    $(&quot;#saving_temp&quot;).remove();
+
+};
+
+/**
+ * Generates a TEI XML document from the HTML document that is generated in the browser.
+ *
+ * @method saveTEI
+ * @param  {String} filename the fileName for the new File
+ */
+var saveTEI = function(filename) {
+    //Define the TEI head
+    var head = &#x27;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;TEI xmlns=&quot;http://www.tei-c.org/ns/1.0&quot; xmlns:xi=&quot;http://www.w3.org/2001/XInclude&quot;&gt;&lt;teiHeader&gt;&lt;fileDesc&gt;&lt;titleStmt&gt;&lt;title&gt;&#x27; + filename + &#x27;&lt;/title&gt;&lt;/titleStmt&gt;&lt;publicationStmt&gt;&lt;p/&gt;&lt;/publicationStmt&gt;&lt;sourceDesc&gt;&lt;p/&gt;&lt;/sourceDesc&gt;&lt;/fileDesc&gt;&lt;/teiHeader&gt;&lt;text&gt;&lt;body&gt;&#x27;;
+    //The closing tags needed to close of the TEI document
+    var tail = &quot;&lt;/body&gt;&lt;/text&gt;&lt;/TEI&gt;&quot;;
+    //Concatenate the head, content and tail
+    var saveContent = head + convertTEI(($(&quot;.doc&quot;)[0]).outerHTML) + tail;
+
+    //Call the saveFile function
+    saveFile(filename, saveContent, function(fileEntry) {
+        $(&#x27;#export&#x27;).attr(&quot;href&quot;, fileEntry.toURL()).attr(&quot;download&quot;, $(&#x27;.doc&#x27;).attr(&#x27;filename&#x27;) + &quot;_tei.xml&quot;);
+        $(&#x27;#export&#x27;)[0].click();
+    });
+};
+
+/**
+ * Generates a standalone HTML document that you can view offline. This has all the data from the
+ * document stored in it, including the stylesheet CSS rules that have been parsed into one single
+ * &#x60;&lt;style&gt;&#x60; tag in the head of the HTML document.
+ *
+ * @method saveHTML
+ * @param  {String} filename the name of the new file
+ */
+var saveHTML = function(filename) {
+    //Define the head of the document for a standalone HTML document
+    var head = &quot;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;/&gt;&lt;/head&gt;&lt;link rel=&#x27;stylesheet&#x27; href=&#x27;http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css&#x27;&gt;&lt;style&gt;.noCBDBID{border-bottom:thin solid red}.previous{display:none}name,persName{background:red}pre{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.unsolved{font-size:large}.fullName{color:#b94a48}.partialName{color:orange}.nianhao{color:green}.markup .markup.unsolved{border-right:medium dotted red}.placeName{color:#428bca}.doc{padding:10px}.moreThanOneId{border-bottom:medium dotted red}.moreThanOneId.wrong{border-bottom:0}#drop_zone{border:2px dashed #fff;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;padding:25px;text-align:center;font:20pt bold Vollkorn;color:#fff}#content{padding-top:20px}div.layout{text-align:center}div.centre{text-align:left;width:10px;display:block;margin-left:auto;margin-right:auto}.stop-scrolling{height:100%;overflow:hidden}.markup.noColor{color:inherit}.officialTitle{color:#5f9ea0}.btn.noColor{background-color:silver;border-color:rgba(0,0,0,0);color:inherit}.markup.selected{padding-right:5px;padding-left:5px;line-height:1.5;border-radius:3px;color:#fff}.selected .markup{color:#fff}.fullName.selected{background-color:#d9534f;border-color:#d43f3a}.partialName.selected{background-color:#f0ad4e;border-color:#eea236}.nianhao.selected{background-color:#5cb85c;border-color:#4cae4c}.placeName.selected{background-color:#428bca;border-color:#357ebd}.officialTitle.selected{background-color:#5bc0de;border-color:#46b8da}#helpModal .modal-header{display:none}.popover .btn{color:#fff}.hidden {display:none}.halfTransparent {opacity:0.3}&lt;/style&gt;&quot;;
+    //Define some more tails and heads for needed HMTL structure
+    var bodyhead = &quot;&lt;body&gt;&lt;div class=&#x27;container&#x27;&gt;&lt;div class=&#x27;row row-offcanvas row-offcanvas-right&#x27;&gt;&quot;;
+    var bodytail = &quot;&lt;/div&gt;&lt;/div&gt;&quot;;
+    var tail = &quot;&lt;/body&gt;&lt;/html&gt;&quot;;
+
+    //Turn all of the styleTags that have been created into a single style tag embedded in the document
+    var style = &quot;&lt;style&gt;&quot;;
+    var tagCSS = _m.tagCSS;
+    for (var tag in tagCSS) {
+        cssArray = tagCSS[tag];
+        for (var cssIndex in cssArray) {
+            css = cssArray[cssIndex];
+            $.stylesheet(css.tagName, css.cssKey, css.cssValue);
+            style += $.stylesheet(css.tagName).rules()[0].cssText;
+        }
+    }
+    //append the closing style tag, completing the style element.
+    style += &quot;&lt;/style&gt;&quot;;
+
+    //Add the invisible temporary saving element that holds the data while it is being cleaned
+    $(&quot;body&quot;).prepend($(&quot;&lt;span id=&#x27;saving_temp&#x27; style=&#x27;display:none&#x27;&gt;&lt;/span&gt;&quot;));
+
+    //Get a ref to the temp element
+    var div = $(&quot;#saving_temp&quot;);
+
+    //Get the HTML and convert it back to unicode
+    div.html(_m.util.converBackToUnicode(($(&quot;.doc&quot;)[0]).outerHTML));
+
+    //Remove any classes and elements we don&#x27;t want to end up in the finished product
+    div.find(&quot;.notSave,iframe&quot;).remove();
+    div.find(&quot;.justSelected,.justExtended&quot;).removeClass(&quot;justSelected&quot;).removeClass(&quot;justExtended&quot;);
+    div.find(&quot;.markup[randomID]&quot;).removeAttr(&quot;randomID&quot;);
+
+    //Concatentate, the head, style, bodyhead, content, bodytail and tail to create the saveContent
+    var saveContent = head + style + bodyhead + $(&quot;#saving_temp&quot;).html() + bodytail + tail;
+
+    //Log the data to be saved for debugging purposes
+    console.log($(&quot;#saving_temp&quot;).html());
+
+    //Call the saveFile function with the following parameters
+    saveFile(filename, saveContent, function(fileEntry) {
+        $(&quot;#saving_temp&quot;).remove();
+        $(&#x27;#export&#x27;).attr(&quot;href&quot;, fileEntry.toURL()).attr(&quot;download&quot;, $(&#x27;.doc&#x27;).attr(&#x27;filename&#x27;) + &quot;_layout.html&quot;);
+        $(&#x27;#export&#x27;)[0].click();
+    });
+};
+
+/**
+ * Saves a file using the FileSystem. It requests write access and in return Gets
+ * a fileEntry (basically a filePointer) that can be written to. Once we have that object
+ * we write all the data that needs to be saved to there and call the callback function once the
+ * writing of data is complete
+ *
+ * @for IO
+ * @method saveFile
+ * @param  {String} filename     the name of the file we want to create
+ * @param  {String} text         the textdata of the file we want to create
+ * @param  {Function} _fn        the callback function, called once the file has been written
+ * @param  {Function} errorHandler A custom errorHandler, does not need to specified, can also be kept default
+ */
+var saveFile = function(filename, text, _fn, errorHandler) {
+    //If an errorHandler has not explicitly set, use the default one
+    if (errorHandler === null) {
+        errorHandler = ERROR_HANDLER;
+    }
+    //Saying we&#x27;re started in the console, for debugging purposes
+    console.log(&quot;exporting start&quot;);
+
+    //Request access to the fileSystem
+    window.webkitRequestFileSystem(window.TEMPORARY, 1024 * 1024, function(fs) {
+        //Logging that we got this far, debugging purposes
+        console.log(&quot;exporting file&quot;);
+
+        //With access to the fileSystem, say we want to create a file
+        fs.root.getFile(filename, {
+            create: true
+        }, function(fileEntry) {
+            //At this point we have a fileEntry object, which is a filepointer
+
+            // fileEntry.remove(function(){}, function(){});
+            //We then create a writer that can write to this fileEntry
+            fileEntry.createWriter(function(fileWriter) {
+                //This blob variable holds the text we want to save
+                var blob = new Blob([text], {
+                    type: &#x27;text/plain&#x27;
+                });
+
+                //once we&#x27;re done with saving, call the callback function
+                fileWriter.addEventListener(&quot;writeend&quot;, function() {
+                    if (_fn) {
+                        _fn(fileEntry);
+                    }
+                }, false);
+
+                //Start writing the blob data to the file
+                fileWriter.write(blob);
+
+                //ALL the error handlers in case something goes to hell
+            }, ERROR_HANDLER);
+        }, ERROR_HANDLER);
+    }, ERROR_HANDLER);
+};
+
+/**
+ * Removes the specified file from the fileSystem.
+ *
+ * @for IO
+ * @method removeFile
+ * @param  {String} filename     the name of the file we want to remove
+ * @param  {Function} _fn          the callback function, called once the file has successfully been removed
+ * @param  {Function} errorHandler the errorHandler, does not need to be defined, can fallback to default handler
+ */
+var removeFile = function(filename, _fn, errorHandler) {
+    //If the error handler has not explicitly been set, use the default errorHandler
+    if (errorHandler === null) {
+        errorHandler = ERROR_HANDLER;
+    }
+
+    //Request access to the fileSystem.
+    window.webkitRequestFileSystem(window.TEMPORARY, 1024 * 1024, function(fs) {
+        fs.root.getFile(filename, {
+            create: false
+        }, function(fileEntry) {
+            //Once we have a FilePoitner to work with, we remove it and call the callBack function
+            fileEntry.remove(function() {
+                if (_fn) {
+                    _fn(fileEntry);
+                }
+            }, errorHandler);
+
+        }, errorHandler);
+    }, errorHandler);
+};
+
+/**
+ * Defines the &#x60;markus.io&#x60; object that can be accessed globally. Uses some functions that have
+ * been defined in the io.js anonymous namespace, but also defines some functions in the object
+ * creation itself.
+ *
+ * @class IO
+ * @constructor
+ */
+_m.io = {
+    removeFile: removeFile,
+    saveFile: saveFile,
+    /**
+     * Defines the readFile function. This allows you to read a file specified by the fileName
+     * and calls the callback on succes
+     *
+     * @method readFile
+     * @param  {String} _file        the fileName as a String
+     * @param  {Function} _fn          The callBack function
+     * @param  {Function} errorHandler custom error handler
+     */
+    readFile: function(_file, _fn, errorHandler) {
+        //If the errorHnadler has not been explicitly set, use the default one
+        if (errorHandler === null) {
+            errorHandler = ERROR_HANDLER;
+        }
+
+        //Define the onInitFS function, use right below this function
+        function onInitFs(fs) {
+            fs.root.getFile(_file, {}, function(fileEntry) {
+                // fs.root.getFile(file+&#x27;.html&#x27;, {}, function(fileEntry) {
+                // Get a File object representing the file,
+                // then use FileReader to read its contents.
+                fileEntry.file(function(_file) {
+                    //Defines a new FileReader.
+                    var reader = new FileReader();
+                    //Once we are finished loading call the callback with the resulting data
+                    //and start parsing the CSS from the css TagAttr
+                    reader.onloadend = ( function(file) {
+                        return function(evt) {
+                            if (_fn) {
+                                _fn(this.result, file);
+                                loadCSSFromCSS_TagAtt();
+                            }
+                        };
+                    } )(_file);
+
+                    //Start reading the file
+                    reader.readAsText(_file);
+                }, errorHandler);
+
+            }, errorHandler);
+
+        }
+        //Request acces to the fileSystem to kick the whole process off
+        window.webkitRequestFileSystem(window.TEMPORARY, 1024 * 1024, onInitFs, errorHandler);
+    },
+
+    /**
+     * Exports a MARKUS save file and automatically saves it
+     *
+     * @method exportSave
+     * @param  {String} filename the fileName of the file you download
+     */
+    exportSave: function(filename) {
+        //Set the tag attribute to the JSON version of markus.tag
+        $(&quot;.doc&quot;).attr(&quot;tag&quot;, _m.util.convertToEscapeUnicode($.toJSON(_m.tag)));
+        //Remove the tagCSS attribute
+        $(&quot;.doc&quot;).removeAttr(&quot;tagCSS&quot;);
+
+        //First removes the file and then saves the file, triggering an autoDownload
+        removeFile(filename + &quot;.html&quot;, function() {
+            saveSave(filename + &quot;.html&quot;, function(fileEntry) {
+                autoDownload(fileEntry, &quot;_markus.html&quot;);
+            });
+        }, function() {
+            saveSave(filename + &quot;.html&quot;, function(fileEntry) {
+                autoDownload(fileEntry, &quot;_markus.html&quot;);
+            });
+        });
+    },
+
+    /**
+     * Exports a TEI save file of the document and automatically saves it
+     *
+     * @method exportTEI
+     * @param  {String} filename the fileName of the file you download
+     */
+    exportTEI: function(filename) {
+        //Set the tag attribute to the JSON version of markus.tag
+        $(&quot;.doc&quot;).attr(&quot;tag&quot;, _m.util.convertToEscapeUnicode($.toJSON(_m.tag)));
+        //Remove the tagCSS attribute
+        $(&quot;.doc&quot;).removeAttr(&quot;tagCSS&quot;);
+
+        //First removes the file and then saves the file, triggering an autoDownload
+        removeFile(filename + &quot;_tei.xml&quot;, function() {
+            saveTEI(filename + &quot;_tei.xml&quot;);
+        }, function() {
+            saveTEI(filename + &quot;_tei.xml&quot;);
+        });
+    },
+
+    /**
+     * Exports a HTML save of the document and its layout and automatically saves it
+     *
+     * @method exportHTML
+     * @param  {String} filename the fileName of the file you download
+     */
+    exportHTML: function(filename) {
+        //Set the tag attribute to the JSON version of markus.tag
+        $(&quot;.doc&quot;).attr(&quot;tag&quot;, _m.util.convertToEscapeUnicode($.toJSON(_m.tag)));
+        //Remove the tagCSS attribute
+        $(&quot;.doc&quot;).removeAttr(&quot;tagCSS&quot;);
+
+        //First removes the file and then saves the file, triggering an autoDownload
+        removeFile(filename + &quot;_layout.html&quot;, function() {
+            saveHTML(filename + &quot;_layout.html&quot;);
+        }, function() {
+            saveHTML(filename + &quot;_layout.html&quot;);
+        });
+    },
+
+    /**
+     * A simple basic save to the normal MARKUS format. Cleans the data, processes it
+     * for download and then automatically downloads it.
+     *
+     * @param  {String} filename The filename of the new file we want to create
+     * @param  {Function} _fn     The callback function called uppon completion
+     */
+    save: function(filename, _fn) {
+        //If there are any defined tags in &#x60;markus.tag&#x60;
+        if (Object.keys(_m.tag).length &gt; 0) {
+            //Add them to the tag attribute of the doc
+            $(&quot;.doc&quot;).attr(&quot;tag&quot;, _m.util.convertToEscapeUnicode($.toJSON(_m.tag)));
+        }
+        //Remove the tagCSS attribute
+        $(&quot;.doc&quot;).removeAttr(&quot;tagCSS&quot;);
+
+        //After that it removes the file and then uses the basic save
+        removeFile(filename + &quot;.html&quot;, function() {
+            saveSave(filename + &quot;.html&quot;, _fn);
+        }, function() {
+            saveSave(filename + &quot;.html&quot;, _fn);
+        });
+    },
+
+    //Define these markus.io functions by pointing to the functions that have
+    //been defined in the anonymous namespace above
+    newTagCSS: newTagCSS,
+    removeTagCSS: removeTagCSS,
+    updateSwitchers: updateSwitchers,
+    updateManualPopover: updateManualPopover,
+    loadCSSFromCSS_TagAtt: loadCSSFromCSS_TagAtt
+};
+} )(markus);
+
+/**
+ * Global method that registers the Global Tag Management UI, it also takes care of all its
+ * event handlers etc.
+ *
+ * @for Global
+ * @method registeTagManageUI
+ */
+var registeTagManageUI = function() {
+    //When we show the manageTag Modal
+    $(&quot;#manageTagModal&quot;).on(&quot;show.bs.modal&quot;, function() {
+        var tbody = $(&quot;#manageTagModal .modal-body .manageTagTable&quot;);
+        tbody.empty();
+
+        //For each of the color-switcher-class we append a table
+        $(&quot;#buttonsRow [color-switcher-class]&quot;).each(function() {
+            var fix = ($(this).attr(&quot;data-markus-default&quot;) == &quot;true&quot;);
+            var tr = $(&quot;&lt;tr class=&#x27;tagSetting&#x27; color-switcher-class=&#x27;&quot; + $(this).attr(&quot;color-switcher-class&quot;) + &quot;&#x27;&#x27; /&gt;&quot;);
+            tr.append(&quot;&lt;td&gt;&lt;input data-markus-action=&#x27;shortcut&#x27; type=&#x27;checkbox&#x27; &quot; + ($(this).is(&quot;:visible&quot;) ? &quot;checked&quot; : &quot;&quot;) + &quot; /&gt;&lt;/td&gt;&quot;);
+            tr.append($(&quot;&lt;td/&gt;&quot;).append($(this).clone().show()));
+            tr.append($(&quot;&lt;td&gt;&lt;input type=&#x27;text&#x27; class=&#x27;form-control&#x27; data-markus-value=&#x27;tagName&#x27; value=&#x27;&quot; + $(this).attr(&quot;color-switcher-class&quot;) + &quot;&#x27; &quot; + ((fix ? &quot;disabled&quot; : &quot;&quot;) + &quot;&gt;&lt;/input&gt;&quot;) + &quot;&lt;/td&gt;&quot;));
+            tr.append($(&quot;&lt;td&gt;&lt;input type=&#x27;text&#x27; class=&#x27;form-control&#x27; data-markus-value=&#x27;color-switcher-class&#x27; value=&#x27;&quot; + $(this).text() + &quot;&#x27;&#x27;&gt;&lt;/input&gt;&lt;/td&gt;&quot;));
+            tr.append($(&quot;&lt;td&gt;&lt;input data-markus-action=&#x27;remove&#x27; type=&#x27;checkbox&#x27; /&gt;&lt;/td&gt;&quot;));
+            tbody.append(tr);
+        });
+    });
+
+    //When you click the setManageTagBtn
+    $(&quot;#setManageTagBtn&quot;).on(&quot;click&quot;, function() {
+        $(&quot;#manageTagModal .modal-body .tagSetting&quot;).each(function() {
+            //For each of the tagSettings
+            var tagSwitcher = $(this).attr(&quot;color-switcher-class&quot;);
+            var fix = ($(&quot;#buttonsRow [color-switcher-class=&#x27;&quot; + tagSwitcher + &quot;&#x27;]&quot;).attr(&quot;data-markus-default&quot;) == &quot;true&quot;);
+            var buttonName = $(this).find(&quot;input.form-control[data-markus-value=&#x27;color-switcher-class&#x27;]&quot;).val();
+            var tagName = markus.util.chineseToPingYin($(this).find(&quot;input.form-control[data-markus-value=&#x27;tagName&#x27;]&quot;).val()).trim();
+
+            //If the buttonName is just a space, assure that it remains that
+            if (buttonName.trim() === &quot;&quot;) {
+                buttonName = &quot;　&quot;;
+            }
+
+            //If the tagName and tagSwitcher are not the same
+            if (tagName != tagSwitcher) {
+                //Get the color from the markus.tag object
+                var tagColor = markus.tag[tagSwitcher].color;
+                //Remove the CSS and re-add it back
+                markus.io.removeTagCSS(tagSwitcher);
+                markus.io.newTagCSS(tagName, tagColor);
+
+                //Remove and add the necessary classes
+                $(&quot;#buttonsRow [color-switcher-class=&#x27;&quot; + tagSwitcher + &quot;&#x27;]&quot;).removeClass(tagSwitcher).addClass(tagName).attr(&quot;color-switcher-class&quot;, tagName);
+                $(&quot;#manualPopover .singleTagContent button.&quot; + tagSwitcher).removeClass(tagSwitcher).addClass(tagName).attr(&quot;_type&quot;, tagName);
+                $(&quot;.doc .&quot; + tagSwitcher).removeClass(tagSwitcher).addClass(tagName).attr(&quot;type&quot;, tagName);
+            }
+
+            //Define the markus.tag[tagSwitcher] object if it not already has been set
+            markus.tag[tagSwitcher] = markus.tag[tagSwitcher] || {
+                color: tagColor,
+                buttonName: buttonName,
+                status: &quot;&quot;
+            };
+
+            //set the buttonName
+            markus.tag[tagSwitcher].buttonName = buttonName;
+
+            //Set the visible status and act upon it
+            var visble = markus.tag[tagSwitcher][&quot;visible&quot;] = $(this).find(&quot;input[data-markus-action=&#x27;shortcut&#x27;]&quot;).is(&quot;:checked&quot;);
+
+            //If it is visible, show the buttons and set the text for the elements
+            if (visble) {
+                $(&quot;#buttonsRow [color-switcher-class=&#x27;&quot; + tagSwitcher + &quot;&#x27;]&quot;).show();
+                $(&quot;#manualPopover .singleTagContent button.&quot; + tagSwitcher).show();
+                $(&quot;#buttonsRow [color-switcher-class=&#x27;&quot; + tagSwitcher + &quot;&#x27;]&quot;).text(buttonName);
+                $(&quot;#manualPopover .singleTagContent button.&quot; + tagSwitcher).text(buttonName);
+
+            } else {
+              //If it is not visible, hide the buttons and manualPopover and text for the elements
+                $(&quot;#buttonsRow [color-switcher-class=&#x27;&quot; + tagSwitcher + &quot;&#x27;]&quot;).text(buttonName);
+                $(&quot;#manualPopover .singleTagContent button.&quot; + tagSwitcher).text(buttonName);
+                $(&quot;#buttonsRow [color-switcher-class=&#x27;&quot; + tagSwitcher + &quot;&#x27;]&quot;).hide();
+                $(&quot;#manualPopover .singleTagContent button.&quot; + tagSwitcher).hide();
+
+            }
+            if ($(this).find(&quot;input[data-markus-action=&#x27;remove&#x27;]&quot;).is(&quot;:checked&quot;)) {
+
+                if (fix) {
+                    $(&quot;#buttonsRow [color-switcher-class=&#x27;&quot; + tagSwitcher + &quot;&#x27;]&quot;).hide();
+                    $(&quot;#manualPopover .singleTagContent button.&quot; + tagSwitcher).hide();
+
+                } else {
+                    $(&quot;#buttonsRow [color-switcher-class=&#x27;&quot; + tagSwitcher + &quot;&#x27;]&quot;).remove();
+                    $(&quot;#manualPopover .singleTagContent button.&quot; + tagSwitcher).remove();
+                }
+                $(&quot;.doc .&quot; + tagSwitcher).contents().unwrap();
+                markus.io.removeTagCSS(tagSwitcher);
+            }
+        });
+        $(&quot;.doc&quot;).attr(&quot;tag&quot;, JSON.stringify(markus.tag));
+        // $(&quot;.doc&quot;).attr(&quot;tagCSS&quot;, &quot;&quot;);
+        $(&quot;#manageTagModal&quot;).modal(&#x27;toggle&#x27;);
+    });
+
+    //Defines what happens when you click the new Tag button
+    $(&quot;#newTagBtn&quot;).on(&quot;click&quot;, function() {
+        //Create a tagname by changing Chinese to pingYin
+        var tagName = markus.util.chineseToPingYin($(&quot;#manageTagModal .newTagTable [data-markus-value=&#x27;tagName&#x27;]&quot;).val()).trim();
+        //The unchanged version of the tagName
+        var buttonName = $(&quot;#manageTagModal .newTagTable [data-markus-value=&#x27;color-switcher-class&#x27;]&quot;).val();
+        //If the buttonName is only a space, make sure it remains only a space
+        if (buttonName.trim() === &quot;&quot;) {
+            buttonName = &quot;　&quot;;
+        }
+
+        //Find the tagColor we want to use
+        var tagColor = $(&quot;#manageTagModal .tagColor&quot;).val();
+
+        //Define the newTag CSS by calling the function to do just that
+        markus.io.newTagCSS(tagName, buttonName, tagColor);
+
+        //Reset the newTagTable now that the newTag has been registered
+        $(&quot;#manageTagModal .newTagTable [data-markus-value=&#x27;tagName&#x27;]&quot;).val(&quot;&quot;);
+        $(&quot;#manageTagModal .newTagTable [data-markus-value=&#x27;color-switcher-class&#x27;]&quot;).val(&quot;&quot;);
+
+        //Update the switchers and manualPopover to show the newly added tag
+        markus.io.updateSwitchers();
+        markus.io.updateManualPopover();
+
+        //Toggle the manageModal
+        $(&quot;#manageTagModal&quot;).modal(&quot;toggle&quot;);
+    });
+};
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

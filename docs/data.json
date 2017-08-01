@@ -36,6 +36,21 @@
             "fors": {},
             "namespaces": {}
         },
+        "src\\js\\io.js": {
+            "name": "src\\js\\io.js",
+            "modules": {
+                "io.js": 1
+            },
+            "classes": {
+                "io.js_anonymous": 1,
+                "IO": 1
+            },
+            "fors": {
+                "IO": 1,
+                "Global": 1
+            },
+            "namespaces": {}
+        },
         "src\\js\\markus.js": {
             "name": "src\\js\\markus.js",
             "modules": {
@@ -121,6 +136,24 @@
             "file": "src\\js\\navbar.js",
             "line": 6,
             "description": "navbar.js base file."
+        },
+        "io.js": {
+            "name": "io.js",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "io.js_anonymous": 1,
+                "IO": 1
+            },
+            "fors": {
+                "IO": 1,
+                "Global": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\js\\io.js",
+            "line": 594,
+            "description": "io.js base file."
         },
         "markus.js": {
             "name": "markus.js",
@@ -242,6 +275,43 @@
                     "type": "Object"
                 }
             ]
+        },
+        "io.js_anonymous": {
+            "name": "io.js_anonymous",
+            "shortname": "io.js_anonymous",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "io.js",
+            "namespace": "",
+            "file": "src\\js\\io.js",
+            "line": 6,
+            "description": "The class that holds the variables and functions created in the namespace of this file.\nThe constrcutor of this object is only called once, because it is an anonymous function.\n\nThe functions defined in this class are later added to the MARKUS global object and can\nfrom that point on be called as `markus.io.FUNCTION_NAME`",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "_m",
+                    "description": "a reference to the Markus Configuration Object is passed",
+                    "type": "Object"
+                }
+            ]
+        },
+        "IO": {
+            "name": "IO",
+            "shortname": "IO",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "io.js",
+            "namespace": "",
+            "file": "src\\js\\io.js",
+            "line": 594,
+            "description": "Defines the `markus.io` object that can be accessed globally. Uses some functions that have\nbeen defined in the io.js anonymous namespace, but also defines some functions in the object\ncreation itself.",
+            "is_constructor": 1
         },
         "JQuery": {
             "name": "JQuery",
@@ -527,6 +597,324 @@
             "module": "navbar.js"
         },
         {
+            "file": "src\\js\\io.js",
+            "line": 18,
+            "description": "Creates an error Handler function. This function prints out the error message\nprefaced by 'Error', to make it easier to spot in the console log.",
+            "itemtype": "method",
+            "name": "ERROR_HANDLER",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "The error that has happened",
+                    "type": "Error"
+                }
+            ],
+            "class": "io.js_anonymous",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 29,
+            "description": "Updates the color switchers for the tagNames. This is called on load. It\nhides or shows buttons depending on their visibility and changes the color-switcher-class\nbased on their status\n\nThis method is defined in the io.js anonymous function but later attached to the `markus.io` object",
+            "itemtype": "method",
+            "name": "updateSwitchers",
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 74,
+            "description": "Updates the .singleTagContent in the manualPopover. It handles their visibility\nbased on the 'visible' property and sets the button text according to either\nthe tagName or a predefined buttonName that can override the tagName.\n\nThis method is defined in the io.js anonymous function but later attached to the `markus.io` object",
+            "itemtype": "method",
+            "name": "updateManualPopover",
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 119,
+            "description": "This method generates all the necessary CSS classes for a new tagType. It will Also\noverwrite already existing definitions so you can use this to redefine the styling of existing\ntags too.\n\nThis method is defined in the io.js anonymous function but later attached to the `markus.io` object",
+            "itemtype": "method",
+            "name": "newTagCSS",
+            "params": [
+                {
+                    "name": "tagName",
+                    "description": "the name of the tagClass we want to generate in CSS",
+                    "type": "String"
+                },
+                {
+                    "name": "buttonName",
+                    "description": "the name we want the button to have for this tagCSS",
+                    "type": "String"
+                },
+                {
+                    "name": "tagColor",
+                    "description": "16 bit hex color (e.g. ``#FF0000` = red.) you can use css shortcuts like `red` or `#f00`",
+                    "type": "String"
+                }
+            ],
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 206,
+            "description": "Called before defining new CSS rules for a tagType. This removes any pre-existing rules for\nthe provided tagType from the markus.tag and markus.tagCSS objects.\n\nThis method is defined in the io.js anonymous function but later attached to the `markus.io` object",
+            "itemtype": "method",
+            "name": "removeTagCSS",
+            "params": [
+                {
+                    "name": "tagName",
+                    "description": "The tag you want to remove",
+                    "type": "String"
+                }
+            ],
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 224,
+            "description": "This function handles the loading of the CSS rules from the saved HTML document using\nthe tag and tagCSS attributes. It has a couple of failsafes in case the data is missing\nand also contains the defaults for the standard tagNames (i.e. placeName, officialTitle, timePeriod etc.)\n\nThis method is defined in the io.js anonymous function but later attached to the `markus.io` object",
+            "itemtype": "method",
+            "name": "loadCSSFromCSS_TagAtt",
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 378,
+            "description": "Calling this method automates the download/export of the file. This generates\na click event on the `#export` button",
+            "itemtype": "method",
+            "name": "autoDownload",
+            "params": [
+                {
+                    "name": "fileEntry",
+                    "description": "The fileEntry object that contains the file",
+                    "type": "Object"
+                },
+                {
+                    "name": "suffix",
+                    "description": "Filetype extension as String, or just a suffix",
+                    "type": "String"
+                }
+            ],
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 392,
+            "description": "Calling this method will clean the data from the document into a newly spawned,\ntemporary element to use JQuery to clean it from unwanted elements and classes",
+            "itemtype": "method",
+            "name": "saveSave",
+            "params": [
+                {
+                    "name": "filename",
+                    "description": "the fileName for the new File",
+                    "type": "String"
+                },
+                {
+                    "name": "_fn",
+                    "description": "The fileEntry object",
+                    "type": "Object"
+                }
+            ],
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 428,
+            "description": "Generates a TEI XML document from the HTML document that is generated in the browser.",
+            "itemtype": "method",
+            "name": "saveTEI",
+            "params": [
+                {
+                    "name": "filename",
+                    "description": "the fileName for the new File",
+                    "type": "String"
+                }
+            ],
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 449,
+            "description": "Generates a standalone HTML document that you can view offline. This has all the data from the\ndocument stored in it, including the stylesheet CSS rules that have been parsed into one single\n`<style>` tag in the head of the HTML document.",
+            "itemtype": "method",
+            "name": "saveHTML",
+            "params": [
+                {
+                    "name": "filename",
+                    "description": "the name of the new file",
+                    "type": "String"
+                }
+            ],
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 507,
+            "description": "Saves a file using the FileSystem. It requests write access and in return Gets\na fileEntry (basically a filePointer) that can be written to. Once we have that object\nwe write all the data that needs to be saved to there and call the callback function once the\nwriting of data is complete",
+            "itemtype": "method",
+            "name": "saveFile",
+            "params": [
+                {
+                    "name": "filename",
+                    "description": "the name of the file we want to create",
+                    "type": "String"
+                },
+                {
+                    "name": "text",
+                    "description": "the textdata of the file we want to create",
+                    "type": "String"
+                },
+                {
+                    "name": "_fn",
+                    "description": "the callback function, called once the file has been written",
+                    "type": "Function"
+                },
+                {
+                    "name": "errorHandler",
+                    "description": "A custom errorHandler, does not need to specified, can also be kept default",
+                    "type": "Function"
+                }
+            ],
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 563,
+            "description": "Removes the specified file from the fileSystem.",
+            "itemtype": "method",
+            "name": "removeFile",
+            "params": [
+                {
+                    "name": "filename",
+                    "description": "the name of the file we want to remove",
+                    "type": "String"
+                },
+                {
+                    "name": "_fn",
+                    "description": "the callback function, called once the file has successfully been removed",
+                    "type": "Function"
+                },
+                {
+                    "name": "errorHandler",
+                    "description": "the errorHandler, does not need to be defined, can fallback to default handler",
+                    "type": "Function"
+                }
+            ],
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 605,
+            "description": "Defines the readFile function. This allows you to read a file specified by the fileName\nand calls the callback on succes",
+            "itemtype": "method",
+            "name": "readFile",
+            "params": [
+                {
+                    "name": "_file",
+                    "description": "the fileName as a String",
+                    "type": "String"
+                },
+                {
+                    "name": "_fn",
+                    "description": "The callBack function",
+                    "type": "Function"
+                },
+                {
+                    "name": "errorHandler",
+                    "description": "custom error handler",
+                    "type": "Function"
+                }
+            ],
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 651,
+            "description": "Exports a MARKUS save file and automatically saves it",
+            "itemtype": "method",
+            "name": "exportSave",
+            "params": [
+                {
+                    "name": "filename",
+                    "description": "the fileName of the file you download",
+                    "type": "String"
+                }
+            ],
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 675,
+            "description": "Exports a TEI save file of the document and automatically saves it",
+            "itemtype": "method",
+            "name": "exportTEI",
+            "params": [
+                {
+                    "name": "filename",
+                    "description": "the fileName of the file you download",
+                    "type": "String"
+                }
+            ],
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 695,
+            "description": "Exports a HTML save of the document and its layout and automatically saves it",
+            "itemtype": "method",
+            "name": "exportHTML",
+            "params": [
+                {
+                    "name": "filename",
+                    "description": "the fileName of the file you download",
+                    "type": "String"
+                }
+            ],
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 715,
+            "description": "A simple basic save to the normal MARKUS format. Cleans the data, processes it\nfor download and then automatically downloads it.",
+            "params": [
+                {
+                    "name": "filename",
+                    "description": "The filename of the new file we want to create",
+                    "type": "String"
+                },
+                {
+                    "name": "_fn",
+                    "description": "The callback function called uppon completion",
+                    "type": "Function"
+                }
+            ],
+            "class": "IO",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\io.js",
+            "line": 749,
+            "description": "Global method that registers the Global Tag Management UI, it also takes care of all its\nevent handlers etc.",
+            "itemtype": "method",
+            "name": "registeTagManageUI",
+            "class": "Global",
+            "module": "io.js"
+        },
+        {
             "file": "src\\js\\markus.js",
             "line": 10,
             "description": "This is the global object that holds the version and build info",
@@ -781,6 +1169,10 @@
         }
     ],
     "warnings": [
+        {
+            "message": "Missing item type\nA simple basic save to the normal MARKUS format. Cleans the data, processes it\nfor download and then automatically downloads it.",
+            "line": " src\\js\\io.js:715"
+        },
         {
             "message": "Missing item type\nDefines what happens when you click on a tab. It shows the specified\ntab, hides all webDicts, shows the correct one and triggers the\nresetSize event.",
             "line": " src\\js\\webDictionary.js:236"
