@@ -209,13 +209,20 @@ var removeTagCSS = function(tagName) {
     ;
 };
 
-
+/**
+ * This function handles the loading of the CSS rules from the saved HTML document using
+ * the tag and tagCSS attributes. It has a couple of failsafes in case the data is missing
+ * and also contains the defaults for the standard tagNames (i.e. placeName, officialTitle, timePeriod etc.)
+ *
+ * @method loadCSSFromCSS_TagAtt
+ */
 var loadCSSFromCSS_TagAtt = function() {
     //find the tagCSS and tag attributes of the doc
     var tagCSSAttr = $(".doc").attr("tagCSS");
     var tagAttr = $(".doc").attr("tag");
 
-    //If the found variables are indeed actually populated with data, we try to populate them
+    //If the found the tagCSS variables are indeed actually populated with data, we try to populate them
+    //But at the same time, the tag attribute for the CSS has not been set yet, so we need to redefine those
     if ((typeof tagCSSAttr !== typeof undefined && tagCSSAttr !== false) && (typeof tagAttr === typeof undefined || tagAttr === false || tagAttr === "{}")) {
         //Read the tagCSS by evaluating JSON from the tagCSS attr.
         var tagCSS = _m.tagCSS = $.evalJSON($(".doc").attr("tagCSS"));
@@ -236,6 +243,8 @@ var loadCSSFromCSS_TagAtt = function() {
         $(".doc").attr("tag", JSON.stringify(_m.tag));
         tagAttr = $(".doc").attr("tag");
     }
+
+    //If we find tagCSS attribute we also add the stuff to the styleSheet in the same manner as above
     if (typeof tagCSSAttr !== typeof undefined && tagCSSAttr !== false) {
         var tagCSS = _m.tagCSS = $.evalJSON($(".doc").attr("tagCSS"));
         var cssArray;
@@ -249,39 +258,58 @@ var loadCSSFromCSS_TagAtt = function() {
             }
         }
     }
+
+    //If we found a tagAttribute we load its definitions into the markus.tag object using JQuery.evalJSON
+    //Converting escaped Unicode Characters back
     if (typeof tagAttr !== typeof undefined && tagAttr !== false) {
         _m.tag = $.evalJSON(markus.util.converBackToUnicode($(".doc").attr("tag")));
 
+        //For each of the tagNames defined in the markus.tag object
+        //We write the css class to the markus.tagCSS object and the JQuery stylesheet
         for (var tagName in _m.tag) {
             var tagColor = _m.tag[tagName].color;
             _m.tagCSS[tagName] = [];
+
+            //Set the foreground color for the .tagName class
             $.stylesheet('.' + tagName, {
                 "color": tagColor
             });
+            //Duplicate into CSS
             _m.tagCSS[tagName].push({
                 tagName: '.' + tagName,
                 cssKey: ["color"],
                 cssValue: tagColor
             });
+
+            //Set the selected.tagName class' background and border color to the provided tagColor
             $.stylesheet('.selected.' + tagName, ['background-color', 'border-color'], tagColor);
+            //Duplicate into the markus.tagCSS array
             _m.tagCSS[tagName].push({
                 tagName: '.selected.' + tagName,
                 cssKey: ['background-color', 'border-color'],
                 cssValue: tagColor
             });
+
+            //Set the .bordered.tagName class' border-color to the tagColor
             $.stylesheet('.bordered.' + tagName, ['border-color'], tagColor);
+            //Duplicate into the markus.tagCSS array
             _m.tagCSS[tagName].push({
                 tagName: '.bordered.' + tagName,
                 cssKey: ['border-color'],
                 cssValue: tagColor
             });
+
+            //Set the button.tagName class' back and border color to the provided tagColor
             $.stylesheet('button.' + tagName, ['background-color', 'border-color'], tagColor);
+            //Set the foreground color for the button.tagName class to the provided tagColor
             $.stylesheet('button.' + tagName, ['color'], "#fff");
+            //Duplicate into the markus.tagCSS array
             _m.tagCSS[tagName].push({
                 tagName: 'button.' + tagName,
                 cssKey: ["color"],
                 cssValue: "#fff"
             });
+            //Duplicate into the markus.tagCSS array
             _m.tagCSS[tagName].push({
                 tagName: 'button.' + tagName,
                 cssKey: ['background-color', 'border-color'],
@@ -289,67 +317,88 @@ var loadCSSFromCSS_TagAtt = function() {
             });
         }
 
-
-
-
     }
+
+    //Check if the definition for fullName exists, if not, redefine it
     _m.tag["fullName"] = _m.tag["fullName"] || {
         buttonName: "姓名",
         visible: true,
         color: "#d9534f",
         status: ""
     };
+    //Check if the definition for partialName exists, if not, redefine it
     _m.tag["partialName"] = _m.tag["partialName"] || {
         buttonName: "別名",
         visible: true,
         color: "#f0ad4e",
         status: ""
     };
+    //Check if the definition for placeName exists, if not, redefine it
     _m.tag["placeName"] = _m.tag["placeName"] || {
         buttonName: "地名",
         visible: true,
         color: "#428bca",
         status: ""
     };
+    //Check if the definition for officialTitle exists, if not, redefine it
     _m.tag["officialTitle"] = _m.tag["officialTitle"] || {
         buttonName: "官名",
         visible: true,
         color: "#5bc0de",
         status: ""
     };
+    //Check if the definition for timePeriod exists, if not, redefine it
     _m.tag["timePeriod"] = _m.tag["timePeriod"] || {
         buttonName: "時間",
         visible: true,
         color: "green",
         status: ""
     };
+
+    //Update the switchers and the manualPopovers
     updateSwitchers();
     updateManualPopover();
-
 };
 
+/**
+ * Calling this method automates the download/export of the file. This generates
+ * a click event on the `#export` button
+ *
+ * @method autoDownload
+ * @param  {Object} fileEntry The fileEntry object that contains the file
+ * @param  {String} suffix    Filetype extension as String, or just a suffix
+ */
 var autoDownload = function(fileEntry, suffix) {
     $("#saving_temp").remove();
     $('#export').attr("href", fileEntry.toURL()).attr("download", $('.doc').attr('filename') + suffix);
     $('#export')[0].click();
 };
 
-var saveSave = function(filename, _fn) {
 
+var saveSave = function(filename, _fn) {
+    //Prepends the temporary saving span, this is an invisible span
     $("body").prepend($("<span id='saving_temp' style='display:none'></span>"));
 
+    //Gets a jquery ref to the just prepened element
     var div = $("#saving_temp");
-    // $("#saving_temp").html($("#content").html());
+
+    // Set the html content of this temp element to the document outerHTML.
     div.html(($(".doc")[0]).outerHTML);
+
+    //Remove all instances of .notSave and iframes
     div.find(".notSave,iframe").remove();
+    //If we find a .justSelected or .justExtend instance, remove that class
     div.find(".justSelected,.justExtended").removeClass("justSelected").removeClass("justExtended");
+    //If there is any markup left with the randomID, remove that attribute
     div.find(".markup[randomID]").removeAttr("randomID");
 
+    //get the saveContent, now that it is cleaned before saving back from the temp element
     var saveContent = $("#saving_temp").html();
-    saveFile(filename, _m.util.recoverAllExistTag(saveContent), _fn
 
+    //Call the saveFile function
+    saveFile(filename, _m.util.recoverAllExistTag(saveContent), _fn);
 
-    );
+    //Now that we're done with the temporary element, remove it from the doc
     $("#saving_temp").remove();
 
 };
