@@ -1,0 +1,582 @@
+<div class="web-dictionary-container" data-spy="affix" data-offset-top="0" style="padding-right:0px;padding-left:0px;">
+  <div id="buttonsRow" style="padding-bottom:10px;">
+    <button type="button" class="btn btn-sm btn-danger switcher" color-switcher-class="fullName" data-toggle="tooltip" data-placement="auto" title="點選改變顯示風格">姓名</button>
+    <button type="button" class="btn btn-sm btn-warning switcher" color-switcher-class="partialName" data-toggle="tooltip" data-placement="auto" title="點選改變顯示風格">別名</button>
+    <button type="button" class="btn btn-sm btn-success switcher" color-switcher-class="timePeriod" data-toggle="tooltip" data-placement="auto" title="點選改變顯示風格">時間</button>
+    <button type="button" class="btn btn-sm btn-primary switcher" color-switcher-class="placeName" data-toggle="tooltip" data-placement="auto" title="點選改變顯示風格">地名</button>
+    <button type="button" class="btn btn-sm btn-info switcher" color-switcher-class="officialTitle" data-toggle="tooltip" data-placement="auto" title="點選改變顯示風格">官職</button>
+    <!-- <button id="showModalBtn" class="btn btn-sm btn-primary" style="opacity:0">Automated markup options</button> -->
+    
+    <button type="button" id="editDocBtn" class="btn btn-sm" data-container="body" data-toggle="tooltip" data-placement="auto" title="全文修改模式"><span class="glyphicon glyphicon-edit"></span></button>
+    <button id="showHelpModalBtn" class="btn btn-sm" data-container="body" data-toggle="tooltip" data-placement="auto" title="標記與圖示解說"><span class="glyphicon glyphicon-info-sign"></span></button>
+    <button id="showSummaryModalBtn" class="btn btn-sm" data-container="body" data-toggle="tooltip" data-placement="auto" title="標記總覽"><span class="glyphicon glyphicon-list-alt"></span></button>
+    <button id="showParagraphModalBtn" class="btn btn-sm" data-container="body" data-toggle="tooltip" data-placement="auto" title="顯示分段"><span class="glyphicon glyphicon-indent-left"></span></button>
+    <button id="showManageTagModalBtn" style="display:none" class="btn btn-sm" data-container="body" data-toggle="tooltip" data-placement="auto" title="管理標記"><span class="glyphicon glyphicon-tags"></span></button>
+    <button id="showManageTabModalBtn" style="display:none" class="btn btn-sm" data-container="body" data-toggle="tooltip" data-placement="auto" title="管理網路參考"><span class="glyphicon glyphicon-folder-close"></span></button>
+    <button id="showGotoModalBtn" class="btn btn-sm" data-container="body" data-toggle="tooltip" data-placement="auto" title="跳至分段"><span class="glyphicon glyphicon-plane"></span></button>
+    <button id="alignmentBtn" class="btn btn-sm" data-container="body" data-toggle="tooltip" data-placement="auto" title="改變邊緣對齊"><span class="glyphicon glyphicon-align-left"></span></button>
+    <button id="displayHiddenBtn" class="btn btn-sm" data-container="body" data-toggle="tooltip" data-placement="auto" title="顯示/隱藏透明字符"><span class="glyphicon glyphicon-sunglasses"></span></button>
+  </div>
+  <ul class="nav nav-tabs">
+    <li><a class="web-dictionary-tab" web-dictionary-name="cbdb">CBDB</a></li>
+    <!-- <li><a class="web-dictionary-tab" web-dictionary-name="chgis">CHGIS</a></li> -->
+    <li><a class="web-dictionary-tab" web-dictionary-name="chgis">TGAZ</a></li>
+    <li><a class="web-dictionary-tab" web-dictionary-name="zdic">ZDict</a></li>
+    <li class="active"><a class="web-dictionary-tab" web-dictionary-name="wiki">Wikipedia</a></li>
+    <li><a class="web-dictionary-tab" web-dictionary-name="wiki8">医学百科</a></li>
+    <li><a class="web-dictionary-tab" web-dictionary-name="ddbcPerson">DDBC 人物</a></li>
+    <li><a class="web-dictionary-tab" web-dictionary-name="ddbcPlace">DDBC 地名</a></li>
+    <li><a class="web-dictionary-tab" web-dictionary-name="ddbcGlossaries">DDBC 詞彙</a></li>
+    <!-- <li><a href="#settings" data-toggle="tab">Settings</a></li> -->
+  </ul>
+  <div style="width:100%">
+    <div style="padding-top:0px">
+      <div class="item web-dictionary" web-dictionary-name="cbdb" web-dictionary-search="searchCBDB" style="display:none">
+        
+        <div class="input-group input-group-sm" style="width:inherit;padding-top:10px;padding-bottom:10px">
+          <span class="input-group-addon">Search</span>
+          <input type="text" class="form-control web-dictionary-input" placeholder="Search name or cbdb ID"></input>
+          <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
+        </div>
+        <div id="cbdbIDRef" class="btn-group btn-group-justified web-dictionary-button" data-toggle="buttons">
+          
+        </div>
+        <center ><div class="web-dictionary-spinHolder" ></div></center>
+        <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>                
+      </div>
+      <div class="item web-dictionary" web-dictionary-name="chgis" web-dictionary-src="chgis.html?n={value}" _web-dictionary-src="http://chgis.hmdc.harvard.edu/engine_basic.php?utfname={value}" web-dictionary-exportURL="http://maps.cga.harvard.edu/tgaz/placename?n={value}" web-dictionary-param="{value}" style="display:none">
+      <style>.banner a {display:none;} </style>
+        
+        <div class="input-group input-group-sm" style="width:inherit;padding-top:10px;padding-bottom:10px">
+          <span class="input-group-addon">Search</span>
+          <input type="text" class="form-control web-dictionary-input" placeholder="Search place name"></input>
+          <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
+        </div>
+        <center ><div class="web-dictionary-spinHolder" ></div></center>
+        <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>                
+      </div>
+      <div class="item web-dictionary" web-dictionary-name="zdic" web-dictionary-src="http://www.zdic.net/search/?c=3&q={value}"
+       web-dictionary-param="{value}" style="display:none">
+        <div class="input-group input-group-sm" style="width:inherit;padding-top:10px;padding-bottom:10px">
+          <span class="input-group-addon">Search</span>
+          <input type="text" class="form-control web-dictionary-input" placeholder="Search here" ></input>
+          <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
+        </div>
+        <center ><div class="web-dictionary-spinHolder" ></div></center>  
+        <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
+      </div>
+      <div class="item web-dictionary" web-dictionary-name="wiki" web-dictionary-src="http://zh.m.wikipedia.org/wiki/{value}" web-dictionary-param="{value}" >
+        <div class="input-group input-group-sm" style="width:inherit;padding-top:10px;padding-bottom:10px">
+          <span class="input-group-addon">Search</span>
+          <input type="text" class="form-control web-dictionary-input" placeholder="Search here" ></input>
+          <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
+        </div>
+        <center ><div class="web-dictionary-spinHolder"></div></center> 
+        
+        <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
+      </div>
+      <div class="item web-dictionary" web-dictionary-name="wiki8" web-dictionary-src="http://mobile.wiki8.com/search?q={value}&d=5&ie=t&mobile=true" web-dictionary-exportURL="http://www.wiki8.com/search?q={value}&d=5&ie=t&mobile=true" web-dictionary-param="{value}" style="display:none">
+        <div class="input-group input-group-sm" style="width:inherit;padding-top:10px;padding-bottom:10px">
+          <span class="input-group-addon">Search</span>
+          <input type="text" class="form-control web-dictionary-input" placeholder="Search here" ></input>
+          <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
+        </div>
+        
+        <center ><div class="web-dictionary-spinHolder"></div></center> 
+        
+        <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
+      </div>
+      <div class="item web-dictionary" web-dictionary-name="ddbcPerson" web-dictionary-search="searchByID" web-dictionary-src="http://authority.dila.edu.tw/person/search.php?per={value}" web-dictionary-id-src="http://authority.dila.edu.tw/person/search.php?aid={value}" web-dictionary-param="{value}" web-dictionary-id-regex="A\d+" style="display:none">
+        <div class="input-group input-group-sm" style="width:inherit;padding-top:10px;padding-bottom:10px">
+          <span class="input-group-addon">Search</span>
+          <input type="text" class="form-control web-dictionary-input" placeholder="Search here" ></input>
+          <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
+        </div>
+        <div class="btn-group btn-group-justified web-dictionary-button IDRef" data-toggle="buttons">
+          
+        </div>
+        <center ><div class="web-dictionary-spinHolder"></div></center> 
+        
+        <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
+      </div>
+      <div class="item web-dictionary" web-dictionary-name="ddbcPlace" web-dictionary-search="searchByID" _web-dictionary-id-src="http://authority.dila.edu.tw/place/search.php?code={value}" web-dictionary-id-src="ddbcPlace.html?q={value}"
+      _web-dictionary-src="http://authority.dila.edu.tw/place/search.php?ml={value}"
+      web-dictionary-src="ddbcPlace.html?q={value}" web-dictionary-id-regex="PL\d+"   web-dictionary-param="{value}" web-dictionary-exportURL="http://authority.dila.edu.tw/place/search.php?ml={value}" style="display:none">
+        <div class="input-group input-group-sm" style="width:inherit;padding-top:10px;padding-bottom:10px">
+          <span class="input-group-addon">Search</span>
+          <input type="text" class="form-control web-dictionary-input" placeholder="Search here" ></input>
+          <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
+        </div>
+        <div class="btn-group btn-group-justified web-dictionary-button IDRef" data-toggle="buttons">
+          
+        </div>
+        <center ><div class="web-dictionary-spinHolder"></div></center> 
+        
+        <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
+      </div>
+      <div class="item web-dictionary" web-dictionary-name="ddbcGlossaries" web-dictionary-src="ddbc.html?q={value}" web-dictionary-exportURL="http://buddhistinformatics.dila.edu.tw/glossaries/search.php?op=search&text={value}" web-dictionary-param="{value}" style="display:none">
+        <div class="input-group input-group-sm" style="width:inherit;padding-top:10px;padding-bottom:10px">
+          <span class="input-group-addon">Search</span>
+          <input type="text" class="form-control web-dictionary-input" placeholder="Search here" ></input>
+          <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
+        </div>
+        <center ><div class="web-dictionary-spinHolder"></div></center> 
+        
+        <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
+      </div>
+    </div>              
+  </div>
+</div>
+<div class="modal fade" id="gotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- <div class="modal-header">          
+        <h4 class="modal-title">Select dynasty range</h4>
+      </div> -->
+      <div class="modal-body">
+        <div class="form-inline">
+          <div class="form-group">
+            <label for="GOTO">跳至分段(passage) </label>
+            <input type="text" class="form-control" placeholder="填入分段(passage) 號碼">
+          </div>
+          <button class="btn btn-default">Go</button>
+        </div>
+      </div>    
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog --> 
+</div>
+<div class="modal fade" id="manageTabModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- <div class="modal-header">          
+        <h4 class="modal-title">Select dynasty range</h4>
+      </div> -->
+      <div class="modal-body">
+         <ul class="nav nav-tabs">    
+          <li><a>CBDB <input web-dictionary-name="cbdb" data-markus-action="display" type="checkbox" checked=""></input></a></li>
+          <li><a>TGAZ <input web-dictionary-name="chgis" data-markus-action="display" type="checkbox" checked=""></input></a></li>
+          <li><a>ZDict <input web-dictionary-name="zdic" data-markus-action="display" type="checkbox" checked=""></input></a></li>
+          <li><a>Wikipedia <input web-dictionary-name="wiki" data-markus-action="display" type="checkbox" checked=""></input></a></li>
+          <li><a>医学百科 <input web-dictionary-name="wiki8" data-markus-action="display" type="checkbox" checked=""></input></a></li>
+          <li><a>DDBC Person <input web-dictionary-name="ddbcPerson" data-markus-action="display" type="checkbox" checked=""></input></a></li>
+          <li><a>DDBC place <input web-dictionary-name="ddbcPlace" data-markus-action="display" type="checkbox" checked=""></input></a></li>
+          <li><a>DDBC Glossary <input web-dictionary-name="ddbcGlossaries" data-markus-action="display" type="checkbox" checked=""></input></a></li>
+        </ul>
+      </div>    
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->  
+</div>
+<div class="modal fade" id="splitPassageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+         
+      </div>    
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->  
+</div>
+<script type="text/javascript">
+  $("#showSplitPassageModalBtn").on("click",function(){
+    $("#splitPassageModal .modal-body").contents().remove();
+    $("#splitPassageModal .modal-body").append(Object.keys(markus.tag).join("<br/>"));
+    $("#splitPassageModal").modal("show");
+  });
+  $("#showManageTabModalBtn").on("click",function(){
+    $("#manageTabModal").modal("show");
+  });
+  $("#gotoModal button").on("click",function(event){    
+    $("span[id='passage"+$("#gotoModal input").val()+"']").goto();
+    $("#gotoModal").modal("hide");
+  });
+
+  $('#gotoModal').on('shown.bs.modal', function (e) {
+    $("#gotoModal input").focus();
+  });
+
+  $("#showGotoModalBtn").on("click",function(){
+    $("#gotoModal").modal("show");
+  });
+
+  $("#alignmentBtn").on("click",function(){
+    direction = $(".doc pre").attr("dir") || "auto";
+
+    switch (direction){
+      case "ltr":
+        direction = "auto";
+        break;
+      case "auto":
+        direction = "rtl";
+        break;
+      case "rtl":
+        direction = "ltr";
+        break;
+      default:
+        direction = "auto";
+    }
+    $(".doc pre").attr("dir",direction);
+
+  });
+
+  // $("#removeHiddenBtn").on("click",function(){
+  //   $(".doc pre .EOL").text("\n");
+  //   $(".doc pre .space").text(" ");
+  //   $(".doc pre .hiddenChar").contents().unwrap();
+  // });
+
+
+ function SelectText(event, element) {
+    // console.log("selectText");
+    var range, selection;
+    $(".doc pre").focus();
+    if (document.body.createTextRange && element.nodeName == 'SPAN') {
+      range = document.body.createTextRange();
+      range.moveToElementText(element);
+      range.select();
+    } else if (window.getSelection) {
+      selection = window.getSelection();
+      range = document.createRange();
+      range.selectNodeContents(element);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+    var evt = (event) ? event : window.event;
+    if (evt.stopPropagation) evt.stopPropagation();
+    if (evt.cancelBubble != null) evt.cancelBubble = true;
+    return false;
+  }
+
+  function insertTextAtCursor(text) { 
+      var sel, range, html; 
+      sel = window.getSelection();
+      range = sel.getRangeAt(0); 
+      range.deleteContents();             
+      var textNode = document.createElement('span');
+      textNode.textContent = text;
+      switch(text){
+        case "·":
+          textNode.className = "space hiddenChar";
+          break;
+        case "\t":
+           textNode.className = "tab hiddenChar";
+           break;
+        case "¬":
+           textNode.className = "EOL hiddenChar";
+           break;
+      }    
+      
+      textNode.setAttribute("contenteditable",false);
+      textNode.setAttribute("unselectable","on");
+      textNode.setAttribute("onclick","SelectText(event, this);");
+      
+
+      range.insertNode(textNode);
+      range.setStartAfter(textNode);
+      sel.removeAllRanges();
+      sel.addRange(range);        
+  }  
+
+
+  $("#displayHiddenBtn").on("click",function(){
+
+    showHidden = $(this).attr('showHidden') || $(".doc pre .hidden").length === 0;
+    showHidden = Boolean(showHidden == 'true');
+    // console.log(showHidden);
+    if (showHidden){
+          $(".doc pre").contents().filter(function(){
+            return this.nodeType === 3;
+          }).each(function(){
+            this.data = this.data.replace(/ /g,'|·|');
+            this.data = this.data.replace(/\t/g,'|—|');
+            this.data = this.data.replace(/\n/g,'|¬|');
+          });
+          $(".doc pre").contents().filter(function(){
+            return this.nodeType !== 3;
+          }).each(function(){
+              $(this).contents().filter(function(){
+              return this.nodeType === 3;
+            }).each(function(){
+              this.data = this.data.replace(/ /g,'|·|');
+              this.data = this.data.replace(/\t/g,'|—|');
+              this.data = this.data.replace(/\n/g,'|¬|');
+            });
+          });
+
+          $(".doc pre").html($(".doc pre").html().replace(/\|·\|/g, "<span class='space hiddenChar'>·</span>").replace(/\|—\|/g,"<span class='tab hiddenChar'>\t</span>")
+            .replace(/\|¬\|/g,"<span class='hiddenChar EOL'>¬</span>"));
+
+          $(".doc pre .hiddenChar").on("click",function(event){
+            SelectText(event,$(this).element);
+          });
+          $(".doc pre .hiddenChar").attr("contenteditable","false");
+          $(".doc pre .hiddenChar").attr("unselectable","on");
+
+
+    } else {
+      // console.log("not hidden")
+      $(".doc pre .EOL").text("\n");
+      $(".doc pre .space").text(" ");
+      $(".doc pre .hiddenChar").contents().unwrap();
+
+    }
+
+    // console.log($(this).attr('showHidden'))
+    $(this).attr('showHidden',!showHidden);
+    // console.log($(this).attr('showHidden'))
+
+
+
+});
+
+
+  $('#manageTabModal [data-markus-action="display"]').change(function() {
+    console.log($(this).is(":checked"));
+    var web_dictionary_name = $(this).attr("web-dictionary-name");
+    if($(this).is(":checked")) {
+      $(".web-dictionary-container li").has("a[web-dictionary-name='"+web_dictionary_name+"']").show(); 
+      $(".web-dictionary-container div.web-dictionary[web-dictionary-name='"+$(this).attr("web-dictionary-name")+"']").show(); 
+    }else{
+      $(".web-dictionary-container li").has("a[web-dictionary-name='"+web_dictionary_name+"']").hide(); 
+      $(".web-dictionary-container div.web-dictionary[web-dictionary-name='"+$(this).attr("web-dictionary-name")+"']").hide();
+    }
+    $($(".web-dictionary-container li a:visible")[0]).trigger("click");
+              
+  });
+  $('#manageTabModal input[web-dictionary-name="wiki8"],input[web-dictionary-name="ddbcPerson"],input[web-dictionary-name="ddbcPlace"],input[web-dictionary-name="ddbcGlossaries"]').trigger("click");
+  
+  $.getJSON("/auth/profile_info", function(result) {
+      if (result["name"]) {
+          $("#showManageTabModalBtn").show();
+          $("#showManageTagModalBtn").show();
+      } else {
+        $("#showManageTabModalBtn").hide();
+        $("#showManageTagModalBtn").hide();
+      }
+
+
+  }).fail(function() {
+      $("#showManageTabModalBtn").hide();
+      $("#showManageTagModalBtn").hide();
+  });
+  var gotolistener = new window.keypress.Listener(document.getElementById("gotoModal"));
+  gotolistener.simple_combo("enter", function() {   
+      // console.log("enter");         
+      $("#gotoModal button").trigger("click");            
+  });
+
+  var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+  var eventer = window[eventMethod];
+  var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+  // Listen to message from child window
+  eventer(messageEvent,function(e) {
+      var key = e.message ? "message" : "data";
+      var data = e[key];
+      console.log(data);
+      if ($(".doc .selected").length > 0){
+        $(".doc .selected").trigger("click");
+        if ($("#cbdbIdPopoverContent input[type='text']").is(':visible')){
+          $("#cbdbIdPopoverContent input[type='text']").val(data);
+        }
+      }
+      //run function//
+  },false);
+
+$("#editDocBtn").on("click",function(){
+    console.log("click");
+    
+    var editable = $("#editDocBtn").hasClass("btn-danger");
+
+    if (editable) {
+      $("#editDocBtn").removeClass("btn-danger");
+      $(".doc").removeClass("edit");
+      editable = false;  
+    }else {
+      $("#editDocBtn").addClass("btn-danger");
+      $(".doc").addClass("edit");  
+      editable = true;
+    }
+
+
+    if (!editable){
+      $(".doc pre div,br").prepend("\n");
+      // $(".doc pre br").prepend("\n");
+      $(".doc div,br").contents().unwrap();
+      // $(".doc br").contents().unwrap();
+      $(".doc pre").html($(".doc pre").html());
+
+      if ($(".doc .passage").length > 0){
+        $(".doc .passage").contents().unwrap();
+        startParagraphMarkup();
+        markus.comment.startAddingCommentHolder();
+      }
+
+      // texts = $(".doc").text().replace(/(\r*\n)+/g,"\n").split("\n");
+      // Clipper.setTexts(texts);  
+      
+    }
+    if (editable){
+      markus.ui.listener.stop_listening();
+    } else {
+      markus.ui.listener.listen();
+    }
+    console.log(editable);
+
+    
+    $(".doc pre").attr("contenteditable",""+ editable);
+  });  
+
+$(document).on('keydown',".doc pre", function(event) {
+    showingHidden = $(".doc pre .hiddenChar").length > 0 || !Boolean($("#displayHiddenBtn").attr("showHidden"));
+    if (!showingHidden) {
+      return true;
+    }
+      EditableDiv = $(this).element;
+      var ignoreKey;
+      var key = event.keyCode || event.charCode;
+      if (!window.getSelection) return;
+      var selection = window.getSelection();
+      var focusNode = selection.focusNode,
+        anchorNode = selection.anchorNode;
+        console.log(key);
+        switch(key) {
+            case 9: //Tab
+                insertTextAtCursor('\t');
+                event.preventDefault();
+                return false;
+            case 13: //Enter
+                insertTextAtCursor('¬');
+                event.preventDefault();
+                return false;
+            case 32: //space
+                insertTextAtCursor('·');
+                event.preventDefault();
+                return false;
+        }
+
+
+      if (!anchorNode) return
+
+      if (anchorNode.nodeName.toLowerCase() != '#text') {
+       if (anchorOffset < anchorNode.childNodes.length)
+         anchorNode = anchorNode.childNodes[anchorOffset]
+       else {
+         while (!anchorNode.nextSibling) anchorNode = anchorNode.parentNode // this might step out of EditableDiv to "justincase" comment node
+         anchorNode = anchorNode.nextSibling
+       }
+       anchorOffset = 0
+      }
+
+      function backseek() {
+
+       while ((anchorOffset == 0) && (anchorNode != EditableDiv)) {
+
+         if (anchorNode.previousSibling) {
+           if (anchorNode.previousSibling.nodeName.toLowerCase() == '#text') {
+             if (anchorNode.previousSibling.nodeValue.length == 0)
+               anchorNode.parentNode.removeChild(anchorNode.previousSibling)
+             else {
+               anchorNode = anchorNode.previousSibling
+               anchorOffset = anchorNode.nodeValue.length
+             }
+           } else if ((anchorNode.previousSibling.offsetWidth == 0) && (anchorNode.previousSibling.offsetHeight == 0))
+             anchorNode.parentNode.removeChild(anchorNode.previousSibling)
+
+           else {
+             anchorNode = anchorNode.previousSibling
+
+             while ((anchorNode.lastChild) && (anchorNode.nodeName.toUpperCase() != 'SPAN')) {
+
+               if ((anchorNode.lastChild.offsetWidth == 0) && (anchorNode.lastChild.offsetHeight == 0))
+                 anchorNode.removeChild(anchorNode.lastChild)
+
+               else if (anchorNode.lastChild.nodeName.toLowerCase() != '#text')
+                 anchorNode = anchorNode.lastChild
+
+               else if (anchorNode.lastChild.nodeValue.length == 0)
+                 anchorNode.removeChild(anchorNode.lastChild)
+
+               else {
+                 anchorNode = anchorNode.lastChild
+                 anchorOffset = anchorNode.nodeValue.length
+                   //break              //don't need to break, textnode has no children
+               }
+             }
+             break
+           }
+         } else
+           while (((anchorNode = anchorNode.parentNode) != EditableDiv) && !anchorNode.previousSibling) {}
+       }
+      }  
+
+      if (key == 8) { //backspace
+         if (!selection.isCollapsed) {
+
+           try {
+             document.createElement("select").size = -1
+           } catch (e) { //kludge for IE when 2+ SPANs are back-to-back adjacent
+
+             if (anchorNode.nodeName.toUpperCase() == 'SPAN') {
+               backseek()
+               if (anchorNode.nodeName.toUpperCase() == 'SPAN') {
+                 var k = document.createTextNode(" ") // doesn't work here between two spans.  IE makes TWO EMPTY textnodes instead !
+                 anchorNode.parentNode.insertBefore(k, anchorNode) // this works
+                 anchorNode.parentNode.insertBefore(anchorNode, k) // simulate "insertAfter"
+               }
+             }
+           }
+
+
+         } else {
+           backseek()
+
+           if (anchorNode == EditableDiv) {
+             ignoreKey = true
+           } else if (anchorNode.nodeName.toUpperCase() == 'SPAN') {
+             SelectText(event, anchorNode)
+             ignoreKey = true
+           } else if ((anchorNode.nodeName.toLowerCase() == '#text') && (anchorOffset <= 1)) {
+
+             var prev, anchorNodeSave = anchorNode,
+               anchorOffsetSave = anchorOffset
+             anchorOffset = 0
+             backseek()
+             if (anchorNode.nodeName.toUpperCase() == 'SPAN') prev = anchorNode
+             anchorNode = anchorNodeSave
+             anchorOffset = anchorOffsetSave
+
+             if (prev) {
+               if (anchorOffset == 0)
+                 SelectEvent(prev)
+
+               else {
+                 var r = document.createRange()
+                 selection.removeAllRanges()
+
+                 if (anchorNode.nodeValue.length > 1) {
+                   r.setStart(anchorNode, 0)
+                   selection.addRange(r)
+                   anchorNode.deleteData(0, 1) 
+                 } 
+                 else {
+                   for (var i = 0, p = prev.parentNode; true; i++)
+                     if (p.childNodes[i] == prev) break
+                   r.setStart(p, ++i)
+                   selection.addRange(r)
+                   anchorNode.parentNode.removeChild(anchorNode)
+                 }
+               }
+               ignoreKey = true
+             }
+           }
+         }
+      }
+      // if (ignoreKey) {
+      //  var evt = event || window.event;
+      //  if (evt.stopPropagation) evt.stopPropagation();
+      //  evt.preventDefault();
+      //  return false;
+      // }
+      
+    });
+
+</script> 

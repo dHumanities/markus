@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Leaflet 0.5: https://github.com/CloudMade/Leaflet-->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <!--[if lte IE 8]> <link rel="stylesheet" href="../../lib/leaflet.ie.css" />  <![endif]-->
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <!-- MarkerCluster https://github.com/danzel/Leaflet.markercluster -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" />
+    <!--[if lte IE 8]> <link rel="stylesheet" href="../../lib/MarkerCluster.Default.ie.css" /> <![endif]-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster-src.js"></script>
+    <!-- GeoCSV: https://github.com/joker-x/Leaflet.geoCSV -->
+    <script>
+    L.GeoCSV = L.GeoJSON.extend({
+        options: {
+            titles: ['lat', 'lng', 'popup'],
+            latitudeTitle: 'lat',
+            longitudeTitle: 'lng',
+            fieldSeparator: ';',
+            lineSeparator: '\n',
+            deleteDoubleQuotes: true,
+            firstLineTitles: false
+        },
+        _propertiesNames: [],
+        initialize: function(csv, options) {
+            L.Util.setOptions(this, options);
+            L.GeoJSON.prototype.initialize.call(this, csv, options);
+        },
+        addData: function(data) {
+            if (typeof data === 'string') {
+                var titulos = this.options.titles;
+                if (this.options.firstLineTitles) {
+                    data = data.split(this.options.lineSeparator);
+                    if (data.length < 2) return;
+                    titulos = data[0];
+                    data.splice(0, 1);
+                    data = data.join(this.options.lineSeparator);
+                    titulos = titulos.trim().split(this.options.fieldSeparator);
+                    for (var i = 0; i < titulos.length; i++) {
+                        titulos[i] = this._deleteDoubleQuotes(titulos[i]);
+                    }
+                    this.options.titles = titulos;
+                }
+                for (var i = 0, j = titulos.length; i < j; i++) {
+                    var prop = titulos[i].toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '_');
+                    if (prop == '' || prop == '_' || this._propertiesNames.indexOf(prop) >= 0){prop = 'prop-' + i};
+                    this._propertiesNames[i] = prop;
+                }
+                data = this._csv2json(data);
+            }
+            L.GeoJSON.prototype.addData.call(this, data);
+        },
+        getPropertyName: function(title) {
+            var pos = this.options.titles.indexOf(title),
+                prop = '';
+            if (pos >= 0) prop = this._propertiesNames[pos];
+            return prop;
+        },
+        getPropertyTitle: function(prop) {
+            var pos = this._propertiesNames.indexOf(prop),
+                title = '';
+            if (pos >= 0) title = this.options.titles[pos];
+            return title;
+        },
+        _deleteDoubleQuotes: function(cadena) {
+            if (this.options.deleteDoubleQuotes) cadena = cadena.trim().replace(/^"/, "").replace(/"$/, "");
+            return cadena;
+        },
+        _csv2json: function(csv) {
+            var json = {};
+            json.type = "FeatureCollection";
+            json.features = [];
+            var titulos = this.options.titles;
+            csv = csv.split(this.options.lineSeparator);
+            for (var num_linea = 0; num_linea < csv.length; num_linea++) {
+                var campos = csv[num_linea].trim().split(this.options.fieldSeparator),
+                    lng = parseFloat(campos[titulos.indexOf(this.options.longitudeTitle)]),
+                    lat = parseFloat(campos[titulos.indexOf(this.options.latitudeTitle)]);
+                if (campos.length == titulos.length && lng < 180 && lng > -180 && lat < 90 && lat > -90) {
+                    var feature = {};
+                    feature.type = "Feature";
+                    feature.geometry = {};
+                    feature.properties = {};
+                    feature.geometry.type = "Point";
+                    feature.geometry.coordinates = [lng, lat];
+                    for (var i = 0; i < titulos.length; i++) {
+                        if (titulos[i] != this.options.latitudeTitle && titulos[i] != this.options.longitudeTitle) {
+                            feature.properties[this._propertiesNames[i]] = this._deleteDoubleQuotes(campos[i])
+                        }
+                    }
+                    json.features.push(feature);
+                }
+            }
+            return json;
+        }
+    });
+    L.geoCsv = function(csv_string, options) {
+        return new L.GeoCSV(csv_string, options);
+    };
+    </script>
+    
+    <!-- jQuery 1.8.3: http://jquery.com/ -->
+    <script src="js/jquery.min.js"></script>
+    <script src="markus.min.js"></script>
+    <style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: Arial, sans-serif;
+        font-color: #38383;
+    }
+    
+    #mapa {
+        position: fixed;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 50%;
+        font-family: Arial, sans-serif;
+        font-color: #38383;
+        z-index: 20;
+    }
+    
+    #info {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        top: 20px;
+        left: -100%;
+    }
+    #back {
+        position: fixed;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        top: 0;
+        left: -100%;
+        z-index: 20;
+        background-color: #fff;
+        text-align: right;
+        font-size:2em;
+
+    }
+    
+    #list {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        /*height:100%;*/
+        
+        background-color: #fff;
+        color: #666;
+        padding-left: 10px;
+        padding-bottom: 100px;
+        /*font-size:2em;*/
+        
+        z-index: 10;
+    }
+    
+    .boton {
+        border: 1px solid #96d1f8;
+        background: #65a9d7;
+        background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+        background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+        background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+        background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+        background: -o-linear-gradient(top, #3e779d, #65a9d7);
+        padding: 12px 24px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+        -moz-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+        box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+        text-shadow: rgba(0, 0, 0, .4) 0 1px 0;
+        color: white;
+        font-size: 17px;
+        /*font-family: Helvetica, Arial, Sans-Serif;*/
+        
+        text-decoration: none;
+        vertical-align: middle;
+    }
+    
+    .boton:hover {
+        border-top-color: #28597a;
+        background: #28597a;
+        color: #ccc;
+    }
+    
+    .boton:active {
+        border-top-color: #1b435e;
+        background: #1b435e;
+    }
+    </style>
+</head>
+
+<body>
+	<span id="back" class="left">back</span>
+    <div id="info" class="left"><span id="detail"></span></div>
+    <div id="mapa" class="right"></div>
+    <div id="list" class="right"></div>
+    <script>
+
+    var lastPost =0;
+    var showDetail = function(_id){
+    	// http://chgis.hmdc.harvard.edu/placename/json/hvd_41237
+    	$.ajax({
+            type: 'GET',
+            dataType: 'text',
+            url: '/chgis/' + _id,
+            error: function(obj, textStatus, errorThrown) {
+                // console.log(obj.responseText);
+                
+                // console.log(errorThrown);
+                // console.log(textStatus);
+                // obj = eval(obj.responseText);
+            },
+            success: function(obj) {
+            	$("#detail").html(obj.replace());
+            	$("#detail .banner").remove();
+            	$("#detail a").contents().unwrap();
+
+                
+                
+            },
+            complete: function() {
+                $(".right").animate({
+                        opacity: 0.25,
+                        left: "-100%",
+                    }, 500, function() {
+                        // Animation complete.
+                    });
+
+                    // $("#mapa").css("left","-100%");
+                    // $("#list").css("left","-100%");
+                    $(".left").css("left", "0");
+                    $(window).scrollTop(0);
+            }
+        });
+
+
+    };
+
+    var mapa;
+    var bankias;
+    $(function() {
+
+        mapa = L.map('mapa', {
+            attributionControl: false
+        }).setView([ 43.79707,119.64656], 4);
+
+        // L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}', {
+        L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 10
+        }).addTo(mapa);
+
+        bankias = L.geoCsv(null, {
+            onEachFeature: function(feature, layer) {
+                var popup = '';
+                for (var clave in feature.properties) {
+                    // var title = bankias.getPropertyTitle(clave);
+                    popup += feature.properties[clave] + '<br />';
+                }
+                layer.bindPopup(popup);
+
+            },
+            // pointToLayer: function (feature, latlng) {
+            // 	return L.marker(latlng, {
+            // 		icon:L.icon({
+            // 			iconUrl: 'marcador-bankia.png',
+            // 			shadowUrl: 'marker-shadow.png',
+            // 			iconSize: [25,41],
+            // 			shadowSize:   [41, 41],
+            // 			shadowAnchor: [13, 20]
+            // 		})
+            // 	});
+            // },
+            firstLineTitles: true
+        });
+        // alert(decodeURIComponent(markus.util.urlParam('n')));
+
+        $("#list").on("click","a.hook",function(){
+            parent.postMessage($(this).text(),"*");
+        });
+
+
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: '/chgis?fmt=json&n=' + decodeURIComponent(markus.util.urlParam('n')),
+            error: function() {
+                // alert('No se pudieron cargar los datos');
+            },
+            success: function(csv) {
+
+
+                // console.log(csv);	
+                geoJSONArray = [];
+                for (var i = 0, j = csv.placenames.length; i < j; i++) {
+                    var obj = csv.placenames[i];
+                    var laglong = obj["xy coordinates"].split(",");
+                    if (parseInt(laglong[0]) !== 0 && parseInt(laglong[1]) !== 0) {
+                        geoJSONArray.push({
+                            "type": "Feature",
+                            "id": obj.sys_id,
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [laglong[0], laglong[1]]
+                            },
+                            "properties": {
+                                "id": obj.sys_id,
+                                "name": obj.name,
+                                "years": obj.years
+                            }
+                        });
+
+                    }
+                    $("#list").append("<br/><span id='" + obj.sys_id + "'><a class='hook'>" + obj.sys_id + "</a><br/>" + obj.name + " (" + obj.transcription + ")<br/><span class=''>(" + obj.years + ") " + ((parseInt(laglong[0]) === 0 && parseInt(laglong[1]) === 0) ? "[No coordinate]" : "[" + obj["xy coordinates"] + "]") + "</span></span><br/>");
+
+                }
+
+                
+
+                if (csv.placenames.length === 0) {
+                    $("#list").append("Find not found ~ 查無資料.");
+                }
+
+                var cluster = new L.MarkerClusterGroup();
+                cluster.on('click', function(a) {
+                    console.log(a.layer);
+                });
+
+                cluster.on('clusterclick', function(a) {
+                    console.log('cluster ' + a.layer.getAllChildMarkers());
+                });
+                // bankias.addData(csv);
+                bankias.addData(geoJSONArray);
+                cluster.addLayer(bankias);
+                mapa.addLayer(cluster);
+                mapa.fitBounds(cluster.getBounds());
+            },
+            complete: function() {
+                $('#cargando').delay(500).fadeOut('slow');
+            }
+        });
+        $("#back").on("click", function() {
+            $(".left").css("left", "-100%");
+            $(".right").animate({
+                opacity: 1,
+                left: "0",
+            }, 500, function() {
+                // Animation complete.
+            });
+            $(window).scrollTop(lastPost);
+        });
+
+
+
+    });
+    </script>
+</body>
+
+</html>

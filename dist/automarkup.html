@@ -1,0 +1,3320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+    <title>MARKUS</title>
+    <!-- Bootstrap core CSS -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/normalize.css" /> -->
+    <link href="css/markus.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <!-- <link href="css/offcanvas.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/website.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/colorPicker.css" /> -->
+    <style>
+    .badge-primary {
+        background-color: #428bca;
+    }
+    /*.timePeriod:after {
+      content : "<" attr(data-markus-date) ">"; 
+    }*/
+    /*.checkboxControl{
+      text-align: left;
+    }*/
+    /*div.colorPicker-picker {
+      height: 30px;
+      width: 30px;
+      background: url(css/arrow.gif) no-repeat bottom right;
+    }*/
+    .timePeriod:before{
+        content : attr(data-append-before);
+    }
+    </style>
+</head>
+
+<body>
+    <div id="navbar" class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    </div>
+    <!-- /.navbar -->
+    <div class="container">
+        <div id="wrapper" class="row row-offcanvas row-offcanvas-right">
+            <div id="wrapperTriggerHolder"></div>
+            <div id="content" class="col-xs-8 col-md-8"></div>
+            <div id="comment" class="col-xs-4 col-md-4" style="padding-left:0px;padding-top:0px;" style="display:none"></div>
+            <div id="assist" class="col-xs-4 col-md-4" style="padding-left:0px;"></div>
+        </div>
+        <hr>
+        <footer></footer>
+    </div>
+    <!--/.container-->
+    <div id="manualPopover" class="popover fade right in" style="display: hidden;">
+        <div class="arrow"></div>
+        <h3 class="popover-title" style="display: none;"></h3>
+        <div class="popover-content">
+            <span class="tagText"></span>
+            <a class="glyphicon glyphicon-book" data-toggle="tooltip" _zhtw="網路解說搜尋" title="search online"></a>
+            <!-- <span class="expand"> | <a class="glyphicon glyphicon-collapse-down" ></a></span><br class="singleTagContent"/> -->
+            <span class="typePopoverContent" style="display:none">
+          <span class="singleTagContent">
+            <button type="button" _type="fullName" class="btn btn-xs btn-danger switch fullName switcher" >姓名</button>
+            <button type="button" _type="partialName" class="btn btn-xs btn-warning switch partialName switcher" >別名</button>
+            <button type="button" _type="timePeriod" class="btn btn-xs btn-success switch timePeriod switcher" >時間</button>
+            <button type="button" _type="placeName" class="btn btn-xs btn-primary switch placeName switcher" >地名</button>
+            <button type="button" _type="officialTitle" class="btn btn-xs btn-info switch officialTitle switcher" >官職</button>
+            <a class="glyphicon glyphicon-floppy-disk" data-toggle="tooltip" title="save" _zhtw="儲存"></a>
+
+          </span>
+            <span class="search"> | <a class="glyphicon glyphicon-search" data-toggle="tooltip" title="search document" _zhtw="文本中搜尋"></a></span>
+            </span>
+        </div>
+    </div>
+    <div class="modal fade" id="dynastySelectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div>
+     <div class="modal fade" id="fileSelectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div>
+    <!-- /.modal -->
+    </div>
+    <div class="modal fade" id="markupSelectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div>
+    <!-- /.modal -->
+    <div class="modal fade" id="timePeriodHelperModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div>
+    <div class="modal fade" id="scanMuzhimingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div>
+    <div class="modal fade" id="markupProgressModal" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" _data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Markup progress</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                    <button id="_startMarkupBtn" type="button" class="btn btn-primary" disabled="true">Start</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <div class="modal fade" id="summaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">
+    </div>
+    <!-- /.modal -->
+    <div class="modal fade" id="helpModal" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" _data-backdrop="static"></div>
+    <!-- /.modal -->
+    <div id="popoverMod">
+    </div>
+    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div>
+    <div class="modal fade" id="veriflyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div>
+    <!-- /.modal -->
+    <div class="modal fade" id="manageTagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <!-- // <script src="js/spin.min.js"></script> -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.hive.js"></script>
+    <script src="js/jquery.stylesheet.js"></script>
+    <script src="js/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.visible.min.js"></script>
+    <script type="text/javascript" src="markus.min.js"></script>
+    <script src="js/rangy-core.js"></script>
+    <script src="js/rangy-cssclassapplier.js"></script>
+    <script src="js/all_cbdb.js"></script>
+    <script type="text/javascript" src="js/office.js"></script>
+    <script type="text/javascript" src="js/place.js"></script>
+    <script type="text/javascript" src="js/ddbc.js"></script>
+    <script type="text/javascript" src="js/ddbc_person.js"></script>
+
+    <script type="text/javascript" src="js/ddbc_place.js"></script>
+    <script type="text/javascript" src="js/json_parse.js"></script>
+    <script type="text/javascript" src="js/era.js"></script>
+    <script src="js/offcanvas.js"></script>
+    <script type="text/javascript" src="js/jquery.colorPicker.min.js"></script>
+    <script type="text/javascript" src="js/keypress-2.1.4.min.js"></script>
+
+    <script type="text/javascript" src="js/earlyJoseon.js"></script>
+
+    <script>
+    // var markupFullName = markupPartialName = markupNianhao = markupofficialTitle = markupPlaceName = false;
+
+    var dynastySelection = {"10":{"first":404,"last":404,"name":"桓楚"},"11":{"first":1122,"last":1123,"name":"北遼"},"12":{"first":338,"last":377,"name":"代"},"13":{"first":1645,"last":1662,"name":"南明"},"14":{"first":304,"last":318,"name":"漢趙"},"15":{"first":1124,"last":1212,"name":"西遼"},"16":{"first":555,"last":587,"name":"西梁"},"17":{"first":384,"last":394,"name":"西燕"},"18":{"first":388,"last":393,"name":"翟魏"},"19":{"first":350,"last":352,"name":"冉魏"},"22":{"first":1616,"last":1636,"name":"後金"},"28":{"first":-221,"last":-207,"name":"秦"},"29":{"first":-208,"last":-202,"name":"楚"},"31":{"first":-207,"last":25,"name":"西漢"},"32":{"first":9,"last":23,"name":"新"},"34":{"first":25,"last":221,"name":"東漢"},"35":{"first":220,"last":266,"name":"曹魏"},"36":{"first":221,"last":264,"name":"蜀漢"},"37":{"first":222,"last":280,"name":"孫吳"},"39":{"first":266,"last":362,"name":"西晉"},"40":{"first":317,"last":420,"name":"東晉"},"41":{"first":318,"last":329,"name":"前趙"},"42":{"first":303,"last":347,"name":"成漢"},"43":{"first":328,"last":351,"name":"後趙"},"44":{"first":301,"last":387,"name":"前涼"},"45":{"first":352,"last":371,"name":"前燕"},"46":{"first":351,"last":394,"name":"前秦"},"47":{"first":384,"last":417,"name":"後秦"},"48":{"first":384,"last":407,"name":"後燕"},"49":{"first":385,"last":431,"name":"西秦"},"50":{"first":386,"last":403,"name":"後涼"},"51":{"first":397,"last":414,"name":"南涼"},"52":{"first":398,"last":410,"name":"南燕"},"53":{"first":400,"last":421,"name":"西涼"},"54":{"first":397,"last":460,"name":"北涼"},"55":{"first":407,"last":431,"name":"胡夏"},"56":{"first":407,"last":436,"name":"北燕"},"57":{"first":420,"last":479,"name":"劉宋"},"58":{"first":479,"last":502,"name":"南齊"},"59":{"first":502,"last":557,"name":"南梁"},"60":{"first":557,"last":589,"name":"陳"},"61":{"first":386,"last":535,"name":"北魏"},"62":{"first":534,"last":550,"name":"東魏"},"63":{"first":535,"last":557,"name":"西魏"},"64":{"first":550,"last":577,"name":"北齊"},"65":{"first":557,"last":581,"name":"北周"},"66":{"first":581,"last":618,"name":"隋"},"67":{"first":618,"last":907,"name":"唐"},"68":{"first":690,"last":705,"name":"武周"},"69":{"first":907,"last":923,"name":"後梁"},"70":{"first":907,"last":937,"name":"後唐"},"71":{"first":936,"last":947,"name":"後晉"},"72":{"first":947,"last":951,"name":"後漢"},"73":{"first":951,"last":960,"name":"後周"},"74":{"first":902,"last":937,"name":"南吳"},"75":{"first":904,"last":925,"name":"前蜀"},"76":{"first":907,"last":978,"name":"吳越"},"78":{"first":917,"last":971,"name":"南漢"},"79":{"first":909,"last":945,"name":"閩"},"81":{"first":934,"last":965,"name":"後蜀"},"82":{"first":937,"last":958,"name":"南唐"},"83":{"first":951,"last":979,"name":"北漢"},"85":{"first":960,"last":1127,"name":"北宋"},"86":{"first":1127,"last":1279,"name":"南宋"},"87":{"first":907,"last":1125,"name":"契丹"},"88":{"first":1115,"last":1234,"name":"大金"},"89":{"first":1271,"last":1370,"name":"大元"},"90":{"first":1032,"last":1227,"name":"西夏"},"91":{"first":1368,"last":1895,"name":"大明"},"92":{"first":1636,"last":1912,"name":"大清"},"93":{"first":1912,"last":1912,"name":"民國"},"96":{"first":-57,"last":935,"name":"駟盧"},"108":{"first":1331,"last":1392,"name":"北朝"},"109":{"first":1336,"last":1392,"name":"南朝"},"114":{"first":-37,"last":668,"name":"高勾麗"},"115":{"first":552,"last":552,"name":"侯漢"},"116":{"first":-18,"last":660,"name":"百濟"},"117":{"first":918,"last":1392,"name":"高麗"},"118":{"first":901,"last":918,"name":"泰封"},"119":{"first":901,"last":936,"name":"後百濟"},"121":{"first":1392,"last":1895,"name":"大朝鮮國"},"122":{"first":1206,"last":1271,"name":"蒙古"}};    
+
+    var tempFile = "";
+
+    var regexs = [];
+    var CBDBRegexs = [];
+    var found = 0;
+
+    var uniqueTermThreadsMax = 8; // check
+    var uniqueTermThreads = [];
+    var uniqueTermThreadscount = -1; //check
+    var uniqueTermJobs = [];
+
+    var uniqueTermRegexsIndex = -1; // check
+    var uniqueTermRegexsCount = -1; // check
+
+    var uniqueTerms = [];
+
+    var refercedSpans = [];
+
+    var closeSpan = {};
+
+    var uniqueTermJobsCount = -1;
+
+    var markupJobsList = [];
+    var partialRegexMax = -1;
+    var partialNameSpans = [];
+    var partialNameSpansMax = -1;
+
+    // var attrMap = {};
+
+
+    var registUserIntefaceAction = function() {
+
+        $(".checkboxControl").each(function() {
+            var parent = $(this);
+            $(this).find(".mainCheckbox").on("change", function() {
+                var checked = $(this).prop("checked");
+                parent.find("input[type='checkbox']").prop("checked", checked);
+            });
+            $(this).find("span.input-group").each(function() {
+                var parent = $(this);
+                $(this).children(".subGroupCheckbox").on("change", function() {
+                    var checked = $(this).prop("checked");
+                    parent.find("input[type='checkbox']").prop("checked", checked);
+                });
+
+
+
+            });
+            $(this).find(".collapse").on("shown.bs.collapse", function() {
+
+                $(parent).find(".glyphicon-chevron-down").removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up");
+            });
+            $(this).find(".collapse").on("hidden.bs.collapse", function() {
+                $(parent).find(".glyphicon-chevron-up").removeClass("glyphicon-chevron-up").addClass("glyphicon-chevron-down");
+            });
+            $(this).find("input[type='checkbox']").on("change", function() {
+
+                $("#setDynastryBtn").prop("disabled", $(".checkboxControl input[type='checkbox']:not(.mainCheckbox):checked").length === 0);
+
+            });
+        });
+
+        $("span.input-group > input:not(.subGroupCheckbox)").css("margin-left", "10px");
+        $("span.input-group > span.input-group > input.subGroupCheckbox").css("margin-left", "20px");
+        $("span.input-group > span.input-group > input:not(.subGroupCheckbox)").css("margin-left", "30px");
+
+        //$(".checkboxControl input[type='checkbox']:not('.mainCheckbox'):checked")
+
+
+        // $(".checkboxControl").filter(function(){if($(this).find(".mainCheckbox:checked").length>0){console.log($(this).find("input[type='checkbox']").prop('checked', true))}})
+        // $('#tagColor').colorPicker();
+        // $('.tagColor').colorPicker();
+
+        $("#showScanMuzhimingBtn").on("click", function() {
+            $("#markupSelectionModal").modal("hide");
+            $('#dynastySelectionModal').modal('hide');
+            $('#scanMuzhimingModal').modal('show');
+            $('#timePeriodHelperModal').modal('hide');
+        });
+
+        $("#showTimePeriodHelpersBtn").on("click", function() {
+            console.log('$("#showTimePeriodHelpersBtn")');
+            $("#markupSelectionModal").modal("hide");
+            $('#dynastySelectionModal').modal('hide');
+            $('#scanMuzhimingModal').modal('hide');
+            $('#timePeriodHelperModal').modal('show');
+        });
+
+
+        $("#showDynastyModalBtn").on("click", function() {
+            $("#markupSelectionModal").modal("hide");
+            $('#dynastySelectionModal').modal('show');
+            $('#timePeriodHelperModal').modal('hide');
+            $('#scanMuzhimingModal').modal('hide');
+        });
+
+
+        $("#removeNonTimePeriodBtn").on("click", function(){
+            $(".timePeriod:not([data-time-period])").contents().unwrap();
+        });
+
+        $("#autocompleteTimePeriodBtn").on("click",function(){
+            
+            var recent_data_attribute = {dynasty:[],nianhao:"",tinKan:"",leap_month:"",year:"",month:""};    
+            $(".doc .timePeriod").each(function(){
+                
+                
+                if (!$(this).attr("data-original-data-attribute")){
+                    $(this).attr("data-original-data-attribute",$(this).attr("data-attribute"));
+                }
+                console.log($(this).text());
+                var data_attribute = JSON.parse(markus.util.converBackToUnicode($(this).attr("data-original-data-attribute")));
+                var data_autocomplete_attribute = JSON.parse(markus.util.converBackToUnicode($(this).attr("data-original-data-attribute")));
+                var head = "";
+                
+                if (recent_data_attribute.nianhao!="" && data_attribute.nianhao ==""){
+                    head +="〈"+recent_data_attribute.nianhao+"〉";
+                    data_autocomplete_attribute.dynasty = recent_data_attribute.dynasty;
+                    data_autocomplete_attribute.nianhao = recent_data_attribute.nianhao;
+                } else if (data_attribute.nianhao!= ""){
+                    
+                    recent_data_attribute.dynasty = data_attribute.dynasty;
+                    recent_data_attribute.nianhao = data_attribute.nianhao;
+                }
+                if (recent_data_attribute.year!="" && data_attribute.year =="" && data_attribute.nianhao ==""){
+                    
+                        head += "〈"+recent_data_attribute.year+"年〉";
+                     data_autocomplete_attribute.year = recent_data_attribute.year;
+                    
+                } else if (data_attribute.year!= ""){
+                    
+                    recent_data_attribute.year = data_attribute.year;
+                }
+                if (recent_data_attribute.month!="" && data_attribute.month =="" && data_attribute.year =="" && data_attribute.nianhao ==""){                    
+                        head +="〈"+(recent_data_attribute.leap_month?"閏":"")+recent_data_attribute.month+"月〉";                     
+                    data_autocomplete_attribute.month = recent_data_attribute.month;
+                    
+                }else if (data_attribute.month!= ""){
+
+                    recent_data_attribute.month = data_attribute.month;
+                    recent_data_attribute.leap_month = data_attribute.leap_month;
+                }
+                if (head.length > 0 ){
+                    if (!$(this).attr("data-orignal-text")){
+                        $(this).attr("data-orignal-text",markus.util.convertToEscapeUnicode($(this).text()));
+                    }                                        
+                    $(this).text(head+ markus.util.converBackToUnicode($(this).attr("data-orignal-text")));
+                    $(this).attr("data-attribute",markus.util.convertToEscapeUnicode(
+                                JSON.stringify(data_autocomplete_attribute)));  
+
+                    // rebuilt timerPeriod_id & data-time-period from autoComplete data attribute
+                    
+
+                    try {
+
+                        var _eras = erasMap[data_autocomplete_attribute.nianhao] || [];
+                        var year = data_autocomplete_attribute.year;
+                        var month = data_autocomplete_attribute.month;
+                        var day = data_autocomplete_attribute.day;
+                        var leap_month = data_autocomplete_attribute.leap_month;
+                        var tinKan = data_autocomplete_attribute.tinKan;
+                        
+                        var finishedEras = [];
+                        for (var i = 0; i < _eras.length; i++) {                            
+                            var _dynasty = "";
+                            try {
+                                var __era = _eras[i]
+                                if (data_autocomplete_attribute.dynasty.indexOf(__era.dynasty_id) != -1){
+                                    _dynasty = __era.dynasty_id;
+                                } else {
+                                    continue;
+                                }
+                                // console.log(JSON.stringify(_eras[i]));
+                                
+                                
+                            }catch(e){
+                                console.log(e);
+                            }
+                            
+
+                            var _era = erasRecords[_eras[i]["era_id"]];
+                            if (finishedEras.indexOf(_eras[i]["era_id"]) > -1) {
+                                continue;
+                            }
+                            finishedEras.push(_eras[i]["era_id"]);
+                            if (_era == null) {
+                                continue;
+                            }
+                            var _y = year || "";
+                            // console.log(year);
+                            _y = _y.replace("元", "一");
+
+                            if (tianGanDiZhiToNumber[_y]) {
+                                _y = _era[_y] || [];
+
+                                // for (var j = _era.start ; j <= _era.end;j++){
+                                //   if (_year == _era[j]){
+                                //     // console.log($(this).text()+" "+_year + " "+j);
+                                //     _year = j;
+
+                                //   }
+                                // }
+
+                            } else {
+                                _y = cnNum2ArabNum("" + _y) || 0;
+                                _y = [_y];
+                            }
+
+
+                            console.log("_year " + _y);
+
+
+                            
+                            var __year = _y;
+                            var _m = month;
+                            var _d = day;
+                            var _date = "";
+                            for (var index = 0; index < __year.length; index++) {
+                                var _year = __year[index];
+                                if ((_era.start <= _year) && (_era.end >= _year)) {
+                                    _year = _era[_era[_year]] || _era[_year];
+
+                                    console.log("month ="+month);
+
+                                    var _month = _m || "";
+                                    console.log(_month);
+                                    _month = _month.replace("正", "一").replace("元", "一");
+                                    console.log(_month);
+                                    
+                                    _month = cnNum2ArabNum("" + _month) || 0;
+                                    
+
+
+
+                                    _month = _year[((leap_month)?"*":"") + _month] || false;
+
+                                    var _day = _d || "";
+                                    var __date;
+
+                                    if (tianGanDiZhiToNumber[_day]) {
+                                        if (_month) {
+
+                                            _day = _month.start_from + dayDifferenceInTianGan(dateToTianGanDiZi(_month.first), _day);
+                                            
+                                        }
+                                    } else {
+                                        console.log(_day);
+                                        _day = cnNum2ArabNum("" + _day) || 0;
+                                        
+                                    }
+
+
+                                    
+                                    if (_month) {
+                                        if (_day >= _month.start_from) {
+                                            // console.log(jd_To_date(_month.first + (_day-_month.start_from)));
+                                            _date = jd_To_date(_month.first + (_day - _month.start_from));
+
+                                                                                
+
+                                            __date = {first:dateFormat(_date),last:dateFormat(_date),level:3,dynasty:_dynasty} 
+                                            _date = "公元" + _date[0] + "年" + _date[1] + "月" + _date[2] + "日";
+
+                                        } else {
+                                            // console.log(jd_To_date(_month.first).join("-") +"~"+ jd_To_date(_month.last).join("-"));
+                                            var _dateFirst = jd_To_date(_month.first);
+                                            var _dateLast = jd_To_date(_month.last);
+                                            __date = {first:dateFormat(_dateFirst),last:dateFormat(_dateLast),level:2,dynasty:_dynasty};
+                                            _date = "公元";
+                                            if ((30 - _dateFirst[2]) > _dateLast[2]) {
+                                                _date = _date + _dateFirst[0] + "年" + _dateFirst[1] + "月";
+                                            } else {
+                                                _date = _date + _dateLast[0] + "年" + _dateLast[1] + "月";
+                                            }
+
+
+
+
+
+                                        }
+                                    } else if (_year) {
+                                        var _dateFirst = jd_To_date(_year.first);
+                                        var _dateLast = jd_To_date(_year.last);
+                                        __date = {first:dateFormat(_dateFirst),last:dateFormat(_dateLast),level:1,dynasty:_dynasty};
+                                        _date = "公元";
+                                        if ((12 - _dateFirst[1]) > _dateLast[1]) {
+                                            _date = _date + _dateFirst[0] + "年";
+                                        } else {
+                                            _date = _date + _dateLast[0] + "年";
+                                        }
+
+
+
+
+
+                                        // $(this).attr("data-markus-date",jd_To_date(_year.first).join("-") +"~"+ jd_To_date(_year.last).join("-"));
+                                        // console.log(jd_To_date(_year.first) +"~"+ jd_To_date(_year.last));
+                                    }
+
+
+
+
+
+
+                                    // console.log(nianhao+year+"年"+month+"月"+day+"日");
+
+                                } else if (_year == 0) {
+
+                                    _year = _era[_era[_era.start]] || _era[_era.start];
+                                    console.log("start year:");
+                                    console.log(_year);
+                                    var _dateStartFirst = jd_To_date(_year.first);
+                                    var _dateStartLast = jd_To_date(_year.last);
+                                    _year = _era[_era[_era.end]] || _era[_era.end];
+                                    console.log("end year:");
+                                    console.log(_year);
+                                    var _dateEndFirst = jd_To_date(_year.first);
+                                    var _dateEndLast = jd_To_date(_year.last);
+                                    __date = {first:dateFormat(_dateStartFirst),last:dateFormat(_dateEndLast),level:0,dynasty:_dynasty};
+                                    _date = "公元";
+                                    if ((12 - _dateStartFirst[1]) > _dateStartLast[1]) {
+                                        _date = _date + _dateStartFirst[0] + "年";
+                                    } else {
+                                        _date = _date + _dateStartLast[0] + "年";
+                                    }
+                                    _date = _date + "~";
+                                    if ((12 - _dateEndFirst[1]) > _dateEndLast[1]) {
+                                        _date = _date + _dateEndFirst[0] + "年";
+                                    } else {
+                                        _date = _date + _dateEndLast[0] + "年";
+                                    }
+                                } 
+                                if (_date.length > 0) {
+                                    var oldDate =  "";
+                                    if (oldDate == "") {
+                                        oldDate = [];
+                                    } else {
+                                        oldDate = markus.util.converBackToUnicode(oldDate).split("|");
+                                    }
+                                    var data_oldDates = "[]";
+                                    data_oldDates = JSON.parse(data_oldDates);  
+                                    
+                                    console.log(_dynasty);                
+                                    
+                                    data_oldDates.push(__date);
+                                    // $(this).attr("data-markus-date",_date+":"+_eras[i]["dynasty"]+_eras[i]["emperor"]);
+                                    oldDate.push(_date + ":" + _eras[i]["dynasty"] + _eras[i]["emperor"]);
+                                    
+
+                                    
+
+                                    $(this).attr("timePeriod_id", markus.util.convertToEscapeUnicode(oldDate.join("|")));
+                                    $(this).attr("data-time-period",JSON.stringify(data_oldDates));
+                                    
+                                }
+
+                                
+
+                                console.log("month ="+month);
+
+                                // console.log(_year);
+
+                            }
+                        }
+
+                        if (!$(this).attr("data-time-period")){
+                            $(this).attr("data-time-period","[]");
+                        }
+                        if (!$(this).attr("timePeriod_id")){
+                            $(this).attr("timePeriod_id","");
+                        }
+                        var data_time_period = JSON.parse($(this).attr("data-time-period"));
+                        var timePeriod_id = $(this).attr("timePeriod_id").split("|");
+                        var maxlevel = 0;
+                        var valid_data_time_period = [];
+                        var valid_timePeriod_id = [];
+                        var dynasty = [];
+                        for (var index = 0 ; index < data_time_period.length; index++){
+                            if (maxlevel < data_time_period[index].level){
+                                maxlevel = data_time_period[index].level;
+                            }
+                        }
+
+                        for (var index = 0 ; index < data_time_period.length; index++){
+                            if (maxlevel == data_time_period[index].level){
+                                if (dynasty.indexOf((data_time_period[index])["dynasty"]) == -1){                       
+                                dynasty.push((data_time_period[index])["dynasty"]); 
+                                }
+                                valid_data_time_period.push(data_time_period[index]);
+                                valid_timePeriod_id.push(timePeriod_id[index]);
+                            }
+                        }            
+
+                        $(this).attr("timePeriod_id", markus.util.convertToEscapeUnicode(valid_timePeriod_id.join("|")));
+                        $(this).attr("data-time-period",JSON.stringify(valid_data_time_period));
+                        if (valid_data_time_period.length > 1) {
+                            $(this).addClass("moreThanOneId");
+                        }else {
+                            $(this).removeClass("moreThanOneId");
+                        }            
+
+
+
+                        $(this).attr("data-attribute",
+                                markus.util.convertToEscapeUnicode(
+                                    JSON.stringify({dynasty:dynasty ,nianhao:nianhao,tinKan:tinKan,leap_month:leap_month,year:year,month:month,day:day})));
+
+                        
+
+                        if (nianhao == "" && day == "" && month == "" && year == "") {
+                            $(this).find(".number").contents().unwrap();
+                            $(this).contents().unwrap();
+                        }
+
+                        // if (day == "" && month == "" && year == ""){
+                        //   $(this).find(".markup").filter(function (){return $(this).attr("type")!="nianhao"}).contents().unwrap();
+                        //   $(this).contents().unwrap();  
+                        // }
+
+
+                    } catch(err){}
+                    
+
+
+
+
+                }
+            });
+        });
+
+        $("#scanTimePeriodBtn").on("click", function(){
+            var dynastyMap = {};
+            $(".timePeriod[data-attribute]").each(function(){
+                var dynasty = JSON.parse(markus.util.converBackToUnicode($(this).attr("data-attribute"))).dynasty;
+                console.log(dynasty);
+                for (var i = 0 ; i < dynasty.length; i++){
+                    dynastyMap[""+dynasty[i]] = dynastyMap[""+dynasty[i]] || 0;
+                    dynastyMap[""+dynasty[i]] = dynastyMap[""+dynasty[i]]+1; 
+                }
+            });
+            var result =[];
+            var keys = Object.keys(dynastyMap);
+            console.log(dynastyMap);
+            console.log(keys);
+            $("#timePeriodDynastyList").html("");
+            for (var i = 0 ; i < keys.length; i++){
+                console.log(keys[i]);
+                $("#timePeriodDynastyList").append("<span dynasty='"+keys[i]+"' class='timePeriodDynasty' ><br/>"+dynastySelection[""+keys[i]].name+" "+dynastyMap[""+keys[i]]+"<button class='btn btn-default removeDynastyBtn' type='button' dynasty='"+keys[i]+"'>remove all time period with this reference</button><br/></span>");
+            }
+
+            $(".removeDynastyBtn").on("click",function(){
+                var dynasty = parseInt($(this).attr("dynasty"));
+                $(".timePeriodDynasty[dynasty='"+$(this).attr("dynasty")+"']").remove();                
+                
+                $(".timePeriod[data-time-period]").each(function(){
+                    var data_time_period = JSON.parse($(this).attr("data-time-period"));
+                    if (data_time_period.length == 0){
+                        return;
+                    }
+
+                    var timeperiod_id = $(this).attr("timePeriod_id").split("|")
+                    var valid_data_time_period = [];
+                    var valid_timeperiod_id = [];
+                    var _dynasty = [];
+                    for (var i=0; i< data_time_period.length; i ++){
+                        if (data_time_period[i].dynasty != dynasty){
+                            valid_data_time_period.push(data_time_period[i]);
+                            valid_timeperiod_id.push(timeperiod_id[i]);
+                            if (_dynasty.indexOf(data_time_period[i].dynasty)== -1){
+                                _dynasty.push(data_time_period[i].dynasty);
+                            }
+                        }                        
+                    }
+                    $(this).attr("timePeriod_id", valid_timeperiod_id.join("|"));
+                    $(this).attr("data-time-period",JSON.stringify(valid_data_time_period));
+                    if (valid_data_time_period.length > 1) {
+                        $(this).addClass("moreThanOneId");
+                    } else {
+                        $(this).removeClass("moreThanOneId");
+                    }            
+                    var data_attribute = JSON.parse(markus.util.converBackToUnicode($(this).attr("data-attribute")));
+                    data_attribute.dynasty = _dynasty;
+
+                    $(this).attr("data-attribute",
+                            markus.util.convertToEscapeUnicode(
+                                JSON.stringify(data_attribute)));
+
+                    if (valid_data_time_period.length == 0){
+                        $(this).contents().unwrap();
+                    }
+
+
+                });
+
+
+            })
+        });
+
+
+
+        $("#timePeriodFilterBtn").on("click", function(){
+            var filterInputs = $("#timePeriodFilter").val().split(",");
+            var filters = [];
+            for (var i= 0; i < filterInputs.length; i++){
+                // Todo: should add format check;
+                var range = filterInputs[i].split("-");
+                filters.push({start:parseInt(range[0]),end:parseInt(range[1])});
+            }
+
+
+
+            $(".timePeriod[data-time-period]").each(function(){
+                var data_time_period = JSON.parse($(this).attr("data-time-period"));
+                
+                var timeperiod_id = $(this).attr("timePeriod_id").split("|");
+
+                var valid_data_time_period = [];
+                var valid_timperiod_id = [];
+                if (data_time_period.length == timeperiod_id.length){
+                    for (var i = 0 ; i < data_time_period.length ; i++){
+                        var yearFirst = parseInt(data_time_period[i].first.split("-")[0]);
+                        var yearLast = parseInt(data_time_period[i].last.split("-")[0]);
+                        var valid = false;
+                        for (var j=0 ; (j<filters.length && !valid);j++){
+                            valid = (yearFirst >= filters[j].start && yearFirst <= filters[j].end) ||(yearLast >= filters[j].start && yearLast <= filters[j].end)
+                        }
+                        if (valid){
+                            valid_data_time_period.push(data_time_period[i]);
+                            valid_timperiod_id.push(timeperiod_id[i]);
+                        }
+                    }
+                }else {
+                    console.log("warning: timePeriod errors");
+                    console.log(this);
+                }
+
+                if (valid_data_time_period.length == 0){
+                    $(this).contents().unwrap();
+                } else {
+                    $(this).attr("data-time-period", JSON.stringify(valid_data_time_period));
+                    $(this).attr("timePeriod_id", valid_timperiod_id.join("|"));
+
+                }
+
+
+
+            });
+
+            
+
+        });
+
+
+        $("#showModalBtn").on("click", function() {
+            $("#showModalBtn").fadeTo(1000, 0);
+            $('#markupSelectionModal').modal('show');
+        });
+
+        $("#showParagraphModalBtn").on("click", function() {
+            $(".passage").toggleClass("hightlight");
+        });
+
+
+        $("#showManageTagModalBtn").on("click", function() {
+            $("#manageTagModal").modal("show");
+        });
+
+
+        // $("#editDocBtn").on("click", function() {
+        //     console.log("click");
+
+        //     var editable = $("#editDocBtn").hasClass("btn-danger");
+
+        //     if (editable) {
+        //         $("#editDocBtn").removeClass("btn-danger");
+        //         $(".doc").removeClass("edit");
+        //         editable = false;
+        //     } else {
+        //         $("#editDocBtn").addClass("btn-danger");
+        //         $(".doc").addClass("edit");
+        //         editable = true;
+        //     }
+
+
+        //     if (!editable) {
+        //         $(".doc pre div,br").prepend("\n");
+        //         // $(".doc pre br").prepend("\n");
+        //         $(".doc div,br").contents().unwrap();
+        //         // $(".doc br").contents().unwrap();
+        //         $(".doc pre").html($(".doc pre").html());
+
+        //         if ($(".doc .passage").length > 0) {
+        //             $(".doc .passage").contents().unwrap();
+        //             startParagraphMarkup();
+        //             markus.comment.startAddingCommentHolder();
+        //         }
+
+        //     }
+        //     console.log(editable);
+
+
+        //     $(".doc pre").attr("contenteditable", "" + editable);
+        // });
+
+        // $("#showUploadTermModalBtn").on("click",function(){    
+        //   // $("#showModalBtn").fadeTo(1000, 0);
+        //   $('#uploadTermModal').modal('show');
+        // });
+
+        // $("#showUploadRegexModalBtn").on("click",function(){    
+        //   // $("#showModalBtn").fadeTo(1000, 0);
+        //   $('#uploadRegexModal').modal('show');
+        // });
+
+
+        $("#markupSelectionModal input:checkbox").on("change", function() {
+            var disabled = true;
+            /*
+              If there is no automarkup selection checked, startMarkup button is disabled. 
+            */
+            $("#markupSelectionModal input:checkbox").each(function() {
+                disabled = disabled && !$(this).prop('checked');
+            });
+            $("#startMarkupBtn").prop("disabled", disabled);
+        });
+
+        /*
+          Partial automarkup depends on fullName automarkup
+        */
+
+        $('#fullNameCheckbox').on("change", function() {
+            if ($(this).prop('checked')) {
+                $('#partialNameCheckbox').prop("disabled", false);
+            } else {
+                $('#partialNameCheckbox').prop('checked', false);
+                $('#partialNameCheckbox').prop("disabled", true);
+            }
+        });
+
+        $('#dynastySelectionModal').on('hidden.bs.modal', function() {
+            $("#showDynastyModalBtn").fadeTo(1000, 1);
+        });
+
+
+        $('#markupSelectionModal').on('hidden.bs.modal', function() {
+            $("#showModalBtn").fadeTo(1000, 1);
+
+        });
+
+        $('#startMarkupBtn').on("click", function() {
+
+            createMarkupJobList();
+        });
+
+
+
+        $('#setDynastryBtn').on("click", function() {
+            $('#dynastySelectionModal').modal("hide");
+
+            setupDynasties(function() {
+                $('#markupSelectionModal').modal("show");
+            });
+
+        });
+
+        $('#saveMarkupBtn').on("click", function() {
+            $('#markupSelectionModal').modal("hide");
+        });
+
+
+        $("#muzhimingLastnameBtn").on("click", function() {
+            $("#markupSelectionModal").modal("hide");
+            var count = 0;
+            $(".partialName.moreThanOneId").each(function() {
+
+                var _ids = [];
+                var _lastnames = $("#muzhimingLastname").val().split(",");
+                for (var i = 0, j = _lastnames.length; i < j; i++) {
+                    _ids = _ids.concat(namesToIds(_lastnames[i] + $(this).text(), selected));
+                }
+                var _oldIds = $(this).attr("cbdbid").split("|");
+                if (_ids.length < _oldIds.length) {
+                    if (_ids.length > 0) {
+                        count++;
+                        $(this).attr("cbdbid", _ids.join("|"));
+                        if (_ids.length == 1) {
+                            
+                            $(this).removeClass("moreThanOneId").removeClass("noCBDBID");
+                        } else {
+                            $(this).addClass("moreThanOneId");
+                        }
+                    }
+                }
+
+
+            });
+
+            $(".partialName.noCBDBID").each(function() {
+
+
+                var _ids = [];
+                var _lastnames = $("#muzhimingLastname").val().split(",");
+                for (var i = 0, j = _lastnames.length; i < j; i++) {
+                    _ids = _ids.concat(namesToIds(_lastnames[i] + $(this).text(), selected));
+                }
+
+
+                if (_ids.length > 0) {
+                    count++;
+                    $(this).attr("cbdbid", _ids.join("|"));
+                    if (_ids.length == 1) {
+                        
+                        $(this).removeClass("moreThanOneId").removeClass("noCBDBID");
+                    } else {
+                        $(this).addClass("moreThanOneId").removeClass("noCBDBID");
+                    }
+                }
+
+
+
+            });
+            alert(count +" cbdbids updated");
+        });
+
+
+
+
+    };
+    var ddbcGlossariesRegexArray;
+    var officeRegexArray;
+    var nianhaoRegexArray = ["天授禮法延祚|天賜禮盛國慶", "大中祥符|天冊萬歲|天安禮定|天祐民安|天祐垂聖|天儀治平|太平真君|太平興國|太初元將|延嗣寧國|建中靖國|建武中元|萬歲通天|萬歲登封|福聖承道", "中大同|中大通|年開元", "人慶|上元|久視|大中|大同|大安|大成|大足|大和|大定|大明|大康|大統|大通|大象|大順|大業|大寧|大德|大慶|大曆|大寶|大觀|中平|中和|中統|中興|五鳳|仁壽|元平|元光|元初|元和|元始|元延|元封|元狩|元貞|元朔|元祐|元康|元符|元統|元象|元鼎|元嘉|元壽|元熙|元鳳|元德|元興|元徽|元豐|天元|天冊|天平|天正|天安|天成|天命|天和|天保|天紀|天祐|天啟|天康|天授|天盛|天眷|天統|天復|天順|天會|天祿|天聖|天嘉|天漢|天監|天福|天輔|天德|天慶|天賜|天曆|天興|天禧|天聰|天璽|天贊|天寶|天顯|太元|太平|太安|太初|太和|太始|太延|太昌|太建|太康|太清|太極|太寧|太熙|太興|文明|文德|弘光|弘治|弘道|本初|本始|正大|正元|正平|正光|正始|正統|正隆|正德|永元|永平|永光|永安|永初|永和|永始|永定|永昌|永明|永建|永貞|永泰|永康|永淳|永隆|永嘉|永壽|永寧|永漢|永熙|永樂|永曆|永興|永徽|甘露|先天|光大|光化|光宅|光和|光定|光啟|光熙|光緒|光熹|同光|同治|地節|如意|成化|收國|至大|至元|至正|至和|至治|至順|至道|至寧|至德|孝昌|孝建|赤烏|初元|初平|和平|始元|始光|延平|延光|延和|延昌|延祐|延康|延載|延熙|延熹|延興|征和|承平|承光|承安|承明|承聖|昇平|昇明|明昌|明道|武平|武成|武定|武泰|武德|河平|河清|治平|炎興|長安|長壽|長慶|長興|青龍|保大|保定|保寧|咸平|咸安|咸亨|咸和|咸康|咸淳|咸通|咸雍|咸寧|咸熙|咸豐|垂拱|宣光|宣和|宣政|宣統|宣德|建中|建元|建文|建平|建光|建安|建初|建和|建始|建明|建武|建炎|建昭|建國|建康|建隆|建義|建寧|建德|建興|建衡|後元|拱化|政和|昭寧|洪武|洪熙|皇始|皇建|皇泰|皇祐|皇健|皇統|皇慶|皇興|致和|貞元|貞明|貞祐|貞觀|重和|重熙|唐隆|泰和|泰始|泰定|泰昌|泰常|泰豫|神冊|神功|神瑞|神鳳|神龍|神龜|神爵|神麚|乾元|乾化|乾亨|乾定|乾明|乾封|乾祐|乾符|乾統|乾隆|乾道|乾寧|乾德|乾興|崇寧|崇禎|崇德|崇慶|康定|康熙|淳化|淳祐|淳熙|清泰|清寧|祥興|竟寧|章和|章武|紹定|紹武|紹泰|紹聖|紹熙|紹興|統和|普泰|普通|景元|景平|景初|景和|景定|景明|景炎|景泰|景祐|景雲|景福|景德|景龍|景耀|登國|開平|開成|開皇|開泰|開運|開慶|開興|開禧|開寶|開耀|陽朔|陽嘉|隆化|隆安|隆和|隆昌|隆武|隆慶|隆興|順治|黃初|黃武|黃龍|嗣聖|會同|會昌|祺祥|綏和|義寧|義熙|聖歷|萬曆|載初|道光|雍正|雍寧|雍熙|靖康|嘉平|嘉禾|嘉定|嘉泰|嘉祐|嘉靖|嘉熙|嘉慶|壽昌|壽隆|寧康|漢安|熙平|熙寧|禎明|端平|端拱|鳳凰|鳳曆|儀鳳|廣明|廣順|廣運|廣德|德昌|德祐|慶元|慶曆|調露|熹平|興元|興平|興光|興安|興和|興定|興寧|龍紀|龍朔|龍德|應天|應順|應曆|總章|鴻嘉|證聖|寶元|寶祐|寶義|寶鼎|寶慶|寶曆|寶應|奲都|顯道|顯德|顯慶|麟德"];
+
+    var placeNameRegexArray;
+
+
+
+    window.onload = function() {
+
+
+
+        var lang = $.cookie('lang') || "";
+        $("footer").load("footer" + lang + ".html");
+        $("#manualPopover a[data-toggle='tooltip']").each(function() {
+            if ($(this).attr(lang) !== undefined) {
+                $(this).attr("title", $(this).attr(lang));
+            }
+        });
+
+        $.ajaxSetup({
+            // Disable caching of AJAX responses
+            cache: false
+        });
+
+        
+
+
+        markus.io.readFile(decodeURIComponent(markus.util.urlParam('file') + ".html"), fileLoaded);
+        markus.navbar.register();
+        // var listener = new window.keypress.Listener();
+
+
+        // listener.simple_combo("meta s", function() {
+        //     $("#save").trigger("click");
+        // });
+        // listener.simple_combo("meta '", function() {
+        //     $("#editDocBtn").trigger("click");
+        // });
+        // listener.simple_combo("meta j", function() {            
+        //     $("#showGotoModalBtn").trigger("click");            
+        // });
+        // listener.simple_combo("meta d", function() {            
+        //     if ($('#popover').hasClass('in')){
+        //         var countIndex = -1;
+        //         var nextIndex = -1;
+        //         var markups = $(".doc .markup");
+        //         markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex +1}});
+        //         $('#popover .glyphicon-trash').trigger("click");
+        //         var obj = $(markups[nextIndex]);
+        //         $(obj).trigger("click");
+        //         if (!$(obj).isOnScreen()){
+        //             $('html, body').animate({
+        //                 scrollTop: $(obj).offset().top - 100
+        //             }, 200);
+        //         }
+        //     }           
+        // });
+        
+
+        // $.fn.isOnScreen = function(){
+        //     var win = $(window);
+        //     var viewport = {
+        //         top : win.scrollTop(),
+        //         left : win.scrollLeft()
+        //     };
+        //     viewport.right = viewport.left + win.width();
+        //     viewport.bottom = viewport.top + win.height();
+
+        //     var bounds = this.offset();
+        //     bounds.right = bounds.left + this.outerWidth();
+        //     bounds.bottom = bounds.top + this.outerHeight();
+        //     return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+        // };
+
+        // function nextSameTypeMarkup(){
+        //   if ($(".selected").length > 0){
+        //     var countIndex = -1;
+        //     var nextIndex = -1;
+        //     var type = $(".doc .selected").attr("type");
+        //     var markups = $(".doc .markup."+type)
+        //     markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex +1}});
+        //     if (markups.length > nextIndex) {
+        //         var obj = $(markups[nextIndex]);
+        //         $(obj).trigger("click");
+        //         if (!$(obj).isOnScreen()){
+        //             $('html, body').animate({
+        //                 scrollTop: $(obj).offset().top - 100
+        //             }, 200);
+        //         }
+        //     }
+
+        //   } else if ($(".doc .markup").length > 0){
+        //     $($(".doc .markup")[0]).trigger("click");
+        //   } 
+        // }        
+
+        // function nextMarkup(_sameType){
+        //   if ($(".selected").length > 0){
+        //     var countIndex = -1;
+        //     var nextIndex = -1;
+        //     var markups = $(".doc .markup");
+        //     markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex +1}});
+        //     if (markups.length > nextIndex) {
+        //         var obj = $(markups[nextIndex]);
+        //         $(obj).trigger("click");
+        //         if (!$(obj).isOnScreen()){
+        //             $('html, body').animate({
+        //                 scrollTop: $(obj).offset().top - 100
+        //             }, 200);
+        //         }
+        //     }
+
+        //   } else if ($(".doc .markup").length > 0){
+        //     $($(".doc .markup")[0]).trigger("click");
+        //   }
+        // }
+
+        // function lastMarkup(){
+        //   if ($(".selected").length > 0){
+        //     var countIndex = -1;
+        //     var nextIndex = -1;
+        //     var markups = $(".doc .markup");
+        //     markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex -1}});
+        //     if (nextIndex > -1) {
+        //         var obj = $(markups[nextIndex]);
+        //         $(obj).trigger("click");
+        //         if (!$(obj).isOnScreen()){
+        //             $('html, body').animate({
+        //                 scrollTop: $(obj).offset().top - 100
+        //             }, 200);
+        //         }
+        //     }
+        //   }else if ($(".doc .markup").length > 0){
+        //     $($(".doc .markup")[0]).trigger("click");
+        //   }
+        // }
+
+        // function lastSameTypeMarkup(){
+        //   if ($(".selected").length > 0){
+        //     var countIndex = -1;
+        //     var nextIndex = -1;
+        //     var type = $(".doc .selected").attr("type");
+        //     var markups = $(".doc .markup."+type)
+        //     markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex -1}});
+        //     if (nextIndex > -1) {
+        //         var obj = $(markups[nextIndex]);
+        //         $(obj).trigger("click");
+        //         if (!$(obj).isOnScreen()){
+        //             $('html, body').animate({
+        //                 scrollTop: $(obj).offset().top - 100
+        //             }, 200);
+        //         }
+        //     }
+        //   }else if ($(".doc .markup").length > 0){
+        //     $($(".doc .markup")[0]).trigger("click");
+        //   }
+        // }
+        
+
+
+        // listener.register_combo({
+        //     "keys"              : "meta right",
+        //     "on_keyup"          : nextMarkup,
+        //     "prevent_default"   : true,
+        //     "is_exclusive"      : true
+        // });
+        // listener.register_combo({
+        //     "keys"              : "meta shift right",
+        //     "on_keyup"          : nextSameTypeMarkup,
+        //     "prevent_default"   : true,
+        //     "is_exclusive"      : true
+        // });
+        // listener.register_combo({
+        //     "keys"              : "meta left",
+        //     "on_keyup"          : lastMarkup,
+        //     "prevent_default"   : true,
+        //     "is_exclusive"      : true
+        // });
+        // listener.register_combo({
+        //     "keys"              : "meta shift left",
+        //     "on_keyup"          : lastSameTypeMarkup,
+        //     "prevent_default"   : true,
+        //     "is_exclusive"      : true
+        // });
+        
+        
+                
+        
+
+
+
+
+        $("#wrapperTriggerHolder").load("wrapperTrigger" + lang + ".html", {}, function() {
+            $("#wrapperTrigger").on("click", function() {
+                $("#wrapper").toggleClass("toggled");
+            });
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        $("#assist").load("assist" + lang + ".html", {}, function() {
+
+            $("#comment").load("comment" + lang + ".html", {}, registerCommentUI);
+            $.get("automarkupButtonsRow" + lang + ".html", function(data) {
+                $("#buttonsRow").append(data);
+                $.get("scanMuzhimingModal" + lang + ".html", function(data) {
+                    $("#scanMuzhimingModal").append(data);
+
+                    $.get("timePeriodHelperModal" + lang + ".html", function(data) {
+                        $("#timePeriodHelperModal").append(data);
+                    });
+
+                    $.get("dynastySelectionModal" + lang + ".html", function(data) {
+                        $("#dynastySelectionModal").append(data);
+
+                        $.get("markupSelectionModal" + lang + ".html", function(data) {
+                            $("#markupSelectionModal").append(data);
+                            updateParagraphStatus();
+                            updateFullNameStatus();
+                            updatePartialNameStatus();
+                            updateNianhaoStatus();
+                            updateofficialTitleStatus();
+                            updatePlaceNameStatus();
+                            updateTimePeriodStatus();
+
+                            updateddbcGlossariesStatus();
+                            updatedddbcPersonStatus();
+                            updatedkoreanPersonStatus();
+                            registUserIntefaceAction();
+
+
+
+
+                        });
+                        $.get("fileSelectionModal" + lang + ".html", function(data) {
+                            $("#fileSelectionModal").append(data);
+                            listFiles();
+                        });
+                    });
+
+
+                });
+            });
+
+
+
+            // $("#buttonsRow").append('<button id="showModalBtn" class="btn btn-sm btn-primary" style="opacity:0">markup selection</button>');    
+            registWebDictionary();
+            registColorSwitcher();
+            markus.helpInfo.register();
+            // registUserIntefaceAction();
+            $("#summaryModal").load("summaryModal" + lang + ".html", {}, function() {
+                registMarkupSummary();
+            });
+            $("#manageTagModal").load("manageTagModal" + lang + ".html", {}, function() {
+                registeTagManageUI();
+                $('#manageTagModal .tagColor').colorPicker();
+            });
+
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+
+
+
+        // $("#summaryModal").load("summaryModal.html",{},function(){registMarkupSummary();});
+        $("#popoverMod").load("popoverMod.html", {}, function() {
+            $.get("removeModal" + lang + ".html", function(data) {
+                $("#removeModal").append(data);
+                markus.popup.registMarkupPopup(true);
+                markus.manualMarkup.registManualMarkup();
+                $("#popoverMod a[data-toggle='tooltip']").each(function() {
+                    if ($(this).attr(lang) !== undefined) {
+                        $(this).attr("title", $(this).attr(lang));
+                    }
+                });
+                $("#popoverMod a[data-toggle='tooltip']").tooltip({
+                    placement: "auto bottom"
+                });
+            });
+            $.get("veriflyModal" + lang + ".html", function(data) {
+                $("#veriflyModal").append(data);
+            });
+
+        });
+
+
+        if (!(window.File && window.FileList && window.FileReader)) {
+            console.log("Your browser does not support File API");
+        }
+
+
+
+
+        $('#markupSelectionModal').modal('show');
+
+        var temp = [];
+        for (var key in office) {
+            var officialTitle = office[key];
+            temp[officialTitle.length] = temp[officialTitle.length] || [];
+            temp[officialTitle.length].push(officialTitle);
+        }
+        for (var key in temp) {
+            temp[key] = markus.util.unique(temp[key]).join("|");
+        }
+        // var sortByItemUnitLength = function(a,b){
+        //             var alength = a.indexOf("|"), blength = b.indexOf("|");
+        //             if (alength < 0) {alength = a.length;}
+        //             if (blength < 0) {blength = b.length;}
+        //             return blength - alength;
+        //           };
+        // temp.sort(sortByItemUnitLength);
+        temp.sort(markus.util.sortMergerdRegex);
+
+        officeRegexArray = temp.filter(function(e) {
+            return e;
+        });
+
+        temp = [];
+        for (var key in DDBC) {
+            var ddbcTitle = DDBC[key];
+            temp[ddbcTitle.length] = temp[ddbcTitle.length] || [];
+            temp[ddbcTitle.length].push(ddbcTitle);
+        }
+
+        for (var key in temp) {
+
+            temp[key] = markus.util.unique(temp[key]).join("|");
+
+        }
+        // var sortByItemUnitLength = function(a,b){
+        //             var alength = a.indexOf("|"), blength = b.indexOf("|");
+        //             if (alength < 0) {alength = a.length;}
+        //             if (blength < 0) {blength = b.length;}
+        //             return blength - alength;
+        //           };
+        // temp.sort(sortByItemUnitLength);
+        temp.sort(markus.util.sortMergerdRegex);
+
+        ddbcGlossariesRegexArray = temp.filter(function(e) {
+            return e;
+        });
+
+
+
+
+
+        temp = [];
+        for (var key in place) {
+            var placeName = place[key];
+            temp[placeName.length] = temp[placeName.length] || [];
+            temp[placeName.length].push(placeName);
+        }
+        for (var key in temp) {
+            temp[key] = markus.util.unique(temp[key]).join("|");
+        }
+
+        temp.sort(markus.util.sortMergerdRegex);
+        // temp.sort(sortByItemUnitLength);
+
+        placeNameRegexArray = temp.filter(function(e) {
+            return e;
+        });
+
+
+        $.Hive.create({
+
+            worker: 'js/CBDBmarkup.js',
+            receive: function(data) {
+
+                switch (data.cmd) {
+                    case "CBDBReady":
+                        receiveCBDBReady();
+                        break;
+                    case "fullNameMarkup":
+                        receiveFullNameMarkupWorker(data);
+                        break;
+                    case "termMarkup":
+                        receiveTermMarkupWorker(data);
+                        break;
+                    case "regexMarkup":
+                        receiveTermMarkupWorker(data);
+                        break;
+                    case "partialNameMarkup":
+                        receivePartialNameMarkupWorker(data);
+                        break;
+                    case "idsToNames":
+                        // console.log(data.names);
+                        $("#stateOneProgress").css("width", "10%");
+                        data.cmd = "partialNameMarkup";
+                        data.txt = $('.doc').html();
+                        partialRegexMax = data.regex.length;
+                        receivePartialNameMarkupWorker(data);
+                        break;
+                    case "scanCBDBMarkups":
+                        $("#stateThreeProgress").css("width", "10%");
+                        partialNameSpans = data.spans;
+                        // console.log(partialNameSpans);
+                        partialNameSpansMax = partialNameSpans.length;
+                        uniqueTermThreadscount = Math.min(partialNameSpans.length, uniqueTermThreadsMax);
+
+                        // Bug ,it will cause all use scanCBDBMarkups in trouble
+
+                        if (uniqueTermThreadscount === 0) {
+                            $(".doc").attr("markupPartialName", true);
+                            // $(".timePeriod .partialName").contents().unwrap();
+                            updatePartialNameStatus();
+                            nextMarkupJob();
+                        }
+                        // var documentHeight = $( document ).height();
+                        var documentHeight = 300;
+
+                        // uniqueTerm.js
+                        // console.log("findNodesWithinDistance");
+                        for (var i = 1; i <= uniqueTermThreadscount; i++) {
+                            $.Hive.get(i).send({
+                                cmd: "findNodesWithinDistance",
+                                spans: partialNameSpans.shift(),
+                                id: i,
+                                distance: documentHeight
+                            });
+                        }
+
+                        break;
+                }
+            },
+            created: function(hive) {
+
+            }
+        });
+
+
+
+        $.Hive.create({
+            count: 8,
+            worker: 'js/uniqueTerm.js',
+            receive: function(data) {
+
+                switch (data.cmd) {
+                    case "uniqueTerm":
+                        $('#progressBar').html("remaining:" + uniqueTermRegexsIndex + "/" + uniqueTermRegexsCount + " candidates:" + uniqueTermJobs.length);
+                        $('#stateOneProgress').css("width", (uniqueTermRegexsIndex / uniqueTermRegexsCount * 10) + "%");
+                        uniqueTermJobs = uniqueTermJobs.concat(data.regex);
+
+                        if (uniqueTermRegexsIndex + 1 < regexs.length) {
+                            uniqueTermRegexsIndex++;
+                            data.regex = regexs[uniqueTermRegexsIndex];
+                            $.Hive.get(data.id + 1).send(data);
+                        } else {
+                            // console.log("push");
+
+                            uniqueTermThreads.push(data.id + 1);
+                            // console.log("["+uniqueTermThreads.length+"]:push");
+                            if (uniqueTermThreads.length == uniqueTermThreadscount) {
+                                uniqueTermThreads = [];
+                                eval(data.callback);
+                            }
+
+                            // uniqueTermThreads = [];
+                        }
+                        break;
+                    case "findAppearedTerm":
+
+                        if (data.regex.length > 0) {
+                            // var _tempRegexArray = data.regex.split(",");
+                            uniqueTerms = uniqueTerms.concat(data.regex.split(","));
+                            // console.log("["+data.id+"]:"+data.regex);
+                        }
+                        $('#progressBar').html("Initial scans remaining:" + uniqueTermJobs.length + "  candidates:" + uniqueTerms.length);
+                        $('#stateTwoProgress').css("width", ((uniqueTermJobsCount - uniqueTermJobs.length) / uniqueTermJobsCount * 45) + "%");
+                        // console.log(uniqueTermJobs.length);
+
+                        if (uniqueTermJobs.length > 0) {
+                            data.regex = uniqueTermJobs.shift();
+                            $.Hive.get(data.id).send(data);
+                        } else {
+                            uniqueTermThreads.push(data.id);
+                            if (uniqueTermThreads.length == 8) {
+                                uniqueTermThreads = [];
+                                eval(data.callback);
+                            }
+                        }
+
+                        break;
+                    case "findNodesWithinDistance":
+                        // console.log("findNodesWithinDistance");
+                        // console.log(data.answer.length);
+                        // console.log(data.answer);
+                        $('#progressBar').html("Filter out non-referenced partial names");
+
+
+
+                        $.each(data.answer, function() {
+                            var span = this;
+                            refercedSpans[span.x] = refercedSpans[span.x] || [];
+                            refercedSpans[span.x][span.y] = refercedSpans[span.x][span.y] || [];
+                            refercedSpans[span.x][span.y].push(span.cbdbid);
+                            closeSpan[span.randomID] = closeSpan[span.randomID] || [];
+                            closeSpan[span.randomID].push(span.cbdbid);
+
+                        });
+                        $("#stateThreeProgress").css("width", ((partialNameSpansMax - partialNameSpans.length) / partialNameSpansMax * 20 + 10) + "%");
+
+                        if (partialNameSpans.length > 0) {
+                            data.spans = partialNameSpans.shift();
+                            $.Hive.get(data.id).send(data);
+                        } else {
+                            uniqueTermThreads.push(data.id);
+                            if (uniqueTermThreads.length == uniqueTermThreadscount) {
+
+                                $("#stateThreeProgress").css("width", "30%");
+                                // $(".doc .markup[x_origin]").each(function(){
+                                //   var x = refercedSpans[$(this).attr("x_origin")];
+                                //   if (x){
+                                //     cbdbid = x[$(this).attr("y_origin")];
+                                //     if (cbdbid){
+                                //       $(this).attr("refered","TRUE");
+
+                                //       // .attr("cbdbid",cbdbid.join("|"));
+                                //     }
+                                //   }
+
+                                // });
+
+                                $(".doc .markup[randomID]").each(function() {
+                                    $(this).attr("refered", "TRUE");
+                                    var matchedID = closeSpan[$(this).attr("randomID")] || [];
+                                    var newCBDBID = matchedID.join("|");
+                                    if (newCBDBID.length > 0 && newCBDBID.length < $(this).attr("cbdbid").length) {
+                                        // console.log("randomID:"+$(this).attr("randomID"));
+                                        // console.log("newCBDBID:"+newCBDBID);
+                                        // console.log("oldCBDBID:"+$(this).attr("cbdbid"));
+                                        $(this).attr("cbdbid", newCBDBID);
+
+                                    }
+                                });
+
+                                $(".doc .markup[cbdbid]").each(function() {
+                                    $(this).attr("cbdbid", markus.util.unique($(this).attr("cbdbid").split("|")).join("|"));
+                                });
+
+                                $(".doc .moreThanOneId").each(function() {
+                                    var _cbdbid = $(this).attr("cbdbid") || $(this).attr($(this).attr("type") + "_id") || "";
+                                    if (_cbdbid.indexOf("|") < 0) {
+                                        $(this).removeClass("moreThanOneId");
+                                    }
+
+                                });
+                                $(".doc .markup[randomID]").removeAttr("randomID");
+                                $("#stateThreeProgress").css("width", "35%");
+                                // $(".doc").find(".partialName.unsolved:not([refered])").contents().unwrap();
+                                $("#stateThreeProgress").css("width", "40%");
+                                $(".doc").find(".fullName[refered='TRUE'] .fullName:not([refered])").contents().unwrap();
+                                $("#stateThreeProgress").css("width", "43%");
+                                $('#progressBar').html("Finish");
+                                $('.doc persname .markup').contents().unwrap();
+                                $('.doc name .markup').contents().unwrap();
+                                $("#stateThreeProgress").css("width", "45%");
+                                $("#progress").removeClass("active").removeClass("progress-striped");
+
+                                $(".doc").attr("markupPartialName", true);
+                                updatePartialNameStatus();
+                                nextMarkupJob();
+                            }
+
+
+                        }
+
+
+                        break;
+                }
+            },
+            created: function(hive) {}
+        });
+
+        // var selected = ["宋","北宋","南宋"];
+
+
+
+    };
+    var selected = [];
+
+
+    // did to be fixed
+    var setupDynasties = function(_fn) {
+        selected = [];
+        CBDBRegexs = [];
+        $(".checkboxControl input[type='checkbox']:not('.mainCheckbox'):checked").each(function() {
+            selected.push($(this).val());
+        });
+        // console.log(selected);
+
+        var selectedCBDB = $.grep(CBDB, function(dy) {
+            return selected.indexOf(dy.dynasty) > -1;
+        });
+
+        $("#fullNameCheckbox").prop("disabled", (selectedCBDB.length <= 0));
+        $("#fullNameCheckbox").prop("checked", (selectedCBDB.length > 0));
+        $("#fullNameCheckbox").change();
+        $("#partialNameCheckbox").prop("disabled", (selectedCBDB.length <= 0));
+        $("#partialNameCheckbox").prop("checked", (selectedCBDB.length > 0));
+        $("#partialNameCheckbox").change();
+
+        selected = [];
+        // console.log(selectedCBDB.length);
+
+
+        $.ajaxSetup({
+            cache: true,
+            converters: {
+                'text json': json_parse
+            }
+        });
+
+        var _jobs = [];
+        var dynastyCodeCount = 0;
+
+        $.each(selectedCBDB, function() {
+            selected.push(this.dynasty);
+            // console.log(this);
+            var _cbdb = this;
+
+
+            if (this.idsToName === undefined) {
+                console.log(this.dynasty + " undefined");
+                var promise = $.getJSON("js/cbdb/" + this.dynastyCode + ".js");
+                promise.done(function(data) {
+
+                        _cbdb.idsToName = data.idsToName;
+                        _cbdb.nameToIds = data.nameToIds;
+                        _cbdb.regexs = data.regexs;
+                        _cbdb = null;
+                        console.log((dynastyCodeCount++) + "/" + selectedCBDB.length + " is loaded");
+                        // data = JSON.parse(data);        
+                        console.log(data.dynasty + " assigned");
+                        // console.log(data);
+                    })
+                    .fail(function(jqxhr, settings, exception) {
+                        console.log(jqxhr);
+
+                        console.log("Triggered ajaxError handler.");
+                    });
+                _jobs.push(promise);
+            }
+        });
+
+        $.when.apply($, _jobs).done(function() {
+            console.log("js ready");
+            $.each(selectedCBDB, function() {
+                $.each(this.regexs, function() {
+                    var length = (this.indexOf("|") > 0) ? this.indexOf("|") : this.length;
+                    if (CBDBRegexs[length] === null) {
+                        CBDBRegexs[length] = this;
+                    } else {
+                        CBDBRegexs[length] = CBDBRegexs[length] + "|" + this;
+                    }
+                });
+            });
+
+            console.log("CBDBRegexs added");
+            CBDBRegexs.sort(markus.util.sortMergerdRegex);
+            console.log("CBDBRegexs sorted");
+            CBDBRegexs = CBDBRegexs.filter(function(e) {
+                return e;
+            });
+            console.log("CBDBRegexs filtered");
+            // $.each(CBDBRegexs,function(index, data){CBDBRegexs[index] = markus.util.unique(data.split("|")).join("|")});
+
+
+
+
+            if (_fn()) {
+                _fn();
+            }
+
+            $.Hive.get(0).send({
+                cmd: "setCBDB",
+                cbdb: selectedCBDB
+            });
+        });
+    };
+
+
+    var fileLoaded = function(result, _file) {
+        $("#content").html(result);
+        // startParagraphMarkup();
+        docStatusDetection();
+        var editable = $(".doc pre").attr("contenteditable", false);
+
+
+        $("#editDocBtn").removeClass("btn-danger");
+        $(".doc").removeClass("edit");
+        if ($(".doc .passage").length > 0) {
+            $(".doc .passage").contents().unwrap();
+            startParagraphMarkup();
+            markus.comment.startAddingCommentHolder();
+        }
+        registerCommentIcon();
+    };
+
+
+    var createMarkupJobList = function() {
+        if ($('#paragraphCheckbox').prop("checked")) {
+            // console.log("startParagraphMarkup");
+            markupJobsList.push(startParagraphMarkup);
+        }
+        if ($('#timePeriodCheckbox').prop("checked")) {
+            // markupJobsList.push(startNianhaoMarkup);
+            // markupJobsList.push('startMarkup(nianhaoRegexArray,"nianhao","nianhaoMarkupCallback()")');
+            markupJobsList.push(startNianhaoMarkup);
+            markupJobsList.push(startNumberMarkup);
+            markupJobsList.push(startTimePeriodComponentMarkup);
+            markupJobsList.push(startSeasonMarkup);
+            markupJobsList.push(startTinKanMarkup);
+            markupJobsList.push(startTimePeriodMarkup);
+            markupJobsList.push(startTimePeriod2Markup);
+        }
+        if ($('#fullNameCheckbox').prop("checked")) {
+            markupJobsList.push(startFullNameMarkup);
+        }
+        if ($('#partialNameCheckbox').prop("checked")) {
+            markupJobsList.push(startPartialNameMarkup);
+        }
+        if ($('#nianhaoCheckbox').prop("checked")) {
+            // markupJobsList.push(startNianhaoMarkup);
+            // markupJobsList.push('startMarkup(nianhaoRegexArray,"nianhao","nianhaoMarkupCallback()")');
+            markupJobsList.push(function() {
+                startMarkup(nianhaoRegexArray, "nianhao", null, "nianhaoMarkupCallback()");
+            });
+        }
+
+        if ($('#placeNameCheckbox').prop("checked")) {
+            // console.log(placeNameRegexArray);
+
+            markupJobsList.push(function() {
+                startMarkup(placeNameRegexArray, 'placeName', null, 'placeNameMarkupCallback()');
+            });
+            markupJobsList.push(patchPlaceNameMarkup1);
+            markupJobsList.push(patchPlaceNameMarkup2);
+        }
+        if ($('#officialTitleCheckbox').prop("checked")) {
+            markupJobsList.push(function() {
+                startMarkup(officeRegexArray, 'officialTitle', null, 'officialTitleMarkupCallback()');
+            });
+
+        }
+        if ($('#ddbcPersonCheckbox').prop("checked")) {
+            markupJobsList.push(function() {
+                startMarkup(DDBC_PERSON.regex, 'ddbcPerson', DDBC_PERSON.nameToIds, 'ddbcPersonCallback()');
+            });
+        }
+
+        if ($('#koreanPersonCheckbox').prop("checked")) {
+            markupJobsList.push(function() {
+                startMarkup(KOREAN_PERSON.regexs, 'koreanPerson', KOREAN_PERSON.nameToIds, 'koreanPersonCallback()');
+            });
+        }
+
+        if ($('#ddbcGlossariesCheckbox').prop("checked")) {
+            markupJobsList.push(function() {
+                startMarkup(ddbcGlossariesRegexArray, 'ddbcGlossaries', null, 'ddbcGlossariesCallback()');
+            });
+        }
+
+        if ($('#muzhimingCheckbox').prop("checked")) {
+
+
+            $("#showScanMuzhimingBtn").show();
+
+            markupJobsList.push(startAltNameIndicatorMarkup);
+            markupJobsList.push(startMuzhimingMarkup);
+            markupJobsList.push(startPossibleName1Markup);
+            markupJobsList.push(startPossibleName2Markup);
+            markupJobsList.push(startPossibleName3Markup);
+
+        }else {
+            $("#showScanMuzhimingBtn").hide();
+        }
+
+        if ($('#timePeriodHelpersCheckbox').prop("checked")) {
+            $("#showTimePeriodHelpersBtn").show();        
+
+        }else {
+            $("#showTimePeriodHelpersBtn").hide();
+        }
+
+
+        $("#progressDiv").fadeIn(1000);
+        nextMarkupJob();
+
+    };
+
+
+
+
+    if (!String.prototype.endsWith) {
+        String.prototype.endsWith = function(searchString, position) {
+            var subjectString = this.toString();
+            if (position === undefined || position > subjectString.length) {
+                position = subjectString.length;
+            }
+            position -= searchString.length;
+            var lastIndex = subjectString.indexOf(searchString, position);
+            return lastIndex !== -1 && lastIndex === position;
+        };
+    }
+
+    var patchPlaceNameMarkup1 = function() {
+
+        var _regex = markus.regex.translate("<placeName>[鄉市縣鎮]");
+        uniqueTerms = [_regex];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "placeNameCandidate",
+            callback: "receivepatchPlaceNameMarkup1()"
+        });
+    };
+
+    var receivepatchPlaceNameMarkup1 = function() {
+        var placeNameCandidate = $(".placeNameCandidate").filter(function() {
+            return $(this).text().substring($(this).text().length - 2).match(/[鄉市縣鎮][鄉市縣鎮]/)
+        });
+        placeNameCandidate.contents().unwrap();
+        $(".placeNameCandidate").find(".markup").contents().unwrap();
+        $(".placeNameCandidate").addClass("placeName").removeClass("placeNameCandidate").attr("type", "placeName");
+        $(".placeNameCandidate").contents().unwrap();
+    };
+
+    var patchPlaceNameMarkup2 = function() {
+
+        var _regex = markus.regex.translate("<placeName>[使王]");
+        uniqueTerms = [_regex];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "officialTitleCandidate",
+            callback: "receivepatchPlaceNameMarkup2()"
+        });
+    };
+
+    var receivepatchPlaceNameMarkup2 = function() {
+        var officialTitleCandidate = $(".officialTitleCandidate").filter(function() {
+            return $(this).text().endsWith("郡王") || $(this).text().endsWith("節度使")
+        });
+        officialTitleCandidate.find(".markup").contents().unwrap();
+        officialTitleCandidate.addClass("officialTitle").removeClass("officialTitleCandidate").attr("type", "officialTitle");
+        $(".officialTitleCandidate").contents().unwrap();
+    };
+
+    var startMuzhimingMarkup = function() {
+
+
+        uniqueTerms = ["(?:第[一二三四五六七八九十]任?){0,}(?:(?:[一二三四五六七八九十]{0,})(?:同母異父|非親生|直系|始祖|未婚|本生|私生|季|次|生|獨|甥|庶|岳|養|長|親|表|胞|繼|族|從|嫡|堂|嗣|曾|高|玄|太|外|世|代|氏|再|少){0,}(?:[一二三四五六七八九十]{0,})(?:昆孫|兒子|之夫|後裔|祖先|重孫|媳婦|未婚夫|丈夫|來孫|內侄|兒媳|公公|外甥|女兒|妹夫|姊丈|姐夫|姑丈|姑夫|婆婆|繼室|表親|舅公|舅婆|伯|侄|兄|叔|女|男|妣|妹|妻|妾|姊|姑|姨|姪|娶|媳|子|孫|弟|母|父|祖|翁|聘|姐|婿|舅)){0,}[之的]?(?:第?[一二三四五六七八九十]?任?){0,}(?:[一二三四五六七八九十]{0,})(?:同母異父|非親生|直系|始祖|未婚|本生|私生|季|次|生|獨|甥|庶|岳|養|長|親|表|胞|繼|族|從|嫡|堂|嗣|曾|高|玄|太|外|世|代|氏|再|少){0,}(?:[一二三四五六七八九十]{0,})(?:昆孫|兒子|之夫|後裔|祖先|重孫|媳婦|未婚夫|丈夫|來孫|內侄|兒媳|公公|外甥|女兒|妹夫|姊丈|姐夫|姑丈|姑夫|婆婆|繼室|表親|舅公|舅婆|伯|侄|兄|叔|女|男|妣|妹|妻|妾|姊|姑|姨|姪|娶|媳|子|孫|弟|母|父|祖|翁|聘|姐|婿|舅)(?:[男女]{0,}[一二三四五六七八九十]{1,}人){0,}"];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "kinship",
+            callback: "receiveKinshipMarkup()"
+        });
+    };
+
+
+
+    var receiveKinshipMarkup = function() {
+        $(".markup .kinship").contents().unwrap();
+        $(".kinship").filter(function() {
+            return $(this).text().length == 1;
+        }).contents().unwrap();
+        // nextMarkupJob();
+    };
+
+    var startPossibleName1Markup = function() {
+        uniqueTerms = ["<[^>]{0,}kinship[^>]{0,}>[^<]{0,}<[^>]{0,}span>([^<，’、。 　：‘'；?《》]{1,2})[<，’、。：‘'；?《》]?"];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "possibleName",
+            callback: "receivePossibleName1Markup()"
+        });
+    };
+
+    var receivePossibleName1Markup = function() {
+        $(".markup .possibleName").contents().unwrap();
+        // console.log($(".doc").html());
+        // startPossibleName2Markup();
+    };
+
+    var startPossibleName2Markup = function() {
+        uniqueTerms = ["[<，、’。：‘'；?《》]{0,}([^>，’、。 　：‘'；?《》]{1,2})<[^>]{0,}kinship[^>]{0,}>[^<]{0,}<[^>]{0,}span>"];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "possibleName",
+            callback: "receivePossibleName2Markup()"
+        });
+    };
+
+    var receivePossibleName2Markup = function() {
+        $(".markup .possibleName").contents().unwrap();
+        // nextMarkupJob();
+    };
+
+    var startPossibleName3Markup = function() {
+        uniqueTerms = ["<[^>]{0,}altNameIndicator[^>]{0,}>[^<]{0,}<[^>]{0,}span>([^<，’、。 　：‘'；?《》]{1,2})[<，’、。：‘'；?《》]?"];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "possibleName",
+            callback: "receivePossibleName3Markup()"
+        });
+    };
+
+    var receivePossibleName3Markup = function() {
+        $(".markup .possibleName").contents().unwrap();
+        $(".altNameIndicator").contents().unwrap();
+        $(".possibleName").each(function() {
+            /* Blacklist */
+            if ($(this).text().endsWith("也") || $(this).text().endsWith("也")) {
+                $(this).contents().unwrap();
+            } else {
+                var _ids = [];
+                var _lastnames = $("#muzhimingLastname").val().split(",");
+                for (var i = 0, j = _lastnames.length; i < j; i++) {
+                    _ids = _ids.concat(namesToIds(_lastnames[i] + $(this).text(), selected));
+                }
+
+
+                $(this).attr("type", "partialName");
+                $(this).addClass("partialName").removeClass("possibleName");
+                if (_ids.length > 0) {
+
+                    $(this).attr("cbdbid", _ids.join("|"));
+                    if (_ids.length == 1) {
+                        $(this).removeClass("moreThanOneId").removeClass("noCBDBID");
+                    } else {
+                        $(this).addClass("moreThanOneId");
+                    }
+                } else {
+                    $(this).attr("cbdbid", "");
+                    $(this).addClass("noCBDBID");
+                    // console.log(temp.contents());
+                }
+            }
+
+
+        });
+
+
+        // nextMarkupJob();
+    };
+
+    var startAltNameIndicatorMarkup = function() {
+
+        uniqueTerms = ["([曰諱字號名])"];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "altNameIndicator",
+            callback: "receiveAltNameIndicatorMarkup()"
+        });
+    };
+
+    var receiveAltNameIndicatorMarkup = function() {
+        $(".markup .altNameIndicator").contents().unwrap();
+        // nextMarkupJob();
+    };
+
+    var startNianhaoMarkup = function() {
+        uniqueTerms = ["(建國|元統|元貞|大德|天曆|天順|延祐|泰定|皇慶|至元|至大|至正|至治|至順|致和|永興|太清|永樂|元璽|光壽|建熙|壽光|延初|皇始|乾德|光天|廣大|通正|佐初|光初|元徽|大明|孝建|昇明|景和|景平|泰豫|保定|大成|大象|天和|宣政|建德|武成|乾興|元祐|元符|元豐|咸平|嘉祐|大中祥符|大觀|天聖|宣和|寶元|崇寧|康定|建中靖國|慶曆|政和|明道|景德|景祐|治平|淳化|熙寧|皇祐|端拱|紹聖|至和|至道|重和|雍熙|靖康|康應|康曆|應安|曆應|永德|觀應|承光|承和|承平|承玄|玄始|神璽|義和|乾佑|天會|天福|建福|德興|神曆|大延|天安|天興|天賜|太平真君|太延|太昌|始光|孝昌|延和|延昌|承明|普泰|景明|正光|正平|武泰|泰常|熙平|登國|皇興|神䴥|神瑞|神龜|興光|興安|乾明|大寧|天統|德昌|武平|河清|皇建|隆化|乾貞|天祚|武義|順義|頒義|交泰|保大|升元|昇元|乾道|咸淳|嘉定|嘉泰|嘉熙|寶慶|寶祐|建炎|德祐|慶元|景定|景炎|淳熙|淳祐|祥興|端平|紹定|紹熙|開慶|開禧|隆興|庚寅|弘光|永曆|紹武|隆武|興國|中大同|中大通|大同|大寶|大通|天成|天正|天監|天鑑|承聖|普通|紹泰|弘昌|乾亨|乾和|大有|應乾|白龍|太上|燕王|延興|永明|永泰|隆昌|保貞|太平興國|寶大|寶太|寶正|寶貞|廣初|建隆|正明|開寶|上元|中和|乾元|乾寧|乾封|乾甯|乾符|儀鳳|先天|光化|光啟|光宅|光慶|咸亨|咸通|唐元|唐安|唐興|唐隆|嗣聖|垂拱|大中|大和|大曆|大順|天寶|天復|天祐|太極|寶應|寶曆|寶歷|廣德|廣明|建中|弘道|文德|文明|明慶|景福|景雲|景龍|會昌|正觀|武德|永崇|永徽|永淳|永貞|永隆|神龍|總章|興元|調露|貞元|貞觀|載初|長慶|開元|開成|開耀|顯慶|麟德|龍朔|龍紀|嘉靖|天啟|宣德|崇禎|建文|弘治|成化|景泰|正統|泰昌|洪武|洪熙|萬曆|隆慶|建陽|乾隆|光緒|同治|咸豐|嘉慶|宣統|崇德|康熙|道光|雍正|順治|天眷|天輔|崇慶|承安|收國|明昌|正大|正豐|正隆|泰和|皇統|至寧|興定|貞祐|開興|光武|隆熙|乾統|保寧|咸雍|壽昌|壽隆|大平|大康|天慶|天祿|天贊|天顯|應曆|會同|泰安|清寧|神冊|統和|重熙|開泰|嘉禾|天冊|天璽|天紀|太元|太平|寶鼎|建衡|永安|神鳳|赤烏|鳳凰|黃武|廣順|顯德|同光|應順|淸泰|清泰|長興|開運|乾化|貞明|開平|鳳曆|龍德|承康|龍飛|乾祐|光始|建始|燕元|長樂|弘始|洪始|白雀|皇初|廣政|明德|泰寧|天命|天聰|政開|水德萬歲|聖冊|虎泰|嘉寧|宣平|晏平|漢興|玉恒|玉衡|仁平|大昌|開國|鴻濟|地皇|天鳳|始建國|咸熙|太和|景元|景初|正元|正始|青龍|黃初|升平|咸和|咸安|咸康|大亨|太寧|太興|寧康|崇和|崇安|昇平|永昌|義熙|興寧|隆和|隆安|中平|元初|元和|元嘉|元興|光和|光熹|初平|和平|延光|延平|延康|延熹|建初|建和|建安|建寧|建康|建武中元|昭寧|本初|永元|永初|永和|永嘉|永壽|永寧|永平|永康|永建|永憙|永漢|永熹|漢安|熹平|章和|興平|陽嘉|元象|天平|武定|興和|永始|久視|大足|天冊萬歲|天授|如意|延載|神功|聖曆|萬歲登封|萬歲通天|證聖|長壽|長安|民國|元熙|光興|嘉平|建元|永鳳|河瑞|漢昌|麟嘉|定鼎|建光|神鼎|勝光|承陽|昌武|真興|鳳翔|龍升|中統|延熙|建興|景耀|炎興|章武|乾定|人慶|元德|光定|大慶|天佑垂聖|天佑民安|天儀治平|天安禮定|天授禮法延祚|天盛|天賜禮盛國慶|奲都|寶義|延嗣甯國|應天|拱化|正德|福聖承道|雍寧|顯道|光熙|咸寧|大安|太安|太康|太熙|永熙|泰始|大定|天保|廣運|嘉興|五鳳|元光|元壽|元始|元封|元平|元康|元延|元朔|元狩|元鳳|元鼎|初元|初始|地節|天漢|太初|太初元將|太始|始元|始建|居攝|建昭|征和|本始|永光|河平|甘露|神爵|竟寧|綏和|陽朔|鴻嘉|黃龍|中興|建平|建明|建武|昌平|更始|燕興|建宏|建弘|建義|永宏|永弘|永洪|咸清|天禧|崇福|康國|延慶|紹興|大統|天德|通文|龍啟|光大|天嘉|天康|太建|永定|禎明|至德|仁壽|大業|義寧|開皇|延壽|光德){1}"];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "nianhao",
+            callback: "receiveNianhaoMarkup()"
+        });
+    }
+
+
+    var erasRecords = {};
+
+    var receiveNianhaoMarkup = function() {
+        $(".doc .markup .nianhao").contents().unwrap();
+        cleanNiahao();
+        var matchedNianhao = {};
+        $(".doc .nianhao").each(function() {
+            matchedNianhao[$(this).text()] = true;
+        });
+        console.log(matchedNianhao);
+        $.ajaxSetup({
+            cache: true,
+            converters: {
+                'text json': json_parse
+            }
+        });
+        var _jobs = [];
+        for (var nianhao in matchedNianhao) {
+            // console.log(nianhao);
+            var _eras = erasMap[nianhao] || [];
+            if (_eras.length == 0) {
+                console.log(nianhao);
+            }
+            for (var i = 0; i < _eras.length; i++) {
+                var promise = $.getJSON("js/ddbc_time/" + _eras[i].era_id + ".json");
+                promise.done(function(data) {
+                        erasRecords[data.era_id] = data;
+                    })
+                    .fail(function(jqxhr, settings, exception) {
+                        console.log(jqxhr);
+
+                        console.log("Triggered ajaxError handler.");
+                    });
+                _jobs.push(promise);
+            }
+
+        }
+
+        $.when.apply($, _jobs).done(function() {
+            console.log("js ready");
+            console.log(erasRecords);
+        });
+
+        
+
+
+    }
+
+    var startNumberMarkup = function() {
+        uniqueTerms = ["[元正𨳝一二三四五六七八九十廿卅]{1,}"];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "number",
+            callback: "receiveNumberMarkup()"
+        });
+    }
+
+    var receiveNumberMarkup = function() {
+        $(".markup .number").contents().unwrap();
+    }
+
+    var startTinKanMarkup = function() {
+        uniqueTerms = ["(辛巳|壬午|癸未|甲申|乙酉|丙戌|丁亥|戊子|己丑|庚寅|辛卯|壬辰|癸巳|甲午|乙未|丙申|丁酉|戊戌|己亥|庚子|辛丑|壬寅|癸卯|甲辰|乙巳|丙午|丁未|戊申|己酉|庚戌|辛亥|壬子|癸丑|甲寅|乙卯|丙辰|丁巳|戊午|己未|庚申|辛酉|壬戌|癸亥|甲子|乙丑|丙寅|丁卯|戊辰|己巳|庚午|辛未|壬申|癸酉|甲戌|乙亥|丙子|丁丑|戊寅|己卯|庚辰)"];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "tinKan",
+            callback: "receiveTinKanMarkup()"
+        });
+    }
+
+    var receiveTinKanMarkup = function() {
+        $(".markup .tinKan").contents().unwrap();
+    }
+
+    var startSeasonMarkup = function() {
+        uniqueTerms = ["[春夏秋冬]{1,}"];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "season",
+            callback: "receiveSeasonMarkup()"
+        });
+    }
+
+    var receiveSeasonMarkup = function() {
+        $(".markup .season").contents().unwrap();
+    }
+
+    var startTimePeriodComponentMarkup = function() {
+        uniqueTerms = ["[年載月日初中末閏]{1,}"];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "timePeriodComponent",
+            callback: "receiveTimePeriodComponentMarkup()"
+        });
+    }
+
+    var receiveTimePeriodComponentMarkup = function() {
+        $(".markup .timePeriodComponent").contents().unwrap();
+    }
+
+    var startTimePeriodMarkup = function() {
+        // TODO: need to modified to accept only endding with timePeriodComponent, season and tinKan
+        uniqueTerms = [markus.regex.translate("<nianhao>(?:(?:<number>)|(?:<timePeriodComponent>)|(?:<season>)|(?:<tinKan>)){0,}")];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "timePeriod",
+            callback: ""
+        });
+    }
+
+    var startTimePeriod2Markup = function() {
+        // need to modified
+        uniqueTerms = [markus.regex.translate("(?:(?:<number>)|(?:<timePeriodComponent>)|(?:<season>)|(?:<tinKan>)){1,}")];
+        $.Hive.get(0).send({
+            cmd: "regexMarkup",
+            txt: $(".doc").html(),
+            regex: uniqueTerms[0],
+            index: 0,
+            type: "timePeriod",
+            callback: "receiveTimePeriod2Markup()"
+        });
+    }
+
+    var tianGan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+    var diZhi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+    var tianGanDiZhiToNumber = {};
+
+    for (var i = 0; i < 60; i++) {
+        tianGanDiZhiToNumber[(tianGan[i % tianGan.length] + diZhi[i % diZhi.length])] = i + 1;
+        // console.log((i + 1) + " " + tianGan[i % tianGan.length] + diZhi[i % diZhi.length] + "\n");
+    }
+
+    var dayDifferenceInTianGan = function(fromDate, toDate) {
+        var difference = 0;
+        var from = tianGanDiZhiToNumber[fromDate];
+        var to = tianGanDiZhiToNumber[toDate];
+        if (to > from) {
+            difference = to - from;
+        } else {
+            difference = Object.keys(tianGanDiZhiToNumber).length - (from - to);
+        }
+        if (difference == 60) {
+            difference = 0;
+        }
+        return difference;
+    };
+
+    function dateToTianGanDiZi(julianCode) {
+        return tianGan[(julianCode - 11) % 10] + diZhi[(julianCode - 11) % 12];
+        // return $ganzhi['tiangan'][($julianCode-11)%10].$ganzhi['dizhi'][($julianCode-11)%12];
+    }
+
+    function isEven(n) {
+        return n == parseFloat(n) ? !(n % 2) : void 0;
+    }
+
+    function dateFormat(dateArray){
+        // return a string in YYYY-MM-DD format
+        var year = ''+dateArray[0];
+        var month = ''+dateArray[1];
+        var day = ''+dateArray[2];
+
+        var BC = false;
+
+        if (year.startsWith("-")){
+            year = year.substr(1);
+            BC = true;
+        }
+
+        for (var i = 0 ; i < 4 - year.length; i++){            
+                year = "0"+year;                            
+        }
+        if (BC){
+            year = "-"+year;
+        }
+        for (var i = 0 ; i < 2 - month.length; i++){
+            month = "0"+month;
+        }
+        for (var i = 0 ; i < 2 - day.length; i++){
+            day = "0"+day;
+        }
+        return year+"-"+month+"-"+day;
+    }
+
+    var receiveTimePeriod2Markup = function() {
+        $(".doc .timePeriod .timePeriod").contents().unwrap();
+        $(".doc .timePeriod").filter(function() {return $(this).find(".markup").length ==1 && !$(this).find(".markup").hasClass("nianhao")}).each(function(){$(this).find(".markup").contents().unwrap();$(this).contents().unwrap()});
+        console.log($(".timePeriod").length);
+        var processed = 0;
+        $(".doc .timePeriod").each(function() {
+            try {
+
+
+            console.log(processed++);
+            var count = 0;
+            var year = month = day = "";
+            var tempNumber = tempNumberID = "";
+            var nianhao = "";
+            var tinKan = "";
+            var timePeriodComponent = "";
+            var leap_month= false;
+            
+           
+
+            console.log($(this).text());
+            console.log($(this)[0].outerHTML);
+            $(this).find(".markup").each(function() {
+
+
+                $(this).attr("randomID", count++)
+                if ($(this).attr("type") == "nianhao") {
+                    nianhao = $(this).text();
+                }
+                if ($(this).attr("type") == "tinKan") {
+                    tinKan = $(this).text();
+                    if (nianhao.length > 0) {
+                        if (timePeriodComponent == "年") {
+                            // month = tinKan;
+                        } else if (timePeriodComponent == "月") {
+                            day = tinKan;
+                        } else if (timePeriodComponent == "") {
+                            year = tinKan;
+                        }
+                    }
+                }
+                if ($(this).attr("type") == "number") {
+                    tempNumber = $(this).text();
+                    tempNumberID = count - 1;
+                }
+                if ($(this).attr("type") == "timePeriodComponent") {
+
+                    // 年閨
+
+                    if (($(this).text() == "年" || $(this).text() == "年閏" || $(this).text() == "載") && tempNumberID == count - 2) {
+                        year = tempNumber;
+                        tempNumber = "";
+                        timePeriodComponent = $(this).text();
+                        if ($(this).text() == "年閏") {
+                            leap_month = true;
+                        }
+                    }
+                    if ($(this).text() == "月" && tempNumberID == count - 2) {
+                        month = tempNumber;
+                        tempNumber = "";
+                        timePeriodComponent = $(this).text();
+                    }
+                    if ($(this).text() == "日" && tempNumberID == count - 2) {
+                        day = tempNumber;
+                        tempNumber = "";
+                        timePeriodComponent = $(this).text();
+                    }
+                    if ($(this).text() == "閏") {
+                        leap_month = true;
+                    }
+
+                }
+            });
+            // if (tempNumber.length > 0){
+            //   if (year=="" && month =="" && day ==""){
+            //     year = tempNumber;
+            //   }
+            // }
+
+            
+
+            console.log(year + " " + month + " " + day);
+
+            var _eras = erasMap[nianhao] || [];
+            
+            var finishedEras = [];
+            for (var i = 0; i < _eras.length; i++) {
+                var _dynasty = "";
+                try {
+                    var __era = _eras[i]
+                    console.log(JSON.stringify(_eras[i]));
+                    _dynasty = __era.dynasty_id;
+                    
+                }catch(e){
+                    console.log(e);
+                }
+                
+
+                var _era = erasRecords[_eras[i]["era_id"]];
+                if (finishedEras.indexOf(_eras[i]["era_id"]) > -1) {
+                    continue;
+                }
+                finishedEras.push(_eras[i]["era_id"]);
+                if (_era == null) {
+                    continue;
+                }
+                var _y = year || "";
+                // console.log(year);
+                _y = _y.replace("元", "一");
+
+                if (tianGanDiZhiToNumber[_y]) {
+                    _y = _era[_y] || [];
+
+                    // for (var j = _era.start ; j <= _era.end;j++){
+                    //   if (_year == _era[j]){
+                    //     // console.log($(this).text()+" "+_year + " "+j);
+                    //     _year = j;
+
+                    //   }
+                    // }
+
+                } else {
+                    _y = cnNum2ArabNum("" + _y) || 0;
+                    _y = [_y];
+                }
+
+
+                console.log("_year " + _y);
+
+
+                
+                var __year = _y;
+                var _m = month;
+                var _d = day;
+                var _date = "";
+                for (var index = 0; index < __year.length; index++) {
+                    var _year = __year[index];
+                    if ((_era.start <= _year) && (_era.end >= _year)) {
+                        _year = _era[_era[_year]] || _era[_year];
+
+                        console.log("month ="+month);
+
+                        var _month = _m || "";
+                        console.log(_month);
+                        _month = _month.replace("正", "一").replace("元", "一");
+                        console.log(_month);
+                        
+                        _month = cnNum2ArabNum("" + _month) || 0;
+                        
+
+
+
+                        _month = _year[((leap_month)?"*":"") + _month] || false;
+
+                        var _day = _d || "";
+                        var __date;
+
+                        if (tianGanDiZhiToNumber[_day]) {
+                            if (_month) {
+
+                                _day = _month.start_from + dayDifferenceInTianGan(dateToTianGanDiZi(_month.first), _day);
+                                
+                            }
+                        } else {
+                            console.log(_day);
+                            _day = cnNum2ArabNum("" + _day) || 0;
+                            
+                        }
+
+
+                        
+                        if (_month) {
+                            if (_day >= _month.start_from) {
+                                // console.log(jd_To_date(_month.first + (_day-_month.start_from)));
+                                _date = jd_To_date(_month.first + (_day - _month.start_from));
+
+                                                                    
+
+                                __date = {first:dateFormat(_date),last:dateFormat(_date),level:3,dynasty:_dynasty} 
+                                _date = "公元" + _date[0] + "年" + _date[1] + "月" + _date[2] + "日";
+
+                            } else {
+                                // console.log(jd_To_date(_month.first).join("-") +"~"+ jd_To_date(_month.last).join("-"));
+                                var _dateFirst = jd_To_date(_month.first);
+                                var _dateLast = jd_To_date(_month.last);
+                                __date = {first:dateFormat(_dateFirst),last:dateFormat(_dateLast),level:2,dynasty:_dynasty};
+                                _date = "公元";
+                                if ((30 - _dateFirst[2]) > _dateLast[2]) {
+                                    _date = _date + _dateFirst[0] + "年" + _dateFirst[1] + "月";
+                                } else {
+                                    _date = _date + _dateLast[0] + "年" + _dateLast[1] + "月";
+                                }
+
+
+
+
+
+                            }
+                        } else if (_year) {
+                            var _dateFirst = jd_To_date(_year.first);
+                            var _dateLast = jd_To_date(_year.last);
+                            __date = {first:dateFormat(_dateFirst),last:dateFormat(_dateLast),level:1,dynasty:_dynasty};
+                            _date = "公元";
+                            if ((12 - _dateFirst[1]) > _dateLast[1]) {
+                                _date = _date + _dateFirst[0] + "年";
+                            } else {
+                                _date = _date + _dateLast[0] + "年";
+                            }
+
+
+
+
+
+                            // $(this).attr("data-markus-date",jd_To_date(_year.first).join("-") +"~"+ jd_To_date(_year.last).join("-"));
+                            // console.log(jd_To_date(_year.first) +"~"+ jd_To_date(_year.last));
+                        }
+
+
+
+
+
+
+                        // console.log(nianhao+year+"年"+month+"月"+day+"日");
+
+                    } else if (_year == 0) {
+
+                        _year = _era[_era[_era.start]] || _era[_era.start];
+                        console.log("start year:");
+                        console.log(_year);
+                        var _dateStartFirst = jd_To_date(_year.first);
+                        var _dateStartLast = jd_To_date(_year.last);
+                        _year = _era[_era[_era.end]] || _era[_era.end];
+                        console.log("end year:");
+                        console.log(_year);
+                        var _dateEndFirst = jd_To_date(_year.first);
+                        var _dateEndLast = jd_To_date(_year.last);
+                        __date = {first:dateFormat(_dateStartFirst),last:dateFormat(_dateEndLast),level:0,dynasty:_dynasty};
+                        _date = "公元";
+                        if ((12 - _dateStartFirst[1]) > _dateStartLast[1]) {
+                            _date = _date + _dateStartFirst[0] + "年";
+                        } else {
+                            _date = _date + _dateStartLast[0] + "年";
+                        }
+                        _date = _date + "~";
+                        if ((12 - _dateEndFirst[1]) > _dateEndLast[1]) {
+                            _date = _date + _dateEndFirst[0] + "年";
+                        } else {
+                            _date = _date + _dateEndLast[0] + "年";
+                        }
+                    } 
+                    if (_date.length > 0) {
+                        var oldDate = $(this).attr("timePeriod_id") || "";
+                        if (oldDate == "") {
+                            oldDate = [];
+                        } else {
+                            oldDate = markus.util.converBackToUnicode(oldDate).split("|");
+                        }
+                        var data_oldDates = $(this).attr("data-time-period") || "[]";
+                        data_oldDates = JSON.parse(data_oldDates);  
+                        
+                        console.log(_dynasty);                
+                        
+                        data_oldDates.push(__date);
+                        // $(this).attr("data-markus-date",_date+":"+_eras[i]["dynasty"]+_eras[i]["emperor"]);
+                        oldDate.push(_date + ":" + _eras[i]["dynasty"] + _eras[i]["emperor"]);
+                        
+
+                        
+
+                        $(this).attr("timePeriod_id", markus.util.convertToEscapeUnicode(oldDate.join("|")));
+                        $(this).attr("data-time-period",JSON.stringify(data_oldDates));
+                        
+                    }
+
+                    
+
+                    console.log("month ="+month);
+
+                    // console.log(_year);
+
+                }
+            }
+
+            if (!$(this).attr("data-time-period")){
+                $(this).attr("data-time-period","[]");
+            }
+            if (!$(this).attr("timePeriod_id")){
+                $(this).attr("timePeriod_id","");
+            }
+            var data_time_period = JSON.parse($(this).attr("data-time-period"));
+            var timePeriod_id = $(this).attr("timePeriod_id").split("|");
+            var maxlevel = 0;
+            var valid_data_time_period = [];
+            var valid_timePeriod_id = [];
+            var dynasty = [];
+            for (var index = 0 ; index < data_time_period.length; index++){
+                if (maxlevel < data_time_period[index].level){
+                    maxlevel = data_time_period[index].level;
+                }
+            }
+
+            for (var index = 0 ; index < data_time_period.length; index++){
+                if (maxlevel == data_time_period[index].level){
+                    if (dynasty.indexOf((data_time_period[index])["dynasty"]) == -1){                       
+                       dynasty.push((data_time_period[index])["dynasty"]); 
+                    }
+                    valid_data_time_period.push(data_time_period[index]);
+                    valid_timePeriod_id.push(timePeriod_id[index]);
+                }
+            }            
+
+            $(this).attr("timePeriod_id", markus.util.convertToEscapeUnicode(valid_timePeriod_id.join("|")));
+            $(this).attr("data-time-period",JSON.stringify(valid_data_time_period));
+            if (valid_data_time_period.length > 1) {
+                $(this).addClass("moreThanOneId");
+            }else {
+                $(this).removeClass("moreThanOneId");
+            }            
+
+
+
+            $(this).attr("data-attribute",
+                     markus.util.convertToEscapeUnicode(
+                        JSON.stringify({dynasty:dynasty ,nianhao:nianhao,tinKan:tinKan,leap_month:leap_month,year:year,month:month,day:day})));
+
+            
+
+            if (nianhao == "" && day == "" && month == "" && year == "") {
+                $(this).find(".number").contents().unwrap();
+                $(this).contents().unwrap();
+            }
+
+            // if (day == "" && month == "" && year == ""){
+            //   $(this).find(".markup").filter(function (){return $(this).attr("type")!="nianhao"}).contents().unwrap();
+            //   $(this).contents().unwrap();  
+            // }
+
+
+        } catch(err){}
+        });
+        
+        
+        // $(".timePeriod").filter(function(){return $(this).find(".markup").length ==1}).contents().unwrap();
+        $(".doc .timePeriod").find(".number,.timePeriodComponent,.season,.tinKan,.nianhao").contents().unwrap();
+        $(".doc .number,.timePeriodComponent,.season,.tinKan").contents().unwrap();
+        $(".doc").attr("markupTimePeriod", "true");
+        
+        updateTimePeriodStatus();
+
+    }
+
+    function jd_to_julian(td) {
+        var z, a, alpha, b, c, d, e, year, month, day;
+
+        td += 0.5;
+        z = Math.floor(td);
+
+        a = z;
+        b = a + 1524;
+        c = Math.floor((b - 122.1) / 365.25);
+        d = Math.floor(365.25 * c);
+        e = Math.floor((b - d) / 30.6001);
+
+        month = Math.floor((e < 14) ? (e - 1) : (e - 13));
+        year = Math.floor((month > 2) ? (c - 4716) : (c - 4715));
+        day = b - d - Math.floor(30.6001 * e);
+
+        /*  If year is less than 1, subtract one to convert from
+            a zero based date system to the common era system in
+            which the year -1 (1 B.C.E) is followed by year 1 (1 C.E.).  */
+
+        if (year < 1) {
+            year--;
+        }
+
+        return new Array(year, month, day);
+    }
+
+    function jd_To_date(jd) {
+        if (jd <= 2299160) {
+            return jd_to_julian(jd);
+        } else {
+            return jd_to_gregorian(jd);
+        }
+    }
+
+    function jd_to_gregorian(jd) {
+        var wjd, depoch, quadricent, dqc, cent, dcent, quad, dquad,
+            yindex, dyindex, year, yearday, leapadj;
+
+        wjd = Math.floor(jd - 0.5) + 0.5;
+        depoch = wjd - GREGORIAN_EPOCH;
+        quadricent = Math.floor(depoch / 146097);
+        dqc = mod(depoch, 146097);
+        cent = Math.floor(dqc / 36524);
+        dcent = mod(dqc, 36524);
+        quad = Math.floor(dcent / 1461);
+        dquad = mod(dcent, 1461);
+        yindex = Math.floor(dquad / 365);
+        year = (quadricent * 400) + (cent * 100) + (quad * 4) + yindex;
+        if (!((cent == 4) || (yindex == 4))) {
+            year++;
+        }
+        yearday = wjd - gregorian_to_jd(year, 1, 1);
+        leapadj = ((wjd < gregorian_to_jd(year, 3, 1)) ? 0 :
+            (leap_gregorian(year) ? 1 : 2)
+        );
+        month = Math.floor((((yearday + leapadj) * 12) + 373) / 367);
+        day = (wjd - gregorian_to_jd(year, month, 1)) + 1;
+
+        return new Array(year, month, day);
+    }
+
+    function mod(a, b) {
+        return a - (b * Math.floor(a / b));
+    }
+
+    function gregorian_to_jd(year, month, day) {
+        return (GREGORIAN_EPOCH - 1) +
+            (365 * (year - 1)) +
+            Math.floor((year - 1) / 4) +
+            (-Math.floor((year - 1) / 100)) +
+            Math.floor((year - 1) / 400) +
+            Math.floor((((367 * month) - 362) / 12) +
+                ((month <= 2) ? 0 :
+                    (leap_gregorian(year) ? -1 : -2)
+                ) +
+                day);
+    }
+
+    function leap_gregorian(year) {
+        return ((year % 4) == 0) &&
+            (!(((year % 100) == 0) && ((year % 400) != 0)));
+    }
+
+
+    var GREGORIAN_EPOCH = 1721425.5;
+
+
+    var cnNum2ArabNum = function(cn) {
+        var arab, parts, cnChars = '零一二三四五六七八九'
+
+        if (!cn) {
+            return 0
+        }
+        console.log(cn);
+        if (cn.indexOf('十') === 0) {
+            cn = '一' + cn
+        }
+
+        arab = cn
+            .replace(/[零一二三四五六七八九]/g, function(a) {
+                return '+' + cnChars.indexOf(a)
+            })
+            .replace(/(十|百|千)/g, function(a, b) {
+                return '*' + (
+                    b == '十' ? 1e1 :
+                    b == '百' ? 1e2 : 1e3
+                )
+            })
+
+        return (new Function('return ' + arab))()
+    }
+
+    var namesToIds = function(name, filtered) {
+        // console.log(filtered);
+        filtered = filtered || [];
+        var ids = [];
+        for (var key in CBDB) {
+            if (filtered.length > 0) {
+                if (filtered.indexOf(CBDB[key].dynasty) > -1) {
+                    if (CBDB[key].nameToIds[name]) {
+                        ids = ids.concat(CBDB[key].nameToIds[name]);
+                    }
+                }
+            } else {
+                try {
+                    if (CBDB[key].nameToIds[name]) {
+                        ids = ids.concat(CBDB[key].nameToIds[name]);
+                    }
+
+                } catch(err){}
+
+            }
+        }
+        return ids;
+    };
+
+
+    var receiveFullNameMarkupWorker = function(data) {
+        // $('#progressBar').html("remaining:"+(data.index +1) + "/"+uniqueTerms.length+" marked:"+found++);
+        $('#progressBar').html("remaining:" + (uniqueTerms.length - (data.index + 1)) + " marked:" + found++);
+        $('#stateThreeProgress').css("width", ((data.index + 1) / uniqueTerms.length * 45) + "%");
+
+        var index = data.index + 1;
+        if (index < uniqueTerms.length) {
+            data.index = index;
+            data.regex = uniqueTerms[index];
+            // console.log(data.regex);
+            if (data.txt) {
+                setTimeout(function() {
+                    $.Hive.get(0).send(data);
+                }, 10);
+                // $.Hive.get(0).send(data);
+            }
+
+        } else {
+            found = 0;
+
+            $(".doc").html(data.txt).attr("markupFullName", true);
+            $('persname .markup').contents().unwrap();
+            $('name .markup').contents().unwrap();
+            $(".doc .timePeriod .fullName").contents().unwrap();
+            $('.doc .fullName').each(function() {
+                $(this).attr("x_origin", $(this).offset().left).attr("y_origin", $(this).offset().top);
+            });
+            var errorCandidate = {};
+
+            // Checking each text of fullName tag, remove them all if all same tag is nested by another fullname tag. 
+
+            $('.doc .fullName .fullName').each(function() {
+                errorCandidate[$(this).text()] = errorCandidate[$(this).text()] || [];
+                errorCandidate[$(this).text()].push($(this));
+            });
+            // $('.doc .fullName').each(function() {
+            //     if (errorCandidate[$(this).text()] && !$(this).parent().hasClass("fullName")) {
+            //         delete errorCandidate[$(this).text()];
+            //     }
+            // });
+
+            for (var key in errorCandidate) {
+                for (var i = 0; i < errorCandidate[key].length; i++) {
+                    (errorCandidate[key][i]).contents().unwrap();
+                }
+            }
+
+
+
+            $('#stateThreeProgress').css("width", "45%");
+            $('#progress').removeClass("progress-striped").removeClass("progress-striped active");
+            $('#progressBar').html("Fullname markup finsihed, partial name scan ready");
+            updateFullNameStatus();
+
+            nextMarkupJob();
+
+            // registUnsolved();
+        }
+    };
+
+    var receiveTermMarkupWorker = function(data) {
+        // $('#progressBar').html("remaining:"+(data.index +1) + "/"+uniqueTerms.length+" marked:"+found++);
+        $('#progressBar').html("remaining:" + (uniqueTerms.length - (data.index + 1)) + " marked:" + found++);
+        $('#stateThreeProgress').css("width", ((data.index + 1) / uniqueTerms.length * 45) + "%");
+
+        var index = data.index + 1;
+        if (index < uniqueTerms.length) {
+            data.index = index;
+            data.regex = uniqueTerms[index];
+            // console.log(data.txt);
+            if (data.txt) {
+                $.Hive.get(0).send(data);
+            }
+
+        } else {
+            found = 0;
+
+            $(".doc").html(data.txt);
+
+            // console.log("updated");
+            // console.log(data.txt);
+
+            // $('persname .markup').contents().unwrap();
+            // $('name .markup').contents().unwrap();          
+            // $('.fullName').each(function(){
+            //   $(this).attr("x_origin",$(this).offset().left).attr("y_origin",$(this).offset().top);
+            // });
+            $('#stateThreeProgress').css("width", "45%");
+            $('#progress').removeClass("progress-striped").removeClass("progress-striped active");
+            // $('#progressBar').html("Fullname markup finsihed, partial name scan ready");      
+
+            if (data.callback) {
+                eval(data.callback);
+            }
+
+            nextMarkupJob();
+
+            // registUnsolved();
+        }
+
+    };
+
+    var resetProgressBar = function() {
+        $("#stateThreeProgress").css("width", "0%");
+        $("#stateTwoProgress").css("width", "0%");
+        $("#stateOneProgress").css("width", "0%");
+        $("#progress").addClass("active").addClass("progress-striped");
+    };
+
+    var startMarkup = function(_regexsArray, _type, _attrMap, _markupCallback) {
+        $.Hive.get(0).send({
+            cmd: "setAttrMap",
+            attrMap: _attrMap
+        });
+        console.log("startMarkup");
+        resetProgressBar();
+        uniqueTermThreads = [];
+        uniqueTermJobs = [];
+        uniqueTermRegexsIndex = -1;
+        uniqueTerms = [];
+        refercedSpans = [];
+        // attrMap = _attrMap || {};
+
+        regexs = _regexsArray;
+        uniqueTermRegexsCount = regexs.length;
+
+        // console.log("startNianhaoMarkup");
+        uniqueTermThreadscount = Math.min(uniqueTermRegexsCount, uniqueTermThreadsMax);
+
+        for (var i = 0; i < uniqueTermThreadscount; i++) {
+            uniqueTermRegexsIndex = i;
+            // console.log("startNianhaoMarkup Thread:"+i);
+            $.Hive.get(i + 1).send({
+                cmd: "uniqueTerm",
+                id: i,
+                regex: regexs[i],
+                callback: "uniqueCallback('" + _type + "','" + _markupCallback + "')"
+            });
+            // console.log("uniqueCallback('"+_type+"','"+_markupCallback+"')");
+        }
+
+    };
+
+    var uniqueCallback = function(_type, _markupCallback) {
+        // console.log("uniqueCallback");
+        $('#stateOneProgress').css("width", "10%");
+        uniqueTermJobsCount = uniqueTermJobs.length;
+        for (var id = 1; id <= Math.min(uniqueTermThreadsMax, uniqueTermJobsCount); id++) {
+            $.Hive.get(id).send({
+                id: id,
+                txt: $(".doc").html(),
+                cmd: "findAppearedTerm",
+                regex: uniqueTermJobs.shift(),
+                callback: "findAppearedCallback('" + _type + "','" + _markupCallback + "')"
+            });
+        }
+    };
+
+    var findAppearedCallback = function(_type, _markupCallback) {
+        $('#stateTwoProgress').css("width", "45%");
+        // console.log("readyTo markup");
+        $('#progressBar').html("Ready to markup");
+        uniqueTerms.sort(markus.util.sortMergerdRegex
+
+        );
+        var data;
+
+        if (uniqueTerms.length > 0) {
+            data = {
+                cmd: "termMarkup",
+                txt: $(".doc").html(),
+                regex: uniqueTerms[0],
+                index: 0,
+                type: _type,
+                callback: _markupCallback
+            };
+
+        } else {
+            data = {
+                cmd: "termMarkup",
+                txt: $(".doc").html(),
+                regex: "",
+                index: 0,
+                type: _type,
+                callback: _markupCallback
+            };
+        }
+        $.Hive.get(0).send(data);
+    };
+
+
+
+    var nianhaoMarkupCallback = function() {
+        $(".doc").find(".nianhao .nianhao").contents().unwrap();
+
+
+        cleanNiahao();
+
+        $(".fullName .nianhao").contents().unwrap();
+        $(".partialName .nianhao").contents().unwrap();
+
+        $(".doc").attr("markupNianhao", true);
+        // cleanPlaceName();
+        updateNianhaoStatus();
+        updatePlaceNameStatus();
+
+    };
+
+    var startPartialNameMarkup = function() {
+        resetProgressBar();
+        console.log("startPartialNameMarkup");
+        var markups = $(".doc").find(".fullName"),
+            matchCBDBResults = [];
+        // console.log($(".doc").find(".fullName").length);
+        $.each(markups, function() {
+            // $(this).attr("x_origin",$(this).offset().left).attr("y_origin",$(this).offset().top);
+            var tempCbdbids = $(this).attr("cbdbid").split("|");
+            for (var i = 0, j = tempCbdbids.length; i < j; i++) {
+                matchCBDBResults.push(tempCbdbids[i]);
+            }
+
+        });
+        // console.log(matchCBDBResults);
+        var cbdbids = markus.util.unique(matchCBDBResults);
+        // console.log(cbdbids);
+        if (cbdbids.length === 0) {
+            $(".doc").attr("markupPartialName", true);
+            updatePartialNameStatus();
+            nextMarkupJob();
+        }
+        $("#progressBar").html("Partial name markup:");
+        $("#stateOneProgress").css("width", "5%");
+        $.Hive.get(0).send({
+            "cmd": "idsToNames",
+            "cbdbids": cbdbids
+        });
+    };
+
+    var receivePartialNameMarkupWorker = function(data) {
+
+        // console.log( data.regex+ " "+data.index+ " "+data.txt);  
+        $('#stateTwoProgress').css("width", ((partialRegexMax - data.regex.length / partialRegexMax) * 45) + "%");
+        $('#progressBar').html(data.index);
+        $(".doc").html(data.txt);
+        $(".doc").find(".partialName .partialName").contents().unwrap();
+        $(".doc").find(".fullName .partialName").contents().unwrap();
+
+        $('#progressBar').html("Partial name scan remaining:" + data.index);
+        data.index--;
+
+
+
+        if (data.regex.length > 0) {
+            data.txt = $(".doc").html();
+            // data.cmd = partialNameMarkup
+            $.Hive.get(0).send(data);
+
+        } else {
+
+            $('#stateTwoProgress').css("width", "45%");
+            $(".doc .timePeriod .partialName").contents().unwrap();
+            $(".doc").find(".partialName").each(function() {
+                $(this).attr("y_origin", $(this).offset().top).attr("x_origin", $(this).offset().left);
+            });
+
+
+
+            var temp = 0;
+            $(".doc").find(".fullName,.partialName").each(function() {
+                $(this).attr("randomID", temp++);
+            });
+
+
+            // CBDBMarkup.js
+            $.Hive.get(0).send({
+                cmd: "scanCBDBMarkups",
+                txt: $(".doc").html()
+            });
+            console.log("scanCBDBMarkups");
+
+        }
+
+    };
+
+
+    var startFullNameMarkup = function() {
+
+        // $(".doc").attr("markupFullName",true);
+        resetProgressBar();
+
+        uniqueTermThreads = [];
+        uniqueTermJobs = [];
+
+        uniqueTermRegexsIndex = -1;
+
+        uniqueTerms = [];
+
+        refercedSpans = [];
+
+        regexs = CBDBRegexs;
+        uniqueTermRegexsCount = regexs.length;
+        console.log("startFullNameMarkup");
+        uniqueTermThreadscount = Math.min(uniqueTermRegexsCount, 8);
+        for (var i = 0; i < uniqueTermThreadscount; i++) {
+            uniqueTermRegexsIndex = i;
+            console.log("startFullNameMarkup Thread:" + i);
+            $.Hive.get(i + 1).send({
+                cmd: "uniqueTerm",
+                id: i,
+                regex: regexs[i],
+                callback: "uniqueFullNameCallback()"
+            });
+        }
+
+    };
+
+    var uniqueFullNameCallback = function() {
+        $('#stateOneProgress').css("width", "10%");
+        uniqueTermJobsCount = uniqueTermJobs.length;
+        for (var id = 1; id <= Math.min(uniqueTermThreadsMax, uniqueTermJobsCount); id++) {
+            $.Hive.get(id).send({
+                id: id,
+                txt: $(".doc").html(),
+                cmd: "findAppearedTerm",
+                regex: uniqueTermJobs.shift(),
+                callback: "findAppearedFullNameCallback()"
+            });
+        }
+    };
+
+    var findAppearedFullNameCallback = function() {
+
+        $('#stateTwoProgress').css("width", "45%");
+        console.log("readyTo markup");
+        $('#progressBar').html("Ready to markup");
+        uniqueTerms.sort(markus.util.sortMergerdRegex
+            //   function(a,b){
+            //   var alength = a.indexOf("|"), blength = b.indexOf("|");
+            //   if (alength < 0) {alength = a.length;}
+            //   if (blength < 0) {blength = b.length;}
+            //   return blength - alength;
+            // }
+        );
+        var data;
+        if (uniqueTerms.length > 0) {
+            data = {
+                cmd: "fullNameMarkup",
+                txt: $(".doc").html(),
+                regex: uniqueTerms[0],
+                index: 0,
+                filtered: selected
+            };
+
+        } else {
+            data = {
+                cmd: "fullNameMarkup",
+                txt: $(".doc").html(),
+                regex: "",
+                index: 0,
+                filtered: selected
+            };
+        }
+        $.Hive.get(0).send(data);
+    };
+    var ddbcPersonCallback = function() {
+        $(".doc").attr("markupddbcPerson", true);
+        $(".ddbcPerson .ddbcPerson").contents().unwrap();
+
+        updatedddbcPersonStatus();
+    };
+
+    var koreanPersonCallback = function() {
+        $(".doc").attr("markupkoreanPerson", true);
+        $(".koreanPerson .koreanPerson").contents().unwrap();
+
+        updatedkoranPersonStatus();
+    };
+
+    var ddbcGlossariesCallback = function() {
+        $(".doc").attr("markupddbcGlossaries", true);
+        $(".markup .ddbcGlossaries").contents().unwrap();
+        updateddbcGlossariesStatus();
+    };
+
+    var officialTitleMarkupCallback = function() {
+        $(".doc").attr("markupofficialTitle", true);
+        $(".officialTitle .officialTitle").contents().unwrap();
+        $(".fullName .officialTitle").contents().unwrap();
+        $(".partialName .officialTitle").contents().unwrap();
+        $(".timePeriod .officialTitle").contents().unwrap();
+        cleanNiahao();
+        updateofficialTitleStatus();
+    };
+
+
+
+    var placeNameMarkupCallback = function() {
+        $(".doc").attr("markupPlaceName", true);
+        $(".placeName .placeName").contents().unwrap();
+        $(".fullName .placeName").contents().unwrap();
+        $(".partialName .placeName").contents().unwrap();
+        $(".timePeriod .placeName").contents().unwrap();
+
+
+
+
+
+
+        // cleanPlaceName(); 
+        cleanNiahao();
+
+        updatePlaceNameStatus();
+        updateNianhaoStatus();
+    };
+
+    var cleanPlaceName = function() {
+        var errorCandidate = [];
+        var randomID = 0;
+        $(".doc .placeName.markup").each(function() {
+            var placeTag = $(this);
+            $(this).attr("randomID", randomID++);
+            var parent = $(this).parent();
+
+            if ($(parent).hasClass("nianhao")) {
+                if ($(parent).text().length > $(this).text().length) {
+                    $(this).contents().unwrap();
+                } else {
+                    errorCandidate.push($(parent));
+                }
+
+            }
+            $(this).find(".nianhao").each(function() {
+                if ($(placeTag).text() == $(this).text()) {
+                    errorCandidate.push($(placeTag));
+                }
+            });
+        });
+
+        var _html = $(".doc").html().replace(/\n/ig, "");
+        var errors = [];
+        for (var _index in errorCandidate) {
+            var candidate = errorCandidate[_index];
+            var htmlSplits = _html.split($(candidate)[0].outerHTML.replace(/\n/ig, ""));
+            var tail = (htmlSplits[1]).replace(/(<([^>]+)>)/ig, "");
+            var head = (htmlSplits[0]).replace(/(<([^>]+)>)/ig, "");
+
+            if (tail.search(/[年月日初中末]/) < 5 ||
+                tail.search(/[甲|丙|戊|庚|壬|乙|丁|己|辛|癸|子|寅|辰|午|申|戌|丑|卯|巳|未|酉|亥][甲|丙|戊|庚|壬|乙|丁|己|辛|癸|子|寅|辰|午|申|戌|丑|卯|巳|未|酉|亥]/) < 5 ||
+                head.substr(head.length - 2, 2) == "改元") {
+                // console.log($(candidate)[0].outerHTML);
+                if ($(candidate).hasClass("placeName")) {
+
+                    $(candidate).contents().unwrap();
+                } else {
+                    $(candidate).find(".placeName").contents().unwrap();
+                }
+
+            }
+        }
+        $(".doc .placeName.markup").each(function() {
+            // console.log(this);
+            var htmlSplits = _html.split(this.outerHTML.replace(/\n/ig, ""));
+            if (htmlSplits.length > 1) {
+                var tail = (htmlSplits[1]).replace(/(<([^>]+)>)/ig, "").replace(/^\s*/g, "");
+                var head = (htmlSplits[0]).replace(/(<([^>]+)>)/ig, "").replace(/\s*$/g, "");
+                console.log(tail.substr(0, 5));
+                if (tail.search(/[殿]/) === 0) {
+
+                    $(this).contents().unwrap();
+
+                }
+
+            }
+
+        });
+
+        $(".placeName").removeAttr("randomID");
+    };
+
+
+    var cleanNiahao = function() {
+        var errorCandidate = [];
+        var randomID = 0;
+        $(".doc .nianhao.markup").each(function() {
+            var nianhaoTag = $(this);
+            $(this).attr("randomID", randomID++);
+            // var parent = $(this).parent();
+
+            // if ($(parent).hasClass("markup")) {
+            //     if ($(parent).text().length > $(this).text().length) {
+            //         $(this).contents().unwrap();
+            //     } else {
+            //         errorCandidate.push($(parent));
+            //     }
+
+            // }
+            // if ($(this).find(".markup").length > 0) {
+            //     errorCandidate.push($(nianhaoTag));
+            // }
+
+
+
+        });
+
+        var _html = $(".doc").html().replace(/\n/ig, "");
+        // var errors = [];
+        // for (var _index in errorCandidate) {
+        //     var candidate = errorCandidate[_index];
+        //     var htmlSplits = _html.split($(candidate)[0].outerHTML.replace(/\n/ig, ""));
+        //     var tail = (htmlSplits[1]).replace(/(<([^>]+)>)/ig, "");
+        //     var head = (htmlSplits[0]).replace(/(<([^>]+)>)/ig, "");
+
+        //     if (tail.search(/[年月日初中末]/) < 5 ||
+        //         tail.search(/[甲|丙|戊|庚|壬|乙|丁|己|辛|癸|子|寅|辰|午|申|戌|丑|卯|巳|未|酉|亥][甲|丙|戊|庚|壬|乙|丁|己|辛|癸|子|寅|辰|午|申|戌|丑|卯|巳|未|酉|亥]/) < 5 ||
+        //         head.substr(head.length - 2, 2) == "改元") {
+        //         // console.log($(candidate)[0].outerHTML);
+        //         if (!$(candidate).hasClass("nianhao")) {
+
+        //             $(candidate).contents().unwrap();
+
+        //             /*
+        //               keep adding error pattern
+        //             */
+        //         } else {
+
+
+        //             $(candidate).find(".markup").contents().unwrap();
+        //         }
+
+        //     }
+        // }
+
+        // $(".doc .nianhao.markup").each(function() {
+        //     // console.log(this);
+        //     var htmlSplits = _html.split(this.outerHTML.replace(/\n/ig, ""));
+        //     if (htmlSplits.length > 1) {
+        //         var tail = (htmlSplits[1]).replace(/(<([^>]+)>)/ig, "").replace(/^\s*/g, "");
+        //         var head = (htmlSplits[0]).replace(/(<([^>]+)>)/ig, "").replace(/\s*$/g, "");
+        //         // console.log(tail.substr(0,5));
+        //         if (tail.search(/[殿府縣寺廟門人陵]/) != -1) {
+
+        //             $(this).contents().unwrap();
+
+        //         }
+
+        //     }
+
+        // });
+
+        $(".doc .nianhao.markup").filter(function() {
+            // console.log(this);
+            var htmlSplits = _html.split(this.outerHTML.replace(/\n/ig, ""));
+            if (htmlSplits.length > 1) {
+                var tail = (htmlSplits[1]).replace(/(<([^>]+)>)/ig, "").replace(/^\s*/g, "");
+                // var head = (htmlSplits[0]).replace(/(<([^>]+)>)/ig, "").replace(/\s*$/g, "");
+                // console.log(tail.substr(0,5));
+                // if (tail.substr(0,3).search(/[殿府縣寺廟門人陵]/) != -1) {
+                //     console.log(tail);
+                // }
+                return  (tail.substr(0,3).search(/[殿府縣寺廟門人陵節]/) != -1);
+
+            } else {
+                return false;
+            }
+
+        }).contents().unwrap();
+        // console.log(problemsNianHao);
+        // problemsNianHao
+
+
+        $(".doc .nianhao").removeAttr("randomID");
+    };
+
+
+    var nextMarkupJob = function() {
+        var html = $(".doc").html();
+        $(".doc").html(html);
+        // console.log(markupJobsList);
+        var job = markupJobsList.shift();
+        // console.log(job);
+        if (job) {
+            // job();
+            job();
+        } else {
+            finishMarkupJobList();
+        }
+    };
+
+    var finishMarkupJobList = function() {
+        $("#progressDiv").fadeOut(1000);
+        if ($("#markupSelectionModal input:checkbox:not(:disabled)").length === 0) {
+            $("#startMarkupBtn").fadeOut(1000);
+        }
+        $("#saveMarkupBtn").fadeIn(1000);
+    };
+
+    var docStatusDetection = function() {
+        updateParagraphStatus();
+        updateFullNameStatus();
+        updatePartialNameStatus();
+        updateNianhaoStatus();
+        updateofficialTitleStatus();
+        updatePlaceNameStatus();
+        updateddbcGlossariesStatus();
+        updatedddbcPersonStatus();
+        updatedkoreanPersonStatus();
+        updateTimePeriodStatus();
+
+        var disabled = true;
+        $("#markupSelectionModal input:checkbox").each(function() {
+            disabled = disabled && !$(this).prop('checked');
+        });
+        $("#startMarkupBtn").prop("disabled", disabled);
+        if (disabled) {
+            $("#startMarkupBtn").fadeOut(1000);
+            $("#saveMarkupBtn").fadeIn(1000);
+        } else {
+            $("#startMarkupBtn").show();
+            $("#saveMarkupBtn").show();
+        }
+
+    };
+    var updateParagraphStatus = function() {
+        console.log("updateParagraphStatus");
+        if ($(".doc").find(".passage").length > 0) {
+            $("#paragraphCheckbox").hide().prop("disabled", true).prop("checked", false);
+            $("#paragraphCheckboxStatus").html("<span class='badge badge-primary'>" + $(".doc").find(".passage").length + "</span>");
+        } else {
+            $("#paragraphCheckbox").show().prop("disabled", false).prop("checked", true);
+            $("#paragraphCheckboxStatus").html("");
+        }
+        markus.comment.startAddingCommentHolder();
+    };
+
+    var updateFullNameStatus = function() {
+        if ($(".doc").attr("markupFullName") == "true") {
+            $("#fullNameCheckbox").hide().prop("disabled", true).prop("checked", false);
+            $("#fullNameCheckboxStatus").html("<span class='badge badge-primary'>" + $(".doc").find(".fullName").length + "</span>");
+        } else {
+            $("#fullNameCheckbox").show().prop("disabled", true).prop("checked", false);
+            $("#fullNameCheckboxStatus").html("");
+        }
+    };
+    var updatePartialNameStatus = function() {
+        if ($(".doc").attr("markupPartialName") == "true") {
+            $("#partialNameCheckbox").hide().prop("disabled", true).prop("checked", false);
+            $("#partialNameCheckboxStatus").html("<span class='badge badge-primary'>" + $(".doc").find(".partialName").length + "</span>");
+        } else {
+            $("#partialNameCheckbox").show().prop("disabled", true).prop("checked", false);
+            $("#partialNameCheckboxStatus").html("");
+        }
+    };
+    var updateNianhaoStatus = function() {
+        if ($(".doc").attr("markupNianhao") == "true") {
+            $("#nianhaoCheckbox").hide().prop("disabled", true).prop("checked", false);
+            $("#nianhaoCheckboxStatus").html("<span class='badge badge-primary'>" + $(".doc").find(".nianhao").length + "</span>");
+        } else {
+            $("#nianhaoCheckbox").show().prop("disabled", false).prop("checked", true);
+            $("#nianhaoCheckboxStatus").html("");
+        }
+    };
+    var updateTimePeriodStatus = function() {
+        if ($(".doc").attr("markupTimePeriod") == "true") {
+            $("#timePeriodCheckbox").hide().prop("disabled", true).prop("checked", false);
+            $("#timePeriodCheckboxStatus").html("<span class='badge badge-primary'>" + $(".doc").find(".timePeriod").length + "</span>");
+        } else {
+            $("#timePeriodCheckbox").show().prop("disabled", false).prop("checked", true);
+            $("#timePeriodCheckboxStatus").html("");
+        }
+    };
+    var updateofficialTitleStatus = function() {
+        if ($(".doc").attr("markupofficialTitle") == "true") {
+            $("#officialTitleCheckbox").hide().prop("disabled", true).prop("checked", false);
+            $("#officialTitleCheckboxStatus").html("<span class='badge badge-primary'>" + $(".doc").find(".officialTitle").length + "</span>");
+        } else {
+            $("#officialTitleCheckbox").show().prop("disabled", false).prop("checked", true);
+            $("#officialTitleCheckboxStatus").html("");
+        }
+    };
+    var updateddbcGlossariesStatus = function() {
+        if ($(".doc").attr("markupddbcGlossaries") == "true") {
+            $("#ddbcGlossariesCheckbox").hide().prop("disabled", true).prop("checked", false);
+            $("#ddbcGlossariesCheckboxStatus").html("<span class='badge badge-primary'>" + $(".doc").find(".ddbcGlossaries").length + "</span>");
+        } else {
+            $("#ddbcGlossariesCheckbox").show().prop("disabled", false).prop("checked", false);
+            $("#ddbcGlossariesCheckboxStatus").html("");
+        }
+    };
+    var updatedddbcPersonStatus = function() {
+        if ($(".doc").attr("markupddbcPerson") == "true") {
+            $("#ddbcPersonCheckbox").hide().prop("disabled", true).prop("checked", false);
+            $("#ddbcPersonCheckboxStatus").html("<span class='badge badge-primary'>" + $(".doc").find(".ddbcPerson").length + "</span>");
+        } else {
+            $("#ddbcPersonCheckbox").show().prop("disabled", false).prop("checked", false);
+            $("#ddbcPersonCheckboxStatus").html("");
+        }
+    };
+
+    var updatedkoreanPersonStatus = function() {
+        if ($(".doc").attr("markupkoreanPerson") == "true") {
+            $("#koreanPersonCheckbox").hide().prop("disabled", true).prop("checked", false);
+            $("#koreanPersonCheckboxStatus").html("<span class='badge badge-primary'>" + $(".doc").find(".koreanPerson").length + "</span>");
+        } else {
+            $("#koreanPersonCheckbox").show().prop("disabled", false).prop("checked", false);
+            $("#koreanPersonCheckboxStatus").html("");
+        }
+    };
+
+    var updatePlaceNameStatus = function() {
+        if ($(".doc").attr("markupPlaceName") == "true") {
+            $("#placeNameCheckbox").hide().prop("disabled", true).prop("checked", false);
+            $("#placeNameCheckboxStatus").html("<span class='badge badge-primary'>" + $(".doc").find(".placeName").length + "</span>");
+        } else {
+            $("#placeNameCheckbox").show().prop("disabled", false).prop("checked", true);
+            $("#placeNameCheckboxStatus").html("");
+        }
+    };
+
+    var startParagraphMarkup = function() {
+        if ($(".doc").text() == $(".doc pre").text()) {
+            var _lineArray = $(".doc pre").html().split("\n");
+            var begin = true;
+            var count = 0;
+            for (var index in _lineArray) {
+                var line = _lineArray[index].replace(/ /g, '');
+                if (begin && line.length > 0) {
+                    _lineArray[index] = "<span class='passage' type='passage' id='passage" + (count++) + "'>" + _lineArray[index];
+                    begin = false;
+                } else if (!begin && line.length === 0) {
+                    _lineArray[index - 1] = _lineArray[index - 1] + "</span>";
+                    begin = true;
+                }
+            }
+            if (!begin) {
+                _lineArray[_lineArray.length - 1] = _lineArray[_lineArray.length - 1] + "</span>";
+            }
+            $(".doc pre").html(_lineArray.join("\n"));
+        } else {
+            var originalHTML = $(".doc").html();
+            $(".doc").html("").append("<span class='passage' id='passage00'></span>");
+            $(".doc #passage00").html(originalHTML);
+        }
+        updateParagraphStatus();
+        nextMarkupJob();
+    }
+    </script>
+    <script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-53293952-3', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+
+</html>

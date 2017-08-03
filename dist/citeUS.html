@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Brent Ho">
+    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+    <title>MARKUS CiteUS</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/markus.min.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.js"></script>
+    <![endif]-->
+    
+  </head>
+<style>
+
+ul.affix {
+  position: fixed; 
+  top: 0px;
+  /*left: 62px;*/
+  width: 360px;
+}
+ul.affix-top {
+  position: static;
+}
+ul.affix-bottom {
+  position: absolute;
+}
+
+/* First level of nav */
+.sidenav {
+  margin-top: 100px;
+  margin-bottom: 30px;
+  padding-top:    10px;
+  padding-bottom: 10px;
+  background-color: #f7f5fa;
+  border-radius: 5px;
+}
+
+/* All levels of nav */
+.sidebar .nav > li > a {
+  display: block;
+  color: #716b7a;
+  padding: 5px 20px;
+}
+.sidebar .nav > li > a:hover,
+.sidebar .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #e5e3e9;
+}
+.sidebar .nav > .active > a,
+.sidebar .nav > .active:hover > a,
+.sidebar .nav > .active:focus > a {
+  font-weight: bold;
+  color: #563d7c;
+  background-color: transparent;
+}
+
+/* Nav: second level */
+.sidebar .nav .nav {
+  margin-bottom: 8px;
+}
+.sidebar .nav .nav > li > a {
+  padding-top:    3px;
+  padding-bottom: 3px;
+  padding-left: 30px;
+  font-size: 90%;
+}
+#content {
+  margin-top:100px;
+}
+.table tfoot>tr>td {
+padding: 8px;
+line-height: 1.428571429;
+vertical-align: middle;
+border-top: 1px solid #ddd;
+}
+
+/*article {
+ padding-top: 70px;
+}
+*/
+</style>
+  <body data-spy="scroll" data-target="#affix-nav">
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="./index.html">MARKUS</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <!--<li><a href="http://chinese-empires.eu" target="chineseEmpire">Communication and Empire</a></li>                      -->
+            <!-- <li><a href="http://chinese-empires.eu/team/" target="chineseEmpire">Team</a></li> -->
+            <!-- <li><a href="http://chinese-empires.eu/team/phase-ii/brent-ho/" target="chineseEmpire">Contact</a></li> -->
+            <!-- <li><a id="save">Save <span class="glyphicon glyphicon-floppy-disk"></span></a></li> -->
+            <!-- <li><a id="saveHTML">Export HTML <span class="glyphicon glyphicon-save"></span></a></li> -->
+            <li><a id="export" style="display:none"></a></li>          
+          </ul>
+          <ul class="nav navbar-nav navbar-right">            
+                
+            <li>
+              <script>document.write('<a href="' + document.referrer + '">Go Back</a>');</script>
+            </li>
+            <!-- <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a class="langLink" lang="">English</a></li>
+                <li><a class="langLink" lang="_zhtw">正體中文</a></li>
+              </ul>
+            </li> -->
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </div><!-- /.navbar -->
+
+    <script>
+      var todayString = new Date().toLocaleDateString('en-US', {  
+    month : 'long',
+    day : 'numeric',    
+    year : 'numeric'
+});
+
+    </script>
+
+    <div class="container">
+      <h2>When using MARKUS in your work, please credit the authors and their work as follows:</h2>
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Citation
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+              Ho, Hou Ieong Brent, and Hilde De Weerdt. MARKUS. Text Analysis and Reading Platform. 2014- http://dh.chinese-empires.eu/beta/ Funded by the European Research Council and the Digging into Data Challenge.
+            </div>
+          </div>
+        </div>
+        <!--<div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                MLA format
+              </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+              Ho,  Hou  Ieong  Brent,  and  Hilde  De  Weerdt. MARKUS  [online  text  analysis  and reading platform]. European Research Council and Digging into Data Challenge, 2014- . http://dh.chinese-empires.eu/beta/. Accessed <script>document.write(todayString);</script> 
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                APA format
+              </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+              Ho   and   De   Weerdt.   (2014- ).MARKUS   [online   text   analysis   and   reading platform]. European Research Council and Digging into Data Challenge. Retrieved from http://dh.chinese-empires.eu/beta/.
+            </div>
+          </div>
+        </div>-->
+        <!--<div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingFour">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                4. How can I add multiple tags at the same time ?
+              </a>
+            </h4>
+          </div>
+          <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+            <div class="panel-body">
+              Highlight a term to be tagged. Select the appropriate tag. Tagging activates the “search in text” icon <a class="glyphicon glyphicon-search" disabled></a>. Click on it to show all instances in which the term that was just tagged appears. In order to tag all instances, click on the <button type="button" class="btn btn-danger btn-xs">Apply to all</button> button at the bottom. All terms will be tagged with the last tag applied. In order to remove individual tags, apply the procedure explained in question 3.
+This procedure will only work when no other tags have been applied to the term before. If tags had been applied in some instances before, first remove all tags (as explained in question 3) and then apply the above procedure.
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingFive">
+            <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                5. How large a file can I upload ?
+              </a>
+            </h4>
+          </div>
+          <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+            <div class="panel-body">
+              This may vary somewhat. We recommend that file size not exceed 5 Mb at this time. Split larger files into smaller ones to tag larger corpora.
+            </div>
+          </div>
+        </div>-->
+      </div>
+
+      
+
+      <hr>
+     
+      <footer>
+        <p>MARKUS was developed as part of the project <a href="http://chinese-empires.eu" target="chineseEmpire">“Communication and Empire: Chinese Empires in Comparative Perspective,”</a> funded by the European Research Council.</p>
+      </footer>
+
+    </div><!--/.container-->
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+    window.onload = function() {
+        var lang = $.cookie('lang') || "";
+        $("footer").load("footer" + lang + ".html");
+      };
+    </script>
+    
+    <!-- <script src="js/jquery.hive.js"></script> -->
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53293952-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    
+  </body>
+  
+</html>
