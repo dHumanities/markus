@@ -56,11 +56,3 @@ _m.ui.colorSwitcher = {
 var registColorSwitcher = function() {
     markus.ui.colorSwitcher.regist("#buttonsRow", "button.switcher", ".doc");
 }
-
-
-
-
-
-
-
-

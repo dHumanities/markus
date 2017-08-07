@@ -10,4 +10,6 @@ helpInfo.js
 io.js
 markus.js
 navbar.js
+tagRegex.js
+ui.js
 webDictionary.js
