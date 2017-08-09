@@ -59,6 +59,34 @@ listener.simple_combo("meta d", function() {
     }
 });
 
+listener.simple_combo("meta =", function() {   
+    
+    var fontSize = $(".doc pre").css('font-size');
+    
+    if (fontSize){
+        fontSize = parseInt(fontSize + 10);
+
+    } else {
+        fontSize = "110";        
+    }
+    $(".doc pre").css('font-size',fontSize+"%");
+    return false;
+});
+
+listener.simple_combo("meta -", function() {   
+    var fontSize = $(".doc pre").css('font-size');
+    if (fontSize){
+
+        fontSize = Math.max(10,parseInt(fontSize + 10));
+
+    } else {
+        fontSize = "90";
+        
+    }
+    $(".doc pre").css('font-size',fontSize+"%");
+    return false;
+});
+
 /**
  * This method will transfer your focus from the currently selected markup instance
  * to the next one in the document with the same type.
