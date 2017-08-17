@@ -60,30 +60,31 @@ listener.simple_combo("meta d", function() {
 });
 
 listener.simple_combo("meta =", function() {   
-    
+      
     var fontSize = $(".doc pre").css('font-size');
     
     if (fontSize){
-        fontSize = parseInt(fontSize + 10);
+        fontSize = parseInt(fontSize) + 1;
 
     } else {
-        fontSize = "110";        
+        fontSize = "14";
+        
     }
-    $(".doc pre").css('font-size',fontSize+"%");
+    $(".doc pre").css('font-size',fontSize+"px");
     return false;
 });
 
 listener.simple_combo("meta -", function() {   
+    
     var fontSize = $(".doc pre").css('font-size');
     if (fontSize){
-
-        fontSize = Math.max(10,parseInt(fontSize + 10));
+        fontSize = Math.max(10,parseInt(fontSize) - 1);
 
     } else {
-        fontSize = "90";
+        fontSize = "12";
         
     }
-    $(".doc pre").css('font-size',fontSize+"%");
+    $(".doc pre").css('font-size',fontSize+"px");
     return false;
 });
 
@@ -284,8 +285,10 @@ listener.register_combo({
  *
  * @class UI
  */
-_m.ui = {
-    listener: listener,
-};
+
+ if (_m.ui == null) {
+    _m.ui = {};
+ }
+_m.ui.listener = listener;
 
 } )(markus);
