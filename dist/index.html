@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+    <title>MARKUS</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/markus.min.css" rel="stylesheet">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+<!--     <link href="css/offcanvas.css" rel="stylesheet">
+    <link href="css/website.css" rel="stylesheet"> -->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+    <div id="navbar"  class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="./index.html">MARKUS</a>         
+        </div>
+        <div class="collapse navbar-collapse">
+          <!-- <ul class="nav navbar-nav"> -->
+            <!-- <li><a href="http://chinese-empires.eu" target="chineseEmpire">Communication and Empire</a></li> -->                    
+            <!-- <li><a href="http://chinese-empires.eu/team/" target="chineseEmpire">Team</a></li> -->
+            <!-- <li><a href="http://chinese-empires.eu/team/phase-ii/brent-ho/" target="chineseEmpire">Contact</a></li> -->
+          <!-- </ul> -->
+          <!-- <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Links <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="http://chinese-empires.eu" target="chineseEmpire">Communication and Empire</a></li>
+                <li><a href="http://isites.harvard.edu/icb/icb.do?keyword=k16229&pageid=icb.page76535" target="ChinaBiographicalDatabase">China Biographical Database</a></li>
+                <li><a href="http://www.fas.harvard.edu/~chgis/" target="ChinaHistoricalGIS">China Historical GIS</a></li>
+              </ul>
+            </li> 
+            <li>
+              <a href="./video.html">About</a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a class="langLink" lang="">English</a></li>
+                <li><a class="langLink" lang="_zhtw">正體中文</a></li>
+              </ul>
+            </li>
+            <li >
+              <a id="login" href="/auth">Login</a>
+            </li>
+          </ul>
+          
+        -->  
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </div><!-- /.navbar -->
+
+    <div class="container">
+      <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-xs-18 col-sm-12" id="frontPage">
+        </div>
+        <!--/span-->
+      <hr>
+      <div id='temp' style='display:none'></div>
+      <footer>
+        <p>MARKUS was developed as part of the project <a href="http://chinese-empires.eu" target="chineseEmpire">“Communication and Empire: Chinese Empires in Comparative Perspective,”</a> funded by the European Research Council. All Rights Reserved.</p>
+      </footer>
+    </div><!--/.container-->
+    <div class="modal fade" id="pasteTextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" style="display:none">          
+            <!-- <h4 class="modal-title">Markup selection</h4> -->
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group has-error">
+                <label for="filename">File name (中文檔名會自動轉為拼音)</label>
+                <div class="input-group">          
+                  <input type="text" class="form-control" id="filename" placeholder="Enter filename">
+                  <span class="input-group-addon">.txt</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="pastedContent">Paste your text here</label>
+                <textarea class="form-control" rows="15" id="pastedContent"></textarea>
+              </div>                
+            </form>
+            <button id="sumbitTextBtn"  class="btn btn-default">Submit</button><br/><br/>
+            <label for="note">* Nothing will be uploaded to our server.</label>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bowser.min.js"></script>    
+    <script src="markus.min.js"></script>
+<!--
+    <script type="text/javascript" src="js_0.2/markus.js"></script>
+    <script type="text/javascript" src="js_0.2/utilities.js"></script>
+-->
+    <!-- <script src="js/offcanvas.js"></script> -->
+    <!-- // <script type="text/javascript" src="js/utilities.js"></script> -->
+    <script>
+
+      var tempFile = "";
+      var autoMarkupLinkEnable = false;
+      var manualMarkupLinkEnable = false;
+      var termsMarkupLinkEnable = false;
+      var filterEntryLinkEnable = false;
+      var chineseToPingYin;
+      var registUserIntefaceAction = function(){
+        $("#autoMarkupLink,#manualMarkupLink,#termsMarkupLink").bind('click',false);
+        // $("#manualMarkupLink").bind('click',false);
+        // $("#termsMarkupLink").bind('click',false);
+        $(".btn").prop('disabled', true);
+        $("#uploadBtn,#pasteBtn").prop('disabled', false);
+        $("#uploadBtn").on("click",function(){
+          $("#filesInput").click();
+        });
+        $("#pasteBtn").on("click",function(){
+          $("#pasteTextModal").modal("show");
+          $("#sumbitTextBtn").prop('disabled', false);
+        });
+        $("#sumbitTextBtn").on("click",function(){
+          if ($("#filename").val().trim() == ""){
+            $("#filename").val("filename");
+          }
+
+          var filename = chineseToPingYin($("#filename").val());
+          
+
+
+          var _file ={type:"text/plain",name:filename};
+          console.log(_file.name);
+          uploadedCallback($("#pastedContent").val(),_file);
+          $("#pasteTextModal").modal("hide");
+          // $("#pasteTextModal").modal("show");
+        });
+      };
+
+      var loadFrontPage = function(lang){
+        $("#navbar").load("navbar"+lang+".html",{},function(){
+          $(".langLink").on("click",function(event){
+
+            event.preventDefault();
+            var lang = $(this).attr("lang");
+            $.cookie('lang', lang,{path: '/' });          
+            loadFrontPage(lang);
+          });
+        });
+
+        $("#frontPage").load("frontPage"+lang+".html",{},function(){
+          registUserIntefaceAction();
+
+          
+          if (!bowser.chrome) {
+            $(".step0").show();
+            $(".step1").hide();
+          }
+
+          $(".step2").hide();
+          if (markus.util.urlParam('file')){
+            $("#uploadBtn").button('loaded').prop('disabled', true);
+          // $("#uploadBtn")
+            markus.io.readeFile(decodeURIComponent(markus.urlParam('file')+".html"), fileLoaded);
+          }
+          var filesInput = document.getElementById("filesInput");
+          filesInput.addEventListener("change", function(evt) {
+            autoMarkupLinkEnable = manualMarkupLinkEnable = false;
+            var file = evt.target.files[0];            
+                if (file.type.match('text.*')) {
+                  
+                  
+                  $("#uploadBtn").button('loading');
+                  autoMarkupLinkEnable = manualMarkupLinkEnable = termsMarkupLinkEnable = filterEntryLinkEnable = false;
+                  setup_upload_reader(file, uploadedCallback);
+                }
+                // 
+          }, false);
+
+          
+          if (markus.util.urlParam('content') == "extension"){
+            $("#pasteBtn").trigger("click");
+          }
+        
+
+          if (!(window.File && window.FileList && window.FileReader)) {
+              alert("Only support newest Chrome browser");
+              console.log("Your browser does not support File API");
+          }
+        });
+      };
+
+      var fetchCTP = function(){
+        var ctp = CTPSubsectionoJob.shift();
+        if (ctp){
+          $.ajax({
+            cache:true,
+            dataType: "json",
+            ctp:ctp,
+            url: "http://api.ctext.org/gettext&urn="+ctp,
+            xhrFields: {
+              withCredentials: true
+            },
+            success: function(result){
+              if ("error" in result){
+                console.log("ctp error");
+                fetchCTP();
+              }
+              if ("subsections" in result){
+                console.log(this.ctp);
+                collectCTPSubsections(this.ctp, result["title"], result["subsections"]);
+              }
+              if ("fulltext" in result){
+                CTPSubsectionoTitle[this.ctp] = result.title;
+                CTPSubsectionoMap[this.ctp] = result.fulltext.join("\n\n");
+                fetchCTP();               
+              }
+              // console.log(result);
+
+            }
+          });
+        } else {
+          // console.log(CTPSubsectionoMap);
+          console.log(mergeCTP(CTPSubsectionsTree));
+
+          var _fileType ={};
+                _fileType.type ="text/plain";
+
+                try {
+                  _fileType.name = chineseToPingYin(CTPSubsectionoTitle[CTPSubsectionsTree]);
+                }catch (error){
+                  _fileType.name = "Text_from_Ctext_"+markus.util.urlParam('ctp');
+                }
+
+                
+                
+
+                uploadedCallback(mergeCTP(CTPSubsectionsTree),_fileType);
+                $("#pasteTextModal").modal("hide");   
+        }  
+      }
+
+      var mergeCTP = function(ctpKey){
+        var CTPText = [CTPSubsectionoTitle[ctpKey]];
+        var ctpResult = CTPSubsectionoMap[ctpKey];
+        if (Array.isArray(ctpResult)){
+          for (var i =0 ; i < ctpResult.length; i++){            
+            CTPText.push(mergeCTP(ctpResult[i]));
+          }
+          return CTPText.join("\n\n");
+        }else {
+          CTPText.push(ctpResult);
+          return CTPText.join("\n\n");
+        }
+
+      }
+
+      var collectCTPSubsections = function(key,title,subsections){
+        CTPSubsectionoTitle[key] = title;
+        CTPSubsectionoMap[key] = subsections;
+        CTPSubsectionoJob = CTPSubsectionoJob.concat(subsections);
+        fetchCTP();
+             
+      }
+      var CTPSubsectionsTree = "";
+      var CTPSubsectionoMap ={};
+      var CTPSubsectionoJob =[];
+      var CTPSubsectionoTitle =[];
+      
+      window.onload = function() {
+        var lang = $.cookie('lang') || "";
+        $("footer").load("footer" + lang + ".html");
+        $.cookie('lang', lang,{path: '/' });
+         $.ajaxSetup ({
+          // Disable caching of AJAX responses
+          cache: false
+        });
+
+        
+
+        
+
+        if (markus.util.urlParam('ctp')){
+
+          var ctp = markus.util.urlParam('ctp');
+          $.ajax({
+            cache:true,
+            dataType: "json",
+            ctp:ctp,
+            url: "http://api.ctext.org/gettext&urn="+ctp,
+            xhrFields: {
+              withCredentials: true
+            },
+            success: function(result){
+              if ("error" in result){
+                console.log("ctp error");
+              }
+              if ("subsections" in result){
+                console.log(this.ctp);
+                CTPSubsectionsTree = this.ctp;
+                collectCTPSubsections(this.ctp, result["title"],result["subsections"]);
+
+              }
+              if ("fulltext" in result){
+                var _fileType ={};
+                _fileType.type ="text/plain";
+                _fileType.name = chineseToPingYin(result.title)+"_"+ctp.replace(/[:\/]/gm, "_");
+                var text = [result.title];
+
+                uploadedCallback(text.concat(result.fulltext).join("\n\n"),_fileType);
+                $("#pasteTextModal").modal("hide");                
+              }
+              // console.log(result);
+
+            }
+          });
+
+        }
+
+        if (markus.util.urlParam('content')){
+          var content = markus.util.urlParam('content');
+          if (content == "extension"){
+
+            chrome.runtime.sendMessage("abdpogpajoomomplofpfpkfpoehkgmhb", {                
+            }, function(response) {                
+                $("#pastedContent").val(response.value);
+            });
+          }
+
+        }
+
+
+        if (markus.util.urlParam('fileName')){
+          var fileId = markus.util.urlParam('fileName');
+          $.getJSON("/auth/list_files", function(result){
+                var files = result.files;
+                for (var i=0, j=files.length; i <j; i++ ){
+                  var _id = files[i]["_id"];
+                  if (_id ==fileId){
+                    var file = files[i];
+                    $.get("/auth/get/"+fileId, function(data) {   
+                      var _fileType ={};
+                      if (data.match(/<[^>]{1,}>/gm)&&data.match(/<\/[^>]{1,}>/)){
+                        _fileType.type ="text/html";
+                      } else {
+                        _fileType.type ="text/plain";
+                      }
+                      console.log(file);
+                      console.log(file.fileName);
+
+                      _fileType.name = chineseToPingYin(file.fileName);
+                      uploadedCallback(data,_fileType);
+                      $("#pasteTextModal").modal("hide");
+
+
+
+
+                    });
+                  }
+                }
+
+          });
+      }
+
+        
+        chineseToPingYin = markus.util.chineseToPingYin;
+        loadFrontPage(lang);
+        $.getJSON("/auth/profile_info", function(result){
+            if (result["name"]){
+              $.get("userSection"+lang+".html", function(data) { 
+                $("#userSection").html(data); 
+                $("#userName").text(result["name"]);
+              });
+            }
+        });
+
+        
+        // $.getJSON( "/auth/profile_info", function( user ) {
+
+        //   var username = false;
+        //   if (user.name){
+        //     username = user.name;
+        //   }
+              
+        //   if (username){
+        //     $("#login").html("Hi! "+username);
+        //     $("#login").attr("href","/auth/logout");
+        //   }
+        //   console.log(username);
+        // });
+        
+
+      };
+
+      var uploadedCallback = function(result,file) {
+          console.log("loaded");
+
+          // console.log(result);
+          // console.log(file);
+          
+          var doc = $(document.createElement('div'));
+          console.log("doc created");
+          var temp = $('#temp');
+          console.log("temp located");
+
+          
+          
+
+
+          
+
+          $(doc).addClass("doc").attr("markupFullName",false)
+                        .attr("markupPartialName",false)
+                        // .attr("markupLocation",false)
+                        .attr("markupNianhao",false)
+                        // .attr("linkToCBDB",false)
+                        .attr("markupOfficalTitle",false)
+                        .attr("markupPlaceName",false)
+                        .attr("filename",chineseToPingYin(file.name));
+
+          if (file.type == "text/plain"){
+            console.log("txt loaded");
+            // console.log(markus.util.removeAllExistTag(result));
+            $(doc).html("<pre>"+markus.util.removeAllExistTag(result)+"</pre>");
+            autoMarkupLinkEnable = manualMarkupLinkEnable = termsMarkupLinkEnable = filterEntryLinkEnable = true;
+
+          } else if (file.type =="text/html") {
+            console.log("html loaded");
+            manualMarkupLinkEnable = true;
+            termsMarkupLinkEnable = true;
+            filterEntryLinkEnable = true;
+            temp.html(markus.util.removeAllExistTag(result));
+            if ($(temp).find(".doc").length >0){
+              var _doc = $(temp).find(".doc")[0];
+              // console.log("markupFullName:"+$(_doc).attr("markupFullName"));
+              // console.log("markupPartialName:"+$(_doc).attr("markupPartialName"));
+              // console.log("markupNianhao:"+$(_doc).attr("markupNianhao"));
+              // console.log("markupOfficalTitle:"+$(_doc).attr("markupOfficalTitle"));
+              // console.log("markupPlaceName:"+$(_doc).attr("markupPlaceName"));
+              // console.log(autoMarkupLinkEnable);
+              autoMarkupLinkEnable = !(($(_doc).attr("markupFullName")=="true") && 
+                  ($(_doc).attr("markupPartialName")=="true") &&
+                  ($(_doc).attr("markupNianhao")=="true") &&
+                  ($(_doc).attr("markupOfficalTitle")=="true") &&
+                  ($(_doc).attr("markupPlaceName")=="true"));
+
+              console.log(autoMarkupLinkEnable);
+
+              doc = _doc;
+            }else{
+              console.log("not saved html loaded");
+              autoMarkupLinkEnable = true;
+              manualMarkupLinkEnable = true;
+              termsMarkupLinkEnable = true;
+              filterEntryLinkEnable = true;
+              $(doc).html(temp.html()); 
+            }
+
+             
+          }else {
+              autoMarkupLinkEnable = true;
+              manualMarkupLinkEnable = true;
+              termsMarkupLinkEnable = true;
+              filterEntryLinkEnable = true;
+              console.log("xml loaded");
+              $(doc).html(markus.util.removeAllExistTag(result));
+          }       
+
+          $("#temp").html("");
+          $("#temp").append(doc);
+          console.log("doc appended");
+          
+          markus.io.removeFile($('.doc').attr('filename')+".html",function(){
+            console.log('File removed.');
+            cacheFile();
+          });  
+          
+          cacheFile();
+
+
+          
+          
+
+         $(".step1").fadeOut(1000);
+         
+         setTimeout(function(){$(".step2").fadeIn();},1100);
+         // console.log("step2 fadeIn");
+      };
+
+      var setup_upload_reader = function (file,_fn){
+
+        autoMarkupLinkEnable = manualMarkupLinkEnable = termsMarkupLinkEnable = filterEntryLinkEnable = false;
+        var fileReader = new FileReader();
+        
+        fileReader.onloadend = (  function(file) {
+          return function(evt) {
+            if (_fn){                           
+              _fn(this.result, file);              
+            }            
+          };
+        })(file);
+
+
+        fileReader.readAsText(file);
+      };
+    
+
+      var fileLoaded = function(result) {
+        $("#temp").html(result);
+        var _doc = $("#temp").find(".doc")[0];
+        manualMarkupLinkEnable = true;
+        termsMarkupLinkEnable = true;
+        filterEntryLinkEnable = true;
+        var filename = $(_doc).attr('filename');
+        autoMarkupLinkEnable = !($(_doc).attr("markupFullName")=="true" && 
+        $(_doc).attr("markupPartialName")=="true" &&
+        $(_doc).attr("markupNianhao")=="true" &&
+        $(_doc).attr("markupOfficalTitle")=="true" &&
+        $(_doc).attr("markupPlaceName")=="true");
+        $("#autoMarkupLink").attr("href","automarkup.html?file="+filename);
+        $("#manualMarkupLink").attr("href","manualmarkup.html?file="+filename);
+        $("#termsMarkupLink").attr("href","termsmarkup.html?file="+filename);
+        $("#filterEntryLink").attr("href","filter.html?file="+filename);
+
+        $("#translateLink").attr("href","translate.html?file="+filename);
+        $("#translateLink").addClass("btn-primary").html("Ready");
+        $("#translateLink").unbind('click',false);
+
+        if (autoMarkupLinkEnable){
+          $("#autoMarkupLink").addClass("btn-primary").html("Ready");
+          $("#autoMarkupLink").unbind('click',false);
+        }else{
+          $("#autoMarkupLink").html("Done");
+          $("#autoMarkupLink").bind('click',false);
+        }
+        $("#manualMarkupLink,#termsMarkupLink,#filterEntryLink").addClass("btn-primary").html("Ready");
+        $("#manualMarkupLink,#termsMarkupLink,#filterEntryLink").unbind('click',false);
+        $(".step1").fadeOut(1000);
+        setTimeout(function(){$(".step2").fadeIn()},1100);
+
+      };
+
+      var cacheFile = function(){
+        markus.io.saveFile($('.doc').attr('filename')+".html",markus.util.recoverAllExistTag($("#temp").html()),function(fileEntry){
+            $("#uploadBtn").button('loaded');
+            $("#uploadBtn").prop('disabled',true);
+            var filename = $('.doc').attr('filename');
+            tempFile = fileEntry.toURL();
+            console.log(tempFile);
+            console.log(autoMarkupLinkEnable);
+            if (autoMarkupLinkEnable){
+              $("#autoMarkupLink").attr("href","automarkup.html?file="+filename);
+              $("#autoMarkupLink").addClass("btn-primary").html("Ready");
+              $("#autoMarkupLink").unbind('click',false);
+            } else {
+              $("#autoMarkupLink").html("Done");
+              $("#autoMarkupLink").bind('click',false);
+            }
+            if (manualMarkupLinkEnable){
+              $("#manualMarkupLink").attr("href","manualmarkup.html?file="+filename);
+              $("#manualMarkupLink").addClass("btn-primary").html("Ready");
+              $("#manualMarkupLink").unbind('click',false);
+
+            }
+            if (termsMarkupLinkEnable){
+              $("#termsMarkupLink").attr("href","termsmarkup.html?file="+filename);
+              $("#termsMarkupLink").addClass("btn-primary").html("Ready");
+              $("#termsMarkupLink").unbind('click',false);
+
+            }
+            if (filterEntryLinkEnable){
+              $("#filterEntryLink").attr("href","filter.html?file="+filename);
+              $("#filterEntryLink").addClass("btn-primary").html("Ready");
+              $("#filterEntryLink").unbind('click',false);
+
+            }
+
+            $("#translateLink").attr("href","translate.html?file="+filename);
+            $("#translateLink").addClass("btn-primary").html("Ready");
+            $("#translateLink").unbind('click',false);
+
+            console.log("end cacheFile")
+
+              if (markus.util.urlParam('action')){
+                switch (markus.util.urlParam('action')){
+                  case "auto":
+                  location = "automarkup.html?file="+filename; 
+                  break;
+                  case "manual":
+                  location = "manualmarkup.html?file="+filename; 
+                  break;
+                  case "keyword":
+                  location = "termsmarkup.html?file="+filename; 
+                  break;
+                  case "filter":
+                  location = "filter.html?file="+filename; 
+                  break;
+                  case "cloud":
+                  location = "cloud.html?file="+filename; 
+                  break;
+                }
+                
+              }
+
+          }); 
+
+      };
+
+      
+
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53293952-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

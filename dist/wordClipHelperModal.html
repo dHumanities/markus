@@ -1,0 +1,39 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">          
+      <h4 class="modal-title">Keywords clipper (keywords discovery helper)</h4>
+    </div>
+    <div class="modal-body">
+    <label>Basic mode:</label>
+      <table class="table table-condensed">
+        <thead><tr><td>Seed terms</td><td >Results</td><td>Excluded terms</td><td>Saved terms</td></tr></thead>
+        <tbody><tr><td><textarea id="seedTerms" class="form-control" rows="10" placeholder="terms (enter a line break after each term)"></textarea></td><td ><textarea id="inPositiveTerms" class="form-control" rows="10" placeholder=""></textarea></td><td><textarea id="inNegativeTerms" class="form-control" rows="10" placeholder=""></textarea></td><td><textarea id="preservedTerms" class="form-control" rows="10" placeholder=""></textarea></td></tr>
+        <tr><td colspan="2"><button id="findMoreWords" type="button" class="btn btn-primary btn-block" >Suggest more keywords</button></td><td colspan="2"><button id="readyToMarkupBtn" type="button" class="btn btn-danger btn-block" >Ready to markup</button></td></tr>
+        <tr><td colspan="4"><button id="resetClipper" type="button" class="btn btn-success btn-block" >Reset keywords clipper</button></td></tr>
+        </tbody>
+        <!-- <tbody><tr><td colspan="2">
+        <select multiple="multiple" id="word-select" name="my-select[]">
+      </select></td><td></td></tr></tbody> -->
+      </table>
+      <label>Step by step advanced mode:</label>
+      <table class="table table-condensed" >
+        <thead><tr><td>Seed patterns</td><td>Excluded patterns</td></tr></thead>
+        <tbody>
+        <tr>
+            <td><textarea id="inPositiveClips" class="form-control" rows="5" ></textarea></td>
+            <td><textarea id="inNegativeClips" class="form-control" rows="5" ></textarea><textarea id="processedClips" style="display:none" class="form-control" rows="5" ></textarea></td>
+        </tr>
+        <tr><td  align="center">     
+               <button type="button" class="btn btn-primary btn-block" id="butComputeClips">Generate patterns from seed terms</button>
+            </td>
+            <td  align="center">
+             <!-- <input id="inStrictMode" type="checkbox" autocomplete="off" style="display:none">Strict Mode -->
+             <button type="button" class="btn btn-primary btn-block" id="butComputeTerms">Generate terms from seed patterns</button>
+          </td>
+        </tr>
+      </tbody></table>
+    </div>
+    <!-- <div class="modal-footer">
+    </div> -->
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

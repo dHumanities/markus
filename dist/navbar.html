@@ -1,0 +1,95 @@
+<script type="text/javascript" src="js/xlsx.min.js"></script>
+<link href="css/font-awesome.min.css" rel="stylesheet"/>
+<div class="container"> 
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="./index.html">MARKUS</a>         
+  </div>
+  <div class="collapse navbar-collapse">
+    <ul id="exportNav" class="nav navbar-nav" style="display:none">
+                            
+      <!-- <li><a href="http://chinese-empires.eu/team/" target="chineseEmpire">Team</a></li> -->
+      <!-- <li><a href="http://chinese-empires.eu/team/phase-ii/brent-ho/" target="chineseEmpire">Contact</a></li> -->
+      <li><a id="save">Save <span class='flexible'>to system</span><span class="glyphicon glyphicon-floppy-disk"></span></a></li>
+      <li><a id="rollBack">Back <span class='flexible'>to last save </span><span class="glyphicon glyphicon-refresh"></span></a></li>
+      <!-- <li><a id="saveHTML">Export HTML <span class="glyphicon glyphicon-save"></ span></a></li> -->
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Export <span class="glyphicon glyphicon-save"></span> <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a id="exportSAVE">MARKUS file</a></li>
+          <li><a id="saveHTML">HTML (layout)</a></li>
+          <li><a id="saveTEI">TEI (BETA)</a></li>
+        </ul>
+      </li>
+      <li><a id="export" style="display:none"></a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a href="./citeUS.html">CiteUS</a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="cbdbLookup.html" target="CBDBLookup">CBDB Lookup</a></li>
+          <li><a href="sieveOnline.html" target="sieveOnline">The Sieve Online</a></li>
+          <li><a href="http://chinese-empires.eu/analysis/tools/cbdb-mac-dictionary/" target="CBDBMAC">CBDB Dictionary (MAC)</a></li>
+          <li><a href="http://ctext.org/account.pl?if=en&installplugin=http://dh.chinese-empires.eu/beta/ctextplugin.xml" target="ctextPlugin">Ctext Plugin</a></li>
+          <!-- <li><a href="http://isites.harvard.edu/icb/icb.do?keyword=k16229&pageid=icb.page76535" target="ChinaBiographicalDatabase">China Biographical Database</a></li>
+          <li><a href="http://www.fas.harvard.edu/~chgis/" target="ChinaHistoricalGIS">China Historical GIS</a></li> -->
+        </ul>
+      </li> 
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-external-link"> <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="http://chinese-empires.eu" target="chineseEmpire">Communication and Empire</a></li>
+          <li><a href="http://did-acte.org" target="didacte">Automating Data Extraction from Chinese Texts</a></li>
+          <li><a href="http://projects.iq.harvard.edu/cbdb" target="ChinaBiographicalDatabase">China Biographical Database</a></li>
+          <li><a href="http://www.fas.harvard.edu/~chgis/" target="ChinaHistoricalGIS">China Historical GIS</a></li>
+          <li><a href="http://authority.dila.edu.tw/" target="DDAD">Dharma Drum Authority Database</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="./faq.html"><span class="fa fa-question"></a>
+      </li>    
+      <li>
+        <a href="./video.html"><span class="fa fa-video-camera"></a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-globe"></span> <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a class="langLink" lang="">English</a></li>
+          <li><a class="langLink" lang="_zhtw">正體中文</a></li>
+          <li><a class="langLink" lang="_zhcn">简体中文</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="http://dh.chinese-empires.eu/forum/category/8/research-blogs" target="forum"><i class="fa fa-newspaper-o"></i></a>
+      </li>
+      <!-- <li>
+        <a href="http://dh.chinese-empires.eu/forum/category/4/discussion-forum" target="forum"><i class="fa fa-comments"></i></a>
+      </li> -->
+      <li>
+        <!-- <a href="mailto:did.acte.report@gmail.com" target="mail"><i class="glyphicon glyphicon-envelope"></i></a> -->
+        <a href="http://dh.chinese-empires.eu/forum/category/6/bug-report" target="forum" ><i class="fa fa-bug"></i></a>
+      </li>
+      <li>
+        <a href="http://tw.weibo.com/5822830227" target="weibo"><i class="fa fa-weibo"></i></a>
+      </li>      
+      <li>
+        <a href="https://twitter.com/did_acte" target="twitter"><i class="fa fa-twitter"></i></a>
+      </li>
+      <li class="dropdown" id="userSection">
+        <a href="/auth" ><i class="glyphicon glyphicon-user"></i><span class='flexible'>Login</span></a>
+      </li>
+    </ul>
+  </div><!-- /.nav-collapse -->  
+</div><!-- /.container -->
+<!-- <div class="alert alert-danger alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>System maintenance!</strong> System will be unstable on 25th July CET.
+</div> -->

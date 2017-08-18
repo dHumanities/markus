@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Brent Ho">
+    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+    <title>MARKUS</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/markus.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet"/>
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.js"></script>
+    <![endif]-->
+    
+  </head>
+<style>
+
+ul.affix {
+  position: fixed; 
+  top: 0px;
+  /*left: 62px;*/
+  width: 360px;
+}
+ul.affix-top {
+  position: static;
+}
+ul.affix-bottom {
+  position: absolute;
+}
+
+/* First level of nav */
+.sidenav {
+  margin-top: 100px;
+  margin-bottom: 30px;
+  padding-top:    10px;
+  padding-bottom: 10px;
+  background-color: #f7f5fa;
+  border-radius: 5px;
+}
+
+/* All levels of nav */
+.sidebar .nav > li > a {
+  display: block;
+  color: #716b7a;
+  padding: 5px 20px;
+}
+.sidebar .nav > li > a:hover,
+.sidebar .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #e5e3e9;
+}
+.sidebar .nav > .active > a,
+.sidebar .nav > .active:hover > a,
+.sidebar .nav > .active:focus > a {
+  font-weight: bold;
+  color: #563d7c;
+  background-color: transparent;
+}
+
+/* Nav: second level */
+.sidebar .nav .nav {
+  margin-bottom: 8px;
+}
+.sidebar .nav .nav > li > a {
+  padding-top:    3px;
+  padding-bottom: 3px;
+  padding-left: 30px;
+  font-size: 90%;
+}
+#content {
+  margin-top:100px;
+}
+.table tfoot>tr>td {
+padding: 8px;
+line-height: 1.428571429;
+vertical-align: middle;
+border-top: 1px solid #ddd;
+}
+
+/*article {
+ padding-top: 70px;
+}
+*/
+</style>
+  <body data-spy="scroll" data-target="#affix-nav">
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="./index.html">MARKUS</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <!--<li><a href="http://chinese-empires.eu" target="chineseEmpire">Communication and Empire</a></li>                      -->
+            <!-- <li><a href="http://chinese-empires.eu/team/" target="chineseEmpire">Team</a></li> -->
+            <!-- <li><a href="http://chinese-empires.eu/team/phase-ii/brent-ho/" target="chineseEmpire">Contact</a></li> -->
+            <!-- <li><a id="save">Save <span class="glyphicon glyphicon-floppy-disk"></span></a></li> -->
+            <!-- <li><a id="saveHTML">Export HTML <span class="glyphicon glyphicon-save"></span></a></li> -->
+            <li><a id="export" style="display:none"></a></li>          
+          </ul>
+          <ul class="nav navbar-nav navbar-right">            
+               
+            <li>
+              <script>document.write('<a href="' + document.referrer + '">返回</a>');</script>
+            </li>
+            <!-- <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a class="langLink" lang="">English</a></li>
+                <li><a class="langLink" lang="_zhtw">正體中文</a></li>
+              </ul>
+            </li> -->
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </div><!-- /.navbar -->
+
+    <div class="container">
+      <!-- <div class="row row-offcanvas row-offcanvas-right">
+        <span id="showUploadTermModalBtn" class="btn btn-primary">Submit keyword</span>
+        <span id="showUploadRegexModalBtn" class="btn btn-primary">Submit regex</span>        
+      </div> -->
+      <div class="row">      
+        <nav id="affix-nav" class="sidebar col-md-4">
+          <ul class="nav sidenav affix" data-spy="affix" data-offset-top="100">
+            <li class="active"><a href="#full">什麼是MARKUS？如何使用？</a></li>
+            <li ><a href="#inputText">如何上傳文本至MARKUS？</a></li>
+            <li ><a href="#loadPreviousWork">如何載入之前的工作內容？</a></li>
+            <li ><a href="#languageSettings">如何更改語言設置？</a></li>
+            <li ><a href="#automaticMarkup">什麼是自動標記？</a></li>
+            <li ><a href="#passageMarkupFunction">什麼是自動標記模式中的“段落標記”功能？</a></li>
+
+            <li ><a href="#muzhimingFunction">如何使用墓誌銘功能？</a></li>
+
+            <li><a href="#manualMarkup">什麼是手動標記？</a></li>
+            <li ><a href="#keywordMarkup">什麼是關鍵字標記？</a></li>
+            <li ><a href="#patternMarkup">什麼是詞彙模組標記？</a></li>
+
+            <li><a href="#filterPassagesThatIncludeSpecificPerson">如何篩選出包含特定人物標記的段落？</a></li>
+
+            <li ><a href="#quicklySwitchMarkupMethods">如何快速在不同的標記模式間進行切換？</a></li>
+            <li ><a href="#loginAndCreateAccount">如何登入MARKUS或建立新帳號？</a></li>
+            <li ><a href="#webReferences">如何管理個人線上參考資料？</a></li>
+            <li ><a href="#onlineReferences">如何利用線上參考資料？</a></li>
+            <li ><a href="#personalTags">如何管理個人標籤？</a></li>
+            <li ><a href="#switchOnOffMarkup">如何開啟或關閉標記？</a></li>
+
+            <li ><a href="#hidAndRemoveTagsWithTagSummary">如何利用 "標籤總覽" 隱藏或移除標籤？</a></li>
+            <li ><a href="#editAddRemoveTagsinBatch">如何批次編輯、新增式或移除標記？</a></li>
+
+            <li ><a href="#quicklyJumpToSpecificPassage">如何快速前往特定段落？</a></li>
+            <li><a href="#commentsAndNotes">如何新增批註或筆記？</a></li>
+            <li><a href="#exportDataToExcel">如何將文本標記以Microsoft Excel形式匯出？</a></li>
+
+            <li><a href="#exportDataToPalladio">如何匯出資料至Palladio？</a></li>
+            <li><a href="#visualDataWithPlatin">如何以Platin視覺呈現數據資料？</a></li>
+            <li><a href="#createTagClouds">如何製作文字雲？</a></li>
+            <li><a href="#learnFromYourMarkup">如何訓練MARKUS記憶學習既有標記？</a></li>
+            <li><a href="#suggestionsBasedOnLearnedFiles">如何從MARKUS學習記憶中獲得標記建議？</a></li>
+
+<!--             <li ><a href="#dataExport">Data export</a>
+              <ul class="nav">
+                <li><a href="#exportDataToExcel">如何將文本標記以Microsoft Excel形式匯出？</a></li>
+              </ul>
+            </li>            -->
+          </ul>
+        </nav>
+        <div id ="content" class="col-xs-8 col-md-8" >
+          <article id="full">
+            <!-- <div class="page-header"> -->
+              <h1>什麼是MARKUS？如何使用？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/elbipt0xDnc?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe> 
+          </article>
+          <article id="inputText">
+            <!-- <div class="page-header"> -->
+              <h1>如何上傳文本至MARKUS？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/6_wkr4MrBGs?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe> 
+          </article>
+          <article id="loadPreviousWork">
+            <!-- <div class="page-header"> -->
+              <h1>如何載入之前的工作內容？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/jhF1OaKiKTQ?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe> 
+          </article>
+          <article id="languageSettings">
+            <!-- <div class="page-header"> -->
+              <h1>如何更改語言設置？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/kGYXzxnTHo8?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe> 
+          </article>
+          <article id="automaticMarkup">
+            <!-- <div class="page-header"> -->
+              <h1>什麼是自動標記？</h1>
+              <!-- <pre>
+After you upload a file to MARKUS, You can choose ２.a automatic markup to use this function.
+
+Automatic markup will discover paragraph, person names, regin name, place names, official title by default, you can click the checkbox to make your choice.
+
+You can also select a period of time or choose one or more dynasties in order to narrow down the possible person names that you are looking for. 
+
+You can click start markup to activate the process.
+
+Discovered entities will be colored in different color.
+              </pre> -->
+              <iframe width="560" height="315" src="//www.youtube.com/embed/evP7e0MKVTg?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+            <!-- </div> -->
+            
+             <p></p>
+<!--             <section id="removeAutomaticMarkup">
+              <h1>Remove automatic markup</h1>
+              <iframe width="560" height="315" src="//www.youtube.com/embed/bWvr1Vm47mY?rel=0" frameborder="0" allowfullscreen></iframe>
+            </section> -->
+<!--            <section id="hilde"><h4>Hilde De Weerdt</h4><p></p></section>
+            <section id="gail"><h4>Shih-Pei CHEN</h4><p></p></section>        
+ -->      </article>
+          <article id="passageMarkupFunction">
+            <h1>什麼是自動標記模式中的“段落標記”功能？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/-7HLWhxw4r4?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+
+          <article id="muzhimingFunction">
+            <h1>如何使用墓誌銘功能？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/yBsEBzAXm0Y?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>          
+
+          <article id="manualMarkup">
+            <h1>什麼是手動標記？</h1>
+            <!-- <Pre>
+After you upload a file to MARKUS, You can choose ２.b manual markup to use this function.
+
+In manual markup mode, you can only markup person names, regin name, place names, official from the text.
+  
+    Markup workflow:
+    1. highlight the text
+    2. select the type (person names, regin name, place names, official title)
+    3. click pencil icon to save (新版會是 floppy-disk)
+    4. If you want to scan through the whole document, you can click magnifying glass icon. More results will be shown.
+    5. You can check every single one or markup all at once. 
+
+            </Pre> -->
+            <iframe width="560" height="315" src="//www.youtube.com/embed/9SZe_WppHJQ?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+
+          <article id="keywordMarkup">
+            <h1>什麼是關鍵字標記？</h1>
+            <!-- <pre>
+After you upload a file to MARKUS, You can choose ２.c keyword markup to use this function. 
+
+In this example, we are looking for herbs appeared in this document
+
+You can click "Sumbit keyword" button to activate this function.
+
+Keyword markup workflow:
+1. Give a name of your markup (This example is herbs)
+2. Pick a color
+3. Paste your prepared list of keywords (one row, one herb)
+4. Submit
+
+Discovered keywords will be colored in choosen color.
+            </pre> -->
+            <iframe width="560" height="315" src="//www.youtube.com/embed/IN9IWB3FLLc?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+          <article id="patternMarkup">
+            <h1>什麼是詞彙模組標記？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/Ri1_zCNeUxs?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+            <pre>
+We will provide a better user interface for pattern construction. 
+If you want to learn more about Regular expression, you can check out this <a href ="http://regexone.com/" target="_blank">website</a>.</pre>
+          </article>
+
+          <article id="filterPassagesThatIncludeSpecificPerson">
+            <h1>如何篩選出包含特定人物標記的段落？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/jLfFOACBFs4?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+
+          <article id="quicklySwitchMarkupMethods">
+            <h1>如何快速在不同的標記模式間進行切換？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/vffkvuG7oNs?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+          <article id="loginAndCreateAccount">
+            <h1>如何登入MARKUS或建立新帳號？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/wZsQXYEKwU8?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+          <article id="webReferences">
+            <h1>如何管理個人線上參考資料？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/dI1ZH6ob2zs?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+          <article id="onlineReferences">
+            <h1>如何利用線上參考資料？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/qrnp78En9lU?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+          <article id="personalTags">
+            <h1>如何管理個人標籤？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/wnyQedksRwA?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+          <article id="switchOnOffMarkup">
+            <h1>如何開啟或關閉標記？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/Ex-0aaYOcws?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+
+          <article id="hidAndRemoveTagsWithTagSummary">
+            <h1>如何利用 "標籤總覽" 隱藏或移除標籤？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/BBCiYnMQeQM?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+          <article id="editAddRemoveTagsinBatch">
+            <h1>如何批次編輯、新增式或移除標記？</h1>
+              <iframe width="560" height="315" src="//www.youtube.com/embed/f-FYoexg7pg?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+
+          <article id="quicklyJumpToSpecificPassage">
+            <h1>如何快速前往特定段落？</h1>
+            <iframe width="560" height="315" src="//www.youtube.com/embed/uaREYgxypIg?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+          <article id="commentsAndNotes">
+            <h1>如何新增批註或筆記？</h1>
+              <iframe width="560" height="315" src="//www.youtube.com/embed/LTxUDmVhuq4?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>  
+          <article id="exportDataToExcel">
+            <h1>如何將文本標記以Microsoft Excel形式匯出？</h1>
+              <iframe width="560" height="315" src="//www.youtube.com/embed/JpQGTnVilH0?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+
+          <article id="exportDataToPalladio">
+            <h1>如何匯出資料至Palladio？</h1>
+              <iframe width="560" height="315" src="//www.youtube.com/embed/Saxo6TB5khs?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+              <br/><p><a href="doc/Palladio_linking_guidelines.pdf" target="_blank"><h3>Palladio linking guidelines [英文]</h3></a></p>
+          </article>
+          <article id="visualDataWithPlatin">
+            <h1>如何以Platin視覺呈現數據資料？</h1>
+              <iframe width="560" height="315" src="//www.youtube.com/embed/stmuxGj7sqY?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+          <article id="createTagClouds">
+            <h1>如何製作文字雲？</h1>
+              <iframe width="560" height="315" src="//www.youtube.com/embed/_nC51JX_Xrw?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+          <article id="learnFromYourMarkup">
+            <h1>如何訓練MARKUS記憶學習既有標記？</h1>
+              <iframe width="560" height="315" src="//www.youtube.com/embed/MDaKnTnqxh0?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+          <article id="suggestionsBasedOnLearnedFiles">
+            <h1>如何從MARKUS學習記憶中獲得標記建議？</h1>
+              <iframe width="560" height="315" src="//www.youtube.com/embed/CoyBt2rptew?rel=0&cc_load_policy=1&hl=zh-tw" frameborder="0" allowfullscreen></iframe>
+          </article>
+        
+
+        </div>
+      </div>
+      
+
+      <hr>
+     
+      <footer>
+        <p>MARKUS was developed as part of the project <a href="http://chinese-empires.eu" target="chineseEmpire">“Communication and Empire: Chinese Empires in Comparative Perspective,”</a> funded by the European Research Council.</p>
+      </footer>
+
+    </div><!--/.container-->
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+    window.onload = function() {
+        var lang = $.cookie('lang') || "";
+        $("footer").load("footer" + lang + ".html");
+
+      };
+    </script>
+    
+    <!-- <script src="js/jquery.hive.js"></script> -->
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53293952-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    
+  </body>
+  
+</html>

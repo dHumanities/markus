@@ -1,0 +1,279 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Brent Ho">
+    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+    <title>MARKUS FAQ</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/markus.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.js"></script>
+    <![endif]-->
+</head>
+<style>
+ul.affix {
+    position: fixed;
+    top: 0px;
+    /*left: 62px;*/
+    
+    width: 360px;
+}
+
+ul.affix-top {
+    position: static;
+}
+
+ul.affix-bottom {
+    position: absolute;
+}
+/* First level of nav */
+
+.sidenav {
+    margin-top: 100px;
+    margin-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #f7f5fa;
+    border-radius: 5px;
+}
+/* All levels of nav */
+
+.sidebar .nav > li > a {
+    display: block;
+    color: #716b7a;
+    padding: 5px 20px;
+}
+
+.sidebar .nav > li > a:hover,
+.sidebar .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #e5e3e9;
+}
+
+.sidebar .nav > .active > a,
+.sidebar .nav > .active:hover > a,
+.sidebar .nav > .active:focus > a {
+    font-weight: bold;
+    color: #563d7c;
+    background-color: transparent;
+}
+/* Nav: second level */
+
+.sidebar .nav .nav {
+    margin-bottom: 8px;
+}
+
+.sidebar .nav .nav > li > a {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 30px;
+    font-size: 90%;
+}
+
+#content {
+    margin-top: 100px;
+}
+
+.table tfoot>tr>td {
+    padding: 8px;
+    line-height: 1.428571429;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;
+}
+/*article {
+ padding-top: 70px;
+}
+*/
+</style>
+
+<body data-spy="scroll" data-target="#affix-nav">
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="./index.html">MARKUS</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <!--<li><a href="http://chinese-empires.eu" target="chineseEmpire">Communication and Empire</a></li>-->
+                    <!-- <li><a href="http://chinese-empires.eu/team/" target="chineseEmpire">Team</a></li> -->
+                    <!-- <li><a href="http://chinese-empires.eu/team/phase-ii/brent-ho/" target="chineseEmpire">Contact</a></li> -->
+                    <!-- <li><a id="save">Save <span class="glyphicon glyphicon-floppy-disk"></span></a></li> -->
+                    <!-- <li><a id="saveHTML">Export HTML <span class="glyphicon glyphicon-save"></span></a></li> -->
+                    <li>
+                        <a id="export" style="display:none"></a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <script>
+                        document.write('<a href="' + document.referrer + '">返回</a>');
+                        </script>
+                    </li>
+                    <!-- <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a class="langLink" lang="">English</a></li>
+                <li><a class="langLink" lang="_zhtw">正体中文</a></li>
+              </ul>
+            </li> -->
+                </ul>
+            </div>
+            <!-- /.nav-collapse -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.navbar -->
+    <div class="container">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                1. 为什么码库思没有上传/输出我的文档 ？
+              </a>
+            </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        您的文档须为<b>纯文本格式，或码库思保存生成的文档格式</b>，并使用<b>UTF-8编码</b>。其余格式的文档或许可以上传，但我们无法保证码库思能够处理和输出。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                2. 为什么码库思无法运行 ？ 
+              </a>
+            </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        请使用谷歌浏览器（Chrome）打开码库思。谷歌浏览器的网页缓存有时候会影响码库思运作。请您清除谷歌浏览器缓存，以确保正在使用的是最新版本的码库思，并且码库思能正常运行。关于如何清除网页缓存，请浏览：
+                        <a href="https://support.google.com/chrome/answer/95582?hl=zh-Hant" target="_blank">https://support.google.com/chrome/answer/95582?hl=zh-Hant</a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                3. 如何才能一次性删掉多个标记 ？
+              </a>
+            </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        要删除多个标记，点击被标记的词，您将看到多个图标出现。点击“搜索文本”图示
+                        <a class="glyphicon glyphicon-search" disabled></a>，弹出的视窗会显示出文本中出现该词的所有段落。点击搜索结果列表最下方的
+                        <button type="button" class="btn btn-danger btn-xs">全部套用</button>按钮。或者反选/锁定您需要保留的被标注词，并点选
+                        <button type="button" class="btn btn-danger btn-xs" style="display: inline-block;">删除全部除了<span class="glyphicon glyphicon-lock"></span></button>按钮。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFour">
+                    <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                4. 如何才能一次性添加多个标记 ？
+              </a>
+            </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                    <div class="panel-body">
+                        先选取需要增加标记的词。选择您需要的标记。您的标记会带出“本文搜寻”功能。点击
+                        <a class="glyphicon glyphicon-search" disabled></a>图示，即可查看文本中您刚刚标记的词出现的所有段落。若要将它们全部标注，点击页面底部的
+                        <button type="button" class="btn btn-danger btn-xs">全部套用</button>按钮。若要删除标记，请按问题3解答中的步骤操作。请注意，只有当词处于未标记状态时才可进行这一步骤。如果已有标注，请先删除所有标注（参见问题3），再重复以上步骤。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFive">
+                    <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                5. 我能上传多大的文档 ？
+              </a>
+            </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                    <div class="panel-body">
+                        视情况而定。我们建议一次上传不超过5MB的文档。大于5MB的文档请先进行分割。
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingSix">
+                    <h4 class="panel-title">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="true
+" aria-controls="collapseSix">
+                6. 有关码库思中文化
+              </a>
+            </h4>
+                </div>
+                <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingsix">
+                    <div class="panel-body">
+                        码库思中文化由以下成员、志愿者共同提供。
+                        <br/>
+                        <table class="table table-condensed table-hover">
+                            <!-- <tr>
+                                <td>机构</td>
+                                <td>姓名</td>
+                            </tr> -->
+                            <tr>
+                                <td>荷兰莱顿大学，Communication and Empire计划研究助理</td>
+                                <td><a target="member" href="http://www.chinese-empires.eu/team/phase-iii/wang-wenxin/">王文欣</a>、<a target="member" href="http://chinese-empires.eu/team/phase-iii/xiong-huei-lan/">熊慧岚</a>、<a target="member" href="http://chinese-empires.eu/team/phase-iii/jialong-liu/">刘家隆</a>、<a target="member" href="http://chinese-empires.eu/team/phase-iii/jiyan-qiao/">乔吉燕</a></td>
+                            </tr>
+                            <tr>
+                                <td>国立台湾师范大学资讯中心专任研究助理</td>
+                                <td><a target="member" href="http://www.imacat.idv.tw/">杨士青</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <footer>
+            <p>MARKUS was developed as part of the project <a href="http://chinese-empires.eu" target="chineseEmpire">“Communication and Empire: Chinese Empires in Comparative Perspective,”</a> funded by the European Research Council.</p>
+        </footer>
+    </div>
+    <!--/.container-->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+    window.onload = function() {
+        var lang = $.cookie('lang') || "";
+        $("footer").load("footer" + lang + ".html");
+      };
+    </script>
+    <!-- <script src="js/jquery.hive.js"></script> -->
+    <script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-53293952-3', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+
+</html>

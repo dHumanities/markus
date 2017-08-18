@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+    <title>MARKUS</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/markus.min.css" rel="stylesheet">
+    <link href="css/bootstrap-select.min.css" rel="stylesheet">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="css/offcanvas.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/website.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/colorPicker.css" /> -->
+
+    <style>
+    .officialTitle {
+      color:CadetBlue;
+    }
+    .badge-primary {
+      background-color: #428bca;
+    }
+    div.colorPicker-picker {
+      height: 30px;
+      width: 30px;
+      background: url(css/arrow.gif) no-repeat bottom right;
+    }
+    .bigger{
+      font-size:200%
+    }
+    .hide{
+      display:none;
+    }
+    .halfTransparent{
+      opacity:0.3;
+    }
+    
+    pre {
+      font-size: 0px;
+    }
+
+    .doc .passage,.entry{
+      font-size: 13px;
+      display: block;
+      margin-bottom: 13px;
+    }
+
+    </style>
+    
+  </head>
+
+  <body>
+    <div id="navbar" class="navbar navbar-fixed-top navbar-inverse" role="navigation">      
+    </div><!-- /.navbar -->
+    <div class="container">
+      <div id="wrapper" class="row row-offcanvas row-offcanvas-right">
+        <div id="wrapperTriggerHolder"></div>           
+        <div id ="content" class="col-xs-8 col-md-8" ></div>         
+        <div id ="assist" class="col-xs-4 col-md-4" style="padding-left:0px;"></div>
+      </div>
+      <hr>
+     
+      <footer>
+        <p>MARKUS was developed as part of the project <a href="http://chinese-empires.eu" target="chineseEmpire">“Communication and Empire: Chinese Empires in Comparative Perspective,”</a> funded by the European Research Council. All Rights Reserved.</p>
+      </footer>
+    </div><!--/.container--> 
+    <div id="manualPopover" class="popover fade right in" style="display: hidden;">
+      <div class="arrow"></div>
+      <h3 class="popover-title" style="display: none;"></h3>
+      <div class="popover-content">
+        <span class="tagText"></span>
+        <a class="glyphicon glyphicon-book" data-toggle="tooltip" title="search online" _zhtw="網路解說搜尋"></a>
+        <!-- <span class="expand"> | <a class="glyphicon glyphicon-collapse-down" ></a></span><br class="singleTagContent"/> -->
+        <span class="typePopoverContent" style="display:none">
+          <span class="singleTagContent">
+            <button type="button" _type="fullName" class="btn btn-xs btn-danger switch fullName switcher" >姓名</button>
+            <button type="button" _type="partialName" class="btn btn-xs btn-warning switch partialName switcher" >別名</button>
+            <!-- <button type="button" _type="nianhao" class="btn btn-xs btn-success switch nianhao switcher" >年號</button> -->
+            <button type="button" _type="timePeriod" class="btn btn-xs btn-success switch timePeriod switcher" >日期</button>
+            <button type="button" _type="placeName" class="btn btn-xs btn-primary switch placeName switcher" >地名</button>
+            <button type="button" _type="officialTitle" class="btn btn-xs btn-info switch officialTitle switcher" >官職</button>
+            <a class="glyphicon glyphicon-floppy-disk" data-toggle="tooltip" title="save" _zhtw="儲存"></a>          
+          </span>  
+          <span class="search"> | <a class="glyphicon glyphicon-search" data-toggle="tooltip" title="search document" _zhtw="文本中搜尋"></a></span>
+        </span>  
+      </div>
+    </div>
+    <div class="modal fade" id="markupSelectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">          
+            <h4 class="modal-title">passage selection</h4>
+          </div>
+          <div class="modal-body">
+            <div class="input-group">
+
+              <div class="input-group-btn">
+                <button type="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span id="action">Action</span><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#" onclick="{$('#action').text($(this).text()); action='show'}">show passage </a></li>
+                  <li><a href="#" onclick="{$('#action').text($(this).text()); action='hide'}">hide passage </a></li>                    
+                </ul>
+              </div><!-- /btn-group -->
+              <div class="input-group-btn" id="tagSelector">
+                <button type="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span id="tagType">Tag Type</span><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                </ul>
+              </div><!-- /btn-group -->
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span id="constraint">constraint</span><span class="caret"></span></button>
+                <ul class="dropdown-menu">                  
+                  <li><a href="#" onclick="{$('#constraint').text($(this).text()); constraint='1'; $('#parameter').show(); $('#cbdbidSelector').hide();}">with distinct ids more than </a></li>
+                  <li><a href="#" onclick="{$('#constraint').text($(this).text()); constraint='2'; $('#parameter').show(); $('#cbdbidSelector').hide();}">with distinct ids less than </a></li>
+                <li class="divider"></li>
+                  <li><a href="#" onclick="{$('#constraint').text($(this).text()); constraint='3'; $('#parameter').hide(); $('#cbdbidSelector').show();}">with specific ids </a></li>
+                  <li><a href="#" onclick="{$('#constraint').text($(this).text()); constraint='4'; $('#parameter').hide(); $('#cbdbidSelector').show();}">without specific ids </a></li>
+                </ul>
+              </div><!-- /btn-group -->
+              <input type="text" id="parameter" class="form-control"></input>
+              <span id="cbdbidSelector" ><select id="peopleSelector" multiple  data-live-search="true"  data-subtext="true" data-size="auto" style="display:none">
+                      <option data-subtext=""></option>
+              </select></span>        
+            </div>              
+            <!-- <div class="input-group">
+              <span id="fullNameCheckboxStatus"></span><input type="checkbox" id="fullNameCheckbox" ><span class="btn">Full name (Last name + first name, 姓名)</span>
+            </div> -->
+            <!-- /input-group -->                
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+            <button  type="button" class="btn btn-primary" onclick="filter()" >filter</button>
+            <!-- <button id="saveMarkupBtn" type="button" class="btn btn-danger" style="display:none">Save and back to Main</button>
+            <a id="export" style="display:none">export</a> -->
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade" id="summaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">
+    </div><!-- /.modal -->
+    <div class="modal fade" id="helpModal" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" _data-backdrop="static">        
+    </div><!-- /.modal -->
+    <div id="popoverMod">
+    </div>
+    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" style="display:none">          
+              <!-- <h4 class="modal-title">Markup selection</h4> -->
+            </div>
+            <div class="modal-body">
+            <span class="tagText" style="display:none"></span>
+            <span class="sameTags"><span>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->              
+              <!-- <button id="removeBtn" type="button" class="btn btn-danger" >Remove</button> -->
+              <!-- <button id="removeInScreenBtn" type="button" class="btn btn-danger">RemoveAll on Screen</button> -->
+              <button id="applyAllBtn" type="button" class="btn btn-danger" >Apply to all</button>
+              <button id="removeAllBtn" type="button" class="btn btn-danger" >Remove all except <span class="glyphicon glyphicon-lock"></span></button>
+              <button id="cancelBtn" type="button" class="btn btn-primary" >Close</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      <div class="modal fade" id="manageTagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <!-- // <script src="js/spin.min.js"></script> -->
+    <script src="js/bootstrap.min.js"></script>    
+    <!-- <script src="js/jquery.hive.js"></script> -->
+    <script src="js/jquery.stylesheet.js"></script>
+    <script src="js/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.visible.min.js"></script>
+    <script type="text/javascript" src="markus.min.js"></script>
+
+    <!--
+
+    <script type="text/javascript" src="js_0.2/markus.js"></script>
+    <script type="text/javascript" src="js_0.2/utilities.js"></script>
+    <script type="text/javascript" src="js_0.2/switcher.js"></script>
+    <script type="text/javascript" src="js_0.2/help.js"></script>
+    <script type="text/javascript" src="js_0.2/webDictionary.js"></script>
+    <script type="text/javascript" src="js_0.2/reference.js"></script>
+        
+    <script type="text/javascript" src="js_0.2/manualMarkup.js"></script>
+    <script type="text/javascript" src="js_0.2/markupPopup.js"></script>
+    <script type="text/javascript" src="js_0.2/summary.js"></script>
+    <script type="text/javascript" src="js_0.2/data.js"></script> -->
+
+    <script src="js/rangy-core.js"></script>
+    <script src="js/rangy-cssclassapplier.js"></script>
+<!--
+    <script src="js/all_cbdb.js"></script>  
+    <script type="text/javascript" src="js/office.js"></script>  
+    <script type="text/javascript" src="js/place.js"></script> 
+    -->
+    <script src="js/offcanvas.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="js/jquery.colorPicker.min.js"></script>
+    <script type="text/javascript" src="js/keypress-2.1.4.min.js"></script>
+
+    
+    <script>
+      var action = "";
+      var constraint ="";
+      var unique ="";
+      // var markupFullName = markupPartialName = markupNianhao = markupofficialTitle = markupPlaceName = false;
+
+      var filterByTagType = function (){
+        if ($('#tagType').text() == "personalNames"){
+          return $(this).attr("type") == "fullName" || $(this).attr("type") == "partialName";
+        } else {
+          return $(this).attr("type") == $('#tagType').text();
+        }
+      }
+
+      var filter = function(){
+        var show = true;
+        var parameter = $('#parameter').val();
+        if (action == "show"){
+          show = true;
+        } else if (action == "hide"){
+          show = false;
+        }
+
+        $('.entry,.passage').each(function(){
+          var cbdbids = [];
+          // $(this).find("[cbdbid]").each(function(){
+          //   cbdbids.push($(this).attr("cbdbid"));
+          // });
+          $(this).find(".markup").filter(filterByTagType).each(function(){
+
+            var id = $(this).attr("cbdbid") || $(this).attr($(this).attr("type")+"_id") || $(this).text();
+            cbdbids.push(markus.util.converBackToUnicode(id));
+          });
+          
+
+          if (constraint == "1"){
+            // console.log(constraint + ","+ show + ","+ unique(cbdbids).length +","+parseInt(parameter));
+            if (unique(cbdbids).length > parseInt(parameter)){
+              if (!show) {
+                $(this).addClass("hidden");                
+              }
+            } else {
+              if (show) {               
+                $(this).addClass("hidden"); 
+              }
+            }
+
+
+          }else if (constraint == "2"){
+            // console.log(constraint + ","+ show + ","+ unique(cbdbids).length +","+parseInt(parameter));
+            if (unique(cbdbids).length < parseInt(parameter)){
+              if (!show) {
+                $(this).addClass("hidden");                
+              }
+            } else {
+              if (show) {               
+                $(this).addClass("hidden"); 
+              }
+            }
+          }else if (constraint == "3"){
+            // console.log(constraint + ","+ show + ","+ unique(cbdbids).length +","+parseInt(parameter));
+            var targetIDs = parameter.split("|").filter(function(value){return value !=""});;
+
+            var uniqueCbdbids = unique(cbdbids);
+            var found = false;           
+            for (var i = 0 ; i < targetIDs.length; i++){
+
+              if (uniqueCbdbids.indexOf(targetIDs[i])>-1){
+                $(this).find("[cbdbid='"+ targetIDs[i]+ "']").filter(filterByTagType).addClass("bigger");
+                $(this).find("["+$('#tagType').text()+"_id='"+ markus.util.convertToEscapeUnicode(targetIDs[i])+ "']").filter(filterByTagType).addClass("bigger");
+                $(this).find(".markup").filter(function(){return $(this).text()==targetIDs[i]}).filter(filterByTagType).addClass("bigger");
+                found = true;
+              }
+            }
+            if (show){
+              if (!found) {
+                  $(this).addClass("hidden");                
+              }
+            }else{
+              if (found) {
+                  $(this).addClass("hidden");                
+              }
+            }
+          }
+          else if (constraint == "4"){
+            // console.log(constraint + ","+ show + ","+ unique(cbdbids).length +","+parseInt(parameter));
+            var targetIDs = parameter.split("|");
+            var uniqueCbdbids = unique(cbdbids);
+            var found = false;           
+            for (var i = 0 ; i < targetIDs.length; i++){
+              if (uniqueCbdbids.indexOf(targetIDs[i])>-1){
+                found = true;
+              }
+            }
+            if (!show){
+              if (found) {
+                  $(this).addClass("hidden");                
+              }
+            }else{
+              if (!found) {
+                  $(this).addClass("hidden");                
+              }
+            }
+          }
+          // console.log($(".hidden"));
+
+        });        
+
+      }
+
+      // var tempFile = "";
+
+      // var regexs = [];
+      // var CBDBRegexs = [];
+      // var found = 0;
+
+      // var uniqueTermThreadsMax = 8 // check
+      // var uniqueTermThreads=[];
+      // var uniqueTermThreadscount=-1; //check
+      // var uniqueTermJobs = [];
+
+      // var uniqueTermRegexsIndex = -1; // check
+      // var uniqueTermRegexsCount = -1; // check
+
+      // var uniqueTerms = [];
+
+      // var refercedSpans = [];
+      // var uniqueTermJobsCount =-1;
+
+      // var markupJobsList = [];
+      // var partialRegexMax = -1;
+      // var partialNameSpans = [];
+      // var partialNameSpansMax = -1;
+var registUserIntefaceAction = function(){
+
+  $(".navbar-header button.switch").on("click",function(){
+    console.log("click");
+    if($(this).attr("markupType")){
+      $(this).toggleClass("noColor");
+      $(".doc").find("."+$(this).attr("markupType")).toggleClass("noColor");
+    }
+  }); 
+
+  $("#resetBtn").on("click",function(){
+    $('#peopleSelector').selectpicker('val', '');
+    $(".doc").find(".hidden,.halfTransparent").removeClass("hidden").removeClass("halfTransparent");
+    $(".doc").find(".bigger").removeClass("bigger");
+  });
+
+
+  $("#showModalBtn").on("click",function(){
+    $("#showModalBtn").fadeTo(1000, 0);
+    $('#markupSelectionModal').modal('show');
+  });
+
+  $("#showHideBtn").on("click",function(){
+    var btn = $(this).find(".glyphicon");
+    if ($(btn).hasClass("glyphicon-eye-close")){
+      $(btn).removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
+      $(".hidden").removeClass("hidden").addClass("halfTransparent");
+
+    }else {
+      $(btn).removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
+      $(".halfTransparent").removeClass("halfTransparent").addClass("hidden");
+
+    }
+
+  });
+  
+  $('#markupSelectionModal').on('hidden.bs.modal', function () {
+    $("#showModalBtn").fadeTo(1000,1);
+  });
+
+  // $("#startMarkupBtn").on("click",function(){
+  //   $(".doc").find(".entry,.passage").each(function(){
+  //     var cbdbArray = [];
+  //     $(this).find("[cbdbid]").each(function(){
+  //       cbdbArray.push($(this).attr("cbdbid"));
+  //     });
+  //     cbdbArray = unique(cbdbArray);
+  //     if (cbdbArray.length < 10){
+  //       $(this).addClass("hidden");
+  //     }
+  //   });
+  // });  
+  // $('#saveMarkupBtn').on("click",function(){
+  //   exportFile();
+  //   // createMarkupJobList();
+  // });  
+
+  // $("#editDocBtn").on("click",function(){
+  //   console.log("click");
+  //   $(this).toggleClass("btn-danger");
+  //   $(".doc").toggleClass("edit");
+  //   var editable = $(".doc pre").attr("contenteditable")||false;
+  //   if (editable == "true"){
+  //     editable = false;
+  //     $(".doc pre div,br").prepend("\n");
+  //     // $(".doc pre br").prepend("\n");
+  //     $(".doc div,br").contents().unwrap();
+  //     // $(".doc br").contents().unwrap();
+  //     $(".doc pre").html($(".doc pre").html());
+
+  //     if ($(".doc .passage").length > 0){
+  //       $(".doc .passage").contents().unwrap();
+  //       startParagraphMarkup();
+  //     }
+
+  //   }else {
+  //     editable = true;
+  //   };
+  //   console.log(editable);
+  //   $(".doc pre").attr("contenteditable",editable);
+  // });
+  $("#showManageTagModalBtn").on("click", function() {
+    $("#manageTagModal").modal("show");
+  });
+};
+var startParagraphMarkup = function(){
+  if ($(".doc").text()== $(".doc pre").text()){
+    var _lineArray = $(".doc pre").html().split("\n");
+    var begin = true;
+    var count = 0;
+    for (var index in _lineArray){
+      var line = _lineArray[index].replace(/ /g,'');
+      if (begin && line.length > 0){
+        _lineArray[index] = "<span class='passage' type='passage' id='passage"+(count++)+"'>"+_lineArray[index];
+        begin = false;
+      } else if (!begin && line.length == 0){
+        _lineArray[index-1] = _lineArray[index-1]+"</span>";
+        begin = true;
+      }
+    }
+    if (!begin){
+      _lineArray[_lineArray.length-1] = _lineArray[_lineArray.length-1]+"</span>";
+    }
+    $(".doc pre").html(_lineArray.join("\n"));
+
+  } else {
+    var originalHTML = $(".doc").html();
+    $(".doc").html("").append("<span class='passage' id='passage00'></span>");
+    $(".doc #passage00").html(originalHTML);
+  }
+}
+var tagChange = function(tagText){
+  console.log(tagText);
+  $('#tagType').text(tagText);
+  $("#peopleSelector").empty();
+  for (var cbdbid in tagSummary[tagText]){
+
+    $("#peopleSelector").append('<option data-subtext="'+tagSummary[tagText][cbdbid].join(",")+'">'+cbdbid+'</option>');  
+  }
+  $("#cbdbidSelector").val("");
+  
+  $("#peopleSelector").selectpicker('refresh');
+
+}
+var tagSummary = {};
+
+      window.onload = function() {
+        var lang = $.cookie('lang') || "";
+        $("footer").load("footer" + lang + ".html");
+
+        $("#manualPopover a[data-toggle='tooltip']").each(function(){
+          if($(this).attr(lang)!== undefined){
+            $(this).attr("title",$(this).attr(lang));
+          }
+        });
+
+        $.getJSON("/auth/profile_info", function(result){
+          if (result["name"]){
+            $.get("userSection"+lang+".html", function(data) { 
+              $("#userSection").html(data); 
+              $("#userName").text(result["name"]);
+            });
+          }
+        });
+        markus.io.readFile(decodeURIComponent(markus.util.urlParam('file')+".html"), function (result){
+          $("#content").html(result);
+          $(".doc").find(".entry").each(function(){
+            var entryID = $(this).attr("id");
+            $(this).prepend("<div class='notSave entryTitle'>"+entryID+"</div>");
+          });
+          
+
+          $(".doc .markup").each(function(){
+            var tagType = $(this).attr('type');
+
+            tagType = (tagType == "fullName" || tagType == "partialName") ? "personalNames" : tagType;
+
+            var tags = tagSummary[tagType] || {};
+            var tagText = $(this).text();
+
+            var id = $(this).attr("cbdbid") || $(this).attr(tagType+"_id") || tagText;
+            id = markus.util.converBackToUnicode(id);
+
+            if (id.length > 0 && id.indexOf("|") == -1){
+              tags[id] = tags[id] || [];
+              if (tags[id].indexOf(tagText) == -1){
+                tags[id].push(tagText);
+              }
+            }
+            tagSummary[tagType] = tags;
+
+          });
+
+          var tagTypes = Object.keys(tagSummary);
+          for (var i=0; i < tagTypes.length; i++){
+            $("#tagSelector ul").append('<li><a href="#" onclick="tagChange($(this).text());" >'+tagTypes[i]+'</a></li>');
+          }
+
+
+
+
+          // var people = {};
+          // $(".doc .fullName,.partialName").each(function(){            
+          //   var cbdbid = $(this).attr("cbdbid") || "";
+          //   if (cbdbid.length > 0 && cbdbid.indexOf("|") == -1){
+          //     people[cbdbid] = people[cbdbid] || [];
+          //     var name = $(this).text();
+          //     if (people[cbdbid].indexOf(name) == -1){
+          //       people[cbdbid].push(name);
+          //     }
+          //   }
+          // });
+                    
+
+          for (var cbdbid in tagSummary["personalNames"]){
+            $("#peopleSelector").append('<option data-subtext="'+tagSummary["personalNames"][cbdbid].join(",")+'">'+cbdbid+'</option>');  
+          }
+          $("#cbdbidSelector").hide();
+          $("#peopleSelector").addClass("selectpicker");
+          $("#peopleSelector").selectpicker();
+          $('#peopleSelector').on("change",function(){
+            $("#parameter").val($("#peopleSelector").val().join("|"));
+          });
+
+        });
+        markus.navbar.register();
+
+        
+
+        var listener = new window.keypress.Listener();
+        listener.simple_combo("meta s", function() {
+            $("#save").trigger("click");
+        });
+        listener.simple_combo("meta '", function() {
+            $("#editDocBtn").trigger("click");
+        });
+        listener.simple_combo("meta j", function() {            
+            $("#showGotoModalBtn").trigger("click");            
+        });
+        listener.simple_combo("meta d", function() {            
+          if ($('#popover').hasClass('in')){
+              $('#popover .glyphicon-trash').trigger("click");
+          }                 
+        });
+
+
+        $("#wrapperTriggerHolder").load("wrapperTrigger"+lang+".html",{},function(){
+          $("#wrapperTrigger").on("click",function(){$("#wrapper").toggleClass("toggled");});
+          $('[data-toggle="tooltip"]').tooltip();
+        });
+        $("#assist").load("assist.html",{},function(){
+          $("#buttonsRow").append('<button id="resetBtn" class="btn btn-sm btn-primary">reset filter</button><button id="showModalBtn" class="btn btn-sm btn-primary" style="opacity:0">passage selection</button><button id="showHideBtn" class="btn btn-sm"><span class="glyphicon glyphicon-eye-close"></span></button>');
+          registWebDictionary();
+          registColorSwitcher();
+          $("#manageTagModal").load("manageTagModal" + lang + ".html", {}, function() {
+                registeTagManageUI();
+                $('#manageTagModal .tagColor').colorPicker();
+            });
+          markus.helpInfo.register();
+          registUserIntefaceAction();
+          $('[data-toggle="tooltip"]').tooltip();
+        });
+      
+        $("#summaryModal").load("summaryModal.html",{},function(){registMarkupSummary();});
+        $("#popoverMod").load("popoverMod.html",{},function(){
+          markus.popup.registMarkupPopup();
+          markus.manualMarkup.registManualMarkup();
+          $("#popoverMod a[data-toggle='tooltip']").each(function(){
+          if($(this).attr(lang)!== undefined){
+            $(this).attr("title",$(this).attr(lang));
+          }
+          $("#popoverMod a[data-toggle='tooltip']").tooltip({placement:"auto bottom"});
+        });
+        });
+
+        unique = markus.util.unique;
+
+        
+        
+        // console.log($.urlParam('file'));
+        
+        $('#markupSelectionModal').modal('show');
+        
+        if (!(window.File && window.FileList && window.FileReader)) {
+            console.log("Your browser does not support File API");
+        }
+
+      }
+
+
+
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53293952-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header" style="display:none">          
+      <!-- <h4 class="modal-title">Markup selection</h4> -->
+    </div>
+    <div class="modal-body">
+    <span class="tagText" style="display:none"></span>
+    <div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#verifly_errors" aria-controls="verifly_errors" role="tab" data-toggle="tab">Error</a></li>
+    <li role="presentation"><a href="#verifly_added" aria-controls="verifly_added" role="tab" data-toggle="tab">Added</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="verifly_errors"><span class="sameTags"><span></div>
+    <div role="tabpanel" class="tab-pane" id="verifly_added"><span class="sameTags"><span></div>
+  </div>
+
+</div>
+    
+    </div>
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->              
+      <!-- <button id="removeBtn" type="button" class="btn btn-danger" >Remove</button> -->
+      <!-- <button id="removeInScreenBtn" type="button" class="btn btn-danger">RemoveAll on Screen</button> -->
+      <!-- <button id="verifly_applyAllBtn" type="button" class="btn btn-danger" >Apply to all</button>
+      <button id="verifly_removeAllBtn" type="button" class="btn btn-danger" >Remove all except <span class="glyphicon glyphicon-lock"></span></button> -->
+      <button id="verifly_cancelBtn" type="button" class="btn btn-primary" >Close</button>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+<script>
+$("#verifly_errors").on("click",".glyphicon-trash",function(){
+  $(".doc .markup[randomID='"+$(this).attr("removeTagId")+"']").contents().unwrap();
+  $("#verifly_errors .row[key='"+$(this).attr("removeTagId")+"']").remove();
+});
+$("#verifly_added").on("click",".glyphicon-trash",function(){
+  $("#verifly_added .row[key='"+$(this).attr("removeId")+"']").remove();
+});
+$("#verifly_added").on("click",".glyphicon-floppy-disk",function(){
+
+
+  var tagName = $("#verifly_added .row[key='"+$(this).attr("removeId")+"'] button.switch:not(.noColor)").attr("markupType");
+  
+  var regex = $(this).attr("regex");
+  $.Hive.get(0).send({cmd:"regexMarkup",txt:$(".doc").html(),regex:regex,index:0,type:tagName,callback:""});
+
+  $("#verifly_added .row[key='"+$(this).attr("removeId")+"']").remove();
+});
+$("#verifly_cancelBtn").on("click", function(){
+  $("#veriflyModal").modal("hide");
+});
+
+$("#verifly_added").on("click","button.switch",function(){
+  $("#verifly_added .row[key='"+$(this).attr("key")+"'] button.switch").addClass("noColor");
+  $(this).removeClass("noColor");
+});// $('a[aria-controls="verifly_errors"]').on('shown.bs.tab', function (e) {
+//   $("#verifly_applyAllBtn").hide();
+//   $("#verifly_removeAllBtn").hide();
+// });
+</script>

@@ -1,0 +1,73 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">          
+      <h4 class="modal-title">自動標記選項</h4>
+    </div>
+    <div class="modal-body">
+      <div id="progressDiv" class="jumbotron" style="display:none">
+        <div id="progressBar"></div>
+        <div id="progress" class="progress progress-striped active">
+          <div id="stateOneProgress" class="progress-bar" style="width: 0%;background-color:gray">
+            <span class="sr-only">35% Complete (success)</span>
+          </div>
+          <div id="stateTwoProgress" class="progress-bar" style="width: 0%;background-color:gray">
+            <span class="sr-only">20% Complete (warning)</span>
+          </div>
+          <div id="stateThreeProgress" class="progress-bar" style="width: 0%;background-color:gray">
+            <span class="sr-only">10% Complete (danger)</span>
+          </div>
+        </div>
+      </div>
+      <div class="input-group" >
+        <span id="paragraphCheckboxStatus"></span><input type="checkbox" id="paragraphCheckbox" checked="true" style="display:none"><span class="btn">文章分段 (以一空白換行或連線空白換行作自動辨識)</span>
+      </div>
+      <div class="input-group">
+        <span id="fullNameCheckboxStatus"></span><input type="checkbox" disabled="true" checked="false" id="fullNameCheckbox" ><span class="btn">全名 (姓氏 + 名字)</span><button id="showDynastyModalBtn" class="btn btn-xs btn-primary" style="">選擇人物朝代</button>
+      </div><!-- /input-group -->  
+      <div class="input-group" >
+        <span id="partialNameCheckboxStatus"></span><input type="checkbox" disabled="true" id="partialNameCheckbox"><span class="btn">部分名字 (別名, 名字)</span>
+      </div><!-- /input-group -->  
+      <!-- <div class="input-group">
+        <span id="nianhaoCheckboxStatus"></span><input type="checkbox" id="nianhaoCheckbox"><span class="btn">年號</span>
+      </div> -->
+      <div class="input-group">
+        <span id="timePeriodCheckboxStatus"></span><input type="checkbox" id="timePeriodCheckbox"><span class="btn">日期</span>
+      </div>
+      <!-- /input-group --> 
+      <div class="input-group">
+        <span id="placeNameCheckboxStatus"></span><input type="checkbox" id="placeNameCheckbox"><span class="btn">地名</span>
+      </div><!-- /input-group --> 
+      <div class="input-group">
+        <span id="officialTitleCheckboxStatus"></span><input type="checkbox" id="officialTitleCheckbox"><span class="btn">官名</span>
+      </div><!-- /input-group -->       
+      <hr/>
+      <div class="input-group">
+        <!--<form class="form-group">-->
+        <span id="muzhimingCheckboxStatus"></span><input type="checkbox" id="muzhimingCheckbox" ><span class="btn">打開墓誌銘(測試)功能，以親屬關係找出可能人名 </span>
+        <!--<span id="timePeriodHelpersCheckboxStatus"></span><input type="checkbox" id="timePeriodHelpersCheckbox" ><span class="btn">enable time period experimental </span>-->
+        <!--</form>-->
+      </div>
+      <hr/>
+      <div class="input-group">
+        <span id="ddbcPersonCheckboxStatus"></span><input type="checkbox" id="ddbcPersonCheckbox" ><span class="btn">法鼓佛學人名規範資料</span>
+      </div>
+      <div class="input-group">
+        <span id="ddbcGlossariesCheckboxStatus"></span><input type="checkbox" id="ddbcGlossariesCheckbox" ><span class="btn">法鼓佛學詞彙</span>
+      </div>
+      <hr/>
+    </div>
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+      <button id="startMarkupBtn" type="button" class="btn btn-primary" >開始標記</button>
+      <button id="saveMarkupBtn" type="button" class="btn btn-danger" style="display:none">標記完成</button>
+      <a id="export" style="display:none">export</a>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+<script type="text/javascript">
+  $("#showVeriflyModalBtn").on("click",function(){
+    $("#markupSelectionModal").modal("hide");
+    $('#dynastySelectionModal').modal('hide');
+    $("#fileSelectionModal").modal('show');
+  });
+</script>

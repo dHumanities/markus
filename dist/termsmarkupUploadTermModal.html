@@ -1,0 +1,27 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">          
+      <h4 class="modal-title">Submit keywords / regex</h4>
+    </div>
+    
+    <div class="modal-body">
+      <form class="form-inline">
+        <div class="form-group">
+        Tag name (Chinese text will be converted to pinyin)
+          <label class="sr-only" for="tagName">Tag name (Chinese text will be converted to pinyin)</label>                
+          <input type="text" class="form-control input-sm tagName" placeholder="Enter tag name"/>
+        </div>
+        <div class="form-group">
+          <input class="tagColor" name="color1" type="text" value="#333399" />
+        </div>
+      </form>
+      <!-- <input type="checkbox" id="escapeRegex" />Strict mode in Keywords match<br/> -->
+      Insert a line break between each term
+      <textarea class="form-control" rows="10"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button id="submitTermsBtn" type="button" class="btn btn-primary" >Submit keywords</button> or 
+      <button id="submitRegexBtn" type="button" class="btn btn-primary" >Submit regex</button>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

@@ -1,0 +1,222 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">          
+      <h4 class="modal-title">previous learned markup file options</h4>
+    </div>
+    <div id="files" class="modal-body">
+      
+      <!-- /input-group --> 
+    </div>
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+      <button id="fileSelectBtn" type="button" class="btn btn-primary" >select</button>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+<script>
+
+      
+
+        var listFiles = function(){
+
+          $.getJSON("/auth/list_files", function(result){
+                var files = result.files;
+                console.log(result);
+                $("#files").html(""); 
+                for (var i=0, j=files.length; i <j; i++ ){
+                  var _id = files[i]["_id"];
+                  var fileName = files[i]["fileName"];
+                  var metadata = files[i]["metadata"];
+                  var title = fileName;
+                  var genre = "genre";
+                  var dynasty = "dynasty";
+                  for (var index in metadata){
+                    var key = metadata[index].key;
+                    var value = metadata[index].value;
+                    switch (key){
+                      case "title":
+                        title =  value;
+                        break;
+                      case "genre":
+                        genre = value;
+                        break;
+                      case "dynasty":
+                        dynasty = value;
+                        break;
+                    }
+                  }
+                  
+                  var created = new Date(files[i]["created"]);
+                  var modified = new Date(files[i]["modified"]);
+
+                  var learningStatus =  files[i]["learningStatus"] || "";
+                  var learningIcon = "glyphicon-record";
+                  
+                  switch(learningStatus) {
+                      
+                      case "done":
+                          learningIcon = "glyphicon-ok-circle";
+                          break;  
+                                 
+                      default:
+                      continue;
+                          learningIcon = "glyphicon-record";
+                  }
+
+
+                  var filesContainer = $("<div data-MARKUS-fileId='"+_id+"'' class='row'><div class='col-md-12'><div class='row'><div class='col-md-1'><input type='checkbox'  data-MARKUS-fileId='"+_id+"' /></div><div class='col-md-5'><a type='markup' href='index.html?fileName="+_id+"'><div class='editable' type='title' >"+title+"</div></a></div><div class='col-md-2'><div class='editable' type='dynasty'>"+dynasty+"</div></div><div class='col-md-2'><div class='editable' type='genre'>"+genre+"</div></div>"+
+                    // "<div class='col-md-2'>"+created+"</div><div class='col-md-2'>"+modified+"</div>"+
+                    "</div></div>"+
+                    "<div class='col-md-12' type='extend' style='display:none'><div class='row'><div class='col-md-1'></div><div class='col-md-5'>"+fileName+"</div></div></div></div>").appendTo("#files"); 
+                  
+                }   
+              });
+        } 
+        var selectedMarkupFiles = [];
+        $("#showVeriflyResultModalBtn").on("click",function(){
+          $("#veriflyModal").modal("show");
+        });
+
+
+        $("#fileSelectBtn").on("click",function(){
+          selectedMarkupFiles = [];
+          $("#files input:checked").each(function(){
+            selectedMarkupFiles.push($(this).attr('data-MARKUS-fileId'));
+            console.log($(this).attr('data-MARKUS-fileId'));
+          });
+          $("#veriflyCheckbox").prop("checked", (selectedMarkupFiles.length > 0));
+          // $("#fileSelectionModal").modal("hide");
+          // $("#markupSelectionModal").modal("show");
+          verifiedWithSelectedFiles();
+        });
+
+
+
+        var verifiedWithSelectedFiles = function(){
+         
+
+          $("#save").on("fileIdupdated", function(){
+            $.ajax({
+              url: "/auth/learningReport/",
+              type: 'POST',
+              
+              contentType: 'application/x-www-form-urlencoded',          
+           
+              // Tell YQL what we want and that we want JSON
+              data: {
+                  fileId: $("#save").attr("fileid"),
+                  selectedFileIds: JSON.stringify(selectedMarkupFiles)
+              },
+       
+          // Work with the response
+              success: function( data ) {
+                   $("#save").off("fileIdupdated");
+                   $("#verifly_errors .sameTags").html("");
+                   $("#verifly_added .sameTags").html("");
+                  console.log( data ); // server response
+                  var count =0;
+                  var error = data.response[1];
+                  
+
+                  var added = data.response[2];
+                  $(".doc .markup").each(function(){
+                    $(this).attr("randomID",count++);
+                    
+                  });
+                  var errorCandiatesText = [];       
+                  var htmlTemp = $(".doc").html();
+                  for (var i =0 ; i < error.length ;i ++){
+                    var errorRecord = error[i];
+                    // console.log(".doc #"+errorRecord.paragraph+" .markup[type='"+errorRecord.entityType+"']");
+                    var errorTags = $(".doc #"+errorRecord.paragraph+" .markup[type='"+errorRecord.entityType+"']").filter(function(){
+                      return $(this).text() == errorRecord.entity;
+                    });
+
+                    for (var j=0; j< errorTags.length;j++){
+                      
+                      var obj = {};
+                      var headAndTail = htmlTemp.split($(errorTags[j])[0].outerHTML);
+                      obj["textBeforeTag"] = (headAndTail.length > 0) ? (headAndTail[0]).replace(/<[^>]*>/gm, "").slice(- Math.max(errorRecord.previousSibling.length, 20)) : "";
+                      obj["textAfterTag"] = (headAndTail.length > 1) ? (headAndTail[1]).replace(/<[^>]*>/gm, "").slice(0, Math.max(errorRecord. nextSibling.length,20)) : "";
+                      if (obj["textBeforeTag"].endsWith(errorRecord.previousSibling) &&  obj["textAfterTag"].startsWith(errorRecord.nextSibling)) {
+                        $("#verifly_errors .sameTags").append('<div class="row well well-sm" key="'+$(errorTags[j]).attr("randomID")+'"><div style="height: 69px;"><div class="col-xs-10" style="height: 69px;">'+obj["textBeforeTag"]+'<span class="'+errorRecord.entityType+' markup unsolved selected" type="'+errorRecord.entityType+'" placeName_id="" randomid="0">'+errorRecord.entity+'</span>'+obj["textAfterTag"]+'</div><div class="col-xs-1" style="padding-left: 0px; height: 69px;"></div><div class="col-xs-1" style="padding-right: 0px; height: 69px;"><div class="row" style="height: 69px; position: relative; top: 0px;"><span class="btn btn-link glyphicon glyphicon-trash" removeTagId="'+ $(errorTags[j]).attr("randomID")+'"></span></div></div></div><div class="row all well-sm fixHeight cbdbIds"><div class="col-xs-12 fixHeight"></div></div></div>');
+                      }
+
+
+                    }
+                    
+
+                    
+                    // errorCandiatesText
+
+                    /*
+<div class="row well well-sm" key="0"><div style="height: 69px;"><div class="col-xs-10" style="height: 69px;">十二月斷也。
+
+鄱陽為郡，文物之盛，甲於<span class="placeName markup unsolved selected" type="placeName" placename_id="" randomid="0">江東</span>，無圖經地志。元祐六年， 餘干都頡，作七</div><div class="col-xs-1" style="padding-left: 0px; height: 69px;"></div><div class="col-xs-1" style="padding-right: 0px; height: 69px;"><div class="row" style="height: 69px; position: relative; top: 0px;"><span class="btn btn-link glyphicon glyphicon-trash" key="0"></span> | <span class="btn btn-link glyphicon glyphicon-ok-circle"></span></div></div></div><div class="row all well-sm fixHeight cbdbIds"><div class="col-xs-12 fixHeight"></div></div></div>
+
+                    */
+                  }
+                  console.log(added.length);
+                  for (var i=0;i<added.length;i++){
+                      var addRecord = added[i];
+                      // var maxType = "";
+                      // var maxNum = 0;
+                      var types = Object.keys(addRecord.entityType);
+                      types.sort(function(a,b){
+                        return addRecord.entityType[b] - addRecord.entityType[a];
+
+                      });
+                      var buttons = [];
+                      for (var j=0; j< Math.min(3,types.length);j++){
+                        // console.log(types[j]);
+                        var buttonName = markus.tag[types[j]];
+                        if (buttonName) {
+                          buttonName = buttonName["buttonName"];
+                        } else {
+                          buttonName = types[j];
+                        }
+                        buttons.push('<button type="button" markupType="'+types[j] +'" key ="'+i+'" class="btn btn-xs btn-info switch '+ types[j]+ ((j==0)?'':' noColor')+'">'+buttonName+'</button>');
+                      }
+                      // for (var j=0;j<types.length;j++){
+                      //   if (addRecord.entityType[types[j]] > maxNum){
+                      //     maxNum = addRecord.entityType[types[j]];
+                      //     maxType = types[j];
+                      //   }
+                      // }
+                      // function escapeRegExp(str) {
+                      //   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+                      // }
+
+                      var previousSibling = addRecord.previousSibling.split('').map(function(character) {
+                        return character.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+                      });
+
+                       var nextSibling = addRecord.nextSibling.split('').map(function(character) {
+                        return character.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+                      });
+
+                      $("#verifly_added .sameTags").append('<div class="row well well-sm" key="'+i+'"><div style="height: 69px;"><div class="col-xs-10" style="height: 69px;">'+addRecord.previousSibling+'<span class="'+types[0]+' markup unsolved selected" type="'+types[0]+'" '+types[0]+'_id="" randomid="0">'+addRecord.entity+'</span>'+addRecord.nextSibling+'</div><div class="col-xs-1" style="padding-left: 0px; height: 69px;">'+buttons.join("")+'<div key="0" class="btn btn-xs btn-link glyphicon glyphicon-floppy-disk " style="display:none"></div></div><div class="col-xs-1" style="padding-right: 0px; height: 69px;"><div class="row" style="height: 69px; position: relative; top: 0px;"><span class="btn btn-link glyphicon glyphicon-trash" removeId="'+ i+'"></span> <span class="btn btn-link glyphicon glyphicon-floppy-disk" markupType="'+types[0]+'" regex="(?:<[^>]{1,}>)? *(?:<[^>]{1,}>)? *'+ previousSibling.join('(?:<[^>]{1,}>)? *(?:<[^>]{1,}>)? *')+'(?:<[^>]{1,}>)? *(?:<[^>]{1,}>)? *(' + addRecord.entity +')(?:<[^>]{1,}>)? *(?:<[^>]{1,}>)? *'+nextSibling.join('(?:<[^>]{1,}>)? *(?:<[^>]{1,}>)? *') +'(?:<[^>]{1,}>)? *(?:<[^>]{1,}>)? *" removeId="'+ i+'"></span></div></div></div><div class="row all well-sm fixHeight cbdbIds"><div class="col-xs-12 fixHeight"></div></div></div>');
+
+/*
+<div class="row well well-sm" key="0"><div style="height: 64px;"><div class="col-xs-10" style="height: 64px;">。」東坡先生作張文定碑云：「熙寧中，公判<span class="placeName markup unsolved" type="placeName" randomid="0"><span class="officialTitle markup unsolved selected" type="officialTitle" officialtitle_id="">應天府</span></span>。新法既粥坊場河渡，又祠廟粥之。官既得錢</div><div class="col-xs-1" style="padding-left: 0px; height: 64px;"><button type="button" class="btn btn-xs btn-info switch officialTitle">官職</button><button type="button" class="btn btn-xs btn-primary switch placeName">地名</button><div key="0" class="btn btn-xs btn-link glyphicon glyphicon-floppy-disk sameTagTypeSave"></div></div><div class="col-xs-1" style="padding-right: 0px; height: 64px;"><div class="row" style="height: 64px; position: relative; top: 0px;"><span class="btn btn-link glyphicon glyphicon-trash" key="0"></span> | <span class="btn btn-link glyphicon glyphicon-ok-circle"></span></div></div></div><div class="row all well-sm fixHeight cbdbIds"><div class="col-xs-12 fixHeight"></div></div></div>
+
+*/
+
+
+                    }
+                  $("#fileSelectionModal").modal("hide");
+                  $("#veriflyModal").modal("show");
+
+              }        
+            });
+          });
+           $("#save").trigger("click");
+
+          
+
+        // http://dh.chinese-empires.eu/cbdbAPI/basic?cbdbids=8008&callback=foo
+
+       }
+        
+
+    </script>

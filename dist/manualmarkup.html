@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+    <title>MARKUS</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="css/markus.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="css/offcanvas.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/website.css" /> -->
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"/> -->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    body { padding-top: 70px; }
+    .badge-primary {
+      background-color: #428bca;
+    }
+
+    .well .glyphicon-trash {
+      padding-top: 1px;
+      padding-right: 2px;
+      padding-bottom: 2px;
+      padding-left: 1px;
+    }
+    .well .btn-danger.glyphicon-trash {
+      color : white;
+    }
+
+    .well .glyphicon-ok-circle {
+      padding-top: 1px;
+      padding-right: 2px;
+      padding-bottom: 3px;
+      padding-left: 2px;
+    }
+
+    .well .btn-success.glyphicon-ok-circle{
+      color:white;
+    }
+
+    
+    .justExtended {
+      color: purple;  
+      background-color: white;
+    }
+    
+/*    .affix {
+      position: static;
+    }*/
+
+    
+
+    </style>
+  </head>
+
+  <body>
+    <div id="navbar"  class="navbar navbar-fixed-top navbar-inverse" role="navigation">      
+    </div><!-- /.navbar -->    
+    <div class="container">
+      <div id="wrapper" class="row row-offcanvas row-offcanvas-right">
+        <div id="wrapperTriggerHolder"></div>
+        <div id ="content" class="col-xs-8 col-md-8" data-foo="data-foo"></div>
+        <div id ="comment" class="col-xs-4 col-md-4" style="padding-left:0px;padding-top:0px;" style="display:none"></div>        
+        <div id ="assist" class="col-xs-4 col-md-4" style="padding-left:0px;"></div>
+      </div>  
+      <hr>    
+      <footer>
+        <p>MARKUS was developed as part of the project <a href="http://chinese-empires.eu" target="chineseEmpire">“Communication and Empire: Chinese Empires in Comparative Perspective,”</a> funded by the European Research Council. All Rights Reserved.</p>
+      </footer>
+    </div><!--/.container--> 
+    <div id="manualPopover" class="popover fade right in" style="display: hidden;">
+      <div class="arrow"></div>
+      <h3 class="popover-title" style="display: none;"></h3>
+      <div class="popover-content">
+        <span class="tagText"></span>
+        <a class="glyphicon glyphicon-book" data-toggle="tooltip" title="search online" _zhtw="網路解說搜尋"></a>
+        <!-- <span class="expand"> | <a class="glyphicon glyphicon-collapse-down" ></a></span><br class="singleTagContent"/> -->
+        <span class="typePopoverContent" style="display:none">
+          <span class="singleTagContent">
+            <button type="button" _type="fullName" class="btn btn-xs btn-danger switch fullName switcher" >姓名</button>
+            <button type="button" _type="partialName" class="btn btn-xs btn-warning switch partialName switcher" >別名</button>
+            <!-- <button type="button" _type="nianhao" class="btn btn-xs btn-success switch nianhao switcher" >年號</button> -->
+            <button type="button" _type="timePeriod" class="btn btn-xs btn-success switch timePeriod switcher" >時間</button>
+            <button type="button" _type="placeName" class="btn btn-xs btn-primary switch placeName switcher" >地名</button>
+            <button type="button" _type="officialTitle" class="btn btn-xs btn-info switch officialTitle switcher" >官職</button>
+            <a class="glyphicon glyphicon-floppy-disk" data-toggle="tooltip" title="save" _zhtw="儲存"></a>          
+          </span>  
+          <span class="search"> | <a class="glyphicon glyphicon-search" data-toggle="tooltip" title="search document" _zhtw="文本中搜尋"></a></span>
+        </span>  
+      </div>
+    </div>
+    <div id="popoverMod">
+    </div> 
+    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div><!-- /.modal -->
+      <div class="modal fade" id="summaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div><!-- /.modal -->
+      <div class="modal fade" id="helpModal" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" _data-backdrop="static"></div>
+      <div class="modal fade" id="manageTagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div><!-- /.modal -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/jquery.visible.min.js"></script>
+    <!-- // <script src="js/spin.min.js"></script> -->
+    <script src="js/bootstrap.min.js"></script> 
+    <!-- <script src="js/tooltip.js"></script>    -->
+    <script src="js/jquery.hive.js"></script>
+    <script src="js/jquery.stylesheet.js"></script>
+    <script src="js/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.visible.min.js"></script>
+
+
+    
+    <script type="text/javascript" src="markus.min.js"></script>
+<!--
+    <script type="text/javascript" src="js_0.2/markus.js"></script>
+    <script type="text/javascript" src="js_0.2/utilities.js"></script>
+    <script type="text/javascript" src="js_0.2/switcher.js"></script>
+    <script type="text/javascript" src="js_0.2/help.js"></script>
+    <script type="text/javascript" src="js_0.2/webDictionary.js"></script>
+    <script type="text/javascript" src="js_0.2/reference.js"></script>
+    
+    <script type="text/javascript" src="js_0.2/manualMarkup.js"></script>
+    <script type="text/javascript" src="js_0.2/markupPopup.js"></script>
+    -->
+    <!-- // <script type="text/javascript" src="js_0.2/manualMarkup.js"></script> -->
+    <!-- // <script type="text/javascript" src="js_0.2/summary.js"></script> -->
+    <!-- // <script type="text/javascript" src="js_0.2/data.js"></script>   -->
+    
+    <script src="js/offcanvas.js"></script>
+    <script type="text/javascript" src="js/jquery.colorPicker.min.js"></script>
+    <script type="text/javascript" src="js/keypress-2.1.4.min.js"></script>
+
+    <!-- <script src="js/jquery.appear.js"></script> -->
+    <script>
+    var listener;
+
+// var tagToggle = null;
+
+// var clickedMarkup = null;
+
+var startParagraphMarkup = function(){
+  if ($(".doc").text()== $(".doc pre").text()){
+    var _lineArray = $(".doc pre").html().split("\n");
+    var begin = true;
+    var count = 0;
+    for (var index in _lineArray){
+      var line = _lineArray[index].replace(/ /g,'');
+      if (begin && line.length > 0){
+        _lineArray[index] = "<span class='passage' type='passage' id='passage"+(count++)+"'>"+_lineArray[index];
+        begin = false;
+      } else if (!begin && line.length == 0){
+        _lineArray[index-1] = _lineArray[index-1]+"</span>";
+        begin = true;
+      }
+    }
+    if (!begin){
+      _lineArray[_lineArray.length-1] = _lineArray[_lineArray.length-1]+"</span>";
+    }
+    $(".doc pre").html(_lineArray.join("\n"));
+
+  } else {
+    var originalHTML = $(".doc").html();
+    $(".doc").html("").append("<span class='passage' id='passage00'></span>");
+    $(".doc #passage00").html(originalHTML);
+  }
+}
+
+
+var registUserIntefaceAction = function(){
+  
+  $("#showParagraphModalBtn").on("click",function(){
+    $(".passage").toggleClass("hightlight");
+  });
+  
+
+  $("#showManageTagModalBtn").on("click",function(){
+    $("#manageTagModal").modal("show");
+  });
+  // $("#wrapperTrigger").on("click",function(){$("#wrapper").toggleClass("toggled");});
+  
+  // $("#editDocBtn").on("click",function(){
+  //   console.log("click");
+    
+  //   var editable = $("#editDocBtn").hasClass("btn-danger");
+
+  //   if (editable) {
+  //     $("#editDocBtn").removeClass("btn-danger");
+  //     $(".doc").removeClass("edit");
+  //     editable = false;  
+  //   }else {
+  //     $("#editDocBtn").addClass("btn-danger");
+  //     $(".doc").addClass("edit");  
+  //     editable = true;
+  //   }
+
+
+  //   if (!editable){
+  //     $(".doc pre div,br").prepend("\n");
+  //     // $(".doc pre br").prepend("\n");
+  //     $(".doc div,br").contents().unwrap();
+  //     // $(".doc br").contents().unwrap();
+  //     $(".doc pre").html($(".doc pre").html());
+
+  //     if ($(".doc .passage").length > 0){
+  //       $(".doc .passage").contents().unwrap();
+  //       startParagraphMarkup();
+  //       markus.comment.startAddingCommentHolder();
+  //     }
+
+  //   }
+  //   console.log(editable);
+
+    
+  //   $(".doc pre").attr("contenteditable",""+ editable);
+
+  // });
+}
+
+window.onload = function() {
+  var lang = $.cookie('lang') || "";
+  $("footer").load("footer" + lang + ".html");
+
+  $("#manualPopover a[data-toggle='tooltip']").each(function(){
+    if($(this).attr(lang)!== undefined){
+      $(this).attr("title",$(this).attr(lang));
+    }
+  });
+
+  $.getJSON("/auth/profile_info", function(result){
+    if (result["name"]){
+      $.get("userSection"+lang+".html", function(data) { 
+        $("#userSection").html(data); 
+        $("#userName").text(result["name"]);
+      });
+    }
+  });
+
+  markus.io.readFile(decodeURIComponent(markus.util.urlParam('file')+".html"), fileLoaded);
+  
+  markus.navbar.register();
+
+  // listener = new window.keypress.Listener();
+
+
+  //       listener.simple_combo("meta s", function() {
+  //           $("#save").trigger("click");
+  //       });
+  //       listener.simple_combo("meta '", function() {
+  //           $("#editDocBtn").trigger("click");
+  //       });
+  //       listener.simple_combo("meta j", function() {            
+  //           $("#showGotoModalBtn").trigger("click");            
+  //       });
+  //       listener.simple_combo("meta d", function() {            
+  //           if ($('#popover').hasClass('in')){
+  //               var countIndex = -1;
+  //               var nextIndex = -1;
+  //               var markups = $(".doc .markup");
+  //               markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex +1}});
+  //               $('#popover .glyphicon-trash').trigger("click");
+  //               var obj = $(markups[nextIndex]);
+  //               $(obj).trigger("click");
+  //               if (!$(obj).isOnScreen()){
+  //                   $('html, body').animate({
+  //                       scrollTop: $(obj).offset().top - 100
+  //                   }, 200);
+  //               }
+  //           }           
+  //       });
+        
+
+  //       $.fn.isOnScreen = function(){
+  //           var win = $(window);
+  //           var viewport = {
+  //               top : win.scrollTop(),
+  //               left : win.scrollLeft()
+  //           };
+  //           viewport.right = viewport.left + win.width();
+  //           viewport.bottom = viewport.top + win.height();
+
+  //           var bounds = this.offset();
+  //           bounds.right = bounds.left + this.outerWidth();
+  //           bounds.bottom = bounds.top + this.outerHeight();
+  //           return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+  //       };
+
+  //       function nextSameTypeMarkup(){
+  //         if ($(".selected").length > 0){
+  //           var countIndex = -1;
+  //           var nextIndex = -1;
+  //           var type = $(".doc .selected").attr("type");
+  //           var markups = $(".doc .markup."+type)
+  //           markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex +1}});
+  //           if (markups.length > nextIndex) {
+  //               var obj = $(markups[nextIndex]);
+  //               $(obj).trigger("click");
+  //               if (!$(obj).isOnScreen()){
+  //                   $('html, body').animate({
+  //                       scrollTop: $(obj).offset().top - 100
+  //                   }, 200);
+  //               }
+  //           }
+
+  //         } else if ($(".doc .markup").length > 0){
+  //           $($(".doc .markup")[0]).trigger("click");
+  //         } 
+  //       }        
+
+  //       function nextMarkup(_sameType){
+  //         if ($(".selected").length > 0){
+  //           var countIndex = -1;
+  //           var nextIndex = -1;
+  //           var markups = $(".doc .markup");
+  //           markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex +1}});
+  //           if (markups.length > nextIndex) {
+  //               var obj = $(markups[nextIndex]);
+  //               $(obj).trigger("click");
+  //               if (!$(obj).isOnScreen()){
+  //                   $('html, body').animate({
+  //                       scrollTop: $(obj).offset().top - 100
+  //                   }, 200);
+  //               }
+  //           }
+
+  //         } else if ($(".doc .markup").length > 0){
+  //           $($(".doc .markup")[0]).trigger("click");
+  //         }
+  //       }
+
+  //       function lastMarkup(){
+  //         if ($(".selected").length > 0){
+  //           var countIndex = -1;
+  //           var nextIndex = -1;
+  //           var markups = $(".doc .markup");
+  //           markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex -1}});
+  //           if (nextIndex > -1) {
+  //               var obj = $(markups[nextIndex]);
+  //               $(obj).trigger("click");
+  //               if (!$(obj).isOnScreen()){
+  //                   $('html, body').animate({
+  //                       scrollTop: $(obj).offset().top - 100
+  //                   }, 200);
+  //               }
+  //           }
+  //         }else if ($(".doc .markup").length > 0){
+  //           $($(".doc .markup")[0]).trigger("click");
+  //         }
+  //       }
+
+  //       function lastSameTypeMarkup(){
+  //         if ($(".selected").length > 0){
+  //           var countIndex = -1;
+  //           var nextIndex = -1;
+  //           var type = $(".doc .selected").attr("type");
+  //           var markups = $(".doc .markup."+type)
+  //           markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex -1}});
+  //           if (nextIndex > -1) {
+  //               var obj = $(markups[nextIndex]);
+  //               $(obj).trigger("click");
+  //               if (!$(obj).isOnScreen()){
+  //                   $('html, body').animate({
+  //                       scrollTop: $(obj).offset().top - 100
+  //                   }, 200);
+  //               }
+  //           }
+  //         }else if ($(".doc .markup").length > 0){
+  //           $($(".doc .markup")[0]).trigger("click");
+  //         }
+  //       }
+        
+
+
+        // listener.register_combo({
+        //     "keys"              : "meta right",
+        //     "on_keyup"          : nextMarkup,
+        //     "prevent_default"   : true,
+        //     "is_exclusive"      : true
+        // });
+        // listener.register_combo({
+        //     "keys"              : "meta shift right",
+        //     "on_keyup"          : nextSameTypeMarkup,
+        //     "prevent_default"   : true,
+        //     "is_exclusive"      : true
+        // });
+        // listener.register_combo({
+        //     "keys"              : "meta left",
+        //     "on_keyup"          : lastMarkup,
+        //     "prevent_default"   : true,
+        //     "is_exclusive"      : true
+        // });
+        // listener.register_combo({
+        //     "keys"              : "meta shift left",
+        //     "on_keyup"          : lastSameTypeMarkup,
+        //     "prevent_default"   : true,
+        //     "is_exclusive"      : true
+        // });
+  var listener = markus.ui.listener;
+
+  listener.simple_combo("meta 1", function() {            
+      if ($('#manualPopover').hasClass('in') && 
+          $('#manualPopover button.switch.fullName').is(":visible")
+          && !$('#manualPopover button.switch.fullName').prop('disabled')){
+          $('#manualPopover button.switch.fullName').trigger("click");
+          $('#manualPopover .glyphicon-floppy-disk').trigger("click");
+      }           
+  });
+  listener.simple_combo("meta 2", function() {            
+      if ($('#manualPopover').hasClass('in') && 
+          $('#manualPopover button.switch.partialName').is(":visible")
+          && !$('#manualPopover button.switch.partialName').prop('disabled')){
+          $('#manualPopover button.switch.partialName').trigger("click");
+          $('#manualPopover .glyphicon-floppy-disk').trigger("click");
+      }           
+  });
+  listener.simple_combo("meta 3", function() {            
+      if ($('#manualPopover').hasClass('in') && 
+          $('#manualPopover button.switch.timePeriod').is(":visible")
+          && !$('#manualPopover button.switch.timePeriod').prop('disabled')){
+          $('#manualPopover button.switch.timePeriod').trigger("click");
+          $('#manualPopover .glyphicon-floppy-disk').trigger("click");
+      }            
+  });
+  listener.simple_combo("meta 4", function() {            
+      if ($('#manualPopover').hasClass('in') && 
+          $('#manualPopover button.switch.placeName').is(":visible")
+          && !$('#manualPopover button.switch.placeName').prop('disabled')){
+          $('#manualPopover button.switch.placeName').trigger("click");
+          $('#manualPopover .glyphicon-floppy-disk').trigger("click");
+      }          
+  });
+  listener.simple_combo("meta 5", function() {            
+      if ($('#manualPopover').hasClass('in') && 
+          $('#manualPopover button.switch.officialTitle').is(":visible")
+          && !$('#manualPopover button.switch.officialTitle').prop('disabled')){
+          $('#manualPopover button.switch.officialTitle').trigger("click");
+          $('#manualPopover .glyphicon-floppy-disk').trigger("click");
+      }          
+  });
+        
+
+  $("#wrapperTriggerHolder").load("wrapperTrigger"+lang+".html",{},function(){
+    $("#wrapperTrigger").on("click",function(){$("#wrapper").toggleClass("toggled");});
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  $("#assist").load("assist"+lang+".html",{},function(){ 
+    $("#comment").load("comment"+lang+".html",{},registerCommentUI);
+    registWebDictionary();
+    registColorSwitcher();
+    markus.helpInfo.register();
+    registUserIntefaceAction();
+    $("#summaryModal").load("summaryModal"+lang+".html",{},function(){registMarkupSummary();});
+    $("#manageTagModal").load("manageTagModal"+lang+".html",{},function(){
+      registeTagManageUI();
+      $('#manageTagModal .tagColor').colorPicker();                 
+    });
+    $('[data-toggle="tooltip"]').tooltip();
+    $("#assist").show();
+  });
+
+  
+  // $("#summaryModal").load("summaryModal.html",{},function(){registMarkupSummary();});
+  $("#popoverMod").load("popoverMod.html",{},function(){
+    $.get("removeModal"+lang+".html", function(data) { 
+      $("#removeModal").append(data);  
+      markus.popup.registMarkupPopup(true);
+      markus.manualMarkup.registManualMarkup(true);
+      $("#popoverMod a[data-toggle='tooltip']").each(function(){
+        if($(this).attr(lang)!== undefined){
+          $(this).attr("title",$(this).attr(lang));
+        }
+      });
+      $("#popoverMod a[data-toggle='tooltip']").tooltip({placement:"auto bottom"});           
+    });
+  });
+  
+
+  if (!(window.File && window.FileList && window.FileReader)) {
+      console.log("Your browser does not support File API");
+  }      
+  
+  
+}
+
+var fileLoaded = function (result,_file){
+  $("#content").html(markus.util.removeAllExistTag(result));
+  // startParagraphMarkup();
+  docStatusDetection();
+  var editable = $(".doc pre").attr("contenteditable",false);
+
+  
+  $("#editDocBtn").removeClass("btn-danger");
+  $(".doc").removeClass("edit");
+
+  if ($(".doc .passage").length > 0){
+    $(".doc .passage").contents().unwrap();
+    startParagraphMarkup();
+    markus.comment.startAddingCommentHolder();
+  }
+  
+  registerCommentIcon();
+}
+
+
+
+var docStatusDetection = function(){
+
+  var doc = $(".doc");
+
+  
+
+  // doc.on("click", ".markup",markupClicked);
+
+  doc.find(".noColor").removeClass("noColor");
+
+  doc.find(".fullName,.partialName").each(function(){
+    var attr = $(this).attr('cbdbid');
+
+    if (typeof attr == 'undefined' || attr == false || attr.length == 0) {    
+      $(this).addClass("noCBDBID");
+    }
+
+  });
+
+
+
+//-- Start Hilde notebook special, need to remove later --// 
+
+  $(".doc").find(".entry").each(function(){
+    var entryID = $(this).attr("id");
+    $(this).prepend("<div class='notSave entryTitle'>"+entryID+"</div>");
+  });
+
+  $(".doc").find("persname[key]").each(function(){
+    var cbdbID = $(this).attr("key");
+    $(this).append("<span class='notSave'>"+cbdbID+"</span>");
+  });
+
+  //-- End Hilde notebook special, need to remove later --//
+  
+}
+
+
+
+
+    </script>
+    <script src="js/rangy-core.js"></script>
+    <script src="js/rangy-cssclassapplier.js"></script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53293952-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

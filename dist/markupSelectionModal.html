@@ -1,0 +1,79 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">          
+      <h4 class="modal-title">automated markup options</h4>
+    </div>
+    <div class="modal-body">
+      <div id="progressDiv" class="jumbotron" style="display:none">
+        <div id="progressBar"></div>
+        <div id="progress" class="progress progress-striped active">
+          <div id="stateOneProgress" class="progress-bar" style="width: 0%;background-color:gray">
+            <span class="sr-only">35% Complete (success)</span>
+          </div>
+          <div id="stateTwoProgress" class="progress-bar" style="width: 0%;background-color:gray">
+            <span class="sr-only">20% Complete (warning)</span>
+          </div>
+          <div id="stateThreeProgress" class="progress-bar" style="width: 0%;background-color:gray">
+            <span class="sr-only">10% Complete (danger)</span>
+          </div>
+        </div>
+      </div>
+      <div class="input-group" >
+        <span id="paragraphCheckboxStatus"></span><input type="checkbox" id="paragraphCheckbox" checked="true" style="display:none"><span class="btn">paragraph division (default one line of blank space)</span>
+      </div>
+      <div class="input-group">
+        <span id="fullNameCheckboxStatus"></span><input type="checkbox" disabled="true" checked="false" id="fullNameCheckbox" ><span class="btn">full name (last name + first name, 姓名)</span><button id="showDynastyModalBtn" class="btn btn-xs btn-primary" style="">dynasties selection</button>
+      </div><!-- /input-group -->  
+      <div class="input-group" >
+        <span id="partialNameCheckboxStatus"></span><input type="checkbox" disabled="true" id="partialNameCheckbox"><span class="btn">partial name (alternative names, 別名)</span>
+      </div><!-- /input-group -->  
+      <!-- <div class="input-group">
+        <span id="nianhaoCheckboxStatus"></span><input type="checkbox" id="nianhaoCheckbox"><span class="btn">reign name (nianhao 年號)</span>
+      </div> --><!-- /input-group --> 
+      <div class="input-group">
+        <span id="timePeriodCheckboxStatus"></span><input type="checkbox" id="timePeriodCheckbox"><span class="btn">date (日期)</span>
+      </div>
+      <div class="input-group">
+        <span id="placeNameCheckboxStatus"></span><input type="checkbox" id="placeNameCheckbox"><span class="btn">place name (地名)</span>
+      </div><!-- /input-group --> 
+      <div class="input-group">
+        <span id="officialTitleCheckboxStatus"></span><input type="checkbox" id="officialTitleCheckbox"><span class="btn">official title (官名)</span>
+      </div>
+      <hr/>
+      <div class="input-group">
+        <!--<form class="form-group">-->
+        <span id="muzhimingCheckboxStatus"></span><input type="checkbox" id="muzhimingCheckbox" ><span class="btn">enable muzhiming (墓誌銘) experimental </span>
+        <!--<span id="timePeriodHelpersCheckboxStatus"></span><input type="checkbox" id="timePeriodHelpersCheckbox" ><span class="btn">enable time period experimental </span>-->
+        <!--</form>-->
+      </div>
+      <hr/>
+      <div class="input-group">
+        <span id="ddbcPersonCheckboxStatus"></span><input type="checkbox" id="ddbcPersonCheckbox" ><span class="btn">person authority database for Buddhist Studies (法鼓佛學人名規範資料)</span>
+      </div>
+      <div class="input-group">
+        <span id="ddbcGlossariesCheckboxStatus"></span><input type="checkbox" id="ddbcGlossariesCheckbox" ><span class="btn">glossaries for Buddhist Studies (法鼓佛學詞彙)</span>
+      </div>
+      <hr/>
+      <div class="input-group">
+        <span id="koreanPersonCheckboxStatus"></span><input type="checkbox" id="koreanPersonCheckbox" ><span class="btn">Korean [early Joseon] (alpha)</span>
+      </div>
+      <!-- <div class="input-group">
+        <span id="veriflyStatus"></span><input type="checkbox" disabled="true" checked="false" id="veriflyCheckbox" ><span class="btn">verifly with prevous markup files</span><button id="showVeriflyModalBtn" class="btn btn-xs btn-primary" style="">files selection</button>
+      </div> -->
+      <!-- /input-group --> 
+    </div>
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+      <button id="startMarkupBtn" type="button" class="btn btn-primary" >start markup</button>
+      <button id="saveMarkupBtn" type="button" class="btn btn-danger" style="display:none">Done</button>
+      <a id="export" style="display:none">export</a>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+<script type="text/javascript">
+  $("#showVeriflyModalBtn").on("click",function(){
+    $("#markupSelectionModal").modal("hide");
+    $('#dynastySelectionModal').modal('hide');
+    $("#fileSelectionModal").modal('show');
+  });
+</script>

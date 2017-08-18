@@ -1,0 +1,27 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">          
+      <h4 class="modal-title">載入關鍵字/正規表達式</h4>
+    </div>
+    
+    <div class="modal-body">
+      <form class="form-inline">
+        <div class="form-group">
+        標記名稱 (中文名會自動轉為拼音)
+          <label class="sr-only" for="tagName">標記名稱 (中文名會自動轉為拼音)</label>                
+          <input type="text" class="form-control input-sm tagName" placeholder="輸入標記名稱(羅馬字母)"/>
+        </div>
+        <div class="form-group">
+          <input class="tagColor" name="color1" type="text" value="#333399" />
+        </div>
+      </form>
+      <!-- <input type="checkbox" id="escapeRegex" />Strict mode in Keywords match<br/> -->
+      詞彙請一行一行分開
+      <textarea class="form-control" rows="10"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button id="submitTermsBtn" type="button" class="btn btn-primary" >載入關鍵字</button> 或 
+      <button id="submitRegexBtn" type="button" class="btn btn-primary" >載入正規表達式</button>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

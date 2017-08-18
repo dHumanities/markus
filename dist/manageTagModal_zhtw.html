@@ -1,0 +1,33 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <!-- <div class="modal-header">          
+      <h4 class="modal-title">Select dynasty range</h4>
+    </div> -->
+    <div class="modal-body">
+       <table>
+        <thead>
+         <tr><td>快捷顯示</td><td>標記</td><td>標記名稱</td><td>按鈕名稱</td><td>刪除所有標記</td></tr>
+         </thead>
+         <tbody class ="manageTagTable">
+           
+         </tbody>
+       </table>
+    </div>
+    <div class="modal-body" style="border:1px solid #e5e5e5">新增標記 (標記名稱的中文會自動轉為拼音)<br/>
+    <table>
+      <thead><tr><td>標記顏色</td><td>標記名稱</td><td>按鈕名稱</td></tr><td></td></thead>
+      <tbody class ="newTagTable"><tr>
+        <td><input class="tagColor" name="color2" type="text" value="#333399" /></td>
+        <td><input type="text" class="form-control input-sm " data-markus-value='tagName' placeholder="標記名稱"/></td>
+        <td><input type="text" class="form-control input-sm buttonName" data-markus-value='color-switcher-class' placeholder="按鈕名稱"/></td>
+        <td><button id="newTagBtn" type="button" class="btn btn-primary" >新增</button></td>
+      </tr></tbody>
+    </table>
+    
+    </div>             
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+      <button id="setManageTagBtn" type="button" class="btn btn-primary" >確定</button>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+    <title>MARKUS</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/normalize.css" /> -->
+    <link href="css/markus.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="css/offcanvas.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/website.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/colorPicker.css" /> -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-table.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-editable.css" />
+
+    <style>
+    .badge-primary {
+      background-color: #428bca;
+    }
+    
+
+    /*.checkboxControl{
+      text-align: left;
+    }*/
+    /*div.colorPicker-picker {
+      height: 30px;
+      width: 30px;
+      background: url(css/arrow.gif) no-repeat bottom right;
+    }*/
+
+    </style>
+    
+  </head>
+
+  <body>
+    <div id="navbar"  class="navbar navbar-fixed-top navbar-inverse" role="navigation">      
+    </div><!-- /.navbar -->
+    <div class="container">
+      <div id="temp"  style="display:none"></div>
+      <div id="wrapper" class="row row-offcanvas row-offcanvas-right">
+        <div id="wrapperTriggerHolder"></div>
+        <div id ="content" class="col-xs-8 col-md-8" >
+          
+          <button id="uploadBtn" type="button" class="btn btn-default btn-sm btn-primary" data-loading-text="Uploading..." data-loaded-text="Done">Upload a txt (UTF-8) or saved MARKUS file</button><input style="display:none" type="file" id="filesInput" multiple/>
+          <hr/>
+          <div id="toolbar">
+              <button id="remove" class="btn btn-danger" disabled>
+                  <i class="glyphicon glyphicon-remove"></i> Delete
+              </button>
+              <button id="sendToLean" class="btn btn-primary" disabled>
+                   <i class="glyphicon glyphicon-record"></i> Learn
+              </button>
+              <button id="downloadBackup" class="btn btn-success" disabled>
+                   <i class="glyphicon glyphicon-download-alt"></i> Download
+              </button>
+              <!-- <button id="exportMarkup" class="btn btn-success" disabled>
+                   <i class="glyphicon glyphicon-save-file"></i> Export Markup
+              </button>
+              <button id="batchMarkup" class="btn btn-success" disabled>
+                   <i class="glyphicon glyphicon-open-file"></i> Batch Markup
+              </button> -->
+          </div>
+          <table 
+          id="table"
+           data-toolbar="#toolbar"
+           data-pagination="true"
+           data-search="true"
+           data-page-list = "[5, 10, 50, 100, 300]" 
+           >
+           <!--<thead>
+            <tr>
+                <th data-field="id">Item ID</th>
+                <th data-field="fileName">fileName</th>
+                <th data-field="price">Item Price</th>
+            </tr>
+        </thead>-->
+    </table>
+          <div id="files"></div>  
+        </div>
+        <div id ="assist" class="col-xs-4 col-md-4" style="padding-left:0px;"></div>
+      </div>
+      <hr>     
+      <footer>
+        <p>MARKUS was developed as part of the project <a href="http://chinese-empires.eu" target="chineseEmpire">“Communication and Empire: Chinese Empires in Comparative Perspective,”</a> funded by the European Research Council. All Rights Reserved.</p>
+      </footer>
+    </div><!--/.container-->
+    <div id="manualPopover" class="popover fade right in" style="display: hidden;">
+      <div class="arrow"></div>
+      <h3 class="popover-title" style="display: none;"></h3>
+      <div class="popover-content">
+        <span class="tagText"></span>
+        <a class="glyphicon glyphicon-book" ></a>
+        <!-- <span class="expand"> | <a class="glyphicon glyphicon-collapse-down" ></a></span><br class="singleTagContent"/> -->
+        <span class="typePopoverContent" style="display:none">
+          <span class="singleTagContent">
+            <button type="button" _type="fullName" class="btn btn-xs btn-danger switch fullName switcher" >姓名</button>
+            <button type="button" _type="partialName" class="btn btn-xs btn-warning switch partialName switcher" >別名</button>
+            <button type="button" _type="nianhao" class="btn btn-xs btn-success switch nianhao switcher" >年號</button>
+            <button type="button" _type="placeName" class="btn btn-xs btn-primary switch placeName switcher" >地名</button>
+            <button type="button" _type="officialTitle" class="btn btn-xs btn-info switch officialTitle switcher" >官職</button>
+            <a class="glyphicon glyphicon-floppy-disk"></a>
+
+          </span>  
+          <span class="search"> | <a class="glyphicon glyphicon-search" ></a></span>
+        </span>  
+      </div>
+    </div>
+    
+    <div class="modal fade" id="dynastySelectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div><!-- /.modal -->
+    </div>
+    <div class="modal fade" id="markupSelectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div><!-- /.modal -->
+    <div class="modal fade" id="markupProgressModal" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" _data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">          
+            <h4 class="modal-title">Markup progress</h4>
+          </div>
+          <div class="modal-body"></div>            
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+            <button id="_startMarkupBtn" type="button" class="btn btn-primary" disabled="true">Start</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade" id="summaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">      
+    </div><!-- /.modal -->
+    <div class="modal fade" id="helpModal" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" _data-backdrop="static"></div><!-- /.modal -->
+    <div id="popoverMod">
+    </div>  
+    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div><!-- /.modal -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+
+    <!-- // <script src="js/spin.min.js"></script> -->
+    <script src="js/bootstrap.min.js"></script>    
+    <script src="js/jquery.hive.js"></script>
+    <script src="js/jquery.stylesheet.js"></script>
+    <script src="js/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.visible.min.js"></script>
+    <script type="text/javascript" src="markus.min.js"></script>
+
+    <script src="js/rangy-core.js"></script>
+    <script src="js/rangy-cssclassapplier.js"></script>    
+    <script src="js/all_cbdb.js"></script>  
+    <script type="text/javascript" src="js/office.js"></script>  
+    <script type="text/javascript" src="js/place.js"></script> 
+    <script type="text/javascript" src="js/ddbc.js"></script>
+    <script type="text/javascript" src="js/ddbc_person.js"></script> 
+    <script type="text/javascript" src="js/ddbc_place.js"></script>
+    <script type="text/javascript" src="js/json_parse.js"></script> 
+    
+    
+    <script src="js/offcanvas.js"></script>
+    <script type="text/javascript" src="js/jquery.colorPicker.min.js"></script>
+    
+    <script src="js/bootstrap-table.min.js"></script>
+    <script src="js/bootstrap-table-editable.js"></script>
+    <script src="js/bootstrap-editable.min.js"></script>
+    <script src="js/jszip2.min.js"></script>
+
+
+    <!--<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>-->
+
+    <script>
+
+      /*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */
+var saveAs=saveAs||function(e){"use strict";if(typeof e==="undefined"||typeof navigator!=="undefined"&&/MSIE [1-9]\./.test(navigator.userAgent)){return}var t=e.document,n=function(){return e.URL||e.webkitURL||e},r=t.createElementNS("http://www.w3.org/1999/xhtml","a"),o="download"in r,i=function(e){var t=new MouseEvent("click");e.dispatchEvent(t)},a=/constructor/i.test(e.HTMLElement),f=/CriOS\/[\d]+/.test(navigator.userAgent),u=function(t){(e.setImmediate||e.setTimeout)(function(){throw t},0)},d="application/octet-stream",s=1e3*40,c=function(e){var t=function(){if(typeof e==="string"){n().revokeObjectURL(e)}else{e.remove()}};setTimeout(t,s)},l=function(e,t,n){t=[].concat(t);var r=t.length;while(r--){var o=e["on"+t[r]];if(typeof o==="function"){try{o.call(e,n||e)}catch(i){u(i)}}}},p=function(e){if(/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(e.type)){return new Blob([String.fromCharCode(65279),e],{type:e.type})}return e},v=function(t,u,s){if(!s){t=p(t)}var v=this,w=t.type,m=w===d,y,h=function(){l(v,"writestart progress write writeend".split(" "))},S=function(){if((f||m&&a)&&e.FileReader){var r=new FileReader;r.onloadend=function(){var t=f?r.result:r.result.replace(/^data:[^;]*;/,"data:attachment/file;");var n=e.open(t,"_blank");if(!n)e.location.href=t;t=undefined;v.readyState=v.DONE;h()};r.readAsDataURL(t);v.readyState=v.INIT;return}if(!y){y=n().createObjectURL(t)}if(m){e.location.href=y}else{var o=e.open(y,"_blank");if(!o){e.location.href=y}}v.readyState=v.DONE;h();c(y)};v.readyState=v.INIT;if(o){y=n().createObjectURL(t);setTimeout(function(){r.href=y;r.download=u;i(r);h();c(y);v.readyState=v.DONE});return}S()},w=v.prototype,m=function(e,t,n){return new v(e,t||e.name||"download",n)};if(typeof navigator!=="undefined"&&navigator.msSaveOrOpenBlob){return function(e,t,n){t=t||e.name||"download";if(!n){e=p(e)}return navigator.msSaveOrOpenBlob(e,t)}}w.abort=function(){};w.readyState=w.INIT=0;w.WRITING=1;w.DONE=2;w.error=w.onwritestart=w.onprogress=w.onwrite=w.onabort=w.onerror=w.onwriteend=null;return m}(typeof self!=="undefined"&&self||typeof window!=="undefined"&&window||this.content);if(typeof module!=="undefined"&&module.exports){module.exports.saveAs=saveAs}else if(typeof define!=="undefined"&&define!==null&&define.amd!==null){define([],function(){return saveAs})}
+
+
+      var selections = [];
+
+      function visusOperateFormatter(value, row, index) {
+        return [
+            '<a class="PLATIN" href="javascript:void(0)" title="PLATIN" >',
+            '<i class="glyphicon glyphicon-globe"></i>',
+            '</a>  ',
+            '<a class="palladio" href="javascript:void(0)" title="palladio">',
+            '<i class="glyphicon glyphicon-th"></i>',
+            '</a>',
+            '<a class="tagCloud" href="javascript:void(0)" title="tagCloud">',
+            '<i class="glyphicon glyphicon-cloud"></i>',
+            '</a>'
+        ].join('');
+    }
+
+    function markusOperateFormatter(value, row, index) {
+        return [
+            '<a class="AUTO" href="javascript:void(0)" title="Automated" >',
+            'Auto',
+            '</a>  ',
+            '<a class="MANU" href="javascript:void(0)" title="Manual">',
+            'Manu',
+            '</a>  ',
+            '<a class="KEYWORD" href="javascript:void(0)" title="Keyword">',
+            'Key',
+            '</a>'
+        ].join('');
+    }
+    function learnOperateFormatter(value, row, index) {
+      var sendToLearn = "";
+      switch(row.learningStatus) {
+          case "added":
+          case "processing":
+              learningIcon = "glyphicon-dashboard";
+              break;
+          case "done":
+              learningIcon = "glyphicon-ok-circle";
+              break;  
+          case "error":
+              learningIcon = "glyphicon-remove-circle";
+              break;            
+          default:
+              sendToLearn = "SENDTOLEARN"
+              learningIcon = "glyphicon-record";
+      }
+
+        return [
+            // '<a class="'+sendToLearn+'" href="javascript:void(0)" title="" >',
+            '<i class="glyphicon '+learningIcon+'"></i>'
+            // '</a>'
+        ].join('');
+    }
+
+    $("#table").on('editable-save.bs.table', function (event, _field, _row, oldValue) {
+
+        var data = new FormData();
+        var file_id = _row._id;
+              
+        var title = _row.fileName;  
+        var genre = _row.genre;  
+        var dynasty = _row.dynasty;  
+        
+        
+        data.append("metadata", JSON.stringify([{key:"title",value:title},{key:"genre",value:genre},{key:"dynasty",value:dynasty}]));
+        // console.log(data);
+              // console.log(_file);
+
+        $.ajax({
+            url: '/auth/update/'+file_id,
+            type: 'POST',
+            data: data,
+            cache: false,
+            dataType: 'json',
+            processData: false, // Don't process the files
+            contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Handle errors here
+                console.log('ERRORS: ' + textStatus);
+                // STOP LOADING SPINNER
+            }
+        });
+      });
+
+
+      $("#table").on('check.bs.table uncheck.bs.table ' +
+                'check-all.bs.table uncheck-all.bs.table', function () {
+            $("#remove").prop('disabled', !$("#table").bootstrapTable('getSelections').length);
+            $("#sendToLean").prop('disabled', !$("#table").bootstrapTable('getSelections').length);
+            $("#downloadBackup").prop('disabled', !$("#table").bootstrapTable('getSelections').length);
+            $("#exportMarkup").prop('disabled', !$("#table").bootstrapTable('getSelections').length);
+            $("#batchMarkup").prop('disabled', !$("#table").bootstrapTable('getSelections').length);
+            // save your data, here just save the current page
+            selections = getIdSelections();
+            // push or splice the selections if you want to save all data selections
+        });
+
+      function getIdSelections() {
+        return $.map($("#table").bootstrapTable('getSelections'), function (row) {
+          
+            return row._id
+        });
+      }
+      
+      $("#exportMarkup").on("click",function () {
+        var selected = $("#table").bootstrapTable('getSelections');
+        var selectedFiles = selected.length;
+        // var files = [];
+        var count = 0;
+
+        $.map(selected, function (row, index) {
+          $.get("/auth/get/"+row._id, function(data) {   
+              count ++;
+
+              // console.log(data);
+
+              
+          });
+      
+        }); 
+      });
+
+
+      $("#downloadBackup").on("click",function () {
+        console.log("downloadBackup");
+        var selected = $("#table").bootstrapTable('getSelections');
+        var selectedFiles = selected.length;
+        // var files = [];
+        var count = 0;
+        var zip = new JSZip2();
+
+        $.map(selected, function (row, index) {
+          $.get("/auth/get/"+row._id, function(data) {   
+              count ++;
+
+              // console.log(row);
+              zip.file(row.fileName, data);
+
+              if (count == selectedFiles){
+                  zip.generateAsync({type:"blob"})
+                    .then(function(content) {
+                        // see FileSaver.js
+                        saveAs(content, "markus_backup.zip");
+                    });
+              }  
+
+
+
+
+          });
+      
+        });               
+      });
+
+
+      $("#sendToLean").on("click",function () {
+        console.log("sendToLean")
+            $.map($("#table").bootstrapTable('getSelections'), function (row, index) {
+                  switch (row.learningStatus) {
+                      case "added":
+                      case "processing":
+                      case "done":
+                      break;
+                      default:
+                        row.learningStatus = "added";
+                        $("#table").bootstrapTable('updateRow', {
+                            index: index,
+                            row: row
+                        });
+                        $.getJSON("/auth/learning/"+row._id, function(result){
+                             console.log(result);
+                        });
+                  }
+            });
+            
+        });
+
+
+      $("#remove").on("click",function () {
+            var ids = getIdSelections();
+            $("#table").bootstrapTable('remove', {
+                field: '_id',
+                values: ids
+            });
+            console.log(ids);
+
+            $.map(ids, function(id){
+              $.getJSON("/auth/destroy/"+id, function(result){
+                console.log(result);
+              });
+            });
+
+            $("#remove").prop('disabled', true);
+        });
+
+
+
+
+
+      // var markupFullName = markupPartialName = markupNianhao = markupofficialTitle = markupPlaceName = false;
+	  var sendFileToLearn = function(){
+  		var fileName = $(this).attr("data-MARKUS-fileId");
+      var obj = $(this);
+  		console.log(fileName);
+  		$.getJSON("/auth/learning/"+fileName, function(data){
+  			console.log(data);
+        $(obj).removeClass("glyphicon-record").addClass("glyphicon-dashboard");
+  		});
+	  }
+	  var sendFileToVerifly = function(){
+		var fileName = $(this).attr("data-MARKUS-fileName");
+		console.log(fileName);
+		$.get("/auth/learningReport/"+fileName, function(data){
+			console.log(data);
+		});
+	  }
+	  var checkFileLearningProgress = function(){
+		var fileName = $(this).attr("data-MARKUS-fileName");
+		console.log(fileName);
+		$.getJSON("/auth/checkLearningProgress/"+fileName, function(data){
+			console.log(data);
+		});
+	  }
+	  
+	  var removeFile = function(){
+  		var fileName = $(this).attr("data-MARKUS-fileId");
+  		console.log(fileName);
+        
+  		$.getJSON("/auth/destroy/"+fileName, function(result){
+        console.log(result);
+  			var obj = $("div.row[data-MARKUS-fileId='"+result["_id"]+"']");
+        obj.hide('slow', function(){ obj.remove(); });
+
+  		});
+	  }
+
+    // var user = {"id":{"_id":"55dfb960f395b1d603bae00b","__v":0,"files":[{"fileName":"FILE1_2_Huizhu_lu_hou_lu_AS_noheads.txt.html","filePath":"uploads/55dfb960f395b1d603bae00b/","_id":"561ed6fba7486c75473b7a12","metadata":[],"modified":"2015-10-14T22:27:19.272Z","created":"2015-10-14T22:28:11.874Z"},{"fileName":"FILE1_2_Huizhu_lu_hou_lu_AS_noheads.txt.html","filePath":"uploads/55dfb960f395b1d603bae00b/","_id":"561ed6fba7486c75473b7a12","metadata":[],"modified":"2015-10-14T22:27:19.272Z","created":"2015-10-14T22:28:11.874Z"}],"twitter":{"displayName":"DID_ACTE","username":"DID_ACTE","token":"2425984148-qGOAMs8HQcYrdBiT2w0EcTnJKjeR6YgfdtdP0JS","id":"2425984148"}},"get":"/auth/get/","files":[{"fileName":"FILE1_2_Huizhu_lu_hou_lu_AS_noheads.txt.html","filePath":"uploads/55dfb960f395b1d603bae00b/","_id":"561ed6fba7486c75473b7a12","metadata":[],"modified":"2015-10-14T22:27:19.272Z","created":"2015-10-14T22:28:11.874Z"},{"fileName":"FILE1_2_Huizhu_lu_hou_lu_AS_noheads.txt.html","filePath":"uploads/55dfb960f395b1d603bae00b/","_id":"561ed6fba7486c75473b7a12","metadata":[],"modified":"2015-10-14T22:27:19.272Z","created":"2015-10-14T22:28:11.874Z"}]};
+      var worker = new Worker('js/tagWorker.js');
+      var target ="";
+      var tagData = "";
+      var cbdbidInfo = {};
+      var entryData = {};
+      var postingData = {};
+      var addressInfo = {};
+      var nameKeys = {};
+      var metadata = [];
+      // var dynamicPersonAddressInfo = {};
+
+      var buildMetadataFromTags = function(tags,basic, posting){
+          var metadataTagsInPassage = {};
+          var metadataKeys = [];
+          var metadataPlace = [];
+          for (var i=0; i<tags.length;i++){
+            var tag = tags[i];
+            if (tag.category =="metadata"){
+              metadataTagsInPassage[tag.passageId] = metadataTagsInPassage[tag.passageId] || {};
+              metadataTagsInPassage[tag.passageId][tag.name] = metadataTagsInPassage[tag.passageId][tag.name] || []
+              metadataTagsInPassage[tag.passageId][tag.name].push(tag.value);
+
+              if (tag.type =="person"){
+                metadataTagsInPassage[tag.passageId][tag.name+"_all_addr_id"] = metadataTagsInPassage[tag.passageId][tag.name+"_all_addr_id"] ||[];
+                // console.log(basic)
+                // console.log(posting)
+                // console.log(tag.id)
+                // console.log(basic[tag.id])
+
+                try {
+                  if (metadataTagsInPassage[tag.passageId][tag.name+"_all_addr_id"].indexOf(basic[tag.id]["c_addr_id"]) == -1){
+                    metadataTagsInPassage[tag.passageId][tag.name+"_all_addr_id"].push(basic[tag.id]["c_addr_id"]);
+                  }
+
+                }catch(err){
+
+                }
+                try {
+                  for (var j=0; j<posting[tag.id].length;j++){
+                    if (metadataTagsInPassage[tag.passageId][tag.name+"_all_addr_id"].indexOf(posting[tag.id][j]["c_addr_id"]) == -1){
+                      metadataTagsInPassage[tag.passageId][tag.name+"_all_addr_id"].push(posting[tag.id][j]["c_addr_id"]);
+                    }
+                  }
+                }catch(err){
+
+                }
+                
+
+
+
+                if (metadataKeys.indexOf(tag.name+"_all_addr_id") == -1){
+                  metadataKeys.push(tag.name+"_all_addr_id");
+                }
+              }
+              if (tag.type =="place"){
+                metadataTagsInPassage[tag.passageId][tag.name+"_addr_id"] = metadataTagsInPassage[tag.passageId][tag.name+"_addr_id"] ||[];
+
+                // console.log(basic)
+                // console.log(posting)
+                // console.log(tag.id)
+                // console.log(basic[tag.id])
+
+                try {
+                  
+                    metadataTagsInPassage[tag.passageId][tag.name+"_addr_id"].push("metadataPlace_"+metadataPlace.length);
+                    addressInfo["metadataPlace_"+metadataPlace.length] = {xy:tag.id,Address:tag.value}
+                    metadataPlace.push("");
+                    
+                  
+
+                }catch(err){
+
+                }
+                
+                
+
+
+
+                if (metadataKeys.indexOf(tag.name+"_addr_id") == -1){
+                  metadataKeys.push(tag.name+"_addr_id");
+                }
+              }
+
+            }
+            if (metadataKeys.indexOf(tag.name) == -1){
+              metadataKeys.push(tag.name);
+            }
+          }
+          
+          console.log(metadataTagsInPassage);
+
+          var contents = ["metadata_id,passagesId,"+metadataKeys.join(",")];
+          var passages = Object.keys(metadataTagsInPassage);
+          // console.log(passages);
+
+          for (var i= 0; i<passages.length;i++){
+            var row = [("metadata_"+contents.length),passages[i]];
+            for (var j=0; j< metadataKeys.length; j++){
+
+              var values = metadataTagsInPassage[passages[i]][metadataKeys[j]] || [];
+              if (metadataKeys[j].endsWith("_xy")){
+                row.push(values.join("|"));
+              } else {
+                row.push(values.join("|").replace(/,/gm,"|"));  
+              }
+              
+              
+            
+            }
+            contents.push(row);
+          }
+
+          return contents;
+      }
+
+
+
+      var tags = "";
+      worker.addEventListener('message', function(e) {
+         tags = JSON.parse(e.data);
+         cbdbidInfo = {};
+         
+         // console.log(metadata.join("\n"));
+         // return;
+        var list = [];
+        tagData = [];
+        var tagKeys = [];
+        nameKeys = {};
+        
+        for (var i = 0 ; i < tags.length ; i++){
+          if (i ==0){
+            tagKeys = Object.keys(tags[i]);
+            tagData.push(tagKeys.join(","));
+          }
+          var tagValues = [];
+
+          // Todo, markus.util.converBackToUnicode to escaped id
+
+          for (var j=0;j<tagKeys.length;j++){
+            // console.log(tags[i])
+            // console.log(tags[i][tagKeys[j]])
+            tagValues.push((markus.util.converBackToUnicode(""+tags[i][tagKeys[j]])).replace(/,/gm,"|"));
+          }
+          tagData.push(tagValues.join(","));
+          var cbdbid = tags[i].id;
+
+          if ( cbdbid !="" && typeof cbdbid != 'undefined' && cbdbid.indexOf("|")==-1 && tags[i].type =="person"){
+            // console.log("in");
+            // if (tags[i].name != "fullName" && tags[i].name != "partialName"){
+            //   console.log(tags[i].id);
+            //   nameKeys[tags[i].name] = nameKeys[tags[i].name] ||[];
+            //   if (nameKeys[tags[i].name].indexOf(tags[i].id) == -1){
+            //     nameKeys[tags[i].name].push(tags[i].id);
+            //   }
+
+            // }
+            if (list.indexOf(cbdbid) == -1){
+              list.push(cbdbid);  
+            }
+            
+          }else {
+            // console.log("out");
+          }
+        }
+        
+        
+
+        $.when($.ajax({
+          url: "http://dh.chinese-empires.eu/cbdbAPI/basic",
+          type: 'POST',
+          
+          contentType: 'application/x-www-form-urlencoded',          
+       
+          // Tell YQL what we want and that we want JSON
+          data: {
+              cbdbids: list.join("|").replace(",","|")
+          }}),
+          $.ajax({
+          url: "http://dh.chinese-empires.eu/cbdbAPI/entry",
+          type: 'POST',
+          
+          contentType: 'application/x-www-form-urlencoded',          
+       
+          // Tell YQL what we want and that we want JSON
+          data: {
+              cbdbids: list.join("|").replace(",","|")
+          }}),
+          $.ajax({
+          url: "http://dh.chinese-empires.eu/cbdbAPI/posting",
+          type: 'POST',
+          
+          contentType: 'application/x-www-form-urlencoded',          
+       
+          // Tell YQL what we want and that we want JSON
+          data: {
+              cbdbids: list.join("|").replace(",","|")
+          }})
+          ).done(function(basic,entry,posting){
+            
+            basic = basic[0];
+            console.log(entry);
+            entry = entry[0];
+            posting = posting[0];
+
+
+            
+            var cbdbids = Object.keys(basic);
+            var objKeys = null;
+            var headers = "";
+            var body = "";
+            var csvHeaders =[];
+            var csvbody =[];
+            addressInfo = {};
+
+            entryData = {};
+            postingData = {};
+
+
+            if (cbdbids.length > 0){
+              objKeys = Object.keys(basic[cbdbids[0]]);
+              objKeys.push("xy");
+              
+              var headers ="";
+              for (var i=0; i <objKeys.length; i++){
+                if (objKeys[i]== "c_personid") {
+                  
+                  csvHeaders.push("bio_main_id");
+                } else
+                if (objKeys[i]== "x_coord") {
+                  
+                  csvHeaders.push("Longitude");
+                } else if (objKeys[i]== "y_coord"){
+                  
+                  csvHeaders.push("Latitude");
+                } else if (objKeys[i]== "c_name_chn"){
+                  
+                  csvHeaders.push("bio_main_name");
+                } else if (objKeys[i]== "c_address"){
+                  
+                  csvHeaders.push("Address");
+                } else if (objKeys[i]== "xy"){
+                  
+                  
+                } else {
+                  
+                  csvHeaders.push(objKeys[i]); 
+                }
+                
+                
+              }
+              
+            }
+            csvbody.push(csvHeaders.join("\t"));
+            // console.log(cbdbids);
+            for (var i =0 ; i < cbdbids.length;i++){                
+              // console.log(basic[cbdbids[i]]);
+              var col = [];
+              for (var j=0; j< objKeys.length;j++){
+                if (objKeys[j] == "c_personid") {
+                  var _id = basic[cbdbids[i]][objKeys[j]];
+                  if(cbdbidInfo[_id] == null){
+                    cbdbidInfo[_id] = {cbdbid:_id,basic:[],entry:[],posting:[],metadata:[]};
+
+                    // var _newKeys = Object.keys(nameKeys);
+                    // // console.log(cbdbidInfo[_id]);
+                    // for (var k=0; k< _newKeys.length;k++){
+                    //   cbdbidInfo[_id][_newKeys[k]] = [];                      
+                    // }
+                    // console.log(cbdbidInfo[_id]);
+                  }
+
+                  // cbdbidInfo[_id] = cbdbidInfo[_id] || {cbdbid:_id,basic:[],entry:[],posting:[]}
+                  
+                  var basicId = _id+"_"+(cbdbidInfo[_id].basic.length);
+
+
+
+                  cbdbidInfo[_id].basic.push(basicId);
+                  col.push(""+basicId+"")
+                } else if (objKeys[j]=="xy"){
+                  if (!isNaN(basic[cbdbids[i]]["y_coord"])&&
+                      !isNaN(basic[cbdbids[i]]["x_coord"])&&
+                      (basic[cbdbids[i]]["y_coord"]!=  null)&&
+                      (basic[cbdbids[i]]["x_coord"]!=  null)&&
+                      (basic[cbdbids[i]]["y_coord"]!=  0)&&
+                      (basic[cbdbids[i]]["x_coord"]!=  0)){
+                      addressInfo[basic[cbdbids[i]]["c_addr_id"]]= {xy:basic[cbdbids[i]]["y_coord"]+","+basic[cbdbids[i]]["x_coord"],Address:basic[cbdbids[i]]["c_address"]}
+
+                      // var _newKeys = Object.keys(nameKeys);
+                      // // console.log(cbdbidInfo[_id]);
+                      // for (var k=0; k< _newKeys.length;k++){
+                      //   if (nameKeys[_newKeys[k]].indexOf(parseInt(cbdbids[i])) != -1 || nameKeys[_newKeys[k]].indexOf(cbdbids[i]) != -1){
+                      //     if (cbdbidInfo[cbdbids[i]][_newKeys[k]].indexOf(basic[cbdbids[i]]["c_addr_id"])==-1){
+                      //       cbdbidInfo[cbdbids[i]][_newKeys[k]].push(basic[cbdbids[i]]["c_addr_id"]);
+                      //     }
+                      //   }                      
+                      // }
+                  }
+                }else {
+
+                  col.push(""+basic[cbdbids[i]][objKeys[j]]+"")
+                  body += "<td>"+basic[cbdbids[i]][objKeys[j]]+"</td>";  
+                }
+                
+              }
+              csvbody.push(col.join("\t"));
+              body ="<tr>"+body+"</tr>";
+            }
+            // $("#table").html("<table>"+headers+body+"</table>");
+            // console.log(csvbody.join("\n"));
+            CBDBdata = csvbody;
+
+            // console.log(entry);
+            cbdbids = Object.keys(entry);
+            objKeys = null;
+            headers = "";
+            body = "";
+            csvHeaders =[];
+            csvbody =[];
+
+            
+
+            if (cbdbids.length > 0){
+              objKeys = Object.keys(entry[cbdbids[0]][0]);
+              
+              
+              
+              for (var i=0; i <objKeys.length; i++){
+                  if (objKeys[i]== "c_personid"){
+                  
+                  csvHeaders.push("entry_id");
+                } else {
+                  
+                  csvHeaders.push("entry_"+objKeys[i]); 
+                }
+              }              
+            }
+            csvbody.push(csvHeaders.join("\t"));
+            // console.log(cbdbids);
+            for (var i =0 ; i < cbdbids.length;i++){                
+              // console.log(basic[cbdbids[i]]);
+              for (var k=0; k < entry[cbdbids[i]].length; k ++){
+                var col = [];
+                  for (var j=0; j< objKeys.length;j++){
+                    if (objKeys[j] == "c_personid") {
+                      var _id = entry[cbdbids[i]][k][objKeys[j]];
+                      if (cbdbidInfo[_id] == null){
+                        cbdbidInfo[_id] =  {cbdbid:_id,basic:[],entry:[],posting:[],metadata:[]}
+                        var _newKeys = Object.keys(nameKeys);
+
+                        for (var k=0; k< _newKeys.length;k++){
+                          cbdbidInfo[_id][_newKeys[k]] = [];
+                        }
+                      }
+
+                      
+                      
+                      var basicId = _id+"_"+(cbdbidInfo[_id].entry.length);
+                      cbdbidInfo[_id].entry.push(basicId);
+
+                      // console.log(cbdbidInfo[_id]);
+
+                      col.push(""+basicId+"")
+                    
+                    }else {
+                      // console.log(cbdbids[i])
+                      // console.log(entry[cbdbids[i]][k])
+                      // console.log(objKeys[j])
+                      
+                      
+
+                      try {
+                          col.push(""+entry[cbdbids[i]][k][objKeys[j]]+"")
+                      }
+                      catch(err) {
+                          col.push("")
+                      }
+                      
+                    }
+                    
+                  }
+                  csvbody.push(col.join("\t"));
+                  
+                }
+              }
+              
+            // console.log(csvbody);
+            entryData = csvbody;
+
+            cbdbids = Object.keys(posting);
+            objKeys = null;
+            headers = "";
+            body = "";
+            csvHeaders =[];
+            csvbody =[];
+
+            
+
+            if (cbdbids.length > 0){
+              objKeys = Object.keys(posting[cbdbids[0]][0]);
+               objKeys.push("xy");
+              
+              
+              for (var i=0; i <objKeys.length; i++){
+                if (objKeys[i]== "c_personid"){
+                  
+                  csvHeaders.push("posting_id");
+                } else if (objKeys[i]== "xy"){
+                  
+                  
+                } else {
+                  
+                  csvHeaders.push("posting_"+objKeys[i]); 
+                }
+              }              
+            }
+            csvbody.push(csvHeaders.join("\t"));
+            // console.log(cbdbids);
+            for (var i =0 ; i < cbdbids.length;i++){                
+              // console.log(basic[cbdbids[i]]);
+              for (var k=0 ; k <posting[cbdbids[i]].length;k++ ){
+                var col = [];
+                for (var j=0; j< objKeys.length;j++){
+                  if (objKeys[j] == "c_personid") {
+                    var _id = posting[cbdbids[i]][k][objKeys[j]];
+                    if (cbdbidInfo[_id] == null) {
+
+                      cbdbidInfo[_id] =  {cbdbid:_id,basic:[],entry:[],posting:[],metadata:[]}
+                      var _newKeys = Object.keys(nameKeys);
+
+                      for (var l=0; l< _newKeys.length;l++){
+                        cbdbidInfo[_id][_newKeys[l]] = [];
+                      }
+                    }
+                    
+                    
+                    var basicId = _id+"_"+(cbdbidInfo[_id].posting.length);
+                    cbdbidInfo[_id].posting.push(basicId);
+                    col.push(""+basicId+"")
+                  
+                  }else if (objKeys[j]=="xy"){
+                    if (!isNaN(posting[cbdbids[i]][k]["y_coord"])&&
+                        !isNaN(posting[cbdbids[i]][k]["x_coord"])&&
+                      (posting[cbdbids[i]][k]["y_coord"]!=  null)&&
+                      (posting[cbdbids[i]][k]["x_coord"]!=  null)&&
+                      (posting[cbdbids[i]][k]["y_coord"]!=  0)&&
+                      (posting[cbdbids[i]][k]["x_coord"]!=  0)){
+                      addressInfo[posting[cbdbids[i]][k]["c_addr_id"]]= {xy:posting[cbdbids[i]][k]["y_coord"]+","+posting[cbdbids[i]][k]["x_coord"],Address:posting[cbdbids[i]][k]["c_address_chn"]} ;
+
+                      // var _newKeys = Object.keys(nameKeys);
+                      // // console.log(cbdbidInfo[_id]);
+                      // for (var l=0; l< _newKeys.length;l++){
+                      //   if (nameKeys[_newKeys[l]].indexOf(cbdbids[i]) != -1 || nameKeys[_newKeys[l]].indexOf(cbdbids[i]) != -1){
+                      //     if (cbdbidInfo[cbdbids[i]][_newKeys[l]].indexOf(posting[cbdbids[i]]["c_addr_id"])==-1){
+                      //       cbdbidInfo[cbdbids[i]][_newKeys[l]].push(posting[cbdbids[i]]["c_addr_id"]);
+                      //     }
+                      //   }                      
+                      // } 
+
+
+                    }
+                    
+                  }else {
+
+                    col.push(""+posting[cbdbids[i]][k][objKeys[j]]+"")
+                    
+                  }
+                  
+                }
+                csvbody.push(col.join("\t"));
+                
+              }
+              }
+              
+            // console.log(csvbody);
+            postingData = csvbody;
+
+            metadata = buildMetadataFromTags(tags,basic,posting);
+            for (var i =1 ;i <metadata.length;i++){
+              var metadataid = metadata[i][0];
+              var passageId = metadata[i][1];
+              tagData.push([passageId,"metadataRecord","record","metadata","",metadataid]);
+              cbdbidInfo[metadataid] = {cbdbid:metadataid,basic:[],entry:[],posting:[],metadata:[metadataid]};
+            }
+
+
+
+
+
+
+
+
+
+
+            switch(target){
+              case "PLATINPOP":
+                openInPLATIN()
+              break;
+              case "PalladioPOP":
+                openInPalladio();
+              break;
+            }
+
+
+
+
+        });
+
+
+        
+
+        
+      }, false);  
+      var openInPLATIN = function(){
+
+          PLATINPOP = window.open('http://dh.chinese-empires.eu/PLATIN/index.html','MARKUS_PLATIN');
+          // PLATINPOP = window.open('/PLATIN/index.html','MARKUS_PLATIN');          
+      }
+      var openInPalladio = function(){
+          PalladioPOP = window.open('http://dh.chinese-empires.eu/palladio/apps/palladio/index.html#/upload','MARKUS_Palladio');
+          // PLATINPOP = window.open('/PLATIN/index.html','MARKUS_PLATIN');          
+      }
+      window.addEventListener('message',function(event) {
+        if (event.data == 'PLATIN'){;
+          
+          PLATINPOP.postMessage(CBDBdata.join("\n").replace(new RegExp('\t', 'g'),','),"http://dh.chinese-empires.eu");
+          // PLATINPOP.postMessage(CBDBdata.join("\n").replace(new RegExp('\t', 'g'),','),"http://localhost");
+        }
+         if (event.data == 'Palladio'){
+          
+          
+          var _cbdbInfoCSV = ["tagid","bio_main","entry","posting","metadata"];
+          var _newKeys = Object.keys(nameKeys);
+          _cbdbInfoCSV = _cbdbInfoCSV.concat(_newKeys);
+          
+          cbdbInfoCSV = [_cbdbInfoCSV.join(",")];
+
+          var cbdbidInfoKeys = Object.keys(cbdbidInfo);
+          for (var i = 0; i< cbdbidInfoKeys.length;i++){
+            var temp = [cbdbidInfo[cbdbidInfoKeys[i]].cbdbid,cbdbidInfo[cbdbidInfoKeys[i]].basic.join("|"),cbdbidInfo[cbdbidInfoKeys[i]].entry.join("|"),cbdbidInfo[cbdbidInfoKeys[i]].posting.join("|"),cbdbidInfo[cbdbidInfoKeys[i]].metadata.join("|")];
+            for (var j =0;j<_newKeys.length;j++){
+              temp.push(cbdbidInfo[cbdbidInfoKeys[i]][_newKeys[j]].join("|"))
+            }
+
+
+            cbdbInfoCSV.push(temp.join(","));
+          }
+
+          var addressInfoCSV = ["Address_name,addressid,xy"];
+
+          var addressInfoKeys = Object.keys(addressInfo);
+          for (var i = 0; i< addressInfoKeys.length;i++){
+            addressInfoCSV.push(addressInfo[addressInfoKeys[i]].Address+','+addressInfoKeys[i]+',"'+addressInfo[addressInfoKeys[i]].xy+'"');
+          }
+
+
+          // console.log(cbdbInfoCSV.join("\n"));
+
+          PalladioPOP.postMessage(tagData.join("\n"),"http://dh.chinese-empires.eu");
+          PalladioPOP.postMessage(CBDBdata.join("\n").replace(new RegExp('\t', 'g'),','),"http://dh.chinese-empires.eu");
+          PalladioPOP.postMessage(entryData.join("\n"),"http://dh.chinese-empires.eu");
+          // console.log(entryData.join("\n"));
+          PalladioPOP.postMessage(cbdbInfoCSV.join("\n"),"http://dh.chinese-empires.eu");
+          PalladioPOP.postMessage(postingData.join("\n"),"http://dh.chinese-empires.eu");
+          PalladioPOP.postMessage(addressInfoCSV.join("\n"),"http://dh.chinese-empires.eu");
+          PalladioPOP.postMessage(metadata.join("\n"),"http://dh.chinese-empires.eu");
+          // PLATINPOP.postMessage(CBDBdata.join("\n").replace(new RegExp('\t', 'g'),','),"http://localhost");
+        } 
+      },false);
+      window.onload = function() {
+        var lang = $.cookie('lang') || "";
+        $("footer").load("footer" + lang + ".html");
+
+
+        console.log(lang)
+        $.cookie('lang', lang,{path: '/' });
+         $.ajaxSetup ({
+          // Disable caching of AJAX responses
+          cache: false
+        });
+
+        $.getJSON("/auth/profile_info", function(result){
+            if (result["name"]){
+              $.get("userSection"+lang+".html", function(data) { 
+                $("#userSection").html(data); 
+                $("#userName").text(result["name"]);
+              });
+            }
+        }); 
+
+         $("#uploadBtn").on("click",function(){
+          $("#filesInput").click();
+        });
+
+        var listFiles = function(){
+
+          $.getJSON("/auth/list_files", function(result){
+                var files = result.files;
+                
+                // $("#table").bootstrapTable({data: files});
+                
+                
+                $("#files").html(""); 
+                var _table = [];
+                for (var i=0, j=files.length; i <j; i++ ){
+                  
+                  var _id = files[i]["_id"];
+                  var fileName = files[i]["fileName"];
+                  var metadata = files[i]["metadata"];
+                  var title = fileName;
+                  var genre = "genre";
+                  var dynasty = "dynasty";
+                  var _row = {_id:files[i]["_id"],fileName:fileName};
+                  for (var index in metadata){
+                    var key = metadata[index].key;
+                    var value = metadata[index].value;
+                    switch (key){
+                      case "title":                        
+                        title =  value;
+                        _row.fileName = title;
+                        break;
+                      case "genre":                        
+                        genre = value;
+                        _row.genre = genre;
+                        break;
+                      case "dynasty":                        
+                        dynasty = value;
+                        _row.dynasty = dynasty;
+                        break;
+                    }
+                  }
+                  
+                  var created = new Date(files[i]["created"]);
+                  var modified = new Date(files[i]["modified"]);
+
+                  var learningStatus =  files[i]["learningStatus"] || "";
+                  var learningIcon = "glyphicon-record";
+                  
+                  switch(learningStatus) {
+                      case "added":
+                      case "processing":
+                          learningIcon = "glyphicon-dashboard";
+                          break;
+                      case "done":
+                          learningIcon = "glyphicon-ok-circle";
+                          break;  
+                      case "error":
+                          learningIcon = "glyphicon-remove-circle";
+                          break;            
+                      default:
+                          learningIcon = "glyphicon-record";
+                  }
+                  _row.learningStatus = learningStatus;
+                  _table.push(_row);
+
+                  // var filesContainer = $("<div data-MARKUS-fileId='"+_id+"'' class='row'><div class='col-md-12'><div class='row'><div class='col-md-1'><span data-MARKUS-fileId='"+_id+"' class='glyphicon glyphicon-menu-right'></span></div><div class='col-md-5'><a type='markup' href='index.html?fileName="+_id+"'><div class='editable' type='title' >"+title+"</div></a></div><div class='col-md-2'><div class='editable' type='dynasty'>"+dynasty+"</div></div><div class='col-md-2'><div class='editable' type='genre'>"+genre+"</div></div>"+
+                  //   // "<div class='col-md-2'>"+created+"</div><div class='col-md-2'>"+modified+"</div>"+
+                  //   "<div class='col-md-1'><span data-MARKUS-fileId='"+_id+"' class='glyphicon glyphicon-edit'></span> <span data-MARKUS-fileId='"+_id+"' class='glyphicon "+  learningIcon +"'></span></div><div class='col-md-1'><span data-MARKUS-fileId='"+_id+"' class='glyphicon glyphicon-trash'></span></div></div></div>"+
+                  //   "<div class='col-md-12' type='extend' style='display:none'><div class='row'><div class='col-md-1'></div><div class='col-md-5'>"+fileName+"</div><div class='col-md-2'><span data-MARKUS-fileId='"+_id+"' class='glyphicon glyphicon-globe PLATIN'></span><span data-MARKUS-fileId='"+_id+"' class='glyphicon glyphicon-th palladio'></span><span data-MARKUS-fileId='"+_id+"' class='glyphicon glyphicon-cloud cloud'></span></div></div></div></div>").appendTo("#files"); 
+                  
+                }   
+
+                $('#table').bootstrapTable({
+    columns: [{
+        field: 'status',
+        title: 'Item ID',
+        checkbox: true
+    },{
+        field: '_id',
+        title: 'Item ID',
+        visible: false
+    }, {
+        field: 'fileName',
+        title: 'File Name',
+        
+        align: 'center',
+        valign: 'middle',
+        sortable: true,
+        editable: true
+    }, {
+        field: 'dynasty',
+        title: 'dynasty',
+        align: 'center',
+        valign: 'middle',
+        sortable: true,
+        editable: true
+    }, {
+        field: 'genre',
+        title: 'genre',
+        align: 'center',
+        valign: 'middle',
+        sortable: true,
+        editable: true
+
+    },{
+        field: 'markus',
+        title: 'MARKUS',
+        align: 'center',
+        events: operateEvents,
+        formatter: markusOperateFormatter
+    },{
+        field: 'visus',
+        title: 'VISUS',
+        align: 'center',
+        events: operateEvents,
+        formatter: visusOperateFormatter
+    },{
+        field: 'learningStatus',
+        title: 'LEARN',
+        align: 'center',
+        sortable: true,
+        events: operateEvents,
+        formatter: learnOperateFormatter
+    }],
+    data: _table
+});
+              });
+        } 
+
+        window.operateEvents = {
+        'click .PLATIN': function (e, value, row, index) {
+          e.preventDefault();
+          target ="PLATINPOP";
+          worker.postMessage('http://dh.chinese-empires.eu/auth/get/'+row._id);
+          
+        },
+        'click .palladio': function (e, value, row, index) {
+          e.preventDefault();
+            target ="PalladioPOP";
+            worker.postMessage('http://dh.chinese-empires.eu/auth/get/'+row._id);
+            
+        },
+        'click .tagCloud': function (e, value, row, index) {
+          e.preventDefault();
+          location = "index.html?action=cloud&fileName="+row._id;            
+        },
+        'click .AUTO': function (e, value, row, index) {
+          e.preventDefault();
+          location = "index.html?action=auto&fileName="+row._id;            
+        },
+        'click .MANU': function (e, value, row, index) {
+          e.preventDefault();
+          location = "index.html?action=manual&fileName="+row._id;            
+        },
+        'click .KEYWORD': function (e, value, row, index) {
+          e.preventDefault();
+          location = "index.html?action=keyword&fileName="+row._id;            
+        }
+
+    };
+
+
+
+
+
+        $("#navbar").load("navbar"+lang+".html",{},function(){
+          $(".langLink").on("click",function(event){
+
+            event.preventDefault();
+            var lang = $(this).attr("lang");
+            $.cookie('lang', lang,{path: '/' });
+                      
+          });
+          listFiles();
+          
+        });
+        // var files = user.files;        
+
+        
+        $("#files").on("click",".PLATIN",function(){
+          target ="PLATINPOP";
+          worker.postMessage('http://dh.chinese-empires.eu/auth/get/'+$(this).attr("data-MARKUS-fileId"));
+          console.log('orighttp://dh.chinese-empires.eu/auth/get/'+row._id);
+        }); 
+        $("#files").on("click",".palladio",function(){
+          target ="PalladioPOP";
+          worker.postMessage('http://dh.chinese-empires.eu/auth/get/'+$(this).attr("data-MARKUS-fileId"));
+        });
+        $("#files").on("click",".glyphicon-trash",removeFile);  
+        $("#files").on("click",".glyphicon-record,.glyphicon-remove-circle",sendFileToLearn); 
+
+        $("#files").on("click",".glyphicon-cloud",function(){
+          location = "index.html?action=cloud&fileName="+ $(this).attr("data-MARKUS-fileId");
+        }); 
+
+
+
+        $("#files").on("click",".glyphicon-edit",function(){
+          $("div.row[data-MARKUS-fileId='"+$(this).attr("data-MARKUS-fileId")+"'] div.editable").attr("contenteditable",true);
+          $("div.row[data-MARKUS-fileId='"+$(this).attr("data-MARKUS-fileId")+"'] a[type='markup']").on("click", false);
+          $(this).removeClass("glyphicon-edit").addClass("glyphicon-floppy-disk");
+        });
+        $("#files").on("click",".glyphicon-menu-right",function(){          
+          $("div.row[data-MARKUS-fileId='"+$(this).attr("data-MARKUS-fileId")+"'] div[type='extend']").show('slow');          
+          $(this).removeClass("glyphicon-menu-right").addClass("glyphicon-menu-up");
+        });
+        $("#files").on("click",".glyphicon-menu-up",function(){          
+          $("div.row[data-MARKUS-fileId='"+$(this).attr("data-MARKUS-fileId")+"'] div[type='extend']").hide('slow');          
+          $(this).removeClass("glyphicon-menu-up").addClass("glyphicon-menu-right");
+        });   
+        $("#files").on("click",".glyphicon-floppy-disk",function(){
+          $("div.row[data-MARKUS-fileId='"+$(this).attr("data-MARKUS-fileId")+"'] div.editable").attr("contenteditable",false);
+          $("div.row[data-MARKUS-fileId='"+$(this).attr("data-MARKUS-fileId")+"'] a[type='markup']").off("click");
+            var data = new FormData();
+            var file_id = $(this).attr("data-MARKUS-fileId")
+            var obj = $("div.row[data-MARKUS-fileId='"+file_id+"']");
+            var title = obj.find("div[type='title']").text();  
+            var genre = obj.find("div[type='genre']").text();  
+            var dynasty = obj.find("div[type='dynasty']").text();  
+            
+            data.append("metadata", JSON.stringify([{key:"title",value:title},{key:"genre",value:genre},{key:"dynasty",value:dynasty}]));
+            // console.log(_file);
+
+            $.ajax({
+                url: '/auth/update/'+file_id,
+                type: 'POST',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false, // Don't process the files
+                contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                success: function(data, textStatus, jqXHR) {
+                    console.log(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Handle errors here
+                    console.log('ERRORS: ' + textStatus);
+                    // STOP LOADING SPINNER
+                }
+            });
+          $(this).removeClass("glyphicon-floppy-disk").addClass("glyphicon-edit");
+        });
+        var setup_upload_reader = function (file,_fn){
+
+          var fileReader = new FileReader();
+          
+          fileReader.onloadend = (  function(file) {
+            return function(evt) {
+              if (_fn){                           
+                _fn(this.result, file);              
+              }            
+            };
+          })(file);
+
+
+          fileReader.readAsText(file);
+        };
+
+        var uploadedCallback = function(result,file) {
+          
+          
+          var doc = $(document.createElement('div'));
+          console.log("doc created");
+          var temp = $('#temp');
+          console.log("temp located");
+          
+
+          $(doc).addClass("doc").attr("markupFullName",false)
+                        .attr("markupPartialName",false)
+                        // .attr("markupLocation",false)
+                        .attr("markupNianhao",false)
+                        // .attr("linkToCBDB",false)
+                        .attr("markupOfficalTitle",false)
+                        .attr("markupPlaceName",false)
+                        .attr("filename",markus.util.chineseToPingYin(file.name));
+
+          if (file.type == "text/plain"){
+            console.log("txt loaded");
+            // console.log(markus.util.removeAllExistTag(result));
+            $(doc).html("<pre>"+markus.util.removeAllExistTag(result)+"</pre>");
+
+
+          } else if (file.type =="text/html") {
+            console.log("html loaded");
+            // console.log(result);
+            temp.html(markus.util.removeAllExistTag(result));
+            // console.log(markus.util.removeAllExistTag(result));
+            // console.log("-");
+            // console.log(temp.html());
+            if ($(temp).find(".doc").length >0){
+              var _doc = $(temp).find(".doc")[0];
+
+              // console.log(autoMarkupLinkEnable);
+
+              doc = _doc;
+            }else{
+              console.log("not saved html loaded");
+              $(doc).html(temp.html());
+              // console.log(temp.html()); 
+            }
+
+             
+          }else {
+              console.log("xml loaded");
+              $(doc).html(markus.util.removeAllExistTag(result));
+          }       
+
+          $("#temp").html("");
+          $("#temp").append(doc);
+          // console.log($("#temp").html());
+          console.log("doc appended");
+          
+          uploadFile();
+
+         // console.log("step2 fadeIn");
+      };
+
+      var uploadFile = function(){
+        markus.io.save($(".doc").attr("filename"), function(fileEntry) {
+          $.getJSON("/auth/profile_info", function(result) {
+              if (result["name"]) {
+                  var data = new FormData();
+
+
+                  fileEntry.file(function(_file) {
+                      data.append("upload", _file);
+                      console.log(_file);
+
+                      $.ajax({
+                          url: '/auth/upload',
+                          type: 'POST',
+                          data: data,
+                          cache: false,
+                          dataType: 'json',
+                          processData: false, // Don't process the files
+                          contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                          success: function(data, textStatus, jqXHR) {
+                              listFiles();
+
+                              console.log("callback uploadFiles: "+uploadFiles.length);
+                              upload(uploadFiles);
+                          },
+                          error: function(jqXHR, textStatus, errorThrown) {
+                              listFiles();
+                              // Handle errors here
+                              upload(uploadFiles);
+
+                              console.log('ERRORS: ' + errorThrown);
+                              // STOP LOADING SPINNER
+                          }
+                      });
+                  }, function() {});
+
+
+
+              }
+          }).fail(function() {
+
+          });
+        });
+
+      };
+      
+        /* file uploads */
+        var uploadFiles = [];
+        var filesInput = document.getElementById("filesInput");
+          filesInput.addEventListener("change", function(evt) {            
+            var files = evt.target.files;            
+              for (var i=0 ; i < files.length; i++){
+                var file = files[i];
+                console.log(file.size);
+                if (file.size < 4194304) {
+                  if (file.type.match('text.*')) {
+                    uploadFiles.push(file)
+                  }
+                  
+                }else {
+                  var lang = $.cookie('lang') || "";
+                  if (lang == "zhtw") {
+                    alert("MARKUS 暫不接受上傳大於 4 M 的檔案");  
+                  } else {
+                    alert("MARKUS does not accept file larger than 4M");
+                  }
+                  
+                }
+                
+                  
+              }
+
+              upload(uploadFiles);
+              // setup_upload_reader(file, uploadedCallback);
+
+                // 
+          }, false);
+        
+        var upload = function(fileArray){
+          if (fileArray.length > 0){
+            var file = fileArray.shift();
+            uploadFiles = fileArray;
+            console.log("uploadFiles "+uploadFiles.length);
+            setup_upload_reader(file, uploadedCallback);
+          }
+          
+        }
+
+
+      };
+
+      
+
+
+    </script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53293952-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  </body>
+</html>

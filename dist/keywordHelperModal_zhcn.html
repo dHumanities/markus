@@ -1,0 +1,108 @@
+﻿<style>
+	.modal-dialog .table>tbody>tr>td {
+		border-top: 0px;
+	}
+</style>
+<div class="modal-dialog">
+	<div class="modal-content">
+	  <div class="modal-header">          
+	    <h4 class="modal-title">关键词助手</h4>
+	  </div>
+	  
+	  <div class="modal-body">
+	    <table class="table table-condensed">
+	      <thead><tr><td>左方缀词字数</td><td colspan="2">欲分析的关键词</td><td>右方缀词字数</td></tr></thead>
+	      <tbody>              
+	      <tr><td><select class="form-control" id="left_ahead">
+	                <option>0</option>
+	                <option>1</option>
+	                <option>2</option>
+	                <option>3</option>
+	                <option>4</option>
+	                <option>5</option>
+	                <option>6</option>
+	                <option>7</option>
+	                <option>8</option>
+	                <option>9</option>
+	                <option>10</option>
+	              </select></td><td colspan="2"><input type="text" class="form-control" id="keyword" placeholder="关键词"></td>
+	          <td><select class="form-control" id="right_ahead">
+	                <option>0</option>
+	                <option>1</option>
+	                <option>2</option>
+	                <option>3</option>
+	                <option>4</option>
+	                <option>5</option>
+	                <option>6</option>
+	                <option>7</option>
+	                <option>8</option>
+	                <option>9</option>
+	                <option>10</option>
+	              </select></td></tr>
+	      <tr><td colspan="4" ><button id="keywordHelperBtn" type="button" class="btn btn-primary btn-block" >开始分析</button></td></tr></tbody>
+	    </table>
+	    <table class="table table-condensed"><thead><tr><td>左方缀词</td><td colspan="2">欲分析的长度</td><td>右方缀词</td></tr></thead>
+	      <tbody>
+	      
+	      <tr><td><input type="text" class="form-control" id="left_keyword" placeholder="关键词"></td><td><select class="form-control" id="keyword_min">
+	                <option selected>min</option>
+	                <option>1</option>
+	                <option>2</option>
+	                <option>3</option>
+	                <option>4</option>
+	                <option>5</option>
+	                <option>10</option>
+	                <option>20</option>
+	                <option>30</option>
+	              </select></td><td><select class="form-control" id="keyword_max">
+	                <option>1</option>
+	                <option>2</option>
+	                <option>3</option>
+	                <option>4</option>
+	                <option>5</option>
+	                <option>10</option>
+	                <option>20</option>
+	                <option>30</option>
+	                <option selected>max</option>
+	              </select></td>
+	          <td><input type="text" class="form-control" id="right_keyword" placeholder="关键词"></td></tr>
+	      <tr><td colspan="4" ><input type="checkbox" id="keywordHelperBtn2Checkbox" /> 只选取分析的词汇 <button id="keywordHelperBtn2" type="button" class="btn btn-primary btn-block" >开始分析</button></td></tr>        
+	      <!-- <tr><td valign="top" align="right"><nobr>种子词汇：</nobr></td>
+	          <td><textarea id="inPositiveTerms" rows="5" cols="40">请输入种子词汇（用逗号区隔）</textarea></td>
+	          <td valign="top" align="right"><nobr>种子夹子：</nobr></td>
+	          <td><textarea id="inPositiveClips" rows="5" cols="40">请输入种子夹子（用逗号区隔）</textarea></td>
+	      </tr>
+	      <tr><td valign="top" align="right"><nobr>排除词汇：</nobr></td>
+	          <td><textarea id="inNegativeTerms" rows="3" cols="40"></textarea></td>
+	          <td valign="top" align="right"><nobr>排除夹子：</nobr></td>
+	          <td><textarea id="inNegativeClips" rows="3" cols="40"></textarea></td>
+	      </tr>
+	      <tr><td colspan="2" align="center">     
+	             <button type="button" id="butComputeClips">利用种子词汇计算夹子</button>
+	          </td>
+	          <td colspan="2" align="center">
+	           <input id="inStrictMode" type="checkbox" autocomplete="off">Strict Mode
+	           <button type="button" id="butComputeTerms">利用种子夹子夹取词汇</button>
+	        </td>
+	      </tr> -->
+	   </tbody></table> 
+	   <!--  <form class="form-inline">
+	      <div class="form-group">
+	        <label class="sr-only" for="tagName">Tag Name</label>
+	        <input type="text" class="form-control input-sm tagName" placeholder="Enter tag name">
+	        
+	      </div>
+	      <div class="form-group">
+	        <input class="tagColor" name="color1" type="text" value="#333399" />
+	      </div>
+	    </form>
+	    词汇请一行一行分开 -->
+	    <textarea class="form-control" rows="10"></textarea>
+	    <button id="keywordHelperBtn3" type="button" class="btn btn-danger btn-block" >标记已分析的词汇</button>
+	    <button id="resetKeywordHelperBtn" type="button" class="btn btn-success btn-block" >重设关键词助手</button>
+	  </div>
+	  <!-- <div class="modal-footer">
+	    
+	  </div> -->
+	</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->

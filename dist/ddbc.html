@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+    <title>MARKUS</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/markus.min.css" rel="stylesheet">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- Custom styles for this template -->
+    <!--     <link href="css/offcanvas.css" rel="stylesheet">
+    <link href="css/website.css" rel="stylesheet"> -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body style="padding-top:0px;padding-right:10px;padding-left:10px;">
+    <div id="content"></div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="markus.min.js"></script>
+    <script type="text/javascript">
+    window.onload = function() {
+        console.log(markus.util.urlParam('q'));
+        $.ajax({
+            url: "http://buddhistinformatics.ddbc.edu.tw/glossaries/api/get.php",
+
+            // The name of the callback parameter, as specified by the YQL service
+            jsonp: "jsoncallback",
+
+            // Tell jQuery we're expecting JSONP
+            dataType: "jsonp",
+            crossDomain: true,
+            // Tell YQL what we want and that we want JSON
+            data: {
+                term: decodeURIComponent(markus.util.urlParam('q')),
+                type: "match"
+
+            },
+
+            // Work with the response
+            success: function(response) {
+                console.log(response); // server response
+                if (response === null) {
+                    $("#content").append("<h3>查無資料</3>");
+                } else {
+                    for (var i = 0, j = response.length; i < j; i++) {
+                        $("#content").append("<h3>" + response[i]["dict-name-en"] + (response[i]["dict-name-zh"].length > 0 ? (" (" + response[i]["dict-name-zh"] + ")") : "") + "</h3>");
+                        $("#content").append("<h4>" + response[i]["term"] + "</h4>");
+                        $("#content").append("<div style='padding-top:10px'>" + response[i].desc + "</div><hr/>");
+
+                    }
+
+                }
+
+
+
+                $("#content").append("<div style='padding-top:10px'>MARKUS DDBC dictionary is powered by The DDBC Glossaries Project API.</div><br/><a rel='license' href='http://creativecommons.org/licenses/by-sa/3.0/' target='_new'><img alt='Creative Commons License' src='http://i.creativecommons.org/l/by-sa/2.5/tw/88x31.png'></a><br/>The <span xmlns:dc='http://purl.org/dc/elements/1.1/' property='dc:title'>DDBC Glossaries Project</span> from <a xmlns:cc='http://creativecommons.org/ns#' href='http://buddhistinformatics.ddbc.edu.tw/glossaries/' property='cc:attributionName' rel='cc:attributionURL' target='_new'>Dharma Drum Institute of Liberal Arts (法鼓文理學院)</a><br/> is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by-sa/3.0/' target='_new'>Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.<hr/>");
+            }
+        });
+    }
+    </script>
+    <script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-53293952-3', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">          
+      <h4 class="modal-title">詞夾子 (測試中)</h4>
+    </div>
+    <div class="modal-body">
+      <label>基本模式:</label>
+      <table class="table table-condensed">
+        <thead><tr><td>種子詞彙</td><td >發現的詞彙</td><td>排除詞彙</td><td>保存詞彙</td></tr></thead>
+        <tbody><tr><td><textarea id="seedTerms" class="form-control" rows="10" placeholder="請輸入保存詞彙（一行一個詞彙）"></textarea></td><td ><textarea id="inPositiveTerms" class="form-control" rows="10" placeholder=""></textarea></td><td><textarea id="inNegativeTerms" class="form-control" rows="10" placeholder=""></textarea></td><td><textarea id="preservedTerms" class="form-control" rows="10" placeholder=""></textarea></td></tr>
+        <tr><td colspan="2"><button id="findMoreWords" type="button" class="btn btn-primary btn-block" >挖掘更多詞彙</button></td><td colspan="2"><button id="readyToMarkupBtn" type="button" class="btn btn-danger btn-block" >標記已保存詞彙</button></td></tr>
+        <tr><td colspan="4"><button id="resetClipper" type="button" class="btn btn-success btn-block" >重設詞夾子</button></td></tr>
+        </tbody>
+        <!-- <tbody><tr><td colspan="2">
+        <select multiple="multiple" id="word-select" name="my-select[]">
+      </select></td><td></td></tr></tbody> -->
+      </table>
+      <label>進階模式 (可修正挖掘出的夾子):</label>
+      <table class="table table-condensed" >
+        <thead><tr><td>種子夾子</td><td>排除夾子</td></tr></thead>
+        <tbody>
+        <tr>
+            <td><textarea id="inPositiveClips" class="form-control" rows="5" ></textarea></td>
+            <td><textarea id="inNegativeClips" class="form-control" rows="5" ></textarea><textarea id="processedClips" style="display:none" class="form-control" rows="5" ></textarea></td>
+        </tr>
+        <tr><td  align="center">     
+               <button type="button" class="btn btn-primary btn-block" id="butComputeClips">計算夾子</button>
+            </td>
+            <td  align="center">
+             <!-- <input id="inStrictMode" type="checkbox" autocomplete="off" style="display:none">Strict Mode -->
+             <button type="button" class="btn btn-primary btn-block" id="butComputeTerms">夾取詞彙</button>
+          </td>
+        </tr>
+      </tbody></table>
+    </div>
+    <!-- <div class="modal-footer">
+    </div> -->
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

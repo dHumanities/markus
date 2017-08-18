@@ -1,0 +1,107 @@
+
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">          
+              <!-- <h4 class="modal-title">Button and Legend</h4> -->
+              <nav class="navbar navbar-default" role="navigation" id="navbar-scrollspy">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-info-sign"></span></a>
+                </div>              
+                <ul class="nav navbar-nav">
+                  <li><a href="#buttonHelp">Buttons</a></li>                  
+                  <li><a href="#legendHelp">Text Features</a></li>
+                  <li><a href="#iconHelp">Icons</a></li>
+                </ul>                
+              </nav>
+            </div>
+            <div class="modal-body" data-spy="scroll" data-target="#navbar-scrollspy" style="position: relative;height: 650px;margin-top: 10px;overflow: auto;">
+            
+ 
+              <div id="buttonHelp">
+                <h1>Buttons</h1>
+              The buttons <button type="button" class="btn btn-sm btn-danger switcher" color-switcher-class="fullName.markup">姓名</button> <button type="button" class="btn btn-sm btn-warning switcher" color-switcher-class="partialName.markup">別名</button> <button type="button" class="btn btn-sm btn-primary switcher" color-switcher-class="placeName.markup">地名</button> <button type="button" class="btn btn-sm btn-success switcher" color-switcher-class="nianhao.markup">年號</button> <button type="button" class="btn btn-sm btn-info switcher" color-switcher-class="officialTitle.markup">官名</button> at the top of the web page are the on/off switches for different kinds of named entities already marked up in the text file. Click on the buttons to show or hide <span class="fullName unsolved" >personal</span> or <span class="placeName unsolved" >place names</span>, <span class="nianhao unsolved" >reign periods</span> or <span class="officialTitle unsolved" >official titles</span>. The colors of the buttons correspond with the colors of the font of the key terms. 
+              <pre style="margin-top:5px">熙寧初，<span class="markup fullName unsolved">王荊公</span>力薦.....。</span></pre>
+                <br/>
+                
+              </div>
+              <div id="legendHelp">
+                <h1>Text Features</h1>
+              <!-- <div id="singleUnderline"></div> -->
+                <span class="markup unsolved noCBDBID">Single Underline</span> appears when there is no match for a name (<span class="fullName unsolved">姓名</span>、<span class="partialName unsolved">別名</span>) in <a href="http://isites.harvard.edu/icb/icb.do?keyword=k16229" target ="_blank">CBDB</a>: 
+              <pre style="margin-top:5px">奉職<span class="markup fullName unsolved noCBDBID">程若英</span>乃文臣<span class="markup fullName unsolved">程博文</span>之子，上書言....</pre><br/>
+              <span class="markup unsolved moreThanOneId">Dotted underline</span> appears when there is more than one match for a name (<span class="fullName unsolved">姓名</span>、<span class="partialName unsolved">別名</span>) in <a href="http://isites.harvard.edu/icb/icb.do?keyword=k16229" target ="_blank">CBDB</a>:
+              <pre style="margin-top:5px">數日後，臺諫<span class="markup fullName unsolved moreThanOneId">王能甫</span>.....</pre><br/>
+              <span class="markup unsolved"><span class="markup unsolved">Square brackets</span></span> appear when names overlap (example 1) and when a name could belong to more than one tag category (example 2):
+              <pre style="margin-top:5px"><span class="nianhao markup unsolved" type="nianhao">靖康</span><span class="fullName markup unsolved " type="fullName" cbdbid="3213" >末，<span class="fullName markup unsolved moreThanOneId " type="fullName" cbdbid="17882|26836" >趙子</span>崧</span>守<span class="placeName markup unsolved" type="placeName">陳州</span>。<span class="partialName markup unsolved" type="partialName" cbdbid="3213" refered="TRUE">子崧</span>先在邸中剽竊此說，至是適天下大亂...</pre>
+              <pre style="margin-top:5px">觀主道士<span class="fullName markup unsolved" type="fullName" cbdbid="206" refered="TRUE">張景先</span>，出入<span class="fullName markup unsolved" type="fullName" cbdbid="8066" refered="TRUE"><span class="placeName markup unsolved" type="placeName">黃安</span>中</span>之門甚久。</pre>
+              </div>
+              <div id="iconHelp">
+                <h1>Icons in the context menu</h1>
+                <a class="glyphicon glyphicon-floppy-disk"></a> = save changes<br/>
+                <a class="glyphicon glyphicon-book"></a> = search online (in a Chinese dictionary for untagged entities, otherwise in the respective database)<br/>
+                <a class="glyphicon glyphicon-search"></a> = search in document (requires more than one occurrence in the document) <br/>
+                <a class="glyphicon glyphicon-trash"></a> = remove tag(s) (removes tag from selected entity; click "Search in document" to remove or edit multiple occurrences) <br/>                
+                <br/>
+                <br/>
+                In search in document mode (<a class="glyphicon glyphicon-search"></a>), <br/>
+                <span class="btn glyphicon glyphicon-ok-circle btn-link"></span> = approve edit<br/>
+                <span class="btn glyphicon glyphicon-ok-circle btn-success glyphicon-lock"></span> = edit locked<br/>
+                <br/>
+                Icons will show when you click a tagged term (<span class="fullName unsolved">姓名</span>,<span class="partialName unsolved">別名</span>,<span class="markup nianhao unsolved">年號</span>,<span class="placeName unsolved">地名</span>,<span class="officialTitle unsolved">官職</span>). Try it below:
+                <pre style="margin-top:5px">數日後，臺諫<span class="markupSample markup fullName unsolved moreThanOneId" cbdbid="13756|38069" type="fullName">王能甫</span>.....。車駕始至<span class="markupSample markup placeName unsolved" type="placeName">臨安府</span>...</pre>
+                <pre style="margin-top:5px">奉職<span class="markupSample markup fullName unsolved noCBDBID" cbdbid="" type="fullName">程若英</span>乃文臣<span class="markupSample markup fullName unsolved" type="fullName" cbdbid="121">程博文</span>之子，上書言....</pre><br/>
+              </div>
+              <div id="menuButtonHelp">
+                <h1>Other right menu buttons</h1>
+                <div>
+                <button type="button" class="btn btn-sm" ><span class="glyphicon glyphicon-edit"></span></button> = Edit<br/>
+                Click on the edit button to start inline text editing. After it has turned red, you can correct textual mistakes or add punctuation. All edits will be saved when you export or save the file. The text will be locked again after clicking the edit button a second time.</div><br/>  
+                <div><button type="button" class="btn btn-sm" ><span class="glyphicon glyphicon-list-alt"></span></button> = Tag summary<br/>
+                Click on tag summary to view a summary of the number of tags added to the file by type. You can also extract and export all tags to a spreadsheet. The tag management function allows you to remove or deactivate individual tags.</div><br/>
+                <div><button class="btn btn-sm btn-primary">markup selection</button> = Markup selection (in Automated markup mode only)<br/>
+                Click on markup selection to view which tags have been marked so far. You can also add more categories for automated markup to the file currently in use.</div><br/> 
+                <div><button class="btn btn-sm"><span class="glyphicon glyphicon-plane"></span></button> = Go to passage<br/>
+                If the text has been dividided into passages, you can use this button to directly jump to a specific number.</div><br/> 
+                <div><button class="btn btn-sm"><span class='glyphicon glyphicon-comment'></span></button> = Add comment<br/>
+                Allows you to comment on individual passages of the text. (Logged-in users only)</div><br/> 
+                <div><button class="btn btn-sm"><span class="glyphicon glyphicon-tags"></span></button> = Manage tags<br/>
+                Change button names for tags, remove tags and corresponding buttons, and add new buttons. (Logged-in users only)</div><br/>    
+                <div><button class="btn btn-sm"><span class="glyphicon glyphicon-folder-close"></span></button> = Manage web references<br/>
+                Customize the dictionaries and databases available for looking up online. (Logged-in users only)</div>              
+              </div>
+            </div>            
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+              <!-- <button id="_startMarkupBtn" type="button" class="btn btn-primary" disabled="true">Start</button> -->
+            </div>
+            <div id="sample1Popover" class="popover fade right in" >
+              <div class="arrow"></div>
+              <h3 class="popover-title" style="display: none;"></h3>
+              <div class="popover-content">
+                <span class="tagText"></span>
+                <span class="typePopoverContent">
+                  <button type="button" class="btn btn-xs btn-danger switch fullName" >姓名</button>
+                  <button type="button" class="btn btn-xs btn-warning switch partialName" >別名</button>
+                  <button type="button" class="btn btn-xs btn-success switch nianhao" >年號</button>
+                  <button type="button" class="btn btn-xs btn-primary switch placeName" >地名</button>
+                  <button type="button" class="btn btn-xs btn-info switch officialTitle" >官職</button>
+                  <a onclick="typeSave()" class="glyphicon glyphicon-floppy-disk disabled"></a> | 
+                </span>
+                <a onclick="searchMarkup()" class="glyphicon glyphicon-book" ></a>
+                <span class="search"> | <a onclick="showSameMarkup()" class="glyphicon glyphicon-search" onclick=""></a></span>
+                <span class="trash"> | <a onclick="showSameMarkup()" class="glyphicon glyphicon-trash"></a></span>
+              </div>
+            </div>
+            <div id="sampleCbdbIdPopover" class="popover fade top in" style="display: hidden;">
+              <div class="arrow"></div>
+              <h3 class="popover-title" style="display: none;"></h3>
+              <div class="popover-content">
+                <span class="tagText"></span>
+                  <span id="sampleCbdbIdPopoverContent">
+                 <input style="height:22px;width:100px;display:inline-block;margin-bottom: 1px;"type="text" class="form-control input-sm" placeholder="Cbdb ID"></input> <a class="glyphicon glyphicon-floppy-disk"></a>
+                </span>          
+              </div>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      

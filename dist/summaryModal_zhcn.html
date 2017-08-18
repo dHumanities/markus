@@ -1,0 +1,178 @@
+﻿<!-- <script src="js/xlsx.js"></script> -->
+<script src="js/Chart.min.js"></script>
+<script src="js/Chart.HorizontalBar.js"></script>
+<style>
+.legend {
+  text-align: center;  
+  margin-top: 10px;
+}
+.tagReset {
+  margin:0 !important; padding:0 !important; font-size:100% !important; line-height:1 !important; background-color: "" !important; color:black!important;
+}
+
+</style>
+
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header" style="display:none">          
+      <!-- <h4 class="modal-title">Markup selection</h4> -->
+    </div>
+    <div class="modal-body">
+    <span class="tagText" style="display:none"></span>
+    <div>
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#summary" aria-controls="summary" role="tab" data-toggle="tab">总结</a></li>
+        <li role="presentation"><a href="#chart" aria-controls="chart" role="tab" data-toggle="tab">图表</a></li>
+        <!-- <li role="presentation"><a href="#tag" aria-controls="messages" role="tab" data-toggle="tab">tags</a></li> -->
+        <li role="presentation"><a href="#manage" aria-controls="manage" role="tab" data-toggle="tab">管理</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="summary"><span class="tagSummary"><span></div>
+        <div role="tabpanel" class="tab-pane" id="chart"><div class="legend"></div><canvas class="myChart" width="400" height="400"></canvas></div>
+        <!-- <div role="tabpanel" class="tab-pane" id="tag">...</div> -->
+        <div role="tabpanel" class="tab-pane" id="manage"><span class="tagSummarySetting"></div>
+      </div>
+
+    </div>
+
+
+    
+    <span class="passageSummary"><span>
+    </div>
+    <div class="modal-footer">
+      以 UTF-8 储存标记资料为：<br/>
+      <input id="withSupportText" type="checkbox" aria-label="include text surrounding"> 同时储存标记前/后 <select id="noOfCharacter">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option selected>5</option>
+                  <option>10</option>
+                  <option>20</option>
+                  <option>30</option>
+                </select>  个字的文字内容。
+      <br/>             
+        <button type="button" class="btn btn-primary" id="exportDataToXLSX">XLSX (MS Excel, 测试中)</button><button type="button" class="btn btn-primary" id="exportDataToCSV">CSV (OO Calc)</button><button type="button" class="btn btn-primary" id="exportDataToTSV">TSV (一般软体)</button><button type="button" class="btn btn-primary" id="exportDataToHTML">HTML (MS Excel)</button>
+        <div>
+          <h6>CSV (逗号分隔值) or TSV (Tab 分隔值) 是一般常见的资料储存格式.</h6>
+          <h6><p class="text-danger">如果使用 Excel "汇入"" UTF-8 的 XLSX，CSV 或 TSV 档案有问题， 请尝试使用 HTML 格式.</p></h6>
+        </div>
+    </div>
+  </div><!-- /.modal-content -->
+  <script type="text/javascript">
+  Chart.defaults.global.responsive = true;
+  var updateTagManageSummary = function(){
+    var content = "<table class='table table-bordered table-condensed'><thead><tr><td>类别</td><td>删除</td><td>显示</td></tr></thead><tbody>";
+     summaryArray = markus.summary.summaryArray;
+    for (var type in summaryArray) {
+        content += "<tr><td class='" + type + "'>" + type + "</td><td><a class='glyphicon glyphicon-trash tagTrash' type='"+type+"'></a></td><td><a class='glyphicon glyphicon-eye-" + (($(".doc ."+type).hasClass("tagReset"))?"close":"open")  +" tagVisible' type='"+type+"'></a></td></tr>";
+    }
+    content += "</tbody></table>";
+    $("#summaryModal .tagSummarySetting").html(content);
+  }
+
+
+  var ctx = $("#summaryModal .myChart").get(0).getContext("2d");
+  
+  $('#summaryModal a[aria-controls="manage"]').on('shown.bs.tab', updateTagManageSummary);
+
+  $("#summaryModal" ).on( "click", ".tagTrash", function() {
+    var type = $( this ).attr("type");
+    $(".doc ."+type).contents().unwrap();
+
+    switch (type){
+      case "fullName":
+        $(".doc").attr("markupfullName","false");
+        break;
+      case "partialName":
+        $(".doc").attr("markuppartialName","false");
+        break;
+      case "officialTitle":
+        $(".doc").attr("markupofficialTitle","false");
+        break;
+      case "placeName":
+        $(".doc").attr("markupplaceName","false");
+        break;
+      case "nianhao":
+        $(".doc").attr("markupnianhao","false");
+        break;
+      case "timePeriod":
+        $(".doc").attr("markuptimePeriod","false");
+        break;
+      case "ddbcPerson":
+        $(".doc").attr("markupddbcPerson","false");
+        break;
+      case "ddbcGlossaries":
+        $(".doc").attr("markupddbcGlossaries","false");
+        break;
+
+      
+    } 
+    if (docStatusDetection){
+        docStatusDetection();
+    }
+      console.log(type);
+    $("#summaryModal .tagSummary").html(markus.summary.docTagSummary());
+    updateTagManageSummary();
+  });
+
+  $("#summaryModal" ).on( "click", ".tagVisible", function() {
+    if ($(this).hasClass("glyphicon-eye-open")){
+      $(this).removeClass("glyphicon-eye-open");
+      $(".doc ."+$( this ).attr("type")).addClass("tagReset");
+      $(this).addClass("glyphicon-eye-close");  
+    } else{
+      $(this).removeClass("glyphicon-eye-close");
+      $(".doc ."+$( this ).attr("type")).removeClass("tagReset");
+      $(this).addClass("glyphicon-eye-open"); 
+    }
+    updateTagManageSummary();
+  });
+
+  $('a[aria-controls="chart"]').on('shown.bs.tab', function (e) {
+    $("#summaryModal .myChart").height(600).width(500);
+    var summaryArray = markus.summary.summaryArray;
+    var _data = {labels:[],unique:[],total:[]};
+    for (var type in summaryArray){
+      _data.labels.push(type);
+      _data.unique.push(summaryArray[type].unique);
+      _data.total.push(summaryArray[type].count);
+    }
+    // $("#myChart")
+     var data = {
+      labels: _data.labels,
+      datasets: [
+          {
+              label: "唯一",
+              fillColor: "rgba(220,220,220,0.5)",
+              strokeColor: "rgba(220,220,220,0.8)",
+              highlightFill: "rgba(220,220,220,0.75)",
+              highlightStroke: "rgba(220,220,220,1)",
+              data: _data.unique
+          },
+          {
+              label: "全部",
+              fillColor: "rgba(151,187,205,0.5)",
+              strokeColor: "rgba(151,187,205,0.8)",
+              highlightFill: "rgba(151,187,205,0.75)",
+              highlightStroke: "rgba(151,187,205,1)",
+              data: _data.total
+          }
+      ]
+  };
+    if (myBarChart != null){
+      myBarChart.destroy();
+    }
+    var myBarChart = new Chart(ctx).HorizontalBar(data,{legendTemplate : "<% for (var i=0; i<datasets.length; i++){%><span style=\"background-color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span> <%}%>"});
+    $("#summaryModal .legend").html(myBarChart.generateLegend());
+    console.log(myBarChart.generateLegend());
+  });
+
+
+ 
+</script>
+</div><!-- /.modal-dialog -->

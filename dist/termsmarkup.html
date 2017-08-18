@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
+
+    <title>MARKUS</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="css/markus.min.css" rel="stylesheet">
+    <link href="css/jquery.highlighttextarea.min.css" rel="stylesheet">
+    <!-- <link href="css/multi-select.css" rel="stylesheet"> -->
+
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="css/offcanvas.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/website.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/colorPicker.css" /> -->
+
+    <style>
+    .officialTitle {
+      color:CadetBlue;
+    }
+    .badge-primary {
+      background-color: #428bca;
+    }
+    
+
+    </style>
+    
+  </head>
+
+  <body>
+    <div id="navbar" class="navbar navbar-fixed-top navbar-inverse" role="navigation">    
+    </div><!-- /.navbar -->
+    <div class="container">
+      <div id="wrapper" class="row row-offcanvas row-offcanvas-right">
+      <div id="wrapperTriggerHolder"></div>
+        <div id ="content" class="col-xs-8 col-md-8" ></div>
+        <div id ="comment" class="col-xs-4 col-md-4" style="padding-left:0px;padding-top:0px;" style="display:none"></div> 
+        <div id ="assist" class="col-xs-4 col-md-4" style="padding-left:0px;"></div>
+      </div>
+      <hr/>     
+      <footer>
+        <p>MARKUS was developed as part of the project <a href="http://chinese-empires.eu" target="chineseEmpire">“Communication and Empire: Chinese Empires in Comparative Perspective,”</a> funded by the European Research Council. All Rights Reserved.</p>
+      </footer>
+    </div><!--/.container--> 
+    <div class="modal fade" id="dynastySelectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div>
+    <div id="manualPopover" class="popover fade right in" style="display: hidden;">
+      <div class="arrow"></div>
+      <h3 class="popover-title" style="display: none;"></h3>
+      <div class="popover-content">
+        <span class="tagText"></span>
+        <a class="glyphicon glyphicon-book" data-toggle="tooltip" title="search online" _zhtw="網路解說搜尋"></a>
+        <!-- <span class="expand"> | <a class="glyphicon glyphicon-collapse-down" ></a></span><br class="singleTagContent"/> -->
+        <span class="typePopoverContent" style="display:none">
+          <span class="singleTagContent">
+            <button type="button" _type="fullName" class="btn btn-xs btn-danger switch fullName switcher" >姓名</button>
+            <button type="button" _type="partialName" class="btn btn-xs btn-warning switch partialName switcher" >別名</button>
+            <!-- <button type="button" _type="nianhao" class="btn btn-xs btn-success switch nianhao switcher" >年號</button> -->
+            <button type="button" _type="timePeriod" class="btn btn-xs btn-success switch timePeriod switcher" >時間</button>
+            <button type="button" _type="placeName" class="btn btn-xs btn-primary switch placeName switcher" >地名</button>
+            <button type="button" _type="officialTitle" class="btn btn-xs btn-info switch officialTitle switcher" >官職</button>
+            <a class="glyphicon glyphicon-floppy-disk" data-toggle="tooltip" title="save" _zhtw="儲存"></a>          
+          </span>  
+          <span class="search"> | <a class="glyphicon glyphicon-search" data-toggle="tooltip" title="search document" _zhtw="文本中搜尋"></a></span>
+        </span>  
+      </div>
+    </div>    
+    <div class="modal fade" id="markupProgressModal" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" _data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">          
+            <h4 class="modal-title">Markup progress</h4>
+          </div>
+          <div class="modal-body"></div>            
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+            <button id="_startMarkupBtn" type="button" class="btn btn-primary" disabled="true">Start</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade" id="dynastySelectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div>
+    <div class="modal fade" id="uploadTermModal" tabindex="-3" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" _data-backdrop="static" remote="">      
+    </div><!-- /.modal -->
+      
+    <div class="modal fade" id="keywordHelperModal" tabindex="-3" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" _data-backdrop="static"></div><!-- /.modal -->
+    <div class="modal fade" id="wordClipHelperModal" tabindex="-3" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" _data-backdrop="static">
+      
+    </div><!-- /.modal -->
+    <div class="modal fade" id="markupSelectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div id="progressDiv" class="jumbotron" style="display:none">
+              <div id="progressBar"></div>
+              <div id="progress" class="progress progress-striped active">
+                <div id="stateOneProgress" class="progress-bar" style="width: 0%;background-color:gray">
+                  <span class="sr-only">35% Complete (success)</span>
+                </div>
+                <!-- <div id="stateTwoProgress" class="progress-bar" style="width: 0%;background-color:gray">
+                  <span class="sr-only">20% Complete (warning)</span>
+                </div>
+                <div id="stateThreeProgress" class="progress-bar" style="width: 0%;background-color:gray">
+                  <span class="sr-only">10% Complete (danger)</span>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+            <button id="startMarkupBtn" type="button" class="btn btn-primary" disabled="true">start markup</button>
+            <button id="saveMarkupBtn" type="button" class="btn btn-danger" style="display:none">Done</button>
+            <a id="export" style="display:none">export</a>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="summaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">
+    </div><!-- /.modal -->
+    <div class="modal fade" id="helpModal" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" _data-backdrop="static">        
+    </div><!-- /.modal -->
+    <div id="popoverMod">
+    </div>
+    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div>
+    <div class="modal fade" id="manageTagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static"></div><!-- /.modal -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <!-- // <script src="js/spin.min.js"></script> -->
+    <script src="js/bootstrap.min.js"></script>    
+    <script src="js/jquery.hive.js"></script>
+    <script src="js/jquery.stylesheet.js"></script>
+    <script src="js/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript" src="js/clipper.js"></script>
+    <!-- // <script type="text/javascript" src="js/utilities.js"></script>  -->
+
+    <script type="text/javascript" src="js/jquery.visible.min.js"></script>
+    <!-- // <script type="text/javascript" src="js/jquery.multi-select.js"></script> -->
+    <script src="js/xregexp-all-min.js"></script>
+    <script type="text/javascript" src="markus.min.js"></script>
+    <!--
+    <script type="text/javascript" src="js_0.2/markus.js"></script>
+    <script type="text/javascript" src="js_0.2/utilities.js"></script>
+    <script type="text/javascript" src="js_0.2/switcher.js"></script>
+    <script type="text/javascript" src="js_0.2/help.js"></script>
+    <script type="text/javascript" src="js_0.2/webDictionary.js"></script>
+    <script type="text/javascript" src="js_0.2/reference.js"></script>  
+    <script type="text/javascript" src="js_0.2/manualMarkup.js"></script>
+    <script type="text/javascript" src="js_0.2/markupPopup.js"></script>
+    <script type="text/javascript" src="js_0.2/summary.js"></script>
+    <script type="text/javascript" src="js_0.2/data.js"></script> -->
+    <script src="js/rangy-core.js"></script>
+    <script src="js/rangy-cssclassapplier.js"></script>
+<!--
+    <script src="js/all_cbdb.js"></script>  
+    <script type="text/javascript" src="js/office.js"></script>  
+    <script type="text/javascript" src="js/place.js"></script> 
+    -->
+    <script src="js/offcanvas.js"></script>
+    <script type="text/javascript" src="js/jquery.colorPicker.min.js"></script>
+    <script src="js/jquery.highlighttextarea.min.js"></script>
+    <script type="text/javascript" src="js/keypress-2.1.4.min.js"></script>
+
+    <script>
+      // var markupFullName = markupPartialName = markupNianhao = markupofficialTitle = markupPlaceName = false;
+
+var tempFile = "";
+
+var regexs = [];
+var CBDBRegexs = [];
+var found = 0;
+
+var uniqueTermThreadsMax = 8 // check
+var uniqueTermThreads=[];
+var uniqueTermThreadscount=-1; //check
+var uniqueTermJobs = [];
+
+var uniqueTermRegexsIndex = -1; // check
+var uniqueTermRegexsCount = -1; // check
+
+var uniqueTerms = [];
+
+var refercedSpans = [];
+var uniqueTermJobsCount =-1;
+
+var markupJobsList = [];
+var partialRegexMax = -1;
+var partialNameSpans = [];
+var partialNameSpansMax = -1;
+
+
+var startParagraphMarkup = function(){
+  if ($(".doc").text()== $(".doc pre").text()){
+    var _lineArray = $(".doc pre").html().split("\n");
+    var begin = true;
+    var count = 0;
+    for (var index in _lineArray){
+      var line = _lineArray[index].replace(/ /g,'');
+      if (begin && line.length > 0){
+        _lineArray[index] = "<span class='passage' type='passage' id='passage"+(count++)+"'>"+_lineArray[index];
+        begin = false;
+      } else if (!begin && line.length == 0){
+        _lineArray[index-1] = _lineArray[index-1]+"</span>";
+        begin = true;
+      }
+    }
+    if (!begin){
+      _lineArray[_lineArray.length-1] = _lineArray[_lineArray.length-1]+"</span>";
+    }
+    $(".doc pre").html(_lineArray.join("\n"));
+  } else {
+    var originalHTML = $(".doc").html();
+    $(".doc").html("").append("<span class='passage' id='passage00'></span>");
+    $(".doc #passage00").html(originalHTML);
+  }
+}
+
+var sortByLength = function(a, b){return a.length -b.length};
+
+var registUserIntefaceAction = function(){  
+
+
+
+  $("#resetClipper").on("click",function(){
+    $("#seedTerms").val("").trigger("input");    
+    $("#preservedTerms").val("").trigger("input");
+    $("#inPositiveTerms").val("").trigger("input");    
+    $("#inNegativeTerms").val("").trigger("input");
+    $("#inPositiveClips").val("").trigger("input");
+    $("#inNegativeClips").val("").trigger("input");
+    $("#processedClips").val("").trigger("input");
+    Clipper.setTexts(texts);
+    Clipper.resetClipState();
+  });
+
+   $("#findMoreWords").on("click",function(){
+      if (texts == null) {
+        texts = $(".doc").text().replace(/(\r*\n)+/g,"\n").split("\n");
+        Clipper.setTexts(texts);
+        Clipper.resetClipState();
+      };
+      
+      var terms = $("#preservedTerms").val().trim().split("\n");
+      while(term = terms.shift()){
+        Clipper.maxTermChars = Math.max(Clipper.maxTermChars,term.length+1);
+      }
+
+      Clipper.setParameters({ 'strictMode': false });
+//       Clipper.setNegativeClips($("#inNegativeClips").val().trim().split("\n"));
+      Clipper.setPositiveTerms($("#seedTerms").val().trim().split("\n"));      
+      $("#preservedTerms").val((($("#preservedTerms").val().trim().length>0) ? ($("#preservedTerms").val()+"\n"): "") +$("#seedTerms").val());
+      $("#seedTerms").val("");
+
+      Clipper.nonUnifyingPuncMode = false;
+      Clipper.computeCandidateClips(false);
+
+      var processedClips = $("#processedClips").val().trim().split("\n");
+      var negativeClips = $("#inNegativeClips").val().trim().split("\n");
+
+
+      var clips;
+      var candidateClips = [];
+      while (clips = Clipper.candidateClips.shift()){
+        if (negativeClips.indexOf(clips)==-1 && processedClips.indexOf(clips)==-1){
+          candidateClips.push(clips);
+        }
+        // if (processedClips.indexOf(clips)==-1 && negativeClips.indexOf(clips)==-1){
+        //   candidateClips.push(clips);
+        // }
+      }
+       
+
+      $("#inPositiveClips").val(candidateClips.join("\n"));
+
+
+//       $("#inPositiveClips").val(Clipper.candidateClips.join("\n"));
+
+
+
+
+      $("#inPositiveClips").trigger('input');
+
+      var preservedTerms = $("#preservedTerms").val().trim().split("\n");
+      var negativeTerms = $("#inNegativeTerms").val().trim().split("\n");
+
+      var strictMode = $("#inStrictMode").prop("checked");
+//       Clipper.setParameters({ 'strictMode': false });
+      Clipper.setNegativeTerms($("#inNegativeTerms").val().trim().split("\n"));
+
+      Clipper.setPositiveClips($("#inPositiveClips").val().trim().split("\n"));
+  
+      $("#processedClips").val($("#processedClips").val()+"\n"+$("#inPositiveClips").val());
+      $("#inPositiveClips").val("");
+
+
+//       Clipper.setPositiveClips(Clipper.candidateClips);
+      Clipper.computeCandidateTerms(false);
+
+      var term ;
+      var candidateTerms = [];
+      var inPositiveTerms = $("#inPositiveTerms");
+      var positiveTerms = inPositiveTerms.val().trim().split("\n");
+      positiveTerms = positiveTerms.filter(function(term){return term.length > 0 && preservedTerms.indexOf(term)==-1});
+
+      while (term = Clipper.candidateTerms.shift()){
+        if (preservedTerms.indexOf(term)==-1 && negativeTerms.indexOf(term)==-1 && positiveTerms.indexOf(term)==-1){
+          candidateTerms.push(term);
+        }
+      }
+       
+      candidateTerms.sort(sortByLength);
+      
+
+      inPositiveTerms.val(positiveTerms.join("\n")+"\n"+candidateTerms.join("\n"));
+      inPositiveTerms.trigger('input');
+      // alert(candidateTerms.length +" Keywords found");
+
+   });
+   $("#butComputeClips").click(computeClips);
+   $("#butComputeTerms").click(computeTerms);
+
+  $("#showParagraphModalBtn").on("click",function(){
+    $(".passage").toggleClass("hightlight");
+  });
+  
+
+  $("#showManageTagModalBtn").on("click",function(){
+    $("#manageTagModal").modal("show");
+  });
+  
+  $("#editDocBtn").on('click',function(){
+      texts = $(".doc").text().replace(/(\r*\n)+/g,"\n").split("\n");  
+      Clipper.setTexts(texts);
+   })
+  
+
+  // $("#editDocBtn").on("click",function(){
+  //   console.log("click");
+    
+  //   var editable = $("#editDocBtn").hasClass("btn-danger");
+
+  //   if (editable) {
+  //     $("#editDocBtn").removeClass("btn-danger");
+  //     $(".doc").removeClass("edit");
+  //     editable = false;  
+  //   }else {
+  //     $("#editDocBtn").addClass("btn-danger");
+  //     $(".doc").addClass("edit");  
+  //     editable = true;
+  //   }
+
+
+  //   if (!editable){
+  //     $(".doc pre div,br").prepend("\n");
+  //     // $(".doc pre br").prepend("\n");
+  //     $(".doc div,br").contents().unwrap();
+  //     // $(".doc br").contents().unwrap();
+  //     $(".doc pre").html($(".doc pre").html());
+
+  //     if ($(".doc .passage").length > 0){
+  //       $(".doc .passage").contents().unwrap();
+  //       startParagraphMarkup();
+  //       markus.comment.startAddingCommentHolder();
+  //     }
+
+  //     texts = $(".doc").text().replace(/(\r*\n)+/g,"\n").split("\n");
+  //     Clipper.setTexts(texts);  
+      
+  //   }
+  //   console.log(editable);
+
+    
+  //   $(".doc pre").attr("contenteditable",""+ editable);
+  // });
+
+
+  // $("#showModalBtn").on("click",function(){
+  //   $("#showModalBtn").fadeTo(1000, 0);
+  //   $('#markupSelectionModal').modal('show');
+  // });
+
+  $("#showUploadTermModalBtn").on("click",function(){    
+    // $("#showModalBtn").fadeTo(1000, 0);
+    $('#uploadTermModal').modal('show');
+  });
+
+  $("#showKeywordHelperModalBtn").on("click",function(){    
+    // $("#showModalBtn").fadeTo(1000, 0);
+    $('#keywordHelperModal').modal('show');
+  });
+
+  $("#showWordClipHelperModalBtn").on("click",function(){    
+    // $("#showModalBtn").fadeTo(1000, 0);
+    $('#wordClipHelperModal').modal('show');
+  });
+
+
+  $('#uploadRegexModal .tagColor').colorPicker();
+  $('#uploadTermModal .tagColor').colorPicker();
+
+  $("#readyToMarkupBtn").on("click",function(){
+    $("#uploadTermModal textarea").val($("#preservedTerms").val());
+    $("#uploadTermModal textarea").trigger('input');
+    $("#wordClipHelperModal").modal('hide');
+    $("#uploadTermModal").modal('show');
+  });
+
+  $("#resetKeywordHelperBtn").on("click",function(){
+    $("#keywordHelperModal textarea").val("");
+    $("#left_ahead").val(0);
+    $("#right_ahead").val(0);
+    $("#keyword").val("");
+    $("#left_keyword").val("");
+    $("#right_keyword").val("");
+    $("#keyword_min").val("min");
+    $("#keyword_max").val("max");
+    $('#keywordHelperModal textarea').highlightTextarea('setWords', [$("#keyword").val()]);
+  });
+
+  $("#keywordHelperBtn3").on("click",function(){
+    $("#uploadTermModal textarea").val($("#keywordHelperModal textarea").val());
+    $("#uploadTermModal textarea").trigger('input');
+    $("#keywordHelperModal").modal('hide');
+    $("#uploadTermModal").modal('show');
+  });
+
+  $('#markupSelectionModal').on('hidden.bs.modal', function () {
+    $("#showModalBtn").fadeTo(1000,1);
+  });
+
+
+  var doAutoMarkup = function(isTermsOnly){
+    isTermsOnly = isTermsOnly || false;
+    // console.log($("#uploadTermModal textarea").val());
+    var buttonName = $("#uploadTermModal .tagName").val().trim();
+    var tagName = markus.util.chineseToPingYin(buttonName).trim();
+
+    var tagColor = $("#uploadTermModal .tagColor").val();
+    // console.log(tagName);
+    // console.log(tagColor);
+    
+    if (tagName ==""){
+      alert("Tag name can't be empty");
+    }
+    var terms = $("#uploadTermModal textarea").val();
+
+    if (terms.length > 0 && tagName.length >0){
+      $("#uploadTermModal .tagName").val(tagName);
+    
+      markus.io.newTagCSS(tagName,buttonName,tagColor);      
+
+      // markus.tag = markus.tag || {};
+      // if (markus.tag[tagName] == null){
+      //   markus.tag[tagName] = {color:tagColor};
+      // } else {
+      //   markus.tag[tagName].color = tagColor;
+      // }
+
+      if ($("#buttonsRow").find("button[color-switcher-class='"+tagName+"']").length == 0) {
+        $("#buttonsRow").prepend('<button type="button" class="btn btn-sm switcher '+tagName+'" color-switcher-class="'+tagName+'" data-toggle="tooltip" data-placement="auto" title="" data-original-title="click to change color">'+buttonName+'</button> ');
+      }
+      
+
+      // markus.tagCSS[tagName] = [];
+
+      // $.stylesheet('button.'+tagName,['background-color','border-color'],tagColor);
+      // $.stylesheet('button.'+tagName,['color'],"#fff");
+      // markus.tagCSS[tagName].push({tagName:'button.'+tagName,cssKey:["color"],cssValue:"#fff"});
+      // markus.tagCSS[tagName].push({tagName:'button.'+tagName,cssKey:['background-color','border-color'],cssValue:tagColor});
+
+      // // tagCSS['.'+tagName].push($.stylesheet('.'+tagName).rules()[0].cssText);
+      // $.stylesheet('.'+tagName,{"color":tagColor});
+      // markus.tagCSS[tagName].push({tagName:'.'+tagName,cssKey:["color"],cssValue:tagColor});
+
+
+      // // $ss.css(,tagColor);
+      // // console.log('.selected.'+tagName+"'");
+      // $.stylesheet('.selected.'+tagName,['background-color','border-color'],tagColor);
+
+
+      // markus.tagCSS[tagName].push({tagName:'.selected.'+tagName,cssKey:['background-color','border-color'],cssValue:tagColor});
+
+      // $.stylesheet('.bordered.'+tagName,['border-color'],tagColor);
+
+
+      // markus.tagCSS[tagName].push({tagName:'.bordered.'+tagName,cssKey:['border-color'],cssValue:tagColor});
+
+
+
+      $(".doc").attr("tagCSS",$.toJSON(markus.tagCSS));
+      $(".doc").attr("tag",markus.util.convertToEscapeUnicode($.toJSON(markus.tag)));
+
+      
+
+
+      if (isTermsOnly){
+        terms = terms.replace(/\s{1,}$/gm,"");
+        console.log(terms.replace(/[-[\]{}()*+?.,\\^$|#]/g, "\\$&"));
+        terms = terms.replace(/[-[\]{}()*+?.,\\^$|#]/g, "\\$&");
+        console.log(terms);
+      } else {
+        var  isTranslate = true;
+        if (isTranslate){
+          terms = markus.regex.translate(terms);  
+        }        
+      }
+
+      var termArray = terms.split("\n");
+      termArray = markus.util.unique(termArray);
+      termArray = $.grep(termArray,function(n){ if (n){ return (n.length>0)} return(n) });
+      var temp = {};
+      for(var i=0, j =termArray.length;i <j ; i++){
+        var list = temp[termArray[i].length]  || [];
+        list.push(termArray[i]);
+        temp[termArray[i].length] = list;
+      }
+
+      uniqueTerms = [];
+
+
+      for (var key in temp){
+        uniqueTerms.push(temp[key]);
+      }
+      uniqueTerms.sort(function(a,b){
+        var alength = a[0].length, blength = b[0].length;
+              // if (alength < 0) {alength = a.length};
+              // if (blength < 0) {blength = b.length};
+              return blength - alength;
+      });
+      
+      for (var i=0,j=uniqueTerms.length; i<j;i++ ){
+        uniqueTerms[i] = uniqueTerms[i].join("|");
+      }
+
+      // termArray.sort(function(a,b){
+      //         var alength = a.length, blength = b.length;
+      //         // if (alength < 0) {alength = a.length};
+      //         // if (blength < 0) {blength = b.length};
+      //         return blength - alength
+      //       });
+
+      // alert(termArray.length +" "+((isTermsOnly)?"Term(s)" :"Regex")+" is/are ready to process, please be patient ;)" );
+      // var termRegex = termArray.join("|");
+      
+      
+      // console.log(termRegex);
+      // startMarkup([termRegex],tagName,'');
+      $.Hive.get(0).send({cmd:"regexMarkup",txt:$(".doc").html(),regex:uniqueTerms[0],index:0,type:tagName,callback:"finishTerm()"}); 
+      // $.Hive.get(0).send({cmd:"termMarkup",txt:$(".doc").html(),regex:termRegex,index:0,type:tagName,callback:""});
+    }
+    // 
+  };
+
+
+
+  $('#submitRegexBtn').on("click",function(){
+    doAutoMarkup(false);
+  });
+
+  $('#submitTermsBtn').on("click",function(){
+    doAutoMarkup(true);
+  });
+
+  $("#keywordHelperBtn").on("click",function(){
+    $("#keywordHelperModal textarea").val("");
+    $("#keywordHelperModal textarea").trigger('input');
+    var regex = ".{"+$("#left_ahead").val()+"}" + $("#keyword").val() +".{"+ $("#right_ahead").val()+"}";
+    console.log(regex);
+    var matched = {};
+    var result = $(".doc").text().match(new RegExp(regex,"g"));
+    var matchedArray = [];
+    var obj ;
+    while (obj = result.shift()){
+      matched[obj] = matched[obj] || 0;
+      matched[obj]++;
+      if (matchedArray.indexOf(obj)<0){
+        matchedArray.push(obj);
+      }
+    }
+    matchedArray.sort(function(a,b){
+      var alength = matched[a], blength = matched[b];
+      if (alength < 0) {alength = a.length};
+      if (blength < 0) {blength = b.length};
+      return blength - alength
+    });
+    $("#keywordHelperModal textarea").val(matchedArray.join("\n"));
+    $("#keywordHelperModal textarea").trigger('input');
+    $('#keywordHelperModal textarea').highlightTextarea('setWords', [$("#keyword").val()]);
+    // $('#keywordHelperModal textarea').highlightTextarea({
+    //   words: [{         
+    //     color: '#ADF0FF',
+    //     words: [$("#keyword").val()]
+    //   }, {
+    //     color: '#FFFF00',
+    //     words: ['高']
+    //   }]
+    // });
+    $("#keywordHelperModal textarea").trigger('input');
+  });
+  $("#keywordHelperBtn2").on("click",function(){
+    $("#keywordHelperModal textarea").val("");
+    $("#keywordHelperModal textarea").trigger('input');
+    var min = $("#keyword_min").val();
+    var max = $("#keyword_max").val();
+    if (min =="min") {
+      min = ""
+    }
+    if  (max =="max") {max = ""}
+
+    if (min.length == 0 && max.length == 0){
+      alert("Min and Max can not be used at the same time!");
+    }
+    var keywordOnly = $("#keywordHelperBtn2Checkbox").is(':checked');
+
+    var regex = $("#left_keyword").val()+(keywordOnly?"(":"")+"[^\n"+$("#left_keyword").val().replace(/[\[\]]/g,'')+$("#right_keyword").val().replace(/[\[\]]/g,'')+"]{" + min+","+max+"}"+(keywordOnly?")":"")+ $("#right_keyword").val();
+    console.log(regex);
+    var matched = {};
+    var result = new RegExp(regex,"g").exec($(".doc").text());
+    var matchedArray = [];
+    var obj ;
+
+    var re = new RegExp(regex,"g");
+    var str = $(".doc").text();
+    while ((m = re.exec(str)) !== null) {
+      if (m.index === re.lastIndex) {
+          re.lastIndex++;
+      }
+
+      var obj = "";
+      if (keywordOnly && m.length > 1){
+        obj = m[1];
+      }else{
+        obj = m[0];
+      }
+      
+      matched[obj] = matched[obj] || 0;
+        matched[obj]++;
+        if (matchedArray.indexOf(obj)<0 && obj.length>0){
+          matchedArray.push(obj);
+        }
+
+      // console.log(m[0]);
+    // View your result using the m-variable.
+    // eg m[0] etc.
+    }
+
+
+    // if (result){
+    //   while (obj = result.shift()){
+    //     matched[obj] = matched[obj] || 0;
+    //     matched[obj]++;
+    //     if (matchedArray.indexOf(obj)<0){
+    //       matchedArray.push(obj);
+    //     }
+    //   }
+    // }    
+    
+    matchedArray.sort(function(a,b){
+      var alength = matched[a], blength = matched[b];
+      if (alength < 0) {alength = a.length};
+      if (blength < 0) {blength = b.length};
+      return blength - alength
+    });
+    $("#keywordHelperModal textarea").val(matchedArray.join("\n"));
+    $("#keywordHelperModal textarea").trigger('input');
+    console.log([$("#left_keyword").val(),$("#right_keyword").val()]);
+    $('#keywordHelperModal textarea').highlightTextarea('setWords', [$("#left_keyword").val(),$("#right_keyword").val()]);
+    // $('#keywordHelperModal textarea').highlightTextarea({
+    //   words: [{         
+    //     color: '#ADF0FF',
+    //     words: [$("#left_keyword").val(),$("#right_keyword").val()]
+    //   }
+    //   // , {
+    //   //   color: '#FFFF00',
+    //   //   words: ['高']
+    //   // }
+    //   ]
+    // });
+    $("#keywordHelperModal textarea").trigger('input');
+
+  });
+
+}
+
+
+
+var finishRegex = function(){
+  // console.log("finishRegex");
+  // alert("Done");
+  $("#uploadRegexModal .tagName").val("");
+  markus.util.removeDuplicatedTags();
+  // $("#uploadRegexModal .tagColor").val("");
+  $("#uploadRegexModal textarea").val("");
+  $("#uploadRegexModal").modal("hide");
+}
+var finishTerm = function(){
+  // console.log("finishRegex");
+  // alert("Done");
+  var tagName = $("#uploadTermModal .tagName").val();
+  
+  $("."+tagName+" ."+tagName).contents().unwrap();
+
+  markus.util.removeDuplicatedTags();
+  $("#uploadTermModal .tagName").val("");
+  // $("#uploadRegexModal .tagColor").val("");
+  $("#uploadTermModal textarea").val("");
+  $("#uploadTermModal").modal("hide");
+  // alert("Done");
+}
+ 
+
+var placeNameRegexArray;
+
+
+window.onload = function() {
+  var lang = $.cookie('lang') || "";
+  $("footer").load("footer" + lang + ".html");
+
+  $("#manualPopover a[data-toggle='tooltip']").each(function(){
+    if($(this).attr(lang)!== undefined){
+      $(this).attr("title",$(this).attr(lang));
+    }
+  });
+
+  $.getJSON("/auth/profile_info", function(result){
+    if (result["name"]){
+      $.get("userSection"+lang+".html", function(data) { 
+        $("#userSection").html(data); 
+        $("#userName").text(result["name"]);
+      });
+    }
+  });
+
+markus.io.readFile(decodeURIComponent(markus.util.urlParam('file')+".html"), fileLoaded);
+markus.navbar.register();
+
+// var listener = new window.keypress.Listener();
+
+
+//         listener.simple_combo("meta s", function() {
+//             $("#save").trigger("click");
+//         });
+//         listener.simple_combo("meta '", function() {
+//             $("#editDocBtn").trigger("click");
+//         });
+//         listener.simple_combo("meta j", function() {            
+//             $("#showGotoModalBtn").trigger("click");            
+//         });
+//         listener.simple_combo("meta d", function() {            
+//             if ($('#popover').hasClass('in')){
+//                 var countIndex = -1;
+//                 var nextIndex = -1;
+//                 var markups = $(".doc .markup");
+//                 markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex +1}});
+//                 $('#popover .glyphicon-trash').trigger("click");
+//                 var obj = $(markups[nextIndex]);
+//                 $(obj).trigger("click");
+//                 if (!$(obj).isOnScreen()){
+//                     $('html, body').animate({
+//                         scrollTop: $(obj).offset().top - 100
+//                     }, 200);
+//                 }
+//             }           
+//         });
+        
+
+//         $.fn.isOnScreen = function(){
+//             var win = $(window);
+//             var viewport = {
+//                 top : win.scrollTop(),
+//                 left : win.scrollLeft()
+//             };
+//             viewport.right = viewport.left + win.width();
+//             viewport.bottom = viewport.top + win.height();
+
+//             var bounds = this.offset();
+//             bounds.right = bounds.left + this.outerWidth();
+//             bounds.bottom = bounds.top + this.outerHeight();
+//             return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+//         };
+
+//         function nextSameTypeMarkup(){
+//           if ($(".selected").length > 0){
+//             var countIndex = -1;
+//             var nextIndex = -1;
+//             var type = $(".doc .selected").attr("type");
+//             var markups = $(".doc .markup."+type)
+//             markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex +1}});
+//             if (markups.length > nextIndex) {
+//                 var obj = $(markups[nextIndex]);
+//                 $(obj).trigger("click");
+//                 if (!$(obj).isOnScreen()){
+//                     $('html, body').animate({
+//                         scrollTop: $(obj).offset().top - 100
+//                     }, 200);
+//                 }
+//             }
+
+//           } else if ($(".doc .markup").length > 0){
+//             $($(".doc .markup")[0]).trigger("click");
+//           } 
+//         }        
+
+//         function nextMarkup(_sameType){
+//           if ($(".selected").length > 0){
+//             var countIndex = -1;
+//             var nextIndex = -1;
+//             var markups = $(".doc .markup");
+//             markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex +1}});
+//             if (markups.length > nextIndex) {
+//                 var obj = $(markups[nextIndex]);
+//                 $(obj).trigger("click");
+//                 if (!$(obj).isOnScreen()){
+//                     $('html, body').animate({
+//                         scrollTop: $(obj).offset().top - 100
+//                     }, 200);
+//                 }
+//             }
+
+//           } else if ($(".doc .markup").length > 0){
+//             $($(".doc .markup")[0]).trigger("click");
+//           }
+//         }
+
+//         function lastMarkup(){
+//           if ($(".selected").length > 0){
+//             var countIndex = -1;
+//             var nextIndex = -1;
+//             var markups = $(".doc .markup");
+//             markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex -1}});
+//             if (nextIndex > -1) {
+//                 var obj = $(markups[nextIndex]);
+//                 $(obj).trigger("click");
+//                 if (!$(obj).isOnScreen()){
+//                     $('html, body').animate({
+//                         scrollTop: $(obj).offset().top - 100
+//                     }, 200);
+//                 }
+//             }
+//           }else if ($(".doc .markup").length > 0){
+//             $($(".doc .markup")[0]).trigger("click");
+//           }
+//         }
+
+//         function lastSameTypeMarkup(){
+//           if ($(".selected").length > 0){
+//             var countIndex = -1;
+//             var nextIndex = -1;
+//             var type = $(".doc .selected").attr("type");
+//             var markups = $(".doc .markup."+type)
+//             markups.each(function(){countIndex++; if ($(this).hasClass("selected")){nextIndex = countIndex -1}});
+//             if (nextIndex > -1) {
+//                 var obj = $(markups[nextIndex]);
+//                 $(obj).trigger("click");
+//                 if (!$(obj).isOnScreen()){
+//                     $('html, body').animate({
+//                         scrollTop: $(obj).offset().top - 100
+//                     }, 200);
+//                 }
+//             }
+//           }else if ($(".doc .markup").length > 0){
+//             $($(".doc .markup")[0]).trigger("click");
+//           }
+//         }
+        
+
+
+//         listener.register_combo({
+//             "keys"              : "meta right",
+//             "on_keyup"          : nextMarkup,
+//             "prevent_default"   : true,
+//             "is_exclusive"      : true
+//         });
+//         listener.register_combo({
+//             "keys"              : "meta shift right",
+//             "on_keyup"          : nextSameTypeMarkup,
+//             "prevent_default"   : true,
+//             "is_exclusive"      : true
+//         });
+//         listener.register_combo({
+//             "keys"              : "meta left",
+//             "on_keyup"          : lastMarkup,
+//             "prevent_default"   : true,
+//             "is_exclusive"      : true
+//         });
+//         listener.register_combo({
+//             "keys"              : "meta shift left",
+//             "on_keyup"          : lastSameTypeMarkup,
+//             "prevent_default"   : true,
+//             "is_exclusive"      : true
+//         });
+      
+
+  $("#wrapperTriggerHolder").load("wrapperTrigger"+lang+".html",{},function(){
+    $("#wrapperTrigger").on("click",function(){$("#wrapper").toggleClass("toggled");});
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  $("#assist").load("assist"+lang+".html",{},function(){ 
+    $("#comment").load("comment"+lang+".html",{},registerCommentUI);
+
+    $.get("termsmarkupButtonsRow"+lang+".html",{ "_": Date.now() }, function(data) {   
+      $("#buttonsRow").append(data);
+      $.get("termsmarkupUploadTermModal"+lang+".html",{ "_": Date.now() }, function(data) {   
+        $("#uploadTermModal").append(data);
+        $.get("keywordHelperModal"+lang+".html",{ "_": Date.now() }, function(data) {   
+          $("#keywordHelperModal").append(data);
+          $.get("wordClipHelperModal"+lang+".html",{ "_": Date.now() }, function(data) {   
+            $("#wordClipHelperModal").append(data);
+          
+            registUserIntefaceAction();
+          });
+        });
+      });
+    });
+
+
+
+    // $("#buttonsRow").append('<button id="showUploadTermModalBtn" class="btn btn-sm btn-primary">Submit keywords/Regex</button> <button id="showKeywordHelperModalBtn" class="btn btn-sm btn-primary">Keywords helper</button> <button id="showWordClipHelperModalBtn" class="btn btn-sm btn-primary">Keywords clipper (alpha)</button>');
+    registWebDictionary();
+    registColorSwitcher();
+    markus.helpInfo.register();
+    
+    $("#summaryModal").load("summaryModal"+lang+".html",{},function(){registMarkupSummary();});
+    $("#manageTagModal").load("manageTagModal"+lang+".html",{},function(){
+      registeTagManageUI();
+      $('#manageTagModal .tagColor').colorPicker();             
+
+    });
+    $('[data-toggle="tooltip"]').tooltip();    
+    // markus.popup.registMarkupPopup(true);
+    // markus.manualMarkup.registManualMarkup();
+  });
+
+  
+  $("#popoverMod").load("popoverMod.html",{},function(){
+    $.get("removeModal"+lang+".html", function(data) { 
+      $("#removeModal").append(data);  
+      markus.popup.registMarkupPopup(true);
+      markus.manualMarkup.registManualMarkup(); 
+      $("#popoverMod a[data-toggle='tooltip']").each(function(){
+        if($(this).attr(lang)!== undefined){
+          $(this).attr("title",$(this).attr(lang));
+        }
+      });
+      $("#popoverMod a[data-toggle='tooltip']").tooltip({placement:"auto bottom"});           
+    });
+  });
+
+  /*
+   * Todo: fix tagCSS
+  */
+  
+
+
+  
+  if (!(window.File && window.FileList && window.FileReader)) {
+      console.log("Your browser does not support File API");
+  }
+
+  // $('#markupSelectionModal').modal('show');
+
+  var temp = [];
+
+
+  $.Hive.create({
+
+    worker: 'js/CBDBmarkup.js',
+    receive: function (data) {
+
+      switch (data.cmd){
+        case "fullNameMarkup":
+          receiveFullNameMarkupWorker(data);
+        break;
+        case "termMarkup":
+          receiveTermMarkupWorker(data);
+        break;
+        case "regexMarkup":
+          
+          receiveTermMarkupWorker(data);
+        break;
+        case "partialNameMarkup":
+          receivePartialNameMarkupWorker(data);
+        break;
+        case "idsToNames":
+          // console.log(data.names);
+          $("#stateOneProgress").css("width","10%");
+          data.cmd = "partialNameMarkup";
+          data.txt = $('.doc').html();
+          partialRegexMax = data.regex.length;
+          receivePartialNameMarkupWorker(data);
+        break;  
+        case "scanCBDBMarkups":
+          $("#stateThreeProgress").css("width","10%");
+          partialNameSpans = data.spans;
+          console.log(partialNameSpans);
+          partialNameSpansMax = partialNameSpans.length;
+          uniqueTermThreadscount = Math.min(partialNameSpans.length,uniqueTermThreadsMax)
+          for (var i =1; i<= uniqueTermThreadscount; i++){
+            $.Hive.get(i).send({cmd:"findNodesWithinDistance",spans:partialNameSpans.shift(),id:i,distance:500});
+          }
+
+        break;
+      }
+    },
+    created: function (hive) {
+      
+    }
+  });
+
+
+
+$.Hive.create({
+  count:8,
+    worker: 'js/uniqueTerm.js',
+    receive: function (data) {
+      
+      switch (data.cmd){
+        case "uniqueTerm":
+          $('#progressBar').html(uniqueTermRegexsIndex+ "/"+uniqueTermRegexsCount+" CandidatesJobs:"+uniqueTermJobs.length);
+          $('#stateOneProgress').css("width",(uniqueTermRegexsIndex/uniqueTermRegexsCount*10)+"%");
+          uniqueTermJobs = uniqueTermJobs.concat(data.regex);
+
+          if (uniqueTermRegexsIndex +1 < regexs.length){
+            uniqueTermRegexsIndex++;
+            data.regex = regexs[uniqueTermRegexsIndex];
+            $.Hive.get(data.id+1).send(data);
+          }else {
+            console.log("push");
+
+            uniqueTermThreads.push(data.id+1);
+            // console.log("["+uniqueTermThreads.length+"]:push");
+            if(uniqueTermThreads.length == uniqueTermThreadscount){                                            
+              uniqueTermThreads = [];
+              eval(data.callback);
+            }
+          
+          // uniqueTermThreads = [];
+          }
+        break;
+        case "findAppearedTerm":
+          
+          if (data.regex.length>0){
+            // var _tempRegexArray = data.regex.split(",");
+            uniqueTerms = uniqueTerms.concat(data.regex.split(",")); 
+            console.log("["+data.id+"]:"+data.regex);
+          }
+          $('#progressBar').html("Initial scans remain:"+uniqueTermJobs.length+"  Markup jobs:"+uniqueTerms.length);
+          $('#stateTwoProgress').css("width",((uniqueTermJobsCount- uniqueTermJobs.length)/uniqueTermJobsCount*45)+"%");
+        // console.log(uniqueTermJobs.length);
+
+        if (uniqueTermJobs.length > 0) {
+          data.regex = uniqueTermJobs.shift();
+          $.Hive.get(data.id).send(data);
+        }else{
+          uniqueTermThreads.push(data.id);
+          if (uniqueTermThreads.length == 8){
+            uniqueTermThreads= [];
+            eval(data.callback);
+          }
+        }
+
+        break;
+        case "findNodesWithinDistance":
+          
+          // console.log(data.answer);
+          $('#progressBar').html("Filter out non-referenced partial names");
+          $.each(data.answer,function(){
+            var span= this;
+            refercedSpans[span.x] = refercedSpans[span.x] || [];
+            refercedSpans[span.x][span.y] = refercedSpans[span.x][span.y] ||[];
+            refercedSpans[span.x][span.y].push(span.cbdbid);
+          });
+          $("#stateThreeProgress").css("width",((partialNameSpansMax-partialNameSpans.length)/partialNameSpansMax*20+10)+"%");
+
+          if (partialNameSpans.length >0){
+            data.spans = partialNameSpans.shift();
+            $.Hive.get(data.id).send(data);
+          }else {
+            uniqueTermThreads.push(data.id);
+            if (uniqueTermThreads.length == uniqueTermThreadscount){
+
+              $("#stateThreeProgress").css("width","30%");
+              $(".markup[x_origin]").each(function(){
+                var x = refercedSpans[$(this).attr("x_origin")];
+                if (x){
+                  cbdbid = x[$(this).attr("y_origin")];
+                  if (cbdbid){
+                    $(this).attr("refered","TRUE").attr("cbdbid",cbdbid.join("|"));
+                  }
+                }
+
+              });
+
+              $(".markup[cbdbid]").each(function(){
+                $(this).attr("cbdbid",unique($(this).attr("cbdbid").split("|")).join("|"));
+              });
+
+              $(".moreThanOneId").each(function(){
+                var _cbdbid = $(this).attr("cbdbid");
+                if (_cbdbid.indexOf("|")<0){
+                  $(this).removeClass("moreThanOneId");
+                }
+
+              });
+              $("#stateThreeProgress").css("width","35%");
+              $(".doc").find(".partialName.unsolved:not([refered])").contents().unwrap();
+              $("#stateThreeProgress").css("width","40%");
+              $(".doc").find(".fullName[refered='TRUE'] .fullName").contents().unwrap();
+              $("#stateThreeProgress").css("width","43%");
+              $('#progressBar').html("Finish");
+              $('persname .markup').contents().unwrap();
+              $('name .markup').contents().unwrap();
+              $("#stateThreeProgress").css("width","45%");
+              $("#progress").removeClass("active").removeClass("progress-striped");
+
+              $(".doc").attr("markupPartialName",true);
+              // updatePartialNameStatus();
+              nextMarkupJob();  
+            }
+            
+            
+          }
+
+
+        break;
+      }
+    },
+    created: function (hive) {
+    }
+  });
+  
+
+}
+
+
+
+var fileLoaded = function (result){
+  $("#content").html(result);
+  docStatusDetection();
+  $(".doc pre").attr("contenteditable",false);
+  var editable = $(".doc pre").attr("contenteditable");
+  
+  $("#editDocBtn").removeClass("btn-danger");
+  $(".doc").removeClass("edit");
+
+  if ($(".doc .passage").length > 0){
+    $(".doc .passage").contents().unwrap();
+    startParagraphMarkup();
+    markus.comment.startAddingCommentHolder();
+  }
+  
+  registerCommentIcon();
+};
+
+
+
+var receiveFullNameMarkupWorker = function(data){
+  $('#progressBar').html("Jobs:"+(data.index +1) + "/"+uniqueTerms.length+" Fullname markup:"+found++);
+  $('#stateThreeProgress').css("width",((data.index +1)/uniqueTerms.length*45)+"%"); 
+
+        var index = data.index +1;
+        if (index< uniqueTerms.length){
+          data.index = index;
+          data.regex = uniqueTerms[index];
+          // console.log(data.txt);
+          if (data.txt){
+            $.Hive.get(0).send(data);
+          }
+          
+       }else{
+          found = 0;
+          
+          $(".doc").html(data.txt).attr("markupFullName",true);
+          $('persname .markup').contents().unwrap();
+          $('name .markup').contents().unwrap();          
+          $('.fullName').each(function(){
+            $(this).attr("x_origin",$(this).offset().left).attr("y_origin",$(this).offset().top);
+          });
+          $('#stateThreeProgress').css("width","45%");
+          $('#progress').removeClass("progress-striped").removeClass("progress-striped active");
+          $('#progressBar').html("Fullname markup finsihed, partial name scan ready");      
+          // updateFullNameStatus();
+
+          nextMarkupJob();       
+          
+          // registUnsolved();
+       } 
+}
+
+var receiveTermMarkupWorker = function(data){
+  // $('#progressBar').html("Jobs:"+(data.index +1) + "/"+uniqueTerms.length+" markup:"+found++);
+  // $('#stateThreeProgress').css("width",((data.index +1)/uniqueTerms.length*45)+"%"); 
+
+        var index = data.index +1;
+        if (index< uniqueTerms.length){
+          data.index = index;
+          data.regex = uniqueTerms[index];
+          // console.log(data.txt);
+          if (data.txt){
+            $.Hive.get(0).send(data);
+          }
+          
+       }else{
+          found = 0;
+          console.log(data.count +" terms are found");
+          alert("MARKUS found "+data.count + " "+markus.tag[data.type].buttonName);
+          $(".doc").html(data.txt);
+          // $('persname .markup').contents().unwrap();
+          // $('name .markup').contents().unwrap();          
+          // $('.fullName').each(function(){
+          //   $(this).attr("x_origin",$(this).offset().left).attr("y_origin",$(this).offset().top);
+          // });
+          // $('#stateThreeProgress').css("width","45%");
+          // $('#progress').removeClass("progress-striped").removeClass("progress-striped active");
+          // $('#progressBar').html("Fullname markup finsihed, partial name scan ready");      
+          // console.log(data.callback);
+          if (data.callback){
+            eval(data.callback);
+          }
+
+          nextMarkupJob();          
+          
+          
+       }  
+    
+}
+
+var resetProgressBar = function(){
+  $("#stateThreeProgress").css("width","0%");
+  $("#stateTwoProgress").css("width","0%");
+  $("#stateOneProgress").css("width","0%");
+  $("#progress").addClass("active").addClass("progress-striped");
+}
+
+var startMarkup = function(_regexsArray,_type,_markupCallback){
+  console.log("startMarkup");
+  resetProgressBar();
+  uniqueTermThreads=[];
+  uniqueTermJobs = [];
+  uniqueTermRegexsIndex = -1;
+  uniqueTerms = [];
+  refercedSpans = [];
+
+  regexs = _regexsArray;
+  uniqueTermRegexsCount = regexs.length;
+  // console.log("startNianhaoMarkup");
+  uniqueTermThreadscount = Math.min(uniqueTermRegexsCount,uniqueTermThreadsMax);
+
+  for (var i=0; i < uniqueTermThreadscount; i++){
+    uniqueTermRegexsIndex = i;
+    // console.log("startNianhaoMarkup Thread:"+i);
+    $.Hive.get(i+1).send({cmd:"uniqueTerm",id:i,regex:regexs[i],callback:"uniqueCallback('"+_type+"','"+_markupCallback+"')"});
+    console.log("uniqueCallback('"+_type+"','"+_markupCallback+"')");
+  } 
+
+}
+
+var uniqueCallback = function(_type,_markupCallback){
+  console.log("uniqueCallback");
+  $('#stateOneProgress').css("width","10%");
+    uniqueTermJobsCount = uniqueTermJobs.length;
+    for (var id =1 ; id <= Math.min(uniqueTermThreadsMax,uniqueTermJobsCount); id++){      
+      $.Hive.get(id).send({
+        id:id,
+        txt:$(".doc").html(),
+        cmd:"findAppearedTerm",
+        regex:uniqueTermJobs.shift(),
+        callback:"findAppearedCallback('"+_type+"','"+_markupCallback+"')"
+      });
+    }
+}
+
+var findAppearedCallback = function (_type,_markupCallback){
+  $('#stateTwoProgress').css("width","45%");
+    // console.log("readyTo markup");
+    $('#progressBar').html("Ready to markup");
+    uniqueTerms.sort(function(a,b){
+      var alength = a.indexOf("|"), blength = b.indexOf("|");
+      if (alength < 0) {alength = a.length;};
+      if (blength < 0) {blength = b.length;};
+      return blength - alength;
+    });
+    var data;
+    // console.log(uniqueTerms.length);
+    // console.log(uniqueTerms);
+
+
+    if (uniqueTerms.length > 0){
+      data = {cmd:"termMarkup",txt:$(".doc").html(),regex:uniqueTerms[0],index:0,type:_type,callback:_markupCallback};
+      
+    } else {
+      data = {cmd:"termMarkup",txt:$(".doc").html(),regex:"",index:0,type:_type,callback:_markupCallback};
+    }
+    $.Hive.get(0).send(data);
+};
+
+
+
+
+
+
+var startFullNameMarkup = function(){
+
+// $(".doc").attr("markupFullName",true);
+  resetProgressBar();
+
+  uniqueTermThreads=[];
+  uniqueTermJobs = [];
+
+  uniqueTermRegexsIndex = -1;
+
+  uniqueTerms = [];
+
+  refercedSpans = [];
+
+  regexs = CBDBRegexs;
+  uniqueTermRegexsCount = regexs.length;
+  console.log("startFullNameMarkup");
+  uniqueTermThreadscount = Math.min(uniqueTermRegexsCount,8);
+  for (var i=0; i < uniqueTermThreadscount; i++){
+    uniqueTermRegexsIndex = i;
+    console.log("startFullNameMarkup Thread:"+i);
+    $.Hive.get(i+1).send({cmd:"uniqueTerm",id:i,regex:regexs[i],callback:"uniqueFullNameCallback()"});
+  } 
+
+};
+
+var uniqueFullNameCallback = function(){
+  $('#stateOneProgress').css("width","10%");
+    uniqueTermJobsCount = uniqueTermJobs.length;
+    for (var id =1 ; id <= Math.min(uniqueTermThreadsMax,uniqueTermJobsCount); id++){      
+      $.Hive.get(id).send({
+        id:id,
+        txt:$(".doc").html(),
+        cmd:"findAppearedTerm",
+        regex:uniqueTermJobs.shift(),
+        callback:"findAppearedFullNameCallback()"
+      });
+    }
+}
+
+var findAppearedFullNameCallback = function(){
+  $('#stateTwoProgress').css("width","45%");
+    console.log("readyTo markup");
+    $('#progressBar').html("Ready to markup");
+    uniqueTerms.sort(function(a,b){
+      var alength = a.indexOf("|"), blength = b.indexOf("|");
+      if (alength < 0) {alength = a.length};
+      if (blength < 0) {blength = b.length};
+      return blength - alength
+    });
+    var data;
+    if (uniqueTerms.length > 0){
+      data = {cmd:"fullNameMarkup",txt:$(".doc").html(),regex:uniqueTerms[0],index:0};
+      
+    } else {
+      data = {cmd:"fullNameMarkup",txt:$(".doc").html(),regex:"",index:0};
+    }
+    $.Hive.get(0).send(data);
+}
+
+
+
+var nextMarkupJob = function(){
+  // console.log(markupJobsList);
+  var job = markupJobsList.shift();
+  // console.log(job);
+  if (job){
+    // job();
+    eval(job);  
+  } else {
+    finishMarkupJobList();
+  }
+}
+
+var finishMarkupJobList = function(){
+  $("#progressDiv").fadeOut(1000);
+  if ($( "input:checkbox:not(:disabled)").length ==0){
+    $("#startMarkupBtn").fadeOut(1000);
+  }
+  $("#saveMarkupBtn").fadeIn(1000);
+}
+
+var docStatusDetection = function(){
+
+}
+var Clipper = ChTermClipper;
+var texts = null;
+
+   
+
+   function setClipperTextsAndResetClipState() {
+    // Todo, duplicated work, setTexts
+      if (texts ===null){
+        texts = $(".doc").text().replace(/(\r*\n)+/g,"\n").split("\n");  
+        Clipper.setTexts(texts);
+      }
+
+      
+
+//       Clipper.resetClipState();
+      Clipper.nonUnifyingPuncMode = false;
+
+      var terms = $("#preservedTerms").val().trim().split("\n");
+      while(term = terms.shift()){
+        Clipper.maxTermChars = Math.max(Clipper.maxTermChars,term.length+1);
+      }
+
+      // Clipper.maxTermChars = 10;
+   }
+   function computeClips() {
+      if (texts == null) {
+        texts = $(".doc").text().replace(/(\r*\n)+/g,"\n").split("\n");
+        Clipper.setTexts(texts);
+        Clipper.resetClipState();
+      };
+      
+      var terms = $("#preservedTerms").val().trim().split("\n");
+      while(term = terms.shift()){
+        Clipper.maxTermChars = Math.max(Clipper.maxTermChars,term.length+1);
+      }
+
+      Clipper.setParameters({ 'strictMode': false });
+//       Clipper.setNegativeClips($("#inNegativeClips").val().trim().split("\n"));
+      Clipper.setPositiveTerms($("#seedTerms").val().trim().split("\n"));      
+      $("#preservedTerms").val((($("#preservedTerms").val().trim().length>0) ? ($("#preservedTerms").val()+"\n"): "") +$("#seedTerms").val());
+      $("#seedTerms").val("");
+
+      Clipper.nonUnifyingPuncMode = false;
+      Clipper.computeCandidateClips(false);
+
+      var processedClips = $("#processedClips").val().trim().split("\n");
+      var negativeClips = $("#inNegativeClips").val().trim().split("\n");
+
+
+      var clips;
+      var candidateClips = [];
+      while (clips = Clipper.candidateClips.shift()){
+        if (negativeClips.indexOf(clips)==-1 && processedClips.indexOf(clips)==-1){
+          candidateClips.push(clips);
+        }
+        // if (processedClips.indexOf(clips)==-1 && negativeClips.indexOf(clips)==-1){
+        //   candidateClips.push(clips);
+        // }
+      }
+       
+
+      $("#inPositiveClips").val(candidateClips.join("\n"));
+
+
+//       $("#inPositiveClips").val(Clipper.candidateClips.join("\n"));
+
+
+
+
+      $("#inPositiveClips").trigger('input');
+   }
+   function computeTerms() {
+      var preservedTerms = $("#preservedTerms").val().trim().split("\n");
+      var negativeTerms = $("#inNegativeTerms").val().trim().split("\n");
+
+      var strictMode = $("#inStrictMode").prop("checked");
+//       Clipper.setParameters({ 'strictMode': false });
+      Clipper.setNegativeTerms($("#inNegativeTerms").val().trim().split("\n"));
+
+      Clipper.setPositiveClips($("#inPositiveClips").val().trim().split("\n"));
+  
+      $("#processedClips").val($("#processedClips").val()+"\n"+$("#inPositiveClips").val());
+      $("#inPositiveClips").val("");
+
+
+//       Clipper.setPositiveClips(Clipper.candidateClips);
+      Clipper.computeCandidateTerms(false);
+
+      var term ;
+      var candidateTerms = [];
+      var inPositiveTerms = $("#inPositiveTerms");
+      var positiveTerms = inPositiveTerms.val().trim().split("\n");
+      positiveTerms = positiveTerms.filter(function(term){return term.length > 0 && preservedTerms.indexOf(term)==-1});
+
+      while (term = Clipper.candidateTerms.shift()){
+        if (preservedTerms.indexOf(term)==-1 && negativeTerms.indexOf(term)==-1 && positiveTerms.indexOf(term)==-1){
+          candidateTerms.push(term);
+        }
+      }
+       
+      candidateTerms.sort(sortByLength);
+      
+
+      inPositiveTerms.val(positiveTerms.join("\n")+"\n"+candidateTerms.join("\n"));
+      inPositiveTerms.trigger('input');
+
+      alert(candidateTerms.length +" Keywords found");
+   }
+  
+  
+
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53293952-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

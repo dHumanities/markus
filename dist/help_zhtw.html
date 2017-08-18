@@ -1,0 +1,99 @@
+
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">          
+              <!-- <h4 class="modal-title">Button and Legend</h4> -->
+              <nav class="navbar navbar-default" role="navigation" id="navbar-scrollspy">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-info-sign"></span></a>
+                </div>              
+                <ul class="nav navbar-nav">
+                  <li><a href="#buttonHelp">按鈕說明</a></li>                  
+                  <li><a href="#legendHelp">標記說明</a></li>
+                  <li><a href="#iconHelp">圖示說明</a></li>
+                </ul>                
+              </nav>
+            </div>
+            <div class="modal-body" data-spy="scroll" data-target="#navbar-scrollspy" style="position: relative;height: 650px;margin-top: 10px;overflow: auto;">
+            
+ 
+              <div id="buttonHelp">
+                <h1>按鈕</h1>
+                網頁上方的按鈕 <button type="button" class="btn btn-sm btn-danger switcher" color-switcher-class="fullName.markup">姓名</button> <button type="button" class="btn btn-sm btn-warning switcher" color-switcher-class="partialName.markup">別名</button> <button type="button" class="btn btn-sm btn-primary switcher" color-switcher-class="placeName.markup">地名</button> <button type="button" class="btn btn-sm btn-success switcher" color-switcher-class="nianhao.markup">年號</button> <button type="button" class="btn btn-sm btn-info switcher" color-switcher-class="officialTitle.markup">官名</button> 用來切換在文字檔中已經標示不同實體的名稱。按下按鈕，會顯示或隱藏<span class="fullName unsolved" >人名</span>、<span class="placeName unsolved" >地名</span>、<span class="nianhao unsolved" >年號</span>或<span class="officialTitle unsolved" >官名</span>。按鈕的顏色就是關鍵語詞的顏色。
+              <pre style="margin-top:5px">熙寧初，<span class="markup fullName unsolved">王荊公</span>力薦.....。</span></pre>
+                <br/>
+                
+              </div>
+              <div id="legendHelp">
+                <h1>標記說明</h1>
+              <!-- <div id="singleUnderline"></div> -->
+                在 <a href="http://isites.harvard.edu/icb/icb.do?keyword=k16229" target ="_blank">CBDB</a> 中沒有符合的<span class="fullName unsolved">姓名</span>或<span class="partialName unsolved">別名</span>，以<span class="markup unsolved noCBDBID">單行底線</span>標示，如：
+              <pre style="margin-top:5px">奉職<span class="markup fullName unsolved noCBDBID">程若英</span>乃文臣<span class="markup fullName unsolved">程博文</span>之子，上書言....</pre><br/>
+              在 <a href="http://isites.harvard.edu/icb/icb.do?keyword=k16229" target ="_blank">CBDB</a> 中符合超過一筆的<span class="fullName unsolved">姓名</span>或<span class="partialName unsolved">別名</span>，以<span class="markup unsolved moreThanOneId">虛線底線</span>標示，如:
+              <pre style="margin-top:5px">數日後，臺諫<span class="markup fullName unsolved moreThanOneId">王能甫</span>.....</pre><br/>
+              名稱重疊時（如例一）或名稱分屬兩類名稱時（如例二），以<span class="markup unsolved">方括號</span>標示，如：
+              <pre style="margin-top:5px"><span class="nianhao markup unsolved" type="nianhao">靖康</span><span class="fullName markup unsolved " type="fullName" cbdbid="3213" >末，<span class="fullName markup unsolved moreThanOneId " type="fullName" cbdbid="17882|26836" >趙子</span>崧</span>守<span class="placeName markup unsolved" type="placeName">陳州</span>。<span class="partialName markup unsolved" type="partialName" cbdbid="3213" refered="TRUE">子崧</span>先在邸中剽竊此說，至是適天下大亂...</pre>
+              <pre style="margin-top:5px">觀主道士<span class="fullName markup unsolved" type="fullName" cbdbid="206" refered="TRUE">張景先</span>，出入<span class="fullName markup unsolved" type="fullName" cbdbid="8066" refered="TRUE"><span class="placeName markup unsolved" type="placeName">黃安</span>中</span>之門甚久。</pre>
+              </div>
+              <div id="iconHelp">
+                <h1>圖示說明</h1>
+                <a class="glyphicon glyphicon-floppy-disk"></a> = 存檔<br/>
+                <a class="glyphicon glyphicon-book"></a> = 線上搜尋（ CBDB、漢典或維基百科）<br/>
+                <a class="glyphicon glyphicon-search"></a> = 本文搜尋（需在本文中出現兩次以上）<br/>
+                <a class="glyphicon glyphicon-trash"></a> = 由本文中移除標記（只限本文中只出現一次的時候；出現多次時，請善用本文搜尋，來編輯或刪除多筆相同語詞的標記）<br/>                
+                <br/>
+                <br/>
+                在本文搜尋模式下 (<a class="glyphicon glyphicon-search"></a>) ：<br/>
+                <span class="btn glyphicon glyphicon-ok-circle btn-link"></span> = 認可編輯<br/>
+                <span class="btn glyphicon glyphicon-ok-circle btn-success glyphicon-lock"></span> = 鎖定資料（不加以變更）<br/>
+                <br/>
+                點選已標記的語詞時，圖示就會出現（<span class="fullName unsolved">姓名</span>、<span class="partialName unsolved">別名</span>、<span class="markup nianhao unsolved">年號</span>、<span class="placeName unsolved">地名</span>、<span class="officialTitle unsolved">官職</span>）：
+                <pre style="margin-top:5px">數日後，臺諫<span class="markupSample markup fullName unsolved moreThanOneId" cbdbid="13756|38069" type="fullName">王能甫</span>.....。車駕始至<span class="markupSample markup placeName unsolved" type="placeName">臨安府</span>...</pre>
+                <pre style="margin-top:5px">奉職<span class="markupSample markup fullName unsolved noCBDBID" cbdbid="" type="fullName">程若英</span>乃文臣<span class="markupSample markup fullName unsolved" type="fullName" cbdbid="121">程博文</span>之子，上書言....</pre><br/>
+              </div>
+              <div id="menuButtonHelp">
+                <h1>系統右方其他按鈕說明</h1>
+                <div>
+                <button type="button" class="btn btn-sm" ><span class="glyphicon glyphicon-edit"></span></button> = 全文修改<br/>
+                點選按鈕進入全文修改模式，此時會出現紅色外框，表示可以對內文進行文字或標點上的增修，增修的結果會在保存或輸出時保存。當增修完畢，請再按一次按鈕離開全文修改模式，就可繼續進行標記或閱讀。</div><br/>  
+                <div><button type="button" class="btn btn-sm" ><span class="glyphicon glyphicon-list-alt"></span></button> = 標記總覽<br/>
+                點選標記總覽來檢示文章中已加入的標記整理資訊，標記會按照不同種類作加總。同時在標記總覽中可以把文中的標記轉出成試算表作進一步分析。</div><br/>
+                <div><button class="btn btn-sm btn-primary">markup selection</button>=Markup selection (只出現在自動標記模式)<br/>
+                點選 markup selection 可檢視有自動標記的狀態，包括已自動標記的數量以及已自動標記的類型。同時在 markup selection 中，可以隨時對已載入的文本，增加要進行自動標記的標記類型。</div>                
+              </div>
+            </div>            
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+              <!-- <button id="_startMarkupBtn" type="button" class="btn btn-primary" disabled="true">Start</button> -->
+            </div>
+            <div id="sample1Popover" class="popover fade right in" >
+              <div class="arrow"></div>
+              <h3 class="popover-title" style="display: none;"></h3>
+              <div class="popover-content">
+                <span class="tagText"></span>
+                <span class="typePopoverContent">
+                  <button type="button" class="btn btn-xs btn-danger switch fullName" >姓名</button>
+                  <button type="button" class="btn btn-xs btn-warning switch partialName" >別名</button>
+                  <button type="button" class="btn btn-xs btn-success switch nianhao" >年號</button>
+                  <button type="button" class="btn btn-xs btn-primary switch placeName" >地名</button>
+                  <button type="button" class="btn btn-xs btn-info switch officialTitle" >官職</button>
+                  <a onclick="typeSave()" class="glyphicon glyphicon-floppy-disk disabled"></a> | 
+                </span>
+                <a onclick="searchMarkup()" class="glyphicon glyphicon-book" ></a>
+                <span class="search"> | <a onclick="showSameMarkup()" class="glyphicon glyphicon-search" onclick=""></a></span>
+                <span class="trash"> | <a onclick="showSameMarkup()" class="glyphicon glyphicon-trash"></a></span>
+              </div>
+            </div>
+            <div id="sampleCbdbIdPopover" class="popover fade top in" style="display: hidden;">
+              <div class="arrow"></div>
+              <h3 class="popover-title" style="display: none;"></h3>
+              <div class="popover-content">
+                <span class="tagText"></span>
+                  <span id="sampleCbdbIdPopoverContent">
+                 <input style="height:22px;width:100px;display:inline-block;margin-bottom: 1px;"type="text" class="form-control input-sm" placeholder="Cbdb ID"></input> <a class="glyphicon glyphicon-floppy-disk"></a>
+                </span>          
+              </div>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      
