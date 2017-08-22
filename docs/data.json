@@ -54,6 +54,16 @@
             },
             "namespaces": {}
         },
+        "src\\js\\manualMarkup.js": {
+            "name": "src\\js\\manualMarkup.js",
+            "modules": {},
+            "classes": {
+                "manualMarkup.js_anonymous": 1,
+                "ManualMarkup": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src\\js\\markus.js": {
             "name": "src\\js\\markus.js",
             "modules": {
@@ -172,7 +182,9 @@
             "elements": {},
             "classes": {
                 "io.js_anonymous": 1,
-                "IO": 1
+                "IO": 1,
+                "manualMarkup.js_anonymous": 1,
+                "ManualMarkup": 1
             },
             "fors": {
                 "IO": 1,
@@ -181,8 +193,8 @@
             },
             "namespaces": {},
             "tag": "module",
-            "file": "src\\js\\io.js",
-            "line": 598,
+            "file": "src\\js\\manualMarkup.js",
+            "line": 210,
             "description": "io.js base file."
         },
         "markus.js": {
@@ -244,7 +256,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src\\js\\ui.js",
-            "line": 252,
+            "line": 281,
             "description": "ui.js base file."
         },
         "webDictionary.js": {
@@ -390,6 +402,43 @@
             "description": "Defines the `markus.io` object that can be accessed globally. Uses some functions that have\nbeen defined in the io.js anonymous namespace, but also defines some functions in the object\ncreation itself.",
             "is_constructor": 1
         },
+        "manualMarkup.js_anonymous": {
+            "name": "manualMarkup.js_anonymous",
+            "shortname": "manualMarkup.js_anonymous",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "io.js",
+            "namespace": "",
+            "file": "src\\js\\manualMarkup.js",
+            "line": 6,
+            "description": "The class that holds the variables and functions created in the namespace of this file.\nThe constrcutor of this object is only called once, because it is an anonymous function.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "_m",
+                    "description": "a reference to the Markus Configuration Object is passed",
+                    "type": "Object"
+                }
+            ]
+        },
+        "ManualMarkup": {
+            "name": "ManualMarkup",
+            "shortname": "ManualMarkup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "io.js",
+            "namespace": "",
+            "file": "src\\js\\manualMarkup.js",
+            "line": 210,
+            "description": "Defines the `markus.manualMarkup` object that can be accessed globally. Uses some functions that have\nbeen defined in the manualMarkup.js anonymous namespace, but also defines some functions in the object\ncreation itself.",
+            "is_constructor": 1
+        },
         "JQuery": {
             "name": "JQuery",
             "shortname": "JQuery",
@@ -495,7 +544,7 @@
             "module": "ui.js",
             "namespace": "",
             "file": "src\\js\\ui.js",
-            "line": 252,
+            "line": 281,
             "description": "Creates the markus.ui object and associates its member varaible listener with\nthe predefined listener variable from the ui.js_anonymous class. You can use this\nclass to gain access to the keyPress listener that was registered here."
         },
         "webDictionary.js_anonymous": {
@@ -1066,6 +1115,80 @@
             "module": "io.js"
         },
         {
+            "file": "src\\js\\manualMarkup.js",
+            "line": 16,
+            "class": "manualMarkup.js_anonymous",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\manualMarkup.js",
+            "line": 19,
+            "description": "This function cleans the class attribute of the element this is called on.",
+            "itemtype": "method",
+            "name": "registMakupAction",
+            "params": [
+                {
+                    "name": "justAdd",
+                    "description": "one of the spans that still has the justAdd class",
+                    "type": "Span"
+                }
+            ],
+            "class": "manualMarkup.js_anonymous",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\manualMarkup.js",
+            "line": 30,
+            "description": "Called when we have a new type of markup to save. We set the classes on\nthe corresponding element, and fadeout the `singleTagContent` css class\nelements. Also shows the `.search` element at the end of the function.",
+            "itemtype": "method",
+            "name": "newtypeSave",
+            "class": "manualMarkup.js_anonymous",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\manualMarkup.js",
+            "line": 79,
+            "description": "Function called when either `applyAllBtn` or `removeAllBtn` has fired\nand event and we want to process it. This just removes the `fired` class\nfrom both of those buttons if present.",
+            "itemtype": "method",
+            "name": "initialRemoveModal",
+            "class": "manualMarkup.js_anonymous",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\manualMarkup.js",
+            "line": 91,
+            "description": "Shows and or hides the `#removeModal` and the `#removeAll` and `#applyAll` buttons",
+            "itemtype": "method",
+            "name": "updateRemoveModal",
+            "class": "manualMarkup.js_anonymous",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\manualMarkup.js",
+            "line": 139,
+            "description": "Shows the just created markup instance. Sets the classes of the markup element.",
+            "itemtype": "method",
+            "name": "showManualMarkup",
+            "class": "manualMarkup.js_anonymous",
+            "module": "io.js"
+        },
+        {
+            "file": "src\\js\\manualMarkup.js",
+            "line": 219,
+            "description": "Handles the registering of manual markup. Handles the necessary registering\nof event handlers and takes care of the selection from the document.",
+            "itemtype": "method",
+            "name": "registManualMarkup",
+            "params": [
+                {
+                    "name": "editable",
+                    "description": "An editable object",
+                    "type": "Object"
+                }
+            ],
+            "class": "ManualMarkup",
+            "module": "io.js"
+        },
+        {
             "file": "src\\js\\markus.js",
             "line": 10,
             "description": "This is the global object that holds the version and build info",
@@ -1175,7 +1298,7 @@
         },
         {
             "file": "src\\js\\ui.js",
-            "line": 62,
+            "line": 91,
             "description": "This method will transfer your focus from the currently selected markup instance\nto the next one in the document with the same type.",
             "itemtype": "method",
             "name": "nextSameTypeMarkup",
@@ -1184,7 +1307,7 @@
         },
         {
             "file": "src\\js\\ui.js",
-            "line": 102,
+            "line": 131,
             "description": "Finds the next markup after the currently selected markup instance and will transfer\nthe focus by generating a click on the next element. This is markup_type agnostic.",
             "itemtype": "method",
             "name": "nextMarkup",
@@ -1200,7 +1323,7 @@
         },
         {
             "file": "src\\js\\ui.js",
-            "line": 142,
+            "line": 171,
             "description": "Finds the previous markup before the currently selected markup instance and will transfer\nthe focus by generating a click on the previous element. This is markup_type agnostic.",
             "itemtype": "method",
             "name": "lastMarkup",
@@ -1209,7 +1332,7 @@
         },
         {
             "file": "src\\js\\ui.js",
-            "line": 179,
+            "line": 208,
             "description": "Finds the previous markup before the currently selected markup instance and will transfer\nthe focus by generating a click on the previous element. This will only go through the instances\nof the same markup_type.",
             "itemtype": "method",
             "name": "lastSameTypeMarkup",
@@ -1420,6 +1543,10 @@
         }
     ],
     "warnings": [
+        {
+            "message": "Missing item type",
+            "line": " src\\js\\manualMarkup.js:16"
+        },
         {
             "message": "Missing item type\nDefines what happens when you click on a tab. It shows the specified\ntab, hides all webDicts, shows the correct one and triggers the\nresetSize event.",
             "line": " src\\js\\webDictionary.js:236"

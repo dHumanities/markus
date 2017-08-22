@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Data</title>
+    <title>manualMarkup.js_anonymous</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -101,31 +101,37 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Data Class</h1>
+<h1>manualMarkup.js_anonymous Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_js_data.js.html#l6"><code>src\js\data.js:6</code></a>
+            Defined in: <a href="../files/src_js_manualMarkup.js.html#l6"><code>src\js\manualMarkup.js:6</code></a>
         </div>
 
-            Module: <a href="../modules/data.js.html">data.js</a>
+            Module: <a href="../modules/io.js.html">io.js</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Here the Markus.Data methods are defined and added to the Global Markus Singleton.
-The Data methods handle mostly data conversion</p>
+    <p>The class that holds the variables and functions created in the namespace of this file.
+The constrcutor of this object is only called once, because it is an anonymous function.</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_Data" class="method item">
-    <h3 class="name"><code>Data</code></h3>
+<div id="method_manualMarkup.js_anonymous" class="method item">
+    <h3 class="name"><code>manualMarkup.js_anonymous</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>_m</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
 
 
@@ -137,7 +143,7 @@ The Data methods handle mostly data conversion</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_data.js.html#l6"><code>src\js\data.js:6</code></a>
+        <a href="../files/src_js_manualMarkup.js.html#l6"><code>src\js\manualMarkup.js:6</code></a>
         </p>
 
 
@@ -148,6 +154,23 @@ The Data methods handle mostly data conversion</p>
         
     </div>
 
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">_m</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>a reference to the Markus Configuration Object is passed</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
 
 
 
@@ -170,19 +193,23 @@ The Data methods handle mostly data conversion</p>
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_getMarkupsArray">getMarkupsArray</a>
+                                <a href="#method_initialRemoveModal">initialRemoveModal</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_objArrayToCSV">objArrayToCSV</a>
+                                <a href="#method_newtypeSave">newtypeSave</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_objArrayToHTML">objArrayToHTML</a>
+                                <a href="#method_registMakupAction">registMakupAction</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_objArrayToTSV">objArrayToTSV</a>
+                                <a href="#method_showManualMarkup">showManualMarkup</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_updateRemoveModal">updateRemoveModal</a>
 
                             </li>
                     </ul>
@@ -195,26 +222,11 @@ The Data methods handle mostly data conversion</p>
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_getMarkupsArray" class="method item">
-    <h3 class="name"><code>getMarkupsArray</code></h3>
+<div id="method_initialRemoveModal" class="method item">
+    <h3 class="name"><code>initialRemoveModal</code></h3>
 
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>withPassage</code>
-                </li>
-                <li class="arg">
-                        <code>withSupportText</code>
-                </li>
-                <li class="arg">
-                        <code>noOfChars</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
 
-        <span class="returns-inline">
-            <span class="type">Array</span>
-        </span>
 
 
 
@@ -225,7 +237,7 @@ The Data methods handle mostly data conversion</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_data.js.html#l15"><code>src\js\data.js:15</code></a>
+        <a href="../files/src_js_manualMarkup.js.html#l79"><code>src\js\manualMarkup.js:79</code></a>
         </p>
 
 
@@ -233,78 +245,21 @@ The Data methods handle mostly data conversion</p>
     </div>
 
     <div class="description">
-        <p>Returns an array that, depending on the provided parameters will return the
-markups in the passage or in the whole document. And depending on the Boolean flag
-withSupportText it returns its surrounding text.</p>
+        <p>Function called when either <code>applyAllBtn</code> or <code>removeAllBtn</code> has fired
+and event and we want to process it. This just removes the <code>fired</code> class
+from both of those buttons if present.</p>
 
     </div>
 
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">withPassage</code>
-                        <span class="type">Boolean</span>
-
-
-                    <div class="param-description">
-                        <p>Do we want to include the passage</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">withSupportText</code>
-                        <span class="type">Boolean</span>
-
-
-                    <div class="param-description">
-                        <p>Do we want to include support Text</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">noOfChars</code>
-                        <span class="type">Int</span>
-
-
-                    <div class="param-description">
-                        <p>The number of chars to get</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Array</span>:
-                    <p>An Array of markups</p>
-
-            </div>
-        </div>
 
 
 </div>
-<div id="method_objArrayToCSV" class="method item">
-    <h3 class="name"><code>objArrayToCSV</code></h3>
+<div id="method_newtypeSave" class="method item">
+    <h3 class="name"><code>newtypeSave</code></h3>
 
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>objArray</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
 
-        <span class="returns-inline">
-            <span class="type">String</span>
-        </span>
 
 
 
@@ -315,7 +270,7 @@ withSupportText it returns its surrounding text.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_data.js.html#l149"><code>src\js\data.js:149</code></a>
+        <a href="../files/src_js_manualMarkup.js.html#l30"><code>src\js\manualMarkup.js:30</code></a>
         </p>
 
 
@@ -323,54 +278,27 @@ withSupportText it returns its surrounding text.</p>
     </div>
 
     <div class="description">
-        <p>Turns an array of objects into a CSV array.</p>
+        <p>Called when we have a new type of markup to save. We set the classes on
+the corresponding element, and fadeout the <code>singleTagContent</code> css class
+elements. Also shows the <code>.search</code> element at the end of the function.</p>
 
     </div>
 
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">objArray</code>
-                        <span class="type">Array</span>
-
-
-                    <div class="param-description">
-                        <p>the array to turn into a CSV</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">String</span>:
-                    <p>The CSV data string</p>
-
-            </div>
-        </div>
 
 
 </div>
-<div id="method_objArrayToHTML" class="method item">
-    <h3 class="name"><code>objArrayToHTML</code></h3>
+<div id="method_registMakupAction" class="method item">
+    <h3 class="name"><code>registMakupAction</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>objArray</code>
+                        <code>justAdd</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
-        <span class="returns-inline">
-            <span class="type">String</span>
-        </span>
 
 
 
@@ -381,7 +309,7 @@ withSupportText it returns its surrounding text.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_data.js.html#l228"><code>src\js\data.js:228</code></a>
+        <a href="../files/src_js_manualMarkup.js.html#l19"><code>src\js\manualMarkup.js:19</code></a>
         </p>
 
 
@@ -389,7 +317,7 @@ withSupportText it returns its surrounding text.</p>
     </div>
 
     <div class="description">
-        <p>Returns the provided array as a HTML table.</p>
+        <p>This function cleans the class attribute of the element this is called on.</p>
 
     </div>
 
@@ -398,12 +326,12 @@ withSupportText it returns its surrounding text.</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">objArray</code>
-                        <span class="type">Array</span>
+                        <code class="param-name">justAdd</code>
+                        <span class="type">Span</span>
 
 
                     <div class="param-description">
-                        <p>the array of objects we want to convert</p>
+                        <p>one of the spans that still has the justAdd class</p>
 
                     </div>
 
@@ -411,32 +339,14 @@ withSupportText it returns its surrounding text.</p>
             </ul>
         </div>
 
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">String</span>:
-                    <p>the table of the array</p>
-
-            </div>
-        </div>
 
 
 </div>
-<div id="method_objArrayToTSV" class="method item">
-    <h3 class="name"><code>objArrayToTSV</code></h3>
+<div id="method_showManualMarkup" class="method item">
+    <h3 class="name"><code>showManualMarkup</code></h3>
 
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>objArray</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
 
-        <span class="returns-inline">
-            <span class="type">String</span>
-        </span>
 
 
 
@@ -447,7 +357,7 @@ withSupportText it returns its surrounding text.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_data.js.html#l192"><code>src\js\data.js:192</code></a>
+        <a href="../files/src_js_manualMarkup.js.html#l139"><code>src\js\manualMarkup.js:139</code></a>
         </p>
 
 
@@ -455,37 +365,42 @@ withSupportText it returns its surrounding text.</p>
     </div>
 
     <div class="description">
-        <p>Turns an array of objects into a TSV array.</p>
+        <p>Shows the just created markup instance. Sets the classes of the markup element.</p>
 
     </div>
 
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">objArray</code>
-                        <span class="type">Array</span>
 
 
-                    <div class="param-description">
-                        <p>the array to turn into a TSV</p>
 
-                    </div>
+</div>
+<div id="method_updateRemoveModal" class="method item">
+    <h3 class="name"><code>updateRemoveModal</code></h3>
 
-                </li>
-            </ul>
-        </div>
+        <span class="paren">()</span>
 
-        <div class="returns">
-            <h4>Returns:</h4>
 
-            <div class="returns-description">
-                        <span class="type">String</span>:
-                    <p>The TSV data string</p>
 
-            </div>
-        </div>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_manualMarkup.js.html#l91"><code>src\js\manualMarkup.js:91</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Shows and or hides the <code>#removeModal</code> and the <code>#removeAll</code> and <code>#applyAll</code> buttons</p>
+
+    </div>
+
+
 
 
 </div>

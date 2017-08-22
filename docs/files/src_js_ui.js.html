@@ -46,6 +46,8 @@
                                 <li><a href="../classes/IO.html">IO</a></li>
                                 <li><a href="../classes/io.js_anonymous.html">io.js_anonymous</a></li>
                                 <li><a href="../classes/JQuery.html">JQuery</a></li>
+                                <li><a href="../classes/ManualMarkup.html">ManualMarkup</a></li>
+                                <li><a href="../classes/manualMarkup.js_anonymous.html">manualMarkup.js_anonymous</a></li>
                                 <li><a href="../classes/navbar.js_anonymous.html">navbar.js_anonymous</a></li>
                                 <li><a href="../classes/Regex.html">Regex</a></li>
                                 <li><a href="../classes/tagRegex.js_anonymous.html">tagRegex.js_anonymous</a></li>
@@ -162,6 +164,35 @@ listener.simple_combo(&quot;meta d&quot;, function() {
             }, 200);
         }
     }
+});
+
+listener.simple_combo(&quot;meta =&quot;, function() {   
+      
+    var fontSize = $(&quot;.doc pre&quot;).css(&#x27;font-size&#x27;);
+    
+    if (fontSize){
+        fontSize = parseInt(fontSize) + 1;
+
+    } else {
+        fontSize = &quot;14&quot;;
+        
+    }
+    $(&quot;.doc pre&quot;).css(&#x27;font-size&#x27;,fontSize+&quot;px&quot;);
+    return false;
+});
+
+listener.simple_combo(&quot;meta -&quot;, function() {   
+    
+    var fontSize = $(&quot;.doc pre&quot;).css(&#x27;font-size&#x27;);
+    if (fontSize){
+        fontSize = Math.max(10,parseInt(fontSize) - 1);
+
+    } else {
+        fontSize = &quot;12&quot;;
+        
+    }
+    $(&quot;.doc pre&quot;).css(&#x27;font-size&#x27;,fontSize+&quot;px&quot;);
+    return false;
 });
 
 /**
@@ -361,9 +392,11 @@ listener.register_combo({
  *
  * @class UI
  */
-_m.ui = {
-    listener: listener,
-};
+
+ if (_m.ui == null) {
+    _m.ui = {};
+ }
+_m.ui.listener = listener;
 
 } )(markus);
 
