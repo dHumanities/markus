@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>IO</title>
+    <title>Util</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -104,59 +104,24 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>IO Class</h1>
+<h1>Util Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_js_io.js.html#l598"><code>src\js\io.js:598</code></a>
+            Defined in: <a href="../files/src_js_utilities.js.html#l84"><code>src\js\utilities.js:84</code></a>
         </div>
 
-            Module: <a href="../modules/io.js.html">io.js</a>
+            Module: <a href="../modules/utilities.js.html">utilities.js</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Defines the <code>markus.io</code> object that can be accessed globally. Uses some functions that have
-been defined in the io.js anonymous namespace, but also defines some functions in the object
-creation itself.</p>
+    <p>The class that holds all the utility functions. This class is only declared once (technically a singleton).</p>
 
 </div>
 
-    <div class="constructor">
-        <h2>Constructor</h2>
-<div id="method_IO" class="method item">
-    <h3 class="name"><code>IO</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_io.js.html#l598"><code>src\js\io.js:598</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-
-
-
-</div>
-    </div>
 
 <div id="classdocs" class="tabview">
     <ul class="api-class-tabs">
@@ -174,51 +139,56 @@ creation itself.</p>
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_exportHTML">exportHTML</a>
+                                <a href="#method_chineseToPingYin">chineseToPingYin</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_exportSave">exportSave</a>
+                                <a href="#method_converBackToUnicode">converBackToUnicode</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_exportTEI">exportTEI</a>
+                                <a href="#method_convertToEscapeUnicode">convertToEscapeUnicode</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_loadCSSFromCSS_TagAtt">loadCSSFromCSS_TagAtt</a>
+                                <a href="#method_ERROR_HANDLER">ERROR_HANDLER</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_newTagCSS">newTagCSS</a>
+                                <a href="#method_recoverAllExistTag">recoverAllExistTag</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_readFile">readFile</a>
+                                <a href="#method_removeAllExistTag">removeAllExistTag</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_removeFile">removeFile</a>
+                                <a href="#method_removeDuplicatedTags">removeDuplicatedTags</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_removeTagCSS">removeTagCSS</a>
+                                <a href="#method_saveAndMove">saveAndMove</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_save">save</a>
+                                <a href="#method_searchFunctionByName">searchFunctionByName</a>
+
+                            </li>
+                            <li class="index-item method deprecated">
+                                <a href="#method_setup_reader">setup_reader</a>
+
+                                    <span class="flag deprecated">deprecated</span>
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_sortMergerdRegex">sortMergerdRegex</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_saveFile">saveFile</a>
+                                <a href="#method_unique">unique</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_updateManualPopover">updateManualPopover</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_updateSwitchers">updateSwitchers</a>
+                                <a href="#method_urlParam">urlParam</a>
 
                             </li>
                     </ul>
@@ -231,17 +201,20 @@ creation itself.</p>
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_exportHTML" class="method item">
-    <h3 class="name"><code>exportHTML</code></h3>
+<div id="method_chineseToPingYin" class="method item">
+    <h3 class="name"><code>chineseToPingYin</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>filename</code>
+                        <code>chineseString</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
 
 
 
@@ -252,7 +225,7 @@ creation itself.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_io.js.html#l699"><code>src\js\io.js:699</code></a>
+        <a href="../files/src_js_utilities.js.html#l99"><code>src\js\utilities.js:99</code></a>
         </p>
 
 
@@ -260,7 +233,7 @@ creation itself.</p>
     </div>
 
     <div class="description">
-        <p>Exports a HTML save of the document and its layout and automatically saves it</p>
+        <p>This method will convert a Chinese character string to Ping Yin.</p>
 
     </div>
 
@@ -269,12 +242,12 @@ creation itself.</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">filename</code>
+                        <code class="param-name">chineseString</code>
                         <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>the fileName of the file you download</p>
+                        <p>A string of Chinese Characters</p>
 
                     </div>
 
@@ -282,546 +255,32 @@ creation itself.</p>
             </ul>
         </div>
 
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>A string of Chinese annotated in Ping Yin</p>
+
+            </div>
+        </div>
 
 
 </div>
-<div id="method_exportSave" class="method item">
-    <h3 class="name"><code>exportSave</code></h3>
+<div id="method_converBackToUnicode" class="method item">
+    <h3 class="name"><code>converBackToUnicode</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>filename</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_io.js.html#l655"><code>src\js\io.js:655</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Exports a MARKUS save file and automatically saves it</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">filename</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the fileName of the file you download</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_exportTEI" class="method item">
-    <h3 class="name"><code>exportTEI</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>filename</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_io.js.html#l679"><code>src\js\io.js:679</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Exports a TEI save file of the document and automatically saves it</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">filename</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the fileName of the file you download</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_loadCSSFromCSS_TagAtt" class="method item">
-    <h3 class="name"><code>loadCSSFromCSS_TagAtt</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_io.js.html#l224"><code>src\js\io.js:224</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>This function handles the loading of the CSS rules from the saved HTML document using
-the tag and tagCSS attributes. It has a couple of failsafes in case the data is missing
-and also contains the defaults for the standard tagNames (i.e. placeName, officialTitle, timePeriod etc.)</p>
-<p>This method is defined in the io.js anonymous function but later attached to the <code>markus.io</code> object</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_newTagCSS" class="method item">
-    <h3 class="name"><code>newTagCSS</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>tagName</code>
-                </li>
-                <li class="arg">
-                        <code>buttonName</code>
-                </li>
-                <li class="arg">
-                        <code>tagColor</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_io.js.html#l119"><code>src\js\io.js:119</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>This method generates all the necessary CSS classes for a new tagType. It will Also
-overwrite already existing definitions so you can use this to redefine the styling of existing
-tags too.</p>
-<p>This method is defined in the io.js anonymous function but later attached to the <code>markus.io</code> object</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">tagName</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the name of the tagClass we want to generate in CSS</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">buttonName</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the name we want the button to have for this tagCSS</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">tagColor</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>16 bit hex color (e.g. <code>&#x60;#FF0000&lt;code&gt;= red.) you can use css shortcuts like&lt;&#x2F;code&gt;red&lt;code&gt;or&lt;&#x2F;code&gt;#f00</code></p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_readFile" class="method item">
-    <h3 class="name"><code>readFile</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>_file</code>
-                </li>
-                <li class="arg">
-                        <code>_fn</code>
-                </li>
-                <li class="arg">
-                        <code>errorHandler</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_io.js.html#l609"><code>src\js\io.js:609</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Defines the readFile function. This allows you to read a file specified by the fileName
-and calls the callback on succes</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">_file</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the fileName as a String</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">_fn</code>
-                        <span class="type">Function</span>
-
-
-                    <div class="param-description">
-                        <p>The callBack function</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">errorHandler</code>
-                        <span class="type">Function</span>
-
-
-                    <div class="param-description">
-                        <p>custom error handler</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_removeFile" class="method item">
-    <h3 class="name"><code>removeFile</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>filename</code>
-                </li>
-                <li class="arg">
-                        <code>_fn</code>
-                </li>
-                <li class="arg">
-                        <code>errorHandler</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_io.js.html#l567"><code>src\js\io.js:567</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Removes the specified file from the fileSystem.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">filename</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the name of the file we want to remove</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">_fn</code>
-                        <span class="type">Function</span>
-
-
-                    <div class="param-description">
-                        <p>the callback function, called once the file has successfully been removed</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">errorHandler</code>
-                        <span class="type">Function</span>
-
-
-                    <div class="param-description">
-                        <p>the errorHandler, does not need to be defined, can fallback to default handler</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_removeTagCSS" class="method item">
-    <h3 class="name"><code>removeTagCSS</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>tagName</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_io.js.html#l206"><code>src\js\io.js:206</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Called before defining new CSS rules for a tagType. This removes any pre-existing rules for
-the provided tagType from the markus.tag and markus.tagCSS objects.</p>
-<p>This method is defined in the io.js anonymous function but later attached to the <code>markus.io</code> object</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">tagName</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>The tag you want to remove</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_save" class="method item">
-    <h3 class="name"><code>save</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>filename</code>
-                </li>
-                <li class="arg">
-                        <code>_fn</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_io.js.html#l719"><code>src\js\io.js:719</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>A simple basic save to the normal MARKUS format. Cleans the data, processes it
-for download and then automatically downloads it.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">filename</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>The filename of the new file we want to create</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">_fn</code>
-                        <span class="type">Function</span>
-
-
-                    <div class="param-description">
-                        <p>The callback function called uppon completion</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_saveFile" class="method item">
-    <h3 class="name"><code>saveFile</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>filename</code>
-                </li>
                 <li class="arg">
                         <code>text</code>
                 </li>
-                <li class="arg">
-                        <code>_fn</code>
-                </li>
-                <li class="arg">
-                        <code>errorHandler</code>
-                </li>
             </ul><span class="paren">)</span>
         </div>
 
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
 
 
 
@@ -832,7 +291,7 @@ for download and then automatically downloads it.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_io.js.html#l511"><code>src\js\io.js:511</code></a>
+        <a href="../files/src_js_utilities.js.html#l45"><code>src\js\utilities.js:45</code></a>
         </p>
 
 
@@ -840,10 +299,8 @@ for download and then automatically downloads it.</p>
     </div>
 
     <div class="description">
-        <p>Saves a file using the FileSystem. It requests write access and in return Gets
-a fileEntry (basically a filePointer) that can be written to. Once we have that object
-we write all the data that needs to be saved to there and call the callback function once the
-writing of data is complete</p>
+        <p>Converts a unicode-escaped string generated using the <code>convertToEscapeUnicode</code> function back
+to its unicode original. Pass a unicode-escaped string and get the unicode encoded string back.</p>
 
     </div>
 
@@ -851,46 +308,145 @@ writing of data is complete</p>
             <h4>Parameters:</h4>
 
             <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">filename</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the name of the file we want to create</p>
-
-                    </div>
-
-                </li>
                 <li class="param">
                         <code class="param-name">text</code>
                         <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>the textdata of the file we want to create</p>
+                        <p>the unicode-escaped string</p>
 
                     </div>
 
                 </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>the string containing unicode characters once again</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_convertToEscapeUnicode" class="method item">
+    <h3 class="name"><code>convertToEscapeUnicode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>source</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_utilities.js.html#l23"><code>src\js\utilities.js:23</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Escapes all unicode characters in the source that is passed as parameter and
+returns the modified string.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">_fn</code>
-                        <span class="type">Function</span>
+                        <code class="param-name">source</code>
+                        <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>the callback function, called once the file has been written</p>
+                        <p>source</p>
 
                     </div>
 
                 </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>the unicode escaped string</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_ERROR_HANDLER" class="method item">
+    <h3 class="name"><code>ERROR_HANDLER</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>e</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_utilities.js.html#l67"><code>src\js\utilities.js:67</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>This is the default error handler. According to previous code documentation this function should be
+moved to the <code>IO</code> package. This function does nothing but print 'Error: ' in front of the logging message
+in the console.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">errorHandler</code>
-                        <span class="type">Function</span>
+                        <code class="param-name">e</code>
+                        <span class="type">Error</span>
 
 
                     <div class="param-description">
-                        <p>A custom errorHandler, does not need to specified, can also be kept default</p>
+                        <p>the error that is encountered.</p>
 
                     </div>
 
@@ -901,10 +457,148 @@ writing of data is complete</p>
 
 
 </div>
-<div id="method_updateManualPopover" class="method item">
-    <h3 class="name"><code>updateManualPopover</code></h3>
+<div id="method_recoverAllExistTag" class="method item">
+    <h3 class="name"><code>recoverAllExistTag</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>txt</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_utilities.js.html#l221"><code>src\js\utilities.js:221</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Recovers all the existing tags using some Regex magic.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">txt</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the string we want to recover tags from</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>returns the newValue string in which the existing tags have been replaced</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_removeAllExistTag" class="method item">
+    <h3 class="name"><code>removeAllExistTag</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>txt</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_utilities.js.html#l197"><code>src\js\utilities.js:197</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Removes all remnants of tags using some more Regex magic</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">txt</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the text to remove the tags from</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>the cleaned string</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_removeDuplicatedTags" class="method item">
+    <h3 class="name"><code>removeDuplicatedTags</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>container</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
 
 
@@ -916,7 +610,7 @@ writing of data is complete</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_io.js.html#l74"><code>src\js\io.js:74</code></a>
+        <a href="../files/src_js_utilities.js.html#l182"><code>src\js\utilities.js:182</code></a>
         </p>
 
 
@@ -924,10 +618,196 @@ writing of data is complete</p>
     </div>
 
     <div class="description">
-        <p>Updates the .singleTagContent in the manualPopover. It handles their visibility
-based on the 'visible' property and sets the button text according to either
-the tagName or a predefined buttonName that can override the tagName.</p>
-<p>This method is defined in the io.js anonymous function but later attached to the <code>markus.io</code> object</p>
+        <p>Makes sure that no embedded markup and tags can be created. Unwraps them using
+JQuery.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">container</code>
+                        <span class="type">Element</span>
+
+
+                    <div class="param-description">
+                        <p>The container to check for embedded markup</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_saveAndMove" class="method item">
+    <h3 class="name"><code>saveAndMove</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>page</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_utilities.js.html#l256"><code>src\js\utilities.js:256</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Saves the current document and moves it to a new location. Another Shorthand
+form, also deprecated?</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">page</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the url of the page you want to move to</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_searchFunctionByName" class="method item">
+    <h3 class="name"><code>searchFunctionByName</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>functionName</code>
+                </li>
+                <li class="arg">
+                        <code>context</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Function</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_utilities.js.html#l273"><code>src\js\utilities.js:273</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Searches through all functions and tries to return it using the provided
+pnamed parameter. It passes the function in its context. I.e:
+You pass the string <code>&quot;markus.io.readFile&quot;</code> and as a return you get
+the function <code>readFile</code> as a member of the <code>markus.io</code> object.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">functionName</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Name of the function, preferred including the namespace.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">context</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>The object we're looking in.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Function</span>:
+                    <p>Returns the string you queried by name as a member of its context.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_setup_reader" class="method item deprecated">
+    <h3 class="name"><code>setup_reader</code></h3>
+
+        <span class="paren">()</span>
+
+
+        <span class="flag deprecated" title="Use &#x60;markus.io.readFile&#x60;">deprecated</span>
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_utilities.js.html#l248"><code>src\js\utilities.js:248</code></a>
+        </p>
+
+
+            <p>Deprecated: Use &#x60;markus.io.readFile&#x60;</p>
+
+    </div>
+
+    <div class="description">
+        <p>Short hand for <code>markus.io.readFile</code>. Deprecated.</p>
 
     </div>
 
@@ -935,11 +815,23 @@ the tagName or a predefined buttonName that can override the tagName.</p>
 
 
 </div>
-<div id="method_updateSwitchers" class="method item">
-    <h3 class="name"><code>updateSwitchers</code></h3>
+<div id="method_sortMergerdRegex" class="method item">
+    <h3 class="name"><code>sortMergerdRegex</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>a</code>
+                </li>
+                <li class="arg">
+                        <code>b</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
+        <span class="returns-inline">
+            <span class="type">Integer</span>
+        </span>
 
 
 
@@ -950,7 +842,7 @@ the tagName or a predefined buttonName that can override the tagName.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_io.js.html#l29"><code>src\js\io.js:29</code></a>
+        <a href="../files/src_js_utilities.js.html#l140"><code>src\js\utilities.js:140</code></a>
         </p>
 
 
@@ -958,14 +850,183 @@ the tagName or a predefined buttonName that can override the tagName.</p>
     </div>
 
     <div class="description">
-        <p>Updates the color switchers for the tagNames. This is called on load. It
-hides or shows buttons depending on their visibility and changes the color-switcher-class
-based on their status</p>
-<p>This method is defined in the io.js anonymous function but later attached to the <code>markus.io</code> object</p>
+        <p>Used to sort two comparable regex strings. This function is called  by
+<code>array.sort</code></p>
 
     </div>
 
+        <div class="params">
+            <h4>Parameters:</h4>
 
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">a</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Compare part A</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">b</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Compare part B</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Integer</span>:
+                    <p>a number signifying if a should be before or after b</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_unique" class="method item">
+    <h3 class="name"><code>unique</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>array</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_utilities.js.html#l161"><code>src\js\utilities.js:161</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Removes duplicates from the passed array and returns only the unique
+values found in that array.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">array</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>the array to check for doubles</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Array</span>:
+                    <p>the array that only contains the unique values from the input array</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_urlParam" class="method item">
+    <h3 class="name"><code>urlParam</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>param</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_utilities.js.html#l123"><code>src\js\utilities.js:123</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Reads the URL parameters that are included in the location (A.K.A the URL request bar
+in the top of your browser. The address bar). Using this function you can request <code>GET</code> variables</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">param</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the name of the parameter we want to extract from the GET variables</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>the value of the parameter (probably URL encoded) as a String.</p>
+
+            </div>
+        </div>
 
 
 </div>

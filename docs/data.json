@@ -114,6 +114,21 @@
             },
             "namespaces": {}
         },
+        "src\\js\\utilities.js": {
+            "name": "src\\js\\utilities.js",
+            "modules": {
+                "utilities.js": 1
+            },
+            "classes": {
+                "utilities.js_anonymous": 1,
+                "Util": 1
+            },
+            "fors": {
+                "Util": 1,
+                "Global": 1
+            },
+            "namespaces": {}
+        },
         "src\\js\\webDictionary.js": {
             "name": "src\\js\\webDictionary.js",
             "modules": {
@@ -258,6 +273,24 @@
             "file": "src\\js\\ui.js",
             "line": 281,
             "description": "ui.js base file."
+        },
+        "utilities.js": {
+            "name": "utilities.js",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "utilities.js_anonymous": 1,
+                "Util": 1
+            },
+            "fors": {
+                "Util": 1,
+                "Global": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\js\\utilities.js",
+            "line": 84,
+            "description": "utilities.js base file."
         },
         "webDictionary.js": {
             "name": "webDictionary.js",
@@ -546,6 +579,42 @@
             "file": "src\\js\\ui.js",
             "line": 281,
             "description": "Creates the markus.ui object and associates its member varaible listener with\nthe predefined listener variable from the ui.js_anonymous class. You can use this\nclass to gain access to the keyPress listener that was registered here."
+        },
+        "utilities.js_anonymous": {
+            "name": "utilities.js_anonymous",
+            "shortname": "utilities.js_anonymous",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utilities.js",
+            "namespace": "",
+            "file": "src\\js\\utilities.js",
+            "line": 6,
+            "description": "The class that holds the variables and functions created in the namespace of this file.\nThe constrcutor of this object is only called once, because it is an anonymous function.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "_m",
+                    "description": "a reference to the Markus Configuration Object is passed",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Util": {
+            "name": "Util",
+            "shortname": "Util",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utilities.js",
+            "namespace": "",
+            "file": "src\\js\\utilities.js",
+            "line": 84,
+            "description": "The class that holds all the utility functions. This class is only declared once (technically a singleton)."
         },
         "webDictionary.js_anonymous": {
             "name": "webDictionary.js_anonymous",
@@ -1340,6 +1409,281 @@
             "module": "ui.js"
         },
         {
+            "file": "src\\js\\utilities.js",
+            "line": 23,
+            "description": "Escapes all unicode characters in the source that is passed as parameter and\nreturns the modified string.",
+            "itemtype": "method",
+            "name": "convertToEscapeUnicode",
+            "params": [
+                {
+                    "name": "source",
+                    "description": "source",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the unicode escaped string",
+                "type": "String"
+            },
+            "class": "Util",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 45,
+            "description": "Converts a unicode-escaped string generated using the `convertToEscapeUnicode` function back\nto its unicode original. Pass a unicode-escaped string and get the unicode encoded string back.",
+            "itemtype": "method",
+            "name": "converBackToUnicode",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "the unicode-escaped string",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the string containing unicode characters once again",
+                "type": "String"
+            },
+            "class": "Util",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 67,
+            "description": "This is the default error handler. According to previous code documentation this function should be\nmoved to the `IO` package. This function does nothing but print 'Error: ' in front of the logging message\nin the console.",
+            "itemtype": "method",
+            "name": "ERROR_HANDLER",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "the error that is encountered.",
+                    "type": "Error"
+                }
+            ],
+            "class": "Util",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 99,
+            "description": "This method will convert a Chinese character string to Ping Yin.",
+            "itemtype": "method",
+            "name": "chineseToPingYin",
+            "params": [
+                {
+                    "name": "chineseString",
+                    "description": "A string of Chinese Characters",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "A string of Chinese annotated in Ping Yin",
+                "type": "String"
+            },
+            "class": "Util",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 123,
+            "description": "Reads the URL parameters that are included in the location (A.K.A the URL request bar\nin the top of your browser. The address bar). Using this function you can request `GET` variables",
+            "itemtype": "method",
+            "name": "urlParam",
+            "params": [
+                {
+                    "name": "param",
+                    "description": "the name of the parameter we want to extract from the GET variables",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the value of the parameter (probably URL encoded) as a String.",
+                "type": "String"
+            },
+            "class": "Util",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 140,
+            "description": "Used to sort two comparable regex strings. This function is called  by\n`array.sort`",
+            "itemtype": "method",
+            "name": "sortMergerdRegex",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "Compare part A",
+                    "type": "String"
+                },
+                {
+                    "name": "b",
+                    "description": "Compare part B",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "a number signifying if a should be before or after b",
+                "type": "Integer"
+            },
+            "class": "Util",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 161,
+            "description": "Removes duplicates from the passed array and returns only the unique\nvalues found in that array.",
+            "itemtype": "method",
+            "name": "unique",
+            "params": [
+                {
+                    "name": "array",
+                    "description": "the array to check for doubles",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "the array that only contains the unique values from the input array",
+                "type": "Array"
+            },
+            "class": "Util",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 182,
+            "description": "Makes sure that no embedded markup and tags can be created. Unwraps them using\nJQuery.",
+            "itemtype": "method",
+            "name": "removeDuplicatedTags",
+            "params": [
+                {
+                    "name": "container",
+                    "description": "The container to check for embedded markup",
+                    "type": "Element"
+                }
+            ],
+            "class": "Util",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 197,
+            "description": "Removes all remnants of tags using some more Regex magic",
+            "itemtype": "method",
+            "name": "removeAllExistTag",
+            "params": [
+                {
+                    "name": "txt",
+                    "description": "the text to remove the tags from",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the cleaned string",
+                "type": "String"
+            },
+            "class": "Util",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 221,
+            "description": "Recovers all the existing tags using some Regex magic.",
+            "itemtype": "method",
+            "name": "recoverAllExistTag",
+            "params": [
+                {
+                    "name": "txt",
+                    "description": "the string we want to recover tags from",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "returns the newValue string in which the existing tags have been replaced",
+                "type": "String"
+            },
+            "class": "Util",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 248,
+            "description": "Short hand for `markus.io.readFile`. Deprecated.",
+            "deprecated": true,
+            "deprecationMessage": "Use `markus.io.readFile`",
+            "itemtype": "method",
+            "name": "setup_reader",
+            "class": "Util",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 256,
+            "description": "Saves the current document and moves it to a new location. Another Shorthand\nform, also deprecated?",
+            "itemtype": "method",
+            "name": "saveAndMove",
+            "params": [
+                {
+                    "name": "page",
+                    "description": "the url of the page you want to move to",
+                    "type": "String"
+                }
+            ],
+            "class": "Util",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 273,
+            "description": "Searches through all functions and tries to return it using the provided\npnamed parameter. It passes the function in its context. I.e:\nYou pass the string `\"markus.io.readFile\"` and as a return you get\nthe function `readFile` as a member of the `markus.io` object.",
+            "itemtype": "method",
+            "name": "searchFunctionByName",
+            "params": [
+                {
+                    "name": "functionName",
+                    "description": "Name of the function, preferred including the namespace.",
+                    "type": "String"
+                },
+                {
+                    "name": "context",
+                    "description": "The object we're looking in.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns the string you queried by name as a member of its context.",
+                "type": "Function"
+            },
+            "class": "Util",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 297,
+            "description": "A reference to the last clicked markup. Should this be in the Global namespace?",
+            "type": "{Object}",
+            "itemtype": "property",
+            "name": "clickedMarkup",
+            "class": "Global",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 305,
+            "description": "A click handler for the `.doc` class from the document scope. It\nremoves any `.selected` class and hides the `popover`.",
+            "class": "Global",
+            "module": "utilities.js"
+        },
+        {
+            "file": "src\\js\\utilities.js",
+            "line": 319,
+            "description": "Handles the application cache events. If the application cache is ready for\nan update, the application cache is swapped and the location is reloaded.",
+            "itemtype": "method",
+            "name": "handleAppCache",
+            "class": "Global",
+            "module": "utilities.js"
+        },
+        {
             "file": "src\\js\\webDictionary.js",
             "line": 15,
             "description": "Function called before search. It hides the iframe of\nthe dictionary and shows the spinHolder.",
@@ -1546,6 +1890,10 @@
         {
             "message": "Missing item type",
             "line": " src\\js\\manualMarkup.js:16"
+        },
+        {
+            "message": "Missing item type\nA click handler for the `.doc` class from the document scope. It\nremoves any `.selected` class and hides the `popover`.",
+            "line": " src\\js\\utilities.js:305"
         },
         {
             "message": "Missing item type\nDefines what happens when you click on a tab. It shows the specified\ntab, hides all webDicts, shows the correct one and triggers the\nresetSize event.",

@@ -8,8 +8,10 @@ comment.js
 data.js
 helpInfo.js
 io.js
+manualMarkup.js
 markus.js
 navbar.js
 tagRegex.js
 ui.js
+utilities.js
 webDictionary.js

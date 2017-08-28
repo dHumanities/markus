@@ -9,6 +9,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ManualMarkup",
         "Regex",
         "UI",
+        "Util",
         "WebDictionary",
         "comment.js_anonymous",
         "helpInfo.js_anonymous",
@@ -17,6 +18,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "navbar.js_anonymous",
         "tagRegex.js_anonymous",
         "ui.js_anonymous",
+        "utilities.js_anonymous",
         "webDictionary.js_anonymous"
     ],
     "modules": [
@@ -28,6 +30,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "navbar.js",
         "tagRegex.js",
         "ui.js",
+        "utilities.js",
         "webDictionary.js"
     ],
     "allModules": [
@@ -70,6 +73,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "ui.js",
             "name": "ui.js",
             "description": "ui.js base file."
+        },
+        {
+            "displayName": "utilities.js",
+            "name": "utilities.js",
+            "description": "utilities.js base file."
         },
         {
             "displayName": "webDictionary.js",
