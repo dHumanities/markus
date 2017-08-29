@@ -28,6 +28,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "webDictionary.js_anonymous"
     ],
     "modules": [
+        "TestModule",
         "comment.js",
         "data.js",
         "helpInfo.js",
@@ -98,6 +99,10 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "tagRegex.js",
             "name": "tagRegex.js",
             "description": "tagRegex.js base file."
+        },
+        {
+            "displayName": "TestModule",
+            "name": "TestModule"
         },
         {
             "displayName": "ui.js",

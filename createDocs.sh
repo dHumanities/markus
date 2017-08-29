@@ -1,2 +1,2 @@
 #!/bin/bash
-yuidoc -o docs src
+yuidoc -x docs -e .js,.html -o docs .

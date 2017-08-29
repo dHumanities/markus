@@ -1,6 +1,15 @@
 {
     "project": {},
     "files": {
+        "dist\\assist.html": {
+            "name": "dist\\assist.html",
+            "modules": {
+                "TestModule": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src\\js\\comment.js": {
             "name": "src\\js\\comment.js",
             "modules": {
@@ -196,6 +205,17 @@
         }
     },
     "modules": {
+        "TestModule": {
+            "name": "TestModule",
+            "submodules": {},
+            "elements": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "dist\\assist.html",
+            "line": 577
+        },
         "comment.js": {
             "name": "comment.js",
             "submodules": {},

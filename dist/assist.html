@@ -6,7 +6,7 @@
     <button data-markus-default="true" type="button" class="btn btn-sm btn-primary switcher" color-switcher-class="placeName" data-toggle="tooltip" data-placement="auto" title="click to change color">地名</button>
     <button data-markus-default="true" type="button" class="btn btn-sm btn-info switcher" color-switcher-class="officialTitle" data-toggle="tooltip" data-placement="auto" title="click to change color">官職</button>
     <!-- <button id="showModalBtn" class="btn btn-sm btn-primary" style="opacity:0">Automated markup options</button> -->
-    
+
     <button type="button" id="editDocBtn" class="btn btn-sm" data-container="body" data-toggle="tooltip" data-placement="auto" title="full text edit mode"><span class="glyphicon glyphicon-edit"></span></button>
     <button id="showHelpModalBtn" class="btn btn-sm" data-container="body" data-toggle="tooltip" data-placement="auto" title="icon info"><span class="glyphicon glyphicon-info-sign"></span></button>
     <button id="showSummaryModalBtn" class="btn btn-sm" data-container="body" data-toggle="tooltip" data-placement="auto" title="tag summary"><span class="glyphicon glyphicon-list-alt"></span></button>
@@ -35,28 +35,28 @@
   <div style="width:100%">
     <div style="padding-top:0px">
       <div class="item web-dictionary" web-dictionary-name="cbdb" web-dictionary-search="searchCBDB" style="display:none">
-        
+
         <div class="input-group input-group-sm" style="width:inherit;padding-top:10px;padding-bottom:10px">
           <span class="input-group-addon">Search</span>
           <input type="text" class="form-control web-dictionary-input" placeholder="Search name or cbdb ID"></input>
           <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
         </div>
         <div id="cbdbIDRef" class="btn-group btn-group-justified web-dictionary-button" data-toggle="buttons">
-          
+
         </div>
         <center ><div class="web-dictionary-spinHolder" ></div></center>
-        <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>                
+        <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
       </div>
       <div class="item web-dictionary" web-dictionary-name="chgis" web-dictionary-src="chgis.html?n={value}" _web-dictionary-src="http://chgis.hmdc.harvard.edu/engine_basic.php?utfname={value}" web-dictionary-exportURL="http://maps.cga.harvard.edu/tgaz/placename?n={value}" web-dictionary-param="{value}" style="display:none">
       <style>.banner a {display:none;} </style>
-        
+
         <div class="input-group input-group-sm" style="width:inherit;padding-top:10px;padding-bottom:10px">
           <span class="input-group-addon">Search</span>
           <input type="text" class="form-control web-dictionary-input" placeholder="Search place name"></input>
           <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
         </div>
         <center ><div class="web-dictionary-spinHolder" ></div></center>
-        <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>                
+        <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
       </div>
       <div class="item web-dictionary" web-dictionary-name="zdic" web-dictionary-src="http://www.zdic.net/search/?c=3&q={value}"
        web-dictionary-param="{value}" style="display:none">
@@ -65,18 +65,18 @@
           <input type="text" class="form-control web-dictionary-input" placeholder="Search here" ></input>
           <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
         </div>
-        <center ><div class="web-dictionary-spinHolder" ></div></center>  
+        <center ><div class="web-dictionary-spinHolder" ></div></center>
         <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
       </div>
-      <div class="item web-dictionary" web-dictionary-name="wiki" web-dictionary-src="http://zh.m.wikipedia.org/wiki/{value}" 
+      <div class="item web-dictionary" web-dictionary-name="wiki" web-dictionary-src="http://zh.m.wikipedia.org/wiki/{value}"
       web-dictionary-exportURL="http://zh.wikipedia.org/wiki/{value}" web-dictionary-param="{value}" >
         <div class="input-group input-group-sm" style="width:inherit;padding-top:10px;padding-bottom:10px">
           <span class="input-group-addon">Search</span>
           <input type="text" class="form-control web-dictionary-input" placeholder="Search here" ></input>
           <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
         </div>
-        <center ><div class="web-dictionary-spinHolder"></div></center> 
-        
+        <center ><div class="web-dictionary-spinHolder"></div></center>
+
         <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
       </div>
       <div class="item web-dictionary" web-dictionary-name="wiki8" web-dictionary-src="http://mobile.wiki8.com/search?q={value}&d=5&ie=t&mobile=true" web-dictionary-exportURL="http://www.wiki8.com/search?q={value}&d=5&ie=t&mobile=true" web-dictionary-param="{value}" style="display:none">
@@ -85,9 +85,9 @@
           <input type="text" class="form-control web-dictionary-input" placeholder="Search here" ></input>
           <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
         </div>
-        
-        <center ><div class="web-dictionary-spinHolder"></div></center> 
-        
+
+        <center ><div class="web-dictionary-spinHolder"></div></center>
+
         <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
       </div>
       <div class="item web-dictionary" web-dictionary-name="ddbcPerson" web-dictionary-search="searchByID" web-dictionary-src="http://authority.dila.edu.tw/person/search.php?per={value}" web-dictionary-id-src="http://authority.dila.edu.tw/person/search.php?aid={value}" web-dictionary-param="{value}" web-dictionary-id-regex="A\d+" style="display:none">
@@ -97,10 +97,10 @@
           <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
         </div>
         <div class="btn-group btn-group-justified web-dictionary-button IDRef" data-toggle="buttons">
-          
+
         </div>
-        <center ><div class="web-dictionary-spinHolder"></div></center> 
-        
+        <center ><div class="web-dictionary-spinHolder"></div></center>
+
         <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
       </div>
       <div class="item web-dictionary" web-dictionary-name="ddbcPlace" web-dictionary-search="searchByID" _web-dictionary-id-src="http://authority.dila.edu.tw/place/search.php?code={value}" web-dictionary-id-src="ddbcPlace.html?q={value}"
@@ -112,10 +112,10 @@
           <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
         </div>
         <div class="btn-group btn-group-justified web-dictionary-button IDRef" data-toggle="buttons">
-          
+
         </div>
-        <center ><div class="web-dictionary-spinHolder"></div></center> 
-        
+        <center ><div class="web-dictionary-spinHolder"></div></center>
+
         <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
       </div>
       <div class="item web-dictionary" web-dictionary-name="ddbcGlossaries" web-dictionary-src="ddbc.html?q={value}" web-dictionary-exportURL="http://buddhistinformatics.dila.edu.tw/glossaries/search.php?op=search&text={value}" web-dictionary-param="{value}" style="display:none">
@@ -124,39 +124,39 @@
           <input type="text" class="form-control web-dictionary-input" placeholder="Search here" ></input>
           <span class="input-group-addon"><a class="web-dictionary-exportURL" target="webDictionary"><span class="glyphicon glyphicon-new-window"></span></a></span>
         </div>
-        <center ><div class="web-dictionary-spinHolder"></div></center> 
-        
+        <center ><div class="web-dictionary-spinHolder"></div></center>
+
         <iframe class="web-dictionary-iframe" frameBorder="0" src="" width="100%" height="700px"></iframe>
       </div>
-    </div>              
+    </div>
   </div>
 </div>
 <div class="modal fade" id="gotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">
   <div class="modal-dialog">
     <div class="modal-content">
-      <!-- <div class="modal-header">          
+      <!-- <div class="modal-header">
         <h4 class="modal-title">Select dynasty range</h4>
       </div> -->
       <div class="modal-body">
         <div class="form-inline">
           <div class="form-group">
-            <label for="GOTO">go to passage </label> 
+            <label for="GOTO">go to passage </label>
             <input type="text" class="form-control" placeholder="passage number">
           </div>
           <button class="btn btn-default">Go</button>
         </div>
-      </div>    
+      </div>
     </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->  
+  </div><!-- /.modal-dialog -->
 </div>
 <div class="modal fade" id="manageTabModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">
   <div class="modal-dialog">
     <div class="modal-content">
-      <!-- <div class="modal-header">          
+      <!-- <div class="modal-header">
         <h4 class="modal-title">Select dynasty range</h4>
       </div> -->
       <div class="modal-body">
-         <ul class="nav nav-tabs">    
+         <ul class="nav nav-tabs">
           <li><a>CBDB <input web-dictionary-name="cbdb" data-markus-action="display" type="checkbox" checked=""></input></a></li>
           <li><a>TGAZ <input web-dictionary-name="chgis" data-markus-action="display" type="checkbox" checked=""></input></a></li>
           <li><a>ZDict <input web-dictionary-name="zdic" data-markus-action="display" type="checkbox" checked=""></input></a></li>
@@ -166,18 +166,18 @@
           <li><a>DDBC place <input web-dictionary-name="ddbcPlace" data-markus-action="display" type="checkbox" checked=""></input></a></li>
           <li><a>DDBC Glossary <input web-dictionary-name="ddbcGlossaries" data-markus-action="display" type="checkbox" checked=""></input></a></li>
         </ul>
-      </div>    
+      </div>
     </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->  
+  </div><!-- /.modal-dialog -->
 </div>
 <div class="modal fade" id="splitPassageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="_static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-         
-      </div>    
+
+      </div>
     </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->  
+  </div><!-- /.modal-dialog -->
 </div>
 <script type="text/javascript">
   $("#showSplitPassageModalBtn").on("click",function(){
@@ -188,7 +188,7 @@
   $("#showManageTabModalBtn").on("click",function(){
     $("#manageTabModal").modal("show");
   });
-  $("#gotoModal button").on("click",function(event){    
+  $("#gotoModal button").on("click",function(event){
     $("span[id='passage"+$("#gotoModal input").val()+"']").goto();
     $("#gotoModal").modal("hide");
   });
@@ -249,11 +249,11 @@
     return false;
   }
 
-  function insertTextAtCursor(text) { 
-      var sel, range, html; 
+  function insertTextAtCursor(text) {
+      var sel, range, html;
       sel = window.getSelection();
-      range = sel.getRangeAt(0); 
-      range.deleteContents();             
+      range = sel.getRangeAt(0);
+      range.deleteContents();
       var textNode = document.createElement('span');
       textNode.textContent = text;
       switch(text){
@@ -266,18 +266,18 @@
         case "¬":
            textNode.className = "EOL hiddenChar";
            break;
-      }    
-      
+      }
+
       textNode.setAttribute("contenteditable",false);
       textNode.setAttribute("unselectable","on");
       textNode.setAttribute("onclick","SelectText(event, this);");
-      
+
 
       range.insertNode(textNode);
       range.setStartAfter(textNode);
       sel.removeAllRanges();
-      sel.addRange(range);        
-  }  
+      sel.addRange(range);
+  }
 
 
   $("#displayHiddenBtn").on("click",function(){
@@ -336,17 +336,17 @@
     console.log($(this).is(":checked"));
     var web_dictionary_name = $(this).attr("web-dictionary-name");
     if($(this).is(":checked")) {
-      $(".web-dictionary-container li").has("a[web-dictionary-name='"+web_dictionary_name+"']").show(); 
-      $(".web-dictionary-container div.web-dictionary[web-dictionary-name='"+$(this).attr("web-dictionary-name")+"']").show(); 
+      $(".web-dictionary-container li").has("a[web-dictionary-name='"+web_dictionary_name+"']").show();
+      $(".web-dictionary-container div.web-dictionary[web-dictionary-name='"+$(this).attr("web-dictionary-name")+"']").show();
     }else{
-      $(".web-dictionary-container li").has("a[web-dictionary-name='"+web_dictionary_name+"']").hide(); 
+      $(".web-dictionary-container li").has("a[web-dictionary-name='"+web_dictionary_name+"']").hide();
       $(".web-dictionary-container div.web-dictionary[web-dictionary-name='"+$(this).attr("web-dictionary-name")+"']").hide();
     }
     $($(".web-dictionary-container li a:visible")[0]).trigger("click");
-              
+
   });
   $('#manageTabModal input[web-dictionary-name="wiki8"],input[web-dictionary-name="ddbcPerson"],input[web-dictionary-name="ddbcPlace"],input[web-dictionary-name="ddbcGlossaries"]').trigger("click");
-  
+
   $.getJSON("/auth/profile_info", function(result) {
       if (result["name"]) {
           $("#showManageTabModalBtn").show();
@@ -362,9 +362,9 @@
       $("#showManageTagModalBtn").hide();
   });
   var gotolistener = new window.keypress.Listener(document.getElementById("gotoModal"));
-  gotolistener.simple_combo("enter", function() {   
-      // console.log("enter");         
-      $("#gotoModal button").trigger("click");            
+  gotolistener.simple_combo("enter", function() {
+      // console.log("enter");
+      $("#gotoModal button").trigger("click");
   });
 
   var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
@@ -387,16 +387,16 @@
 
 $("#editDocBtn").on("click",function(){
     console.log("click");
-    
+
     var editable = $("#editDocBtn").hasClass("btn-danger");
 
     if (editable) {
       $("#editDocBtn").removeClass("btn-danger");
       $(".doc").removeClass("edit");
-      editable = false;  
+      editable = false;
     }else {
       $("#editDocBtn").addClass("btn-danger");
-      $(".doc").addClass("edit");  
+      $(".doc").addClass("edit");
       editable = true;
     }
 
@@ -415,8 +415,8 @@ $("#editDocBtn").on("click",function(){
       }
 
       // texts = $(".doc").text().replace(/(\r*\n)+/g,"\n").split("\n");
-      // Clipper.setTexts(texts);  
-      
+      // Clipper.setTexts(texts);
+
     }
     if (editable){
       markus.ui.listener.stop_listening();
@@ -425,9 +425,9 @@ $("#editDocBtn").on("click",function(){
     }
     console.log(editable);
 
-    
+
     $(".doc pre").attr("contenteditable",""+ editable);
-  });  
+  });
 
 $(document).on('keydown',".doc pre", function(event) {
     showingHidden = $(".doc pre .hiddenChar").length > 0 || !Boolean($("#displayHiddenBtn").attr("showHidden"));
@@ -510,7 +510,7 @@ $(document).on('keydown',".doc pre", function(event) {
          } else
            while (((anchorNode = anchorNode.parentNode) != EditableDiv) && !anchorNode.previousSibling) {}
        }
-      }  
+      }
 
       if (key == 8) { //backspace
          if (!selection.isCollapsed) {
@@ -559,8 +559,8 @@ $(document).on('keydown',".doc pre", function(event) {
                  if (anchorNode.nodeValue.length > 1) {
                    r.setStart(anchorNode, 0)
                    selection.addRange(r)
-                   anchorNode.deleteData(0, 1) 
-                 } 
+                   anchorNode.deleteData(0, 1)
+                 }
                  else {
                    for (var i = 0, p = prev.parentNode; true; i++)
                      if (p.childNodes[i] == prev) break
@@ -580,7 +580,7 @@ $(document).on('keydown',".doc pre", function(event) {
       //  evt.preventDefault();
       //  return false;
       // }
-      
+
     });
 
-</script> 
+</script>
