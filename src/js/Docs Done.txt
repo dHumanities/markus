@@ -13,7 +13,7 @@ manualMarkup.js
 markus.js
 navbar.js
 reference.js
-=>summary.js
+summary.js
 switcher.js
 tagRegex.js
 ui.js
