@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\js\markupPopup.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/ColorSwitcher.html">ColorSwitcher</a></li>
+                                <li><a href="../classes/Comment.html">Comment</a></li>
+                                <li><a href="../classes/comment.js_anonymous.html">comment.js_anonymous</a></li>
+                                <li><a href="../classes/Data.html">Data</a></li>
+                                <li><a href="../classes/Global.html">Global</a></li>
+                                <li><a href="../classes/helpInfo.js_anonymous.html">helpInfo.js_anonymous</a></li>
+                                <li><a href="../classes/IO.html">IO</a></li>
+                                <li><a href="../classes/io.js_anonymous.html">io.js_anonymous</a></li>
+                                <li><a href="../classes/JQuery.html">JQuery</a></li>
+                                <li><a href="../classes/ManualMarkup.html">ManualMarkup</a></li>
+                                <li><a href="../classes/manualMarkup.js_anonymous.html">manualMarkup.js_anonymous</a></li>
+                                <li><a href="../classes/markupPopup.js_anonymous.html">markupPopup.js_anonymous</a></li>
+                                <li><a href="../classes/navbar.js_anonymous.html">navbar.js_anonymous</a></li>
+                                <li><a href="../classes/Regex.html">Regex</a></li>
+                                <li><a href="../classes/Summary.html">Summary</a></li>
+                                <li><a href="../classes/summary.js_anonymous.html">summary.js_anonymous</a></li>
+                                <li><a href="../classes/switcher.js_anonymous.html">switcher.js_anonymous</a></li>
+                                <li><a href="../classes/tagRegex.js_anonymous.html">tagRegex.js_anonymous</a></li>
+                                <li><a href="../classes/UI.html">UI</a></li>
+                                <li><a href="../classes/ui.js_anonymous.html">ui.js_anonymous</a></li>
+                                <li><a href="../classes/Util.html">Util</a></li>
+                                <li><a href="../classes/utilities.js_anonymous.html">utilities.js_anonymous</a></li>
+                                <li><a href="../classes/WebDictionary.html">WebDictionary</a></li>
+                                <li><a href="../classes/webDictionary.js_anonymous.html">webDictionary.js_anonymous</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/comment.js.html">comment.js</a></li>
+                                <li><a href="../modules/data.js.html">data.js</a></li>
+                                <li><a href="../modules/helpInfo.js.html">helpInfo.js</a></li>
+                                <li><a href="../modules/io.js.html">io.js</a></li>
+                                <li><a href="../modules/markupPopup.js.html">markupPopup.js</a></li>
+                                <li><a href="../modules/markus.js.html">markus.js</a></li>
+                                <li><a href="../modules/navbar.js.html">navbar.js</a></li>
+                                <li><a href="../modules/reference.js.html">reference.js</a></li>
+                                <li><a href="../modules/summary.js.html">summary.js</a></li>
+                                <li><a href="../modules/switcher.js.html">switcher.js</a></li>
+                                <li><a href="../modules/tagRegex.js.html">tagRegex.js</a></li>
+                                <li><a href="../modules/ui.js.html">ui.js</a></li>
+                                <li><a href="../modules/utilities.js.html">utilities.js</a></li>
+                                <li><a href="../modules/webDictionary.js.html">webDictionary.js</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: src\js\markupPopup.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * markupPopup.js base files
+ * @module markupPopup.js
+ */
+
+/*
+  Note: cbdbIdSameTagSave not work
+*/
+
+ /**
+ The class that holds the variables and functions created in the namespace of this file.
+ The constrcutor of this object is only called once, because it is an anonymous function.
+
+ @class markupPopup.js_anonymous
+ @constructor
+ @param {Object}  _m a reference to the Markus Configuration Object is passed
+ **/
+( function(_m) {
+
+/**
+ * The removeSameTags array. Internal use by functions
+ * @type {Array}
+ */
+var removeSameTags = [];
+/**
+ * If the markup is editable.
+ *
+ * @type {Boolean}
+ */
+var markupEditable = false;
+
+/**
+ * Removes the markup that was clicked on. Contained within &#x60;markus.popup.clickedMarkup&#x60;.
+ * It hides the popOver and unwraps the removeTarget. (This basically removes the .markup
+ * element around the tag)
+ *
+ * @method removeMarkup
+ */
+var removeMarkup = function() {
+    var removeTarget = _m.popup.clickedMarkup;
+    $(&quot;.popover&quot;).hide();
+    removeTarget.contents().unwrap();
+
+};
+
+var showSameMarkup = function() {
+    var clickedMarkup = _m.popup.clickedMarkup;
+    $(&quot;.popover&quot;).hide();
+    $(&quot;#removeModal&quot;).find(&quot;.tagText&quot;).text($(clickedMarkup).text());
+    var onScreen = [],
+        sameMarkup = [],
+        markupText = $(clickedMarkup).text(),
+        _htmlTemp = &quot;&quot;;
+
+    removeSameTags = getSameTags(markupText);
+
+    if ($(clickedMarkup).hasClass(&quot;justAdd&quot;)) {
+        for (var key in removeSameTags) {
+            if ($(removeSameTags[key].tag).hasClass(&quot;justAdd&quot;)) {
+                _htmlTemp = getSameTagHTML(key) + _htmlTemp;
+            }
+        }
+        for (var key in removeSameTags) {
+            if (!$(removeSameTags[key].tag).hasClass(&quot;justAdd&quot;)) {
+                _htmlTemp += getSameTagHTML(key);
+
+            }
+        }
+
+    } else {
+        for (var key in removeSameTags) {
+            if (removeSameTags[key].tag == clickedMarkup[0]) {
+                _htmlTemp = getSameTagHTML(key) + _htmlTemp;
+            }
+        }
+        for (var key in removeSameTags) {
+            if (removeSameTags[key].tag != clickedMarkup[0]) {
+                _htmlTemp += getSameTagHTML(key);
+            }
+
+        }
+
+    }
+
+    $(&quot;#removeModal&quot;).trigger(&quot;initial&quot;);
+    $(&quot;#removeModal&quot;).find(&quot;.sameTags&quot;).contents().remove();
+    $(&quot;#removeModal&quot;).find(&quot;.sameTags&quot;).html(_htmlTemp);
+
+    if (markupEditable) {
+        $(&quot;#removeModal button.switch&quot;).on(&quot;click&quot;, function() {
+            $(this).toggleClass(&quot;noColor&quot;);
+        });
+
+        $(&quot;#removeModal .glyphicon-ok-circle&quot;).on(&quot;click&quot;, function() {
+            $(this).toggleClass(&quot;btn-link&quot;).toggleClass(&quot;btn-success&quot;).toggleClass(&quot;glyphicon-lock&quot;);
+            if ($(this).hasClass(&quot;btn-link&quot;)) {
+                $(this).parent().find(&quot;.glyphicon-trash&quot;).removeClass(&quot;disabled&quot;);
+            } else {
+                $(this).parent().find(&quot;.glyphicon-trash&quot;).addClass(&quot;disabled&quot;);
+            }
+
+        });
+
+        $(&quot;#removeModal .glyphicon-trash&quot;).on(&quot;click&quot;, function() {
+            if (!$(this).hasClass(&quot;disabled&quot;)) {
+                removeSameTag($(this).attr(&quot;key&quot;));
+            }
+        });
+
+        $(&quot;#removeModal .glyphicon-trash&quot;).on(&quot;mouseenter&quot;, function() {
+            if (!$(this).hasClass(&quot;disabled&quot;)) {
+                $(this).removeClass(&quot;btn-link&quot;).addClass(&quot;btn-danger&quot;);
+            }
+        });
+
+        $(&quot;#removeModal .glyphicon-trash&quot;).on(&quot;mouseleave&quot;, function() {
+            $(this).removeClass(&quot;btn-danger&quot;).addClass(&quot;btn-link&quot;);
+        });
+
+        $(&quot;#removeModal .cbdbIdSameTagSave&quot;).on(&quot;click&quot;, function() {
+            if (!$(this).hasClass(&quot;disabled&quot;)) {
+                cbdbIdSameTagSave($(this).attr(&quot;key&quot;));
+            }
+        });
+        $(&quot;#removeModal .IdSameTagSave&quot;).on(&quot;click&quot;, function() {
+            if (!$(this).hasClass(&quot;disabled&quot;)) {
+                // console.log(&quot;click: &quot; + $(this).attr(&quot;key&quot;));
+                IdSameTagSave($(this).attr(&quot;key&quot;));
+            // cbdbIdSameTagSave($(this).attr(&quot;key&quot;));
+            }
+        });
+
+    } else {
+        $(&quot;#removeModal .col-xs-1&quot;).hide();
+        $(&quot;#removeModal .col-xs-10&quot;).addClass(&quot;col-xs-12&quot;).removeClass(&quot;col-xs-10&quot;);
+        $(&quot;#removeModal .cbdbIds&quot;).hide();
+
+        $(&quot;#removeModal .modal-footer&quot;).hide();
+
+    }
+
+
+
+    $(&quot;#removeModal&quot;).trigger(&quot;update&quot;);
+
+    $(&quot;#removeModal&quot;).modal(&#x27;show&#x27;);
+    $(&quot;#removeModal&quot;).on(&quot;shown.bs.modal&quot;, function() {
+        $(this).find(&quot;.well&quot;).each(function() {
+            var maxHeight = 0;
+            $(this).find(&quot;div,span&quot;).each(function() {
+                maxHeight = Math.max(maxHeight, $(this).height());
+            });
+            $(this).find(&quot;div:not(.btn,.fixHeight)&quot;).height(maxHeight);
+            // $(this).find(&quot;.fixHeight&quot;).removeClass(&quot;fixHeight&quot;);
+            $(this).find(&quot;.row:not(.all)&quot;).each(function() {
+                var parent = $(this).parent();
+                $(this).offset({
+                    top: $(parent).offset().top + $(parent).outerHeight() / 2 - $(this).outerHeight() / 2
+                });
+            });
+        });
+    });
+};
+
+var getSameTags = function(markupText) {
+    var sameTags = [];
+    var serialCount = 0;
+    $(&quot;.doc&quot;).find(&quot;.markup&quot;).each(function() {
+
+        if ($(this).text() == markupText &amp;&amp; $($(this).parent()).text() != markupText) {
+            $(this).attr(&quot;randomID&quot;, serialCount++);
+
+            var contents = $(this).parent().contents();
+
+            // var contents = $(&quot;.doc&quot;).contents();
+
+            var index = contents.index(this),
+                onScreen = false,
+                headIndex = index - 1,
+                tailIndex = index + 1,
+                frontText = &quot;&quot;,
+                endText = &quot;&quot;;
+
+
+            var sameTagChild = $(this).find(&quot;.markup&quot;).filter(function() {
+                return $(this).text() == markupText;
+            });
+
+            // console.log(getSurroundText(this));
+
+
+            var splittedHTML = $(&quot;.doc&quot;).html().split($(this)[0].outerHTML);
+
+
+
+            splittedHTML[0] = splittedHTML[0].replace(/(&lt;([^&gt;]+)&gt;)/ig, &quot;&quot;);
+            splittedHTML[1] = splittedHTML[1].replace(/(&lt;([^&gt;]+)&gt;)/ig, &quot;&quot;);
+
+
+            frontText = splittedHTML[0].substr(splittedHTML[0].length - 20);
+            endText = splittedHTML[1].substr(0, 20);
+
+            sameTags.push({
+                tag: this,
+                onScreen: $(this).visible(true),
+                html: (frontText + $(this)[0].outerHTML + endText),
+                sameTagChild: sameTagChild
+            });
+        // sameTags.push({tag:this,onScreen:$(this).visible(true),html:(frontText +$(this).clone().wrap(&#x27;&lt;p&gt;&#x27;).parent().html()+endText),sameTagChild:sameTagChild});
+        }
+    });
+    return sameTags;
+};
+
+var getSameTagHTML = function(key) {
+    /*
+      &lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-danger switch fullName&quot; &gt;姓名&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-warning switch partialName&quot; &gt;別名&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-success switch nianhao&quot; &gt;年號&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-primary switch placeName&quot; &gt;地名&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-info switch officialTitle&quot; &gt;官職&lt;/button&gt;
+              &lt;a onclick=&quot;typeSave()&quot; class=&quot;glyphicon glyphicon-floppy-disk&quot;&gt;&lt;/a&gt;
+      */
+    var child = removeSameTags[key].sameTagChild;
+    var childHTML = &quot;&quot;;
+    var cbdbIdsHTML = &quot;&quot;;
+    for (var i = 0; i &lt; child.length; i++) {
+        var type = $(child[i]).attr(&quot;type&quot;);
+        // console.log(type);
+        switch (type) {
+        case &quot;fullName&quot;:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-danger switch fullName&quot; &gt;姓名&lt;/button&gt;&#x27;;
+            break;
+        case &quot;partialName&quot;:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-warning switch partialName&quot; &gt;別名&lt;/button&gt;&#x27;;
+            break;
+        case &quot;nianhao&quot;:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-success switch nianhao&quot; &gt;年號&lt;/button&gt;&#x27;;
+            break;
+        case &quot;placeName&quot;:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-primary switch placeName&quot; &gt;地名&lt;/button&gt;&#x27;;
+            break;
+        case &quot;officialTitle&quot;:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-info switch officialTitle&quot; &gt;官職&lt;/button&gt;&#x27;;
+            break;
+        case &quot;timePeriod&quot;:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-info switch timePeriod&quot; &gt;時間&lt;/button&gt;&#x27;;
+            break;
+        default:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-info switch &#x27; + type + &#x27;&quot; &gt;&#x27; + type + &#x27;&lt;/button&gt;&#x27;;
+            break;
+        }
+    }
+
+    if (childHTML.length &gt; 0) {
+        var type = $(removeSameTags[key].tag).attr(&quot;type&quot;);
+        switch (type) {
+        case &quot;fullName&quot;:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-danger switch fullName&quot; &gt;姓名&lt;/button&gt;&#x27;;
+            break;
+        case &quot;partialName&quot;:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-warning switch partialName&quot; &gt;別名&lt;/button&gt;&#x27;;
+            break;
+        case &quot;nianhao&quot;:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-success switch nianhao&quot; &gt;年號&lt;/button&gt;&#x27;;
+            break;
+        case &quot;placeName&quot;:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-primary switch placeName&quot; &gt;地名&lt;/button&gt;&#x27;;
+            break;
+        case &quot;officialTitle&quot;:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-info switch officialTitle&quot; &gt;官職&lt;/button&gt;&#x27;;
+            break;
+        case &quot;timePeriod&quot;:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-info switch timePeriod&quot; &gt;時間&lt;/button&gt;&#x27;;
+            break;
+        default:
+            childHTML += &#x27;&lt;button type=&quot;button&quot; class=&quot;btn btn-xs btn-info switch &#x27; + type + &#x27;&quot; &gt;&#x27; + type + &#x27;&lt;/button&gt;&#x27;;
+        }
+        childHTML += &#x27;&lt;div key=&quot;&#x27; + key + &#x27;&quot; class=&quot;btn btn-xs btn-link glyphicon glyphicon-floppy-disk sameTagTypeSave&quot;&gt;&lt;/div&gt;&#x27;;
+    } else {
+        var type = $(removeSameTags[key].tag).attr(&quot;type&quot;);
+        if (type == &quot;fullName&quot; || type == &quot;partialName&quot;) {
+            var inputColorClass = (type == &quot;fullName&quot;) ? &quot;has-error&quot; : &quot;has-warning&quot;;
+            var btnColorClass = (type == &quot;fullName&quot;) ? &quot;btn-danger&quot; : &quot;btn-warning&quot;;
+            // if (!$(removeSameTags[key].tag).attr(&quot;cbdbid&quot;)) {
+            //     $(removeSameTags[key].tag).attr(&quot;cbdbid&quot;, &quot;&quot;);
+            // }
+
+
+
+            var cbdbIds = markus.util.converBackToUnicode($(removeSameTags[key].tag).attr(&quot;cbdbid&quot;)).split(&quot;|&quot;);
+            for (var index in cbdbIds) {
+                if (cbdbIds[index].length &gt; 0) {
+                    cbdbIdsHTML += &quot;&lt;button type=&#x27;button&#x27; class=&#x27;btn btn-xs &quot; + btnColorClass + &quot; switch&#x27;&gt;&quot; + cbdbIds[index] + &quot;&lt;/button&gt; &quot;;
+                }
+
+            }
+            cbdbIdsHTML += &#x27;&lt;input style=&quot;height:22px;width:100px;display:inline-block;margin-bottom: 1px;&quot;type=&quot;text&quot; class=&quot;form-control input-sm &#x27; + inputColorClass + &#x27;&quot; placeholder=&quot;Cbdb ID&quot;&gt;&lt;/input&gt; &lt;a key=&quot;&#x27; + key + &#x27;&quot; class=&quot;glyphicon glyphicon-floppy-disk cbdbIdSameTagSave&quot;&gt;&lt;/a&gt;&#x27;;
+        } else {
+            if ($(removeSameTags[key].tag).attr(type + &quot;_id&quot;)) {
+                var Ids = markus.util.converBackToUnicode($(removeSameTags[key].tag).attr(type + &quot;_id&quot;)).split(&quot;|&quot;);
+                for (var index in Ids) {
+                    if (Ids[index].length &gt; 0) {
+                        cbdbIdsHTML += &quot;&lt;button type=&#x27;button&#x27; class=&#x27;btn btn-xs &quot; + type + &quot; switch&#x27;&gt;&quot; + Ids[index] + &quot;&lt;/button&gt; &quot;;
+                    }
+
+                }
+                cbdbIdsHTML += &#x27;&lt;input style=&quot;height:22px;width:100px;display:inline-block;margin-bottom: 1px;&quot;type=&quot;text&quot; class=&quot;form-control input-sm &#x27; + type + &#x27;&quot; placeholder=&quot;ID&quot;&gt;&lt;/input&gt; &lt;a key=&quot;&#x27; + key + &#x27;&quot; class=&quot;glyphicon glyphicon-floppy-disk IdSameTagSave&quot;&gt;&lt;/a&gt;&#x27;;
+            }
+        }
+
+
+
+    }
+
+    return &#x27;&lt;div class=&quot;row well well-sm&quot; key=&quot;&#x27; + key + &#x27;&quot;&gt;&lt;div&gt;&lt;div class=&quot;col-xs-10&quot;&gt;&#x27; + removeSameTags[key].html + &#x27;&lt;/div&gt;&lt;div class=&quot;col-xs-1&quot; style=&quot;padding-left:0px;&quot;&gt;&#x27; + childHTML + &#x27;&lt;/div&gt;&lt;div class=&quot;col-xs-1&quot; style=&quot;padding-right:0px&quot;&gt;&lt;div class=&quot;row&quot;&gt;&lt;span class=&quot;btn btn-link glyphicon glyphicon-trash&quot; key=&quot;&#x27; + key + &#x27;&quot;&gt;&lt;/span&gt; | &lt;span class=&quot;btn btn-link glyphicon glyphicon-ok-circle&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;row all well-sm fixHeight cbdbIds&quot;&gt;&lt;div class=&quot;col-xs-12 fixHeight&quot;&gt;&#x27; + cbdbIdsHTML + &#x27;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&#x27;;
+};
+
+/**
+ * Searches trough the appropriate dictionary for the markup the user just clicked
+ * on. Depending on the dictionary type the response varies. Most of the time the
+ * web-dictionary is just clicked (to show it), but sometimes an &#x60;&lt;input&gt;&#x60; on the
+ * web-dictionary can be set to the value of the clicked markup (or in case of the CBDB to
+ * a CBDBID)
+ *
+ * @method searchMarkup
+ */
+var searchMarkup = function() {
+    //Get a reference to the clicked markup instance
+    var clickedMarkup = _m.popup.clickedMarkup;
+    //Hide the comment field, show the assist
+    $(&quot;#comment&quot;).hide();
+    $(&quot;#assist&quot;).show();
+    //Set the web-dictionary-input to the value of the clickedMarkup text and trigger a change event on the input.
+    $(&quot;.web-dictionary-input&quot;).val(clickedMarkup.text()).trigger(&quot;change&quot;);
+
+    //If it is a fullName or partialName
+    if (clickedMarkup.hasClass(&quot;fullName&quot;) || clickedMarkup.hasClass(&quot;partialName&quot;)) {
+      //get the cbdbid attr.
+        var cbdbid = clickedMarkup.attr(&quot;cbdbid&quot;);
+        if (cbdbid) { //if it exists, but length = 0, get the id from the clickedMarkup text
+            if (cbdbid.trim().length == 0) {
+                cbdbid = $(clickedMarkup).text();
+            }
+        } else {
+          //get the id from the clickedMarkup text
+            cbdbid = $(clickedMarkup).text();
+        }
+        //Open the cbdb web-dictionary, set its input to the cbdbid obtained and trigger an update
+        $(&quot;.web-dictionary[web-dictionary-name=&#x27;cbdb&#x27;] .web-dictionary-input&quot;).val(cbdbid).trigger(&quot;change&quot;);
+        //   searchCBDB(clickedMarkup.text(), clickedMarkup.attr(&quot;cbdbid&quot;));
+        //   showCBDBRef();
+        //Trigger a click to show the web-dictionary
+        $(&quot;.web-dictionary-tab[web-dictionary-name=&#x27;cbdb&#x27;]&quot;).trigger(&quot;click&quot;);
+    } else if (clickedMarkup.hasClass(&quot;placeName&quot;)) {
+        //If it is a placeName, show the appropriate web-dictionary by triggering a click
+        $(&quot;.web-dictionary-tab[web-dictionary-name=&#x27;chgis&#x27;]&quot;).trigger(&quot;click&quot;);
+    //   showCHGISRef();
+    } else if (clickedMarkup.hasClass(&quot;ddbcGlossaries&quot;)) {
+        //If it is a ddbcGlossaries, show the appropriate web-dictionary by triggering a click
+        $(&quot;.web-dictionary-tab[web-dictionary-name=&#x27;ddbcGlossaries&#x27;]&quot;).trigger(&quot;click&quot;);
+    //   showCHGISRef();
+    } else if (clickedMarkup.hasClass(&quot;ddbcPerson&quot;)) {
+          //If it is a ddbcPerson, show the appropriate web-dictionary by triggering a click,
+          //but first set the input to the &#x27;ddbcperson_id&#x27; attr of the clicked markup
+        $(&quot;.web-dictionary[web-dictionary-name=&#x27;ddbcPerson&#x27;] .web-dictionary-input&quot;).val(clickedMarkup.attr(&quot;ddbcperson_id&quot;)).trigger(&quot;change&quot;);
+        $(&quot;.web-dictionary-tab[web-dictionary-name=&#x27;ddbcPerson&#x27;]&quot;).trigger(&quot;click&quot;);
+    //   showCHGISRef();
+    } else {
+      //Else just show the zdic web-dictionary.
+        $(&quot;.web-dictionary-tab[web-dictionary-name=&#x27;zdic&#x27;]&quot;).trigger(&quot;click&quot;);
+    //   showZDICRef();
+    }
+
+      // _m.popup.clickedMarkup = clickedMarkup = null;
+};
+
+/**
+ * Defines what happens when you click the &#x60;#removeAllBtn&#x60; button. When you click this button
+ * all the &#x60;.glyphicon-trash&#x60; elements that are not disabled are clicked (removing the instance with it).
+ *
+ * @method removeAllSameTag
+ */
+var removeAllSameTag = function() {
+    $(&quot;#removeAllBtn&quot;).addClass(&quot;fired&quot;);
+    $(&quot;#removeModal&quot;).find(&quot;.glyphicon-trash:not(.disabled)&quot;).each(function() {
+        $(this).click();
+    });
+    //Remove all occurences of the justAdd and justExtended class across the doc
+    $(&quot;.justAdd&quot;).removeClass(&quot;justAdd&quot;);
+    $(&quot;.justExtended&quot;).removeClass(&quot;justExtended&quot;);
+    //Trigger an update on the removeModal
+    $(&quot;#removeModal&quot;).trigger(&quot;update&quot;);
+};
+
+/**
+ * Defines what happens when you click the &#x60;#applyAll&#x60; button. When you click this button
+ * the contents of the first well are copied across all the other wells. This is to unify contents
+ * of the markup.
+ *
+ * @method applyAll
+ */
+var applyAll = function() {
+    $(&quot;#applyAllBtn&quot;).addClass(&quot;fired&quot;);
+    // $(&quot;#removeAllBtn&quot;).addClass(&quot;fired&quot;);
+
+    //the key of the first well
+    var sourcekey = $(&quot;#removeModal&quot;).find(&quot;.well:first&quot;).attr(&quot;key&quot;);
+    //The first tag within the first well
+    var firstTag = $(&quot;#removeModal&quot;).find(&quot;.well:first .markup:first&quot;);
+
+    // var child = $(removeSameTags[sourcekey].sameTagChild;
+    // The HTML content of the tag
+    var tagContent = getTheTagContent(getTheOuterTag(removeSameTags[sourcekey].tag));
+
+    //We get all the unlocked keys..
+    var keys = getAllunLockedKeys();
+    //and for each of them
+    for (var index in keys) {
+        var key = keys[index];
+        //If this is not the same key as the first well
+        if (sourcekey != key) {
+            // console.log(key);
+            var tag = removeSameTags[key].tag;
+            // console.log(tag);
+            var outerTag = getTheOuterTag(tag);
+
+            //We replace the tag contents to be the same as the tagContent from the source (well:first)
+            removeSameTags[key].tag = replaceTag(outerTag, tagContent);
+            //Get a ref to the well we&#x27;re working on right now
+            var well = $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;);
+
+            //Wrap the first markup in a paragraph and return its parent
+            var wrap = well.find(&quot;.markup:first&quot;).wrap(&quot;&lt;p&gt;&quot;).parent();
+            //empty the wrap (remove the first markup?)
+            wrap.contents().remove();
+            //Set them to be identical to this first tag
+            wrap.append($(firstTag).clone().removeClass(&quot;selected&quot;));
+            //Unwrap the wrap again, the wrap was just to allow for easy jquery editing
+            wrap.contents().unwrap();
+
+            // well.find(&quot;.markup:first&quot;).outerHTML = $(firstTag).clone().removeClass(&quot;selected&quot;).outerHTML;
+
+            //Trigger a click on the ok circle
+            $(well).find(&quot;.glyphicon-ok-circle&quot;).click();
+            //Hiden the elements that have any of the following classes
+            $(well).find(&quot;.cbdbIds,.glyphicon-floppy-disk,.switch&quot;).hide();
+
+
+        }
+    }
+
+
+    //Remove all occurences in the whole document of the &#x27;justAdded&#x27; and &#x27;justExtended&#x27; class.
+    $(&quot;.justAdd&quot;).removeClass(&quot;justAdd&quot;);
+    $(&quot;.justExtended&quot;).removeClass(&quot;justExtended&quot;);
+    //Then trigger an update on the removeModal
+    $(&quot;#removeModal&quot;).trigger(&quot;update&quot;);
+};
+
+/**
+ * Initializes the removeModal by removing the &#x60;.fired&#x60; class, if it was present
+ * to begin with. This makes sure they actually show up as the &#x60;updateRemoveModal&#x60; function
+ * tells the buttons to fade once they have the &#x60;.fired&#x60; class.
+ *
+ * @method initialRemoveModal
+ */
+var initialRemoveModal = function() {
+    $(&quot;#applyAllBtn&quot;).removeClass(&quot;fired&quot;);
+    $(&quot;#removeAllBtn&quot;).removeClass(&quot;fired&quot;);
+};
+
+/**
+ * Called to update the &#x60;#removeModal&#x60;. Used to change the contents of this modal
+ * depending on its contents.
+ *
+ * @method updateRemoveModal
+ */
+var updateRemoveModal = function() {
+
+    // console.log($(&quot;#removeModal&quot;).find(&quot;.well&quot;).length);
+    // Do something based on the amount of &#x60;well&#x60; class items found in the removeModal
+    switch ($(&quot;#removeModal&quot;).find(&quot;.well&quot;).length) {
+      //If there are none left, hide the modal
+    case 0:
+        $(&quot;#removeModal&quot;).modal(&quot;hide&quot;);
+        break;
+    case 1:
+      //If there is only one left, hide the &#x27;removeAll&#x27; and &#x27;applyAll&#x27; buttons
+        $(&quot;#removeAllBtn&quot;).hide();
+        $(&quot;#applyAllBtn&quot;).hide();
+        break;
+    default:
+      //Set the first well with the sameTags class to have the following CSS
+        $(&quot;#removeModal&quot;).find(&quot;.sameTags .well:first&quot;).css({
+            &quot;border-width&quot;: &quot;2px&quot;,
+            &quot;border-color&quot;: &quot;#8D8C8C&quot;,
+            &quot;background-color&quot;: &quot;#D8D5D5&quot;
+        });
+
+        //If the removeAllButton has the fired class, fade it out, else show it
+        if (!$(&quot;#removeAllBtn&quot;).hasClass(&quot;fired&quot;)) {
+            $(&quot;#removeAllBtn&quot;).show();
+        } else {
+            $(&quot;#removeAllBtn&quot;).fadeOut();
+        }
+        //If the applyAllBtn has the fired class, fade it out, else show it
+        if (!$(&quot;#applyAllBtn&quot;).hasClass(&quot;fired&quot;)) {
+            $(&quot;#applyAllBtn&quot;).show();
+        } else {
+            $(&quot;#applyAllBtn&quot;).fadeOut();
+        }
+
+    }
+
+};
+
+/**
+ * Returns an array of all the key attributes of the &#x60;glyphicon-trash&#x60; icons that do not
+ * have a &#x60;disabled&#x60; class
+ *
+ * @method getAllunLockedKeys
+ * @return {Array} Returns the unlocked keys.
+ */
+var getAllunLockedKeys = function() {
+    var keys = [];
+    $(&quot;#removeModal&quot;).find(&quot;.glyphicon-trash:not(.disabled)&quot;).each(function() {
+        keys.push($(this).attr(&quot;key&quot;));
+    });
+    // console.log(keys);
+    return keys;
+};
+
+/**
+ * Returns the surroundign element of the provided tag. This is done by going up
+ * the DOM hierarchy untill we find a parent that does not have the same textcontent
+ * as the child. This means we have the first parent that also has different children.
+ *
+ * @method getTheOuterTag
+ * @param  {Element} tag the tag we want to now the containing tag of
+ * @return {Element}     the containing tag of the tag we provided
+ */
+var getTheOuterTag = function(tag) {
+    var parent = $(tag).parent();
+    while ($(tag).text() == $(parent).text()) {
+        parent = $(parent).parent();
+        tag = parent;
+    }
+    return tag;
+};
+
+/**
+ * Replaces the provided tag with the provided HTML string content.
+ *
+ * @method replaceTag
+ * @param  {Element} tag     The element to replace
+ * @param  {String} content  The string that represents the HTML data to replace the tag with
+ * @return {Element}         The element after it has been replaced.
+ */
+var replaceTag = function(tag, content) {
+
+    // var wrapper = $(tag).wrap(&#x27;&lt;p&gt;&#x27;).parent();
+    // if (tag){
+    //   $(tag).remove();
+    // }
+    // wrapper.html(content);
+    // wrapper.find(&quot;.markup&quot;).each(registMakupAction);
+    // tag = wrapper.find(&quot;.markup:first&quot;);
+    // wrapper.contents().unwrap();
+
+    if (tag) {
+        $(tag)[0].outerHTML = content;
+    // console.log(replaceTag);
+    }
+
+    return tag;
+};
+
+/**
+ * Returns the html content (including itself) of the provided tag. Removes the
+ * &#x60;selected&#x60; class before returning the HTML data string.
+ *
+ * @method getTheTagContent
+ * @param  {Element} tag the tag we want to get the content of
+ * @return {String}      the HTML content represented as a string
+ */
+var getTheTagContent = function(tag) {
+    var clone = $(tag).clone();
+    // var _html = $(clone).removeClass(&quot;selected&quot;).wrap(&#x27;&lt;p&gt;&#x27;).parent().html();
+    var _html = $(clone).removeClass(&quot;selected&quot;)[0].outerHTML;
+    clone.remove();
+    return _html;
+};
+
+/**
+ * Defines what happens when you click the applyAll button. Sets the cbdbId of
+ * all the markups contained to the cbdbId of the clickedMarkup
+ *
+ * @method applyAllSameType
+ */
+var applyAllSameType = function() {
+    /* find the clicked in removeSameTags Id. , well, need to change the removeSameTags to others
+       or plan another &#x27;types&#x27; storing schema
+    */
+    //The markup we just clicked
+    var clickedMarkup = _m.popup.clickedMarkup;
+
+    //Add the fired class to make it fadeOut afterwards (because ofthe removeModalUpdate)
+    $(&quot;#applyAllBtn&quot;).addClass(&quot;fired&quot;);
+
+    //Get the cbdbId from the clickedMarkup as an attribute.
+    var cbdbId = markus.util.converBackToUnicode($(clickedMarkup).attr(&quot;cbdbid&quot;));
+    $(&quot;#removeModal&quot;).find(&quot;.row&quot;).each(function() {
+        //All of the elements that do not have a disabled but do have a glyphicon-trash
+        if ($(this).has(&quot;.glyphicon-trash:not(.disabled)&quot;).length) {
+          //Get all of the .cbdbIds and update them and click the link within them.
+            $(this).find(&quot;.cbdbIds&quot;).each(function() {
+                $(this).find(&quot;input&quot;).val(cbdbId).parent().find(&quot;a&quot;).click();
+            });
+        }
+    });
+
+    //Trigger an update on the removeModal
+    $(&quot;#removeModal&quot;).trigger(&quot;update&quot;);
+
+};
+
+/**
+ * Removes the sametag (spans multiple DOM levels if they are only-child) specified
+ * by the provided key. Updates the &#x60;#removeModal&#x60; afterwards;
+ *
+ * @param  {String} key the key of the entry we want to delete
+ */
+var removeSameTag = function(key) {
+    //Get the tag of the key we want to remove
+    var tag = removeSameTags[key].tag;
+    //Get the parent of the tag
+    var parent = $(tag).parent();
+    //Get the markup child of the tag
+    var child = $(tag).find(&quot;.markup&quot;);
+    //Get the text of the tag
+    var text = $(tag).text();
+
+    //Add the remove class
+    $(tag).addClass(&quot;remove&quot;);
+
+    //If the parent text is identical to the tag text(the parent has no other children) remove it
+    if ($(parent).text() == text) {
+        $(parent).addClass(&quot;remove&quot;);
+    }
+    //If the child text is identical to the tag-text (the child is only child) remove it.
+    if ($(child).text() == text) {
+        $(child).addClass(&quot;remove&quot;);
+    }
+
+    //Find all the instances of the .remove class and unwrap their contents (removing the container markup)
+    $(&quot;.doc&quot;).find(&quot;.remove&quot;).contents().unwrap();
+
+    //We find the well for the key that was provided and fade it out
+    $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).fadeOut({
+        complete: function() {
+          //Once the fadeout is complete,  remove the well and trigger an update on the
+          //#removeModal
+            $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).remove();
+            $(&quot;#removeModal&quot;).trigger(&quot;update&quot;);
+        }
+    });
+
+    //Since this key is now removed, remove it from the removeSameTags array
+    removeSameTags[key] = null;
+};
+
+/**
+ * Defines the behaviour when you click the &#x60;.sameTagTypeSave&#x60; element.
+ *
+ * @method sameTagTypeSave
+ */
+var sameTagTypeSave = function() {
+  //Gets the key attribute from the clicked element
+    var key = $(this).attr(&quot;key&quot;);
+    // console.log(removeSameTags);
+
+    var child = removeSameTags[key].sameTagChild;
+    child.push(removeSameTags[key].tag);
+
+    //Find all the markup in a well
+    var wellMarkup = $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).find(&quot;.markup&quot;);
+
+    //For each of the buttons within the specified well that has a switch and noColor class
+    $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).find(&quot;button.switch.noColor&quot;).each(function() {
+        //If the clicked element has a class identical to the type of the markup in the well
+        for (var i = 0, j = wellMarkup.length; i &lt; j; i++) {
+            if ($(this).hasClass($(wellMarkup[i]).attr(&quot;type&quot;))) {
+                $(wellMarkup[i]).addClass(&quot;remove&quot;);
+            }
+        }
+        //For each of the children that have the same type, remove them too
+        for (var i = 0, j = child.length; i &lt; j; i++) {
+            if ($(this).hasClass($(child[i]).attr(&quot;type&quot;))) {
+                $(child[i]).addClass(&quot;remove&quot;);
+            }
+        }
+        //Then remove the element we just clicked
+        $(this).remove();
+    });
+
+    //Remove same tags
+    if ($(removeSameTags[key].tag).hasClass(&quot;remove&quot;)) {
+        // console.log(&quot;removeSameTag remove hooked tag&quot;);
+        for (var i = 0; i &lt; removeSameTags[key].sameTagChild.length &amp;&amp; $(removeSameTags[key].tag).hasClass(&quot;remove&quot;); i++) {
+            removeSameTags[key].tag = removeSameTags[key].sameTagChild[i];
+        }
+    }
+
+    //Go up through the DOM untill we find the actual parent
+    var _parent = $(removeSameTags[key].tag).parent();
+    while ($(_parent).text() == $(removeSameTags[key].tag).text() &amp;&amp; !$(_parent).hasClass(&quot;remove&quot;)) {
+        removeSameTags[key].tag = _parent;
+        _parent = $(removeSameTags[key].tag).parent();
+    }
+
+    //Where the markup needs to be unwrapped, do so
+    $(&quot;.doc&quot;).find(&quot;.markup.remove&quot;).contents().unwrap();
+
+    //Also reflect these changes in the removeModal
+    $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).find(&quot;.markup.remove&quot;).contents().unwrap();
+
+    //If there are no more buttonswitches
+    if ($(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).find(&quot;button.switch&quot;).length === 0) {
+        $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).fadeOut({
+          //We fadeout this well if there are no more buttons in it
+            complete: function() {
+              //Once its done, hide the removeModal and remove the specific well
+                $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).remove();
+                if ($(&quot;#removeModal&quot;).find(&quot;.well&quot;).length === 0) {
+                    $(&quot;#removeModal&quot;).modal(&quot;hide&quot;);
+                }
+            }
+        });
+    } else {
+      //Get the row specified by the provided key
+        var row = $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;] .row&quot;);
+        //Disable the trash icon and make it a bnt-link instead of btn danger
+        $(row).find(&quot;.glyphicon-trash&quot;).addClass(&quot;disabled&quot;).addClass(&quot;btn-link&quot;).removeClass(&quot;btn-danger&quot;);
+        //Find the ok icon and remove the btnLink, and make it a btn-succes, also add glyphicon-lock and disabled
+        $(row).find(&quot;.glyphicon-ok-circle&quot;).removeClass(&quot;btn-link&quot;).addClass(&quot;btn-success&quot;).addClass(&quot;glyphicon-lock&quot;).addClass(&quot;disabled&quot;);
+    }
+};
+
+/**
+ * Hide the popPover on save of this type.
+ *
+ * @method typeSave
+ */
+var typeSave = function() {
+  //Get a reference to the cliked markup
+    var clickedMarkup = _m.popup.clickedMarkup;
+
+    //Get its parent
+    var _parent = $(clickedMarkup).parent();
+    // console.log(&quot;typeSave&quot;);
+
+    //For each button with a noColor class
+    $(&quot;#typePopoverContent&quot;).find(&quot;button.noColor&quot;).each(function() {
+        if (_parent) {
+          //If the parent has a type set identical to the class of this (Backwards compatibility?), unwrap it
+            if ($(this).hasClass($(_parent).attr(&quot;type&quot;))) {
+                $(_parent).contents().unwrap();
+                _parent = null;
+            }
+        }
+        //If the clickedMarkup has a type attribute identical to this button, then unwrap it
+        if (clickedMarkup) {
+            if ($(this).hasClass($(clickedMarkup).attr(&quot;type&quot;))) {
+                $(clickedMarkup).contents().unwrap();
+                clickedMarkup = null;
+            }
+        }
+
+    });
+    //Hide the popOver, now that we have done all this;
+    $(&quot;.popover&quot;).hide();
+
+    //null the reference
+    _m.popup.clickedMarkup = clickedMarkup = null;
+};
+
+/**
+ * Saves the cbdbid that the user has typed into the input field onto the HTML element
+ * either as cbdbid attribute or &#x60;type&#x60;_id attribute.
+ *
+ * @method cbdbIdSave
+ */
+var cbdbIdSave = function() {
+    //Get a reference to the markup that was just clicked
+    var clickedMarkup = _m.popup.clickedMarkup;
+    if (clickedMarkup === null) {
+        return;
+        //If it was not set, go back.
+    }
+
+    //Get cbdbid attribute or similar attribute if not present
+    var ids = $(clickedMarkup).attr(&quot;cbdbid&quot;) || $(clickedMarkup).attr($(clickedMarkup).attr(&quot;type&quot;) + &quot;_id&quot;) || &quot;&quot;;
+
+    // console.log(ids);
+    var cbdbIds = [];
+    if (ids.length &gt; 0) {
+      //Convert to unicode and split it on the &#x27;|&#x27;
+        cbdbIds = markus.util.converBackToUnicode(ids).split(&quot;|&quot;);
+    }
+    // console.log(cbdbIds);
+    // The value from the &#x60;&lt;input&gt;&#x60; in the cbdbIdPopoverContent
+    var cbdbInputVal = $(&quot;#cbdbIdPopoverContent&quot;).find(&quot;input&quot;).val();
+
+    /*
+        // orginial design is just for CBDB, and CBDBID only contains digital. Now it will disable to allow other type of characters for different IDs
+
+        Todo : ids format need to be designed to filter different kinds of id format
+
+
+        if (cbdbInputVal.match(/\d+/g)) {
+            clickedMarkup.attr(&quot;cbdbid&quot;, cbdbInputVal);
+            clickedMarkup.removeClass(&quot;moreThanOneId&quot;).removeClass(&quot;noCBDBID&quot;);
+        }
+
+    */
+
+    // if (cbdbInputVal.match(/\d+/g)) {
+    //     clickedMarkup.attr(&quot;cbdbid&quot;, cbdbInputVal);
+    //     clickedMarkup.removeClass(&quot;moreThanOneId&quot;).removeClass(&quot;noCBDBID&quot;);
+    // }
+
+    // console.log(clickedMarkup.attr(clickedMarkup.attr(&quot;type&quot;) + &quot;_id&quot;));
+    // console.log(clickedMarkup);
+
+    //Remove any whitespace from the inputvalue
+    cbdbInputVal = cbdbInputVal.replace(/\s+/g);
+    //If there is actually a value left and there are no more &#x27;|&#x27;&#x27;s
+    if (cbdbInputVal.length &gt; 0 &amp;&amp; cbdbInputVal.indexOf(&quot;|&quot;) == -1) {
+      //If we have a type_id attribute
+        if ($(clickedMarkup).attr($(clickedMarkup).attr(&quot;type&quot;) + &quot;_id&quot;) !== undefined) {
+          //Set that attribute to the input value
+            clickedMarkup.attr(clickedMarkup.attr(&quot;type&quot;) + &quot;_id&quot;, markus.util.convertToEscapeUnicode(cbdbInputVal));
+        } else {
+          //Else set the cbdbid attribute to the input value
+            clickedMarkup.attr(&quot;cbdbid&quot;, markus.util.convertToEscapeUnicode(cbdbInputVal));
+        }
+        //Remove moreThanOneId and noCBDBID, since the cbdbid is now set
+        clickedMarkup.removeClass(&quot;moreThanOneId&quot;).removeClass(&quot;noCBDBID&quot;);
+    } else {
+        $(&quot;#cbdbIdPopoverContent&quot;).find(&quot;button.noColor&quot;).each(function() {
+          //For each of the buttonsNoColor,
+            var cbdb = $(this).text();
+            //remove this cbdbid from the list of ids
+            cbdbIds.splice(cbdbIds.indexOf(cbdb), 1);
+        });
+        //If there is still stuff left in the input box
+        if (cbdbInputVal.length &gt; 0) {
+            cbdbIds = cbdbInputVal.split(&quot;|&quot;);
+        }
+        //Based onthe length of id&#x27;s possible, display or not display the moreThanOneId and noCBDBID class
+        switch (cbdbIds.length) {
+        case 0:
+            clickedMarkup.removeClass(&quot;moreThanOneId&quot;).addClass(&quot;noCBDBID&quot;);
+            break;
+        case 1:
+            clickedMarkup.removeClass(&quot;moreThanOneId&quot;).removeClass(&quot;noCBDBID&quot;);
+            break;
+        default:
+            clickedMarkup.addClass(&quot;moreThanOneId&quot;).removeClass(&quot;noCBDBID&quot;);
+        }
+
+        //If we have a attribute of type_id, set it to the joined remains of cbdbIds array
+        if (clickedMarkup.attr(clickedMarkup.attr(&quot;type&quot;) + &quot;_id&quot;) !== undefined) {
+            clickedMarkup.attr(clickedMarkup.attr(&quot;type&quot;) + &quot;_id&quot;, markus.util.convertToEscapeUnicode(cbdbIds.join(&quot;|&quot;)));
+        } else {
+          //Set the cbdbid attribute to the joined remains of the cbdbIds array
+            clickedMarkup.attr(&quot;cbdbid&quot;, markus.util.convertToEscapeUnicode(cbdbIds.join(&quot;|&quot;)));
+        }
+    }
+    //Clear the input textfield after use
+    $(&quot;#cbdbIdPopoverContent&quot;).find(&quot;input&quot;).val(&quot;&quot;);
+    //Hide the popOver
+    $(&quot;.popover&quot;).hide();
+    //Null the clicked reference
+    _m.popup.clickedMarkup = clickedMarkup = null;
+};
+
+/**
+ * Saves the id the user has manually typed into an input field to override the
+ * cbdbId of that element.
+ *
+ * @param  {String} key the key of the well we&#x27;re working with
+ */
+var cbdbIdSameTagSave = function(key) {
+    var tag = removeSameTags[key].tag;
+    // console.log(&quot;cbdbIdSameTagSave&quot;);
+    var cbdbIds = $(tag).attr(&quot;cbdbid&quot;).split(&quot;|&quot;);
+
+    //Get the input value of the input on the .cbdbIds within the specified well
+    var cbdbInputVal = $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).find(&quot;.cbdbIds input&quot;).val();
+
+    //Make sure it is only digits
+    if (cbdbInputVal.match(/\d+/g)) {
+      //Set the cbdbid attribute to the input value
+        $(tag).attr(&quot;cbdbid&quot;, cbdbInputVal);
+        //Remove the classes displaying ambiguity (moreThanOneId and noCBDBID)
+        $(tag).removeClass(&quot;moreThanOneId&quot;).removeClass(&quot;noCBDBID&quot;);
+
+        //For each of switchButtons in this well, only display color if the input value is identical to the text on the button
+        $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).find(&quot;.cbdbIds button.switch&quot;).each(function() {
+            if ($(this).text() == cbdbInputVal) {
+                $(this).removeClass(&quot;noColor&quot;);
+            } else {
+                $(this).addClass(&quot;noColor&quot;);
+            }
+        });
+
+    } else {//If it is not only digits
+      //For all of the .cbdbIds with a button.switch.noColor
+        $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).find(&quot;.cbdbIds button.switch.noColor&quot;).each(function() {
+            var cbdb = $(this).text();
+            //remove any mathces from the cbdbIds array
+            cbdbIds.splice(cbdbIds.indexOf(cbdb), 1);
+        });
+        //Switch classes of the tag, based on the amount of cbdbIds. Display (or not) moreThanOneId and noCBDBID
+        switch (cbdbIds.length) {
+        case 0:
+            $(tag).removeClass(&quot;moreThanOneId&quot;).addClass(&quot;noCBDBID&quot;);
+            break;
+        case 1:
+            $(tag).removeClass(&quot;moreThanOneId&quot;).removeClass(&quot;noCBDBID&quot;);
+            break;
+        default:
+            $(tag).addClass(&quot;moreThanOneId&quot;).removeClass(&quot;noCBDBID&quot;);
+        }
+        //Set the attribute cbdbid of the tag to the joined remains of the cbdbIds array
+        $(tag).attr(&quot;cbdbid&quot;, cbdbIds.join(&quot;|&quot;));
+    }
+
+    //Reference the row in this well specified by the provided key
+    var row = $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;] .row&quot;);
+    //Disable the trash icon, make it a link instead of a danger button
+    $(row).find(&quot;.glyphicon-trash&quot;).addClass(&quot;disabled&quot;).addClass(&quot;btn-link&quot;).removeClass(&quot;btn-danger&quot;);
+    //Lock the ok-circle, make it a success button instead of link
+    $(row).find(&quot;.glyphicon-ok-circle&quot;).addClass(&quot;glyphicon-lock&quot;).removeClass(&quot;btn-link&quot;).addClass(&quot;btn-success&quot;);
+    // $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot;+key+&quot;&#x27;]&quot;).find(&quot;.cbdbids input&quot;).val(&quot;&quot;);
+    // $(&quot;.popover&quot;).hide();
+    // clickedMarkup = null;
+};
+
+/*
+Todo : merge cbdbIdSameTagSave
+*/
+
+/**
+ * Manually save an ID and overwrite all other tags in the file using it too.
+ *
+ * @method IdSameTagSave
+ * @param  {String} key the key that was clicked
+ */
+var IdSameTagSave = function(key) {
+    var tag = removeSameTags[key].tag;
+    // console.log(&quot;IdSameTagSave&quot;);
+    var ids = $(tag).attr($(tag).attr(&quot;type&quot;) + &quot;_id&quot;).split(&quot;|&quot;);
+
+    //Get the input from the well. Remove all whitespace from the value
+    var inputVal = $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).find(&quot;input&quot; + &quot;.&quot; + $(tag).attr(&quot;type&quot;)).val().replace(/\s+/g);
+
+    //If there was actually an input value left after the cleaning of the data
+    if (inputVal.length &gt; 0) {
+      //Set the id to the input val (manually entering id)
+        $(tag).attr($(tag).attr(&quot;type&quot;) + &quot;_id&quot;, inputVal);
+        //Remove the moreThanOneId and noCBDBID classes
+        $(tag).removeClass(&quot;moreThanOneId&quot;).removeClass(&quot;noCBDBID&quot;);
+
+        //Remove or add the noColor class if the text of the button matches the inputValue
+        $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).find(&quot;button.switch&quot; + &quot;.&quot; + $(tag).attr(&quot;type&quot;)).each(function() {
+            if ($(this).text() == inputVal) {
+                $(this).removeClass(&quot;noColor&quot;);
+            } else {
+                $(this).addClass(&quot;noColor&quot;);
+            }
+
+        });
+
+    } else {
+      //Within the well defined by the provided key, for each button swithc with nocolor and matching type, save all the id&#x27;s
+        $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;]&quot;).find(&quot;button.switch.noColor&quot; + &quot;.&quot; + $(tag).attr(&quot;type&quot;)).each(function() {
+            var id = $(this).text();
+            ids.splice(ids.indexOf(id), 1);
+        });
+        switch (ids.length) {
+          //Based on the amount of id&#x27;s remove the moreThanOneId class and add the noCBDBID class
+        case 0:
+            $(tag).removeClass(&quot;moreThanOneId&quot;).addClass(&quot;noCBDBID&quot;);
+            break;
+        case 1:
+            $(tag).removeClass(&quot;moreThanOneId&quot;).removeClass(&quot;noCBDBID&quot;);
+            break;
+        default:
+            $(tag).addClass(&quot;moreThanOneId&quot;).removeClass(&quot;noCBDBID&quot;);
+        }
+        $(tag).attr($(tag).attr(&quot;type&quot;) + &quot;_id&quot;, ids.join(&quot;|&quot;));
+    }
+
+    //Find the row contained within the well
+    var row = $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot; + key + &quot;&#x27;] .row&quot;);
+    //Disable the glyphicon-trash and make it a .btn-link class with .btn-danger
+    $(row).find(&quot;.glyphicon-trash&quot;).addClass(&quot;disabled&quot;).addClass(&quot;btn-link&quot;).removeClass(&quot;btn-danger&quot;);
+    //Lock the glyphicon-ok-circle by showing the glyphicon-lock and removing the btn-link class, make it a btn-succes
+    $(row).find(&quot;.glyphicon-ok-circle&quot;).addClass(&quot;glyphicon-lock&quot;).removeClass(&quot;btn-link&quot;).addClass(&quot;btn-success&quot;);
+
+    // $(&quot;#removeModal&quot;).find(&quot;.well[key=&#x27;&quot;+key+&quot;&#x27;]&quot;).find(&quot;.cbdbids input&quot;).val(&quot;&quot;);
+    // $(&quot;.popover&quot;).hide();
+    // clickedMarkup = null;
+};
+
+
+_m.popup = {
+    /**
+     * Holds a reference to the popOver element used to make a floating window
+     * appear with markup controls in it (remove, search etc.);
+     *
+     * @type {Element}
+     */
+    popover: null,
+    /**
+     * Holds a reference to the markup that was just clicked. May be null!
+     *
+     * @type {Markup}
+     */
+    clickedMarkup: null,
+
+    /**
+     * Function is defined in the markupPopup.js_anonymous class. Function is exposed
+     * using this class (&#x60;markus.popup&#x60;);
+     *
+     * @method searchMarkup
+     * @type {Function}
+     */
+    searchMarkup: searchMarkup,
+
+    /**
+     * Function is defined in the markupPopup.js_anonymous class. Function is exposed
+     * using this class (&#x60;markus.popup&#x60;);
+     *
+     * @method showSameMarkup
+     * @type {Function}
+     */
+    showSameMarkup: showSameMarkup,
+
+    /**
+     * Registers the popover used for the markup instances. Creates handlers for
+     * click, mouseenter and update for the buttons and other content.
+     *
+     * @method registMarkupPopup
+     * @param  {boolean} editable if this markup is editable
+     */
+    registMarkupPopup: function(editable) {
+      //register the popOver used as the popover, i.e. the #popOver element
+        _m.popup.registPopover($(&quot;#popover&quot;));
+        markupEditable = editable || false;
+
+        //When a click happens on the .doc in the document (I.e. unfocus / blur)
+        $(document).on(&quot;click&quot;, &quot;.doc&quot;, function() {
+            //Unselect any previously selected markups
+            $(&quot;.selected&quot;).removeClass(&quot;selected&quot;);
+            //Hide the popover
+            $(&quot;.popover&quot;).hide();
+            //No popup is clicked right now
+            _m.popup.clickedMarkup = null;
+
+            //Remove the justSelected class from any markup
+            $(&quot;.justSelected.markup&quot;).removeClass(&quot;justSelected&quot;);
+            // $(&quot;.justExtended&quot;).contents().unwrap();
+            // And unwrap its contents
+            $(&quot;.justSelected,.justExtended&quot;).contents().unwrap();
+        });
+
+        //Register the click handlers for the icons in the markup popover
+        $(&quot;#cbdbIdPopoverContent a&quot;).on(&quot;click&quot;, cbdbIdSave);
+        $(&quot;#typePopoverContent a&quot;).on(&quot;click&quot;, typeSave);
+        $(&quot;#popover .search a&quot;).on(&quot;click&quot;, showSameMarkup);
+        $(&quot;#popover .trash a&quot;).on(&quot;click&quot;, removeMarkup);
+        $(&quot;#popover .glyphicon-book&quot;).on(&quot;click&quot;, searchMarkup);
+
+        //When you click a markup, you are forwarded to the markupClicked function (click handler)
+        $(document).on(&quot;click&quot;, &quot;.doc .markup&quot;, _m.popup.markupClicked);
+        //When you click the sameTagTypeSave you are forwarded to the sameTagTypeSave function (click handler)
+        $(document).on(&quot;click&quot;, &quot;.sameTagTypeSave&quot;, sameTagTypeSave);
+
+        //If you hit the .switch element in the typePopoverContent, the .noColor class is toggled
+        $(document).on(&quot;click&quot;, &quot;#typePopoverContent .switch&quot;, function() {
+            $(this).toggleClass(&quot;noColor&quot;);
+        });
+
+        //When you click the removeAllBtn, the removeAllSameTag function is called
+        $(&quot;#removeAllBtn&quot;).on(&quot;click&quot;, removeAllSameTag);
+
+        //When you click the applyAllBtn, the applyAll function is called
+        $(&quot;#applyAllBtn&quot;).on(&quot;click&quot;, applyAll);
+
+        //When you hit the cancel button, the #removeModal is hidden
+        $(&quot;#cancelBtn&quot;).on(&quot;click&quot;, function() {
+            $(&quot;#removeModal&quot;).modal(&quot;hide&quot;);
+        });
+
+        // console.log(_m.util.urlParam(&#x27;file&#x27;));
+
+        //If an update event is request, forward it to the update function (updateremoveModal)
+        $(&quot;#removeModal&quot;).on(&quot;update&quot;, updateRemoveModal);
+        //If we fire the initial event (re-initialzing the modal), forward it to the initialRemoveModal function
+        $(&quot;#removeModal&quot;).on(&quot;initial&quot;, initialRemoveModal);
+
+        //When the modal is hidden unwrap the justSelected and justExtended contents
+        $(&quot;#removeModal&quot;).on(&quot;hide.bs.modal&quot;, function() {
+            // var parent = $(&quot;.justSelected,.justExtended&quot;).parent();
+            $(&quot;.justSelected,.justExtended&quot;).contents().unwrap();
+
+        });
+    },
+
+    /**
+     * Sets the reference variable &#x60;markus.popup.popover&#x60; to the provided element.
+     *
+     * @method registPopover
+     * @param  {Element} popover the element that is used as the popover
+     */
+    registPopover: function(popover) {
+        this.popover = popover;
+    },
+
+    /**
+     * Defines what happens when you click on an instance of &#x60;.markup&#x60;. This shows the popOver,
+     * registers it, and fills the popOver with content depending on the type of markup, and
+     * the markup content. Also checks for nested multitags.
+     *
+     * @param  {Event} event the mouseEvent. Just passed to stop it from bubbling
+     */
+    markupClicked: function(event) {
+      //Stop the event from bubbling
+        event.stopPropagation();
+
+        //Hide the popOver if it is currently showing
+        $(&quot;.popover&quot;).hide();
+
+        //Get a reference to the object as a JQuery HTML element
+        var obj = $(this);
+        //Get its parent, offset and text
+        var _parent = obj.parent(),
+            offset = obj.offset(),
+            tagText = obj.text();
+
+        //Find any other .markup tags that have the same text, but not the same parent
+        var otherTags = $(&quot;.doc&quot;).find(&quot;.markup&quot;).filter(function(index) {
+            return (tagText == $(this).text()) &amp;&amp; $(obj).parent() != this &amp;&amp; obj != this;
+        });
+
+        // unselect any previously selected tag
+        $(&quot;.markup.selected&quot;).removeClass(&quot;selected&quot;);
+        // set the currently selected tag as selected
+        obj.addClass(&quot;selected&quot;);
+        // console.log($(this));
+
+        //Update the clickedMarkup reference to the just clicked object
+        _m.popup.clickedMarkup = $(this);
+
+        //Get the popover and hide the .tagText
+        var popover = _m.popup.popover;
+        popover.find(&quot;.tagText&quot;).hide();
+
+        /*
+          start
+          Nested multi tags detect and show popup
+        */
+
+       //Hide the typePopoverContent element, and if it has any buttons, remove their &#x27;noColor&#x27; class and disabled attribute
+        var typePopoverContent = popover.find(&quot;#typePopoverContent&quot;);
+        typePopoverContent.hide();
+        typePopoverContent.find(&quot;button&quot;).removeClass(&quot;noColor&quot;).removeAttr(&quot;disabled&quot;).hide();
+
+        //While the parent text matches the clicked text and the parent is of class markup, we are the sameTag
+        var sameTag = false;
+        while (_parent.is(&quot;.markup&quot;) &amp;&amp; _parent.text() == tagText) {
+            sameTag = true;
+            //Show it in the typePopoverContent
+            typePopoverContent.find(&quot;.&quot; + $(_parent).attr(&quot;type&quot;)).show();
+            //Go up through the DOM hierarchy
+            _parent = _parent.parent();
+        }
+
+        //If they are a nested multitag
+        if (sameTag) {
+            //Show all of the type of this and show them
+            typePopoverContent.find(&quot;.&quot; + $(this).attr(&quot;type&quot;)).show();
+            typePopoverContent.show();
+        } else {
+            //Find all of this, set their disabled attribute and show them
+            typePopoverContent.find(&quot;.&quot; + $(this).attr(&quot;type&quot;)).attr(&quot;disabled&quot;, &quot;disabled&quot;).show();
+            typePopoverContent.show();
+        }
+
+        /*
+          end nested multi tags
+        */
+
+       //If we can edit the markup
+        if (markupEditable) {
+            //If there are other tags
+            if (otherTags.length &gt; 0) {
+              //Show the search and trash icons
+                popover.find(&quot;.search&quot;).show();
+                popover.find(&quot;.trash&quot;).show();
+            } else {
+              //if there are no other tags, only show the trash icon, but not the search since there is nothing to find
+                popover.find(&quot;.trash&quot;).show();
+                popover.find(&quot;.search&quot;).hide();
+            }
+        } else {
+          //If we can&#x27;t edit the markup
+            if (otherTags.length &gt; 0) {
+              //Only allow searching if there are other tags
+                popover.find(&quot;.search&quot;).show();
+                popover.find(&quot;.trash&quot;).hide();
+            } else {
+              //If there are no other tags there is nothing meaningful you can do right now
+                popover.find(&quot;.trash&quot;).hide();
+                popover.find(&quot;.search&quot;).hide();
+            }
+        }
+
+        //Now show the popOVer and set its position
+        popover.show().offset({
+            top: offset.top + $(this).height() / 2 - popover.outerHeight() / 2,
+            left: offset.left + obj.outerWidth() + 11
+        });
+
+        //If we have a class of fullName or partialName, or a set type_id attribute
+        if (obj.hasClass(&quot;fullName&quot;) || obj.hasClass(&quot;partialName&quot;) || (obj.hasClass(&quot;markup&quot;) &amp;&amp; (obj.attr(obj.attr(&quot;type&quot;) + &quot;_id&quot;) !== null))) {
+          //set the color class according to the obj class
+            var colorClass = &quot;&quot;;
+            if (obj.hasClass(&quot;fullName&quot;)) {
+                colorClass = &quot;btn-danger&quot;;
+                $(&quot;#cbdbIdPopoverContent&quot;).addClass(&quot;has-error&quot;).removeClass(&quot;has-warning&quot;);
+            } else {
+                colorClass = &quot;btn-warning&quot;;
+                $(&quot;#cbdbIdPopoverContent&quot;).addClass(&quot;has-warning&quot;).removeClass(&quot;has-error&quot;);
+            }
+
+            //If we are allowed to edit the markup, we get a ref to the cbdbIdPopover
+            if (markupEditable) {
+                var cbdbIdPopover = $(&quot;#cbdbIdPopover&quot;);
+                var cbdbIdPopoverContent = cbdbIdPopover.find(&quot;#cbdbIdPopoverContent&quot;);
+                var cbdbIdsHTML = &quot;&quot;;
+                //We remove all the buttons from it, effectively resetting it
+                cbdbIdPopoverContent.find(&quot;button&quot;).remove();
+
+                //If the object is a name of some kind
+                if (obj.hasClass(&quot;fullName&quot;) || obj.hasClass(&quot;partialName&quot;)) {
+                  //If the object has no attribute of cbdbid, set it to an empty string
+                    if (!obj.attr(&quot;cbdbid&quot;)) {
+                        obj.attr(&quot;cbdbid&quot;, &quot;&quot;);
+                    }
+                    //Get the cbdbid attribute and split it into its parts
+                    if ($(this).attr(&quot;cbdbid&quot;)) {
+                        var cbdbids = $(this).attr(&quot;cbdbid&quot;).split(&quot;|&quot;);
+
+                        //For each of them create a new button
+                        for (var i = 0; i &lt; cbdbids.length; i++) {
+                            if (cbdbids[i].length &gt; 0) {
+                                cbdbIdsHTML += &quot;&lt;button class=&#x27;btn &quot; + colorClass + &quot; btn-xs&#x27; style=&#x27;margin-bottom: 1px;&#x27;&gt;&quot; + cbdbids[i] + &quot;&lt;/button&gt; &quot;;
+                            }
+                        }
+                    }
+                } else {
+                  //If it doesn;t have this attribute, set it
+                    if (!$(this).attr($(this).attr(&quot;type&quot;) + &quot;_id&quot;)) {
+                        $(this).attr($(this).attr(&quot;type&quot;) + &quot;_id&quot;, &quot;&quot;);
+                    }
+                    //Split it using the &#x27;|&#x27; as delimiter.
+                    var ids = $(this).attr($(this).attr(&quot;type&quot;) + &quot;_id&quot;).split(&quot;|&quot;);
+                    if (ids.length &gt; 0) {
+                      //For each of the  id&#x27;s add a button
+                        for (var i = 0; i &lt; ids.length; i++) {
+                            if (ids[i].length &gt; 0) {
+                                cbdbIdsHTML += &quot;&lt;button class=&#x27;btn &quot; + obj.attr(&quot;type&quot;) + &quot; btn-xs&#x27; style=&#x27;margin-bottom: 1px;&#x27;&gt;&quot; + markus.util.converBackToUnicode(ids[i]) + &quot;&lt;/button&gt; &quot;;
+                            }
+                        }
+                        //Set the placeHolder attribute of the input to &#x27;ID&#x27;;
+                        cbdbIdPopover.find(&quot;#cbdbIdPopoverContent input&quot;).attr(&quot;placeholder&quot;, &quot;ID&quot;);
+                    // $(&quot;#cbdbIdPopoverContent a&quot;).on(&quot;click&quot;, function() {
+                    //     console.log(&quot;clicked&quot;)
+                    // });
+                    }
+                }
+                // console.log(&#x27;$(this).attr(&quot;cbdbid&quot;).split(&quot;|&quot;)&#x27;);
+                // console.log(cbdbIdsHTML);
+                //Prepend the html to the cbdbIdPopoverContent
+                $(cbdbIdPopoverContent).prepend(cbdbIdsHTML);
+
+                //If the popOver is out of the viewable screen on the top
+                if (offset.top - cbdbIdPopover.outerHeight() - 11 &lt; $(&quot;.doc&quot;).offset().top) {
+                  //Change its attachment to the object
+                    cbdbIdPopover.addClass(&quot;bottom&quot;).removeClass(&quot;top&quot;).show().offset({
+                        top: offset.top + obj.outerHeight() + 11,
+                        left: offset.left + obj.outerWidth() / 2 - cbdbIdPopover.outerWidth() / 2
+                    });
+                } else {
+                  //If its viewable, standard attachment to the clickedMarkup
+                    cbdbIdPopover.addClass(&quot;top&quot;).removeClass(&quot;bottom&quot;).show().offset({
+                        top: offset.top - cbdbIdPopover.outerHeight() - 11,
+                        left: offset.left + obj.outerWidth() / 2 - cbdbIdPopover.outerWidth() / 2
+                    });
+                }
+
+                //Any button will toggle this clicked objects &#x27;noColor&#x27; class
+                $(cbdbIdPopoverContent).find(&quot;button&quot;).on(&quot;click&quot;, function() {
+
+                    $(this).toggleClass(&quot;noColor&quot;);
+                });
+            }
+        }
+    }
+};
+} )(markus);
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

@@ -64,6 +64,17 @@
             "fors": {},
             "namespaces": {}
         },
+        "src\\js\\markupPopup.js": {
+            "name": "src\\js\\markupPopup.js",
+            "modules": {
+                "markupPopup.js": 1
+            },
+            "classes": {
+                "markupPopup.js_anonymous": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src\\js\\markus.js": {
             "name": "src\\js\\markus.js",
             "modules": {
@@ -250,6 +261,20 @@
             "file": "src\\js\\manualMarkup.js",
             "line": 210,
             "description": "io.js base file."
+        },
+        "markupPopup.js": {
+            "name": "markupPopup.js",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "markupPopup.js_anonymous": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\js\\markupPopup.js",
+            "line": 10,
+            "description": "markupPopup.js base files"
         },
         "markus.js": {
             "name": "markus.js",
@@ -558,6 +583,28 @@
             "line": 210,
             "description": "Defines the `markus.manualMarkup` object that can be accessed globally. Uses some functions that have\nbeen defined in the manualMarkup.js anonymous namespace, but also defines some functions in the object\ncreation itself.",
             "is_constructor": 1
+        },
+        "markupPopup.js_anonymous": {
+            "name": "markupPopup.js_anonymous",
+            "shortname": "markupPopup.js_anonymous",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "markupPopup.js",
+            "namespace": "",
+            "file": "src\\js\\markupPopup.js",
+            "line": 10,
+            "description": "The class that holds the variables and functions created in the namespace of this file.\nThe constrcutor of this object is only called once, because it is an anonymous function.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "_m",
+                    "description": "a reference to the Markus Configuration Object is passed",
+                    "type": "Object"
+                }
+            ]
         },
         "JQuery": {
             "name": "JQuery",
@@ -1415,6 +1462,316 @@
             ],
             "class": "ManualMarkup",
             "module": "io.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 20,
+            "description": "The removeSameTags array. Internal use by functions",
+            "type": "{Array}",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 25,
+            "description": "If the markup is editable.",
+            "type": "{Boolean}",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 32,
+            "description": "Removes the markup that was clicked on. Contained within `markus.popup.clickedMarkup`.\nIt hides the popOver and unwraps the removeTarget. (This basically removes the .markup\nelement around the tag)",
+            "itemtype": "method",
+            "name": "removeMarkup",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 319,
+            "description": "Searches trough the appropriate dictionary for the markup the user just clicked\non. Depending on the dictionary type the response varies. Most of the time the\nweb-dictionary is just clicked (to show it), but sometimes an `<input>` on the\nweb-dictionary can be set to the value of the clicked markup (or in case of the CBDB to\na CBDBID)",
+            "itemtype": "method",
+            "name": "searchMarkup",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 378,
+            "description": "Defines what happens when you click the `#removeAllBtn` button. When you click this button\nall the `.glyphicon-trash` elements that are not disabled are clicked (removing the instance with it).",
+            "itemtype": "method",
+            "name": "removeAllSameTag",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 396,
+            "description": "Defines what happens when you click the `#applyAll` button. When you click this button\nthe contents of the first well are copied across all the other wells. This is to unify contents\nof the markup.",
+            "itemtype": "method",
+            "name": "applyAll",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 461,
+            "description": "Initializes the removeModal by removing the `.fired` class, if it was present\nto begin with. This makes sure they actually show up as the `updateRemoveModal` function\ntells the buttons to fade once they have the `.fired` class.",
+            "itemtype": "method",
+            "name": "initialRemoveModal",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 473,
+            "description": "Called to update the `#removeModal`. Used to change the contents of this modal\ndepending on its contents.",
+            "itemtype": "method",
+            "name": "updateRemoveModal",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 518,
+            "description": "Returns an array of all the key attributes of the `glyphicon-trash` icons that do not\nhave a `disabled` class",
+            "itemtype": "method",
+            "name": "getAllunLockedKeys",
+            "return": {
+                "description": "Returns the unlocked keys.",
+                "type": "Array"
+            },
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 534,
+            "description": "Returns the surroundign element of the provided tag. This is done by going up\nthe DOM hierarchy untill we find a parent that does not have the same textcontent\nas the child. This means we have the first parent that also has different children.",
+            "itemtype": "method",
+            "name": "getTheOuterTag",
+            "params": [
+                {
+                    "name": "tag",
+                    "description": "the tag we want to now the containing tag of",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "the containing tag of the tag we provided",
+                "type": "Element"
+            },
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 552,
+            "description": "Replaces the provided tag with the provided HTML string content.",
+            "itemtype": "method",
+            "name": "replaceTag",
+            "params": [
+                {
+                    "name": "tag",
+                    "description": "The element to replace",
+                    "type": "Element"
+                },
+                {
+                    "name": "content",
+                    "description": "The string that represents the HTML data to replace the tag with",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The element after it has been replaced.",
+                "type": "Element"
+            },
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 579,
+            "description": "Returns the html content (including itself) of the provided tag. Removes the\n`selected` class before returning the HTML data string.",
+            "itemtype": "method",
+            "name": "getTheTagContent",
+            "params": [
+                {
+                    "name": "tag",
+                    "description": "the tag we want to get the content of",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "the HTML content represented as a string",
+                "type": "String"
+            },
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 595,
+            "description": "Defines what happens when you click the applyAll button. Sets the cbdbId of\nall the markups contained to the cbdbId of the clickedMarkup",
+            "itemtype": "method",
+            "name": "applyAllSameType",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 628,
+            "description": "Removes the sametag (spans multiple DOM levels if they are only-child) specified\nby the provided key. Updates the `#removeModal` afterwards;",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "the key of the entry we want to delete",
+                    "type": "String"
+                }
+            ],
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 673,
+            "description": "Defines the behaviour when you click the `.sameTagTypeSave` element.",
+            "itemtype": "method",
+            "name": "sameTagTypeSave",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 750,
+            "description": "Hide the popPover on save of this type.",
+            "itemtype": "method",
+            "name": "typeSave",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 788,
+            "description": "Saves the cbdbid that the user has typed into the input field onto the HTML element\neither as cbdbid attribute or `type`_id attribute.",
+            "itemtype": "method",
+            "name": "cbdbIdSave",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 889,
+            "description": "Saves the id the user has manually typed into an input field to override the\ncbdbId of that element.",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "the key of the well we're working with",
+                    "type": "String"
+                }
+            ],
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 956,
+            "description": "Manually save an ID and overwrite all other tags in the file using it too.",
+            "itemtype": "method",
+            "name": "IdSameTagSave",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "the key that was clicked",
+                    "type": "String"
+                }
+            ],
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 1021,
+            "description": "Holds a reference to the popOver element used to make a floating window\nappear with markup controls in it (remove, search etc.);",
+            "type": "{Element}",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 1028,
+            "description": "Holds a reference to the markup that was just clicked. May be null!",
+            "type": "{Markup}",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 1035,
+            "description": "Function is defined in the markupPopup.js_anonymous class. Function is exposed\nusing this class (`markus.popup`);",
+            "itemtype": "method",
+            "name": "searchMarkup",
+            "type": "{Function}",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 1044,
+            "description": "Function is defined in the markupPopup.js_anonymous class. Function is exposed\nusing this class (`markus.popup`);",
+            "itemtype": "method",
+            "name": "showSameMarkup",
+            "type": "{Function}",
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 1053,
+            "description": "Registers the popover used for the markup instances. Creates handlers for\nclick, mouseenter and update for the buttons and other content.",
+            "itemtype": "method",
+            "name": "registMarkupPopup",
+            "params": [
+                {
+                    "name": "editable",
+                    "description": "if this markup is editable",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 1124,
+            "description": "Sets the reference variable `markus.popup.popover` to the provided element.",
+            "itemtype": "method",
+            "name": "registPopover",
+            "params": [
+                {
+                    "name": "popover",
+                    "description": "the element that is used as the popover",
+                    "type": "Element"
+                }
+            ],
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
+        },
+        {
+            "file": "src\\js\\markupPopup.js",
+            "line": 1134,
+            "description": "Defines what happens when you click on an instance of `.markup`. This shows the popOver,\nregisters it, and fills the popOver with content depending on the type of markup, and\nthe markup content. Also checks for nested multitags.",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "the mouseEvent. Just passed to stop it from bubbling",
+                    "type": "Event"
+                }
+            ],
+            "class": "markupPopup.js_anonymous",
+            "module": "markupPopup.js"
         },
         {
             "file": "src\\js\\markus.js",
@@ -2493,6 +2850,34 @@
         {
             "message": "Missing item type",
             "line": " src\\js\\manualMarkup.js:16"
+        },
+        {
+            "message": "Missing item type\nThe removeSameTags array. Internal use by functions",
+            "line": " src\\js\\markupPopup.js:20"
+        },
+        {
+            "message": "Missing item type\nIf the markup is editable.",
+            "line": " src\\js\\markupPopup.js:25"
+        },
+        {
+            "message": "Missing item type\nRemoves the sametag (spans multiple DOM levels if they are only-child) specified\nby the provided key. Updates the `#removeModal` afterwards;",
+            "line": " src\\js\\markupPopup.js:628"
+        },
+        {
+            "message": "Missing item type\nSaves the id the user has manually typed into an input field to override the\ncbdbId of that element.",
+            "line": " src\\js\\markupPopup.js:889"
+        },
+        {
+            "message": "Missing item type\nHolds a reference to the popOver element used to make a floating window\nappear with markup controls in it (remove, search etc.);",
+            "line": " src\\js\\markupPopup.js:1021"
+        },
+        {
+            "message": "Missing item type\nHolds a reference to the markup that was just clicked. May be null!",
+            "line": " src\\js\\markupPopup.js:1028"
+        },
+        {
+            "message": "Missing item type\nDefines what happens when you click on an instance of `.markup`. This shows the popOver,\nregisters it, and fills the popOver with content depending on the type of markup, and\nthe markup content. Also checks for nested multitags.",
+            "line": " src\\js\\markupPopup.js:1134"
         },
         {
             "message": "Missing item type\nArray that holds data that can be saved. Empty by default.",

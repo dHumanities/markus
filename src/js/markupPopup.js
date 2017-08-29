@@ -515,8 +515,6 @@ var updateRemoveModal = function() {
 
 };
 
-
-
 /**
  * Returns an array of all the key attributes of the `glyphicon-trash` icons that do not
  * have a `disabled` class
@@ -532,7 +530,6 @@ var getAllunLockedKeys = function() {
     // console.log(keys);
     return keys;
 };
-
 
 /**
  * Returns the surroundign element of the provided tag. This is done by going up
@@ -673,52 +670,67 @@ var removeSameTag = function(key) {
     removeSameTags[key] = null;
 };
 
-
+/**
+ * Defines the behaviour when you click the `.sameTagTypeSave` element.
+ *
+ * @method sameTagTypeSave
+ */
 var sameTagTypeSave = function() {
+  //Gets the key attribute from the clicked element
     var key = $(this).attr("key");
     // console.log(removeSameTags);
 
     var child = removeSameTags[key].sameTagChild;
     child.push(removeSameTags[key].tag);
 
+    //Find all the markup in a well
     var wellMarkup = $("#removeModal").find(".well[key='" + key + "']").find(".markup");
 
+    //For each of the buttons within the specified well that has a switch and noColor class
     $("#removeModal").find(".well[key='" + key + "']").find("button.switch.noColor").each(function() {
-
+        //If the clicked element has a class identical to the type of the markup in the well
         for (var i = 0, j = wellMarkup.length; i < j; i++) {
             if ($(this).hasClass($(wellMarkup[i]).attr("type"))) {
                 $(wellMarkup[i]).addClass("remove");
             }
         }
-
+        //For each of the children that have the same type, remove them too
         for (var i = 0, j = child.length; i < j; i++) {
             if ($(this).hasClass($(child[i]).attr("type"))) {
                 $(child[i]).addClass("remove");
             }
         }
+        //Then remove the element we just clicked
         $(this).remove();
     });
 
+    //Remove same tags
     if ($(removeSameTags[key].tag).hasClass("remove")) {
         // console.log("removeSameTag remove hooked tag");
         for (var i = 0; i < removeSameTags[key].sameTagChild.length && $(removeSameTags[key].tag).hasClass("remove"); i++) {
             removeSameTags[key].tag = removeSameTags[key].sameTagChild[i];
         }
     }
+
+    //Go up through the DOM untill we find the actual parent
     var _parent = $(removeSameTags[key].tag).parent();
     while ($(_parent).text() == $(removeSameTags[key].tag).text() && !$(_parent).hasClass("remove")) {
         removeSameTags[key].tag = _parent;
         _parent = $(removeSameTags[key].tag).parent();
     }
 
-
+    //Where the markup needs to be unwrapped, do so
     $(".doc").find(".markup.remove").contents().unwrap();
 
+    //Also reflect these changes in the removeModal
     $("#removeModal").find(".well[key='" + key + "']").find(".markup.remove").contents().unwrap();
 
+    //If there are no more buttonswitches
     if ($("#removeModal").find(".well[key='" + key + "']").find("button.switch").length === 0) {
         $("#removeModal").find(".well[key='" + key + "']").fadeOut({
+          //We fadeout this well if there are no more buttons in it
             complete: function() {
+              //Once its done, hide the removeModal and remove the specific well
                 $("#removeModal").find(".well[key='" + key + "']").remove();
                 if ($("#removeModal").find(".well").length === 0) {
                     $("#removeModal").modal("hide");
@@ -726,13 +738,20 @@ var sameTagTypeSave = function() {
             }
         });
     } else {
+      //Get the row specified by the provided key
         var row = $("#removeModal").find(".well[key='" + key + "'] .row");
+        //Disable the trash icon and make it a bnt-link instead of btn danger
         $(row).find(".glyphicon-trash").addClass("disabled").addClass("btn-link").removeClass("btn-danger");
+        //Find the ok icon and remove the btnLink, and make it a btn-succes, also add glyphicon-lock and disabled
         $(row).find(".glyphicon-ok-circle").removeClass("btn-link").addClass("btn-success").addClass("glyphicon-lock").addClass("disabled");
     }
 };
 
-
+/**
+ * Hide the popPover on save of this type.
+ *
+ * @method typeSave
+ */
 var typeSave = function() {
   //Get a reference to the cliked markup
     var clickedMarkup = _m.popup.clickedMarkup;
@@ -766,21 +785,31 @@ var typeSave = function() {
     _m.popup.clickedMarkup = clickedMarkup = null;
 };
 
+/**
+ * Saves the cbdbid that the user has typed into the input field onto the HTML element
+ * either as cbdbid attribute or `type`_id attribute.
+ *
+ * @method cbdbIdSave
+ */
 var cbdbIdSave = function() {
+    //Get a reference to the markup that was just clicked
     var clickedMarkup = _m.popup.clickedMarkup;
     if (clickedMarkup === null) {
         return;
+        //If it was not set, go back.
     }
+
+    //Get cbdbid attribute or similar attribute if not present
     var ids = $(clickedMarkup).attr("cbdbid") || $(clickedMarkup).attr($(clickedMarkup).attr("type") + "_id") || "";
 
     // console.log(ids);
     var cbdbIds = [];
     if (ids.length > 0) {
+      //Convert to unicode and split it on the '|'
         cbdbIds = markus.util.converBackToUnicode(ids).split("|");
     }
-
-
     // console.log(cbdbIds);
+    // The value from the `<input>` in the cbdbIdPopoverContent
     var cbdbInputVal = $("#cbdbIdPopoverContent").find("input").val();
 
     /*
@@ -803,23 +832,33 @@ var cbdbIdSave = function() {
 
     // console.log(clickedMarkup.attr(clickedMarkup.attr("type") + "_id"));
     // console.log(clickedMarkup);
+
+    //Remove any whitespace from the inputvalue
     cbdbInputVal = cbdbInputVal.replace(/\s+/g);
+    //If there is actually a value left and there are no more '|''s
     if (cbdbInputVal.length > 0 && cbdbInputVal.indexOf("|") == -1) {
+      //If we have a type_id attribute
         if ($(clickedMarkup).attr($(clickedMarkup).attr("type") + "_id") !== undefined) {
+          //Set that attribute to the input value
             clickedMarkup.attr(clickedMarkup.attr("type") + "_id", markus.util.convertToEscapeUnicode(cbdbInputVal));
         } else {
+          //Else set the cbdbid attribute to the input value
             clickedMarkup.attr("cbdbid", markus.util.convertToEscapeUnicode(cbdbInputVal));
         }
+        //Remove moreThanOneId and noCBDBID, since the cbdbid is now set
         clickedMarkup.removeClass("moreThanOneId").removeClass("noCBDBID");
     } else {
-
         $("#cbdbIdPopoverContent").find("button.noColor").each(function() {
+          //For each of the buttonsNoColor,
             var cbdb = $(this).text();
+            //remove this cbdbid from the list of ids
             cbdbIds.splice(cbdbIds.indexOf(cbdb), 1);
         });
+        //If there is still stuff left in the input box
         if (cbdbInputVal.length > 0) {
             cbdbIds = cbdbInputVal.split("|");
         }
+        //Based onthe length of id's possible, display or not display the moreThanOneId and noCBDBID class
         switch (cbdbIds.length) {
         case 0:
             clickedMarkup.removeClass("moreThanOneId").addClass("noCBDBID");
@@ -831,47 +870,60 @@ var cbdbIdSave = function() {
             clickedMarkup.addClass("moreThanOneId").removeClass("noCBDBID");
         }
 
-
-
+        //If we have a attribute of type_id, set it to the joined remains of cbdbIds array
         if (clickedMarkup.attr(clickedMarkup.attr("type") + "_id") !== undefined) {
             clickedMarkup.attr(clickedMarkup.attr("type") + "_id", markus.util.convertToEscapeUnicode(cbdbIds.join("|")));
         } else {
+          //Set the cbdbid attribute to the joined remains of the cbdbIds array
             clickedMarkup.attr("cbdbid", markus.util.convertToEscapeUnicode(cbdbIds.join("|")));
         }
-
-
-
     }
+    //Clear the input textfield after use
     $("#cbdbIdPopoverContent").find("input").val("");
+    //Hide the popOver
     $(".popover").hide();
+    //Null the clicked reference
     _m.popup.clickedMarkup = clickedMarkup = null;
 };
 
+/**
+ * Saves the id the user has manually typed into an input field to override the
+ * cbdbId of that element.
+ *
+ * @param  {String} key the key of the well we're working with
+ */
 var cbdbIdSameTagSave = function(key) {
     var tag = removeSameTags[key].tag;
     // console.log("cbdbIdSameTagSave");
     var cbdbIds = $(tag).attr("cbdbid").split("|");
 
+    //Get the input value of the input on the .cbdbIds within the specified well
     var cbdbInputVal = $("#removeModal").find(".well[key='" + key + "']").find(".cbdbIds input").val();
 
+    //Make sure it is only digits
     if (cbdbInputVal.match(/\d+/g)) {
+      //Set the cbdbid attribute to the input value
         $(tag).attr("cbdbid", cbdbInputVal);
+        //Remove the classes displaying ambiguity (moreThanOneId and noCBDBID)
         $(tag).removeClass("moreThanOneId").removeClass("noCBDBID");
 
+        //For each of switchButtons in this well, only display color if the input value is identical to the text on the button
         $("#removeModal").find(".well[key='" + key + "']").find(".cbdbIds button.switch").each(function() {
             if ($(this).text() == cbdbInputVal) {
                 $(this).removeClass("noColor");
             } else {
                 $(this).addClass("noColor");
             }
-
         });
 
-    } else {
+    } else {//If it is not only digits
+      //For all of the .cbdbIds with a button.switch.noColor
         $("#removeModal").find(".well[key='" + key + "']").find(".cbdbIds button.switch.noColor").each(function() {
             var cbdb = $(this).text();
+            //remove any mathces from the cbdbIds array
             cbdbIds.splice(cbdbIds.indexOf(cbdb), 1);
         });
+        //Switch classes of the tag, based on the amount of cbdbIds. Display (or not) moreThanOneId and noCBDBID
         switch (cbdbIds.length) {
         case 0:
             $(tag).removeClass("moreThanOneId").addClass("noCBDBID");
@@ -882,37 +934,47 @@ var cbdbIdSameTagSave = function(key) {
         default:
             $(tag).addClass("moreThanOneId").removeClass("noCBDBID");
         }
+        //Set the attribute cbdbid of the tag to the joined remains of the cbdbIds array
         $(tag).attr("cbdbid", cbdbIds.join("|"));
     }
 
+    //Reference the row in this well specified by the provided key
     var row = $("#removeModal").find(".well[key='" + key + "'] .row");
+    //Disable the trash icon, make it a link instead of a danger button
     $(row).find(".glyphicon-trash").addClass("disabled").addClass("btn-link").removeClass("btn-danger");
+    //Lock the ok-circle, make it a success button instead of link
     $(row).find(".glyphicon-ok-circle").addClass("glyphicon-lock").removeClass("btn-link").addClass("btn-success");
-
-
-// $("#removeModal").find(".well[key='"+key+"']").find(".cbdbids input").val("");
-// $(".popover").hide();
-// clickedMarkup = null;
+    // $("#removeModal").find(".well[key='"+key+"']").find(".cbdbids input").val("");
+    // $(".popover").hide();
+    // clickedMarkup = null;
 };
-
 
 /*
 Todo : merge cbdbIdSameTagSave
 */
 
+/**
+ * Manually save an ID and overwrite all other tags in the file using it too.
+ *
+ * @method IdSameTagSave
+ * @param  {String} key the key that was clicked
+ */
 var IdSameTagSave = function(key) {
     var tag = removeSameTags[key].tag;
     // console.log("IdSameTagSave");
     var ids = $(tag).attr($(tag).attr("type") + "_id").split("|");
 
+    //Get the input from the well. Remove all whitespace from the value
     var inputVal = $("#removeModal").find(".well[key='" + key + "']").find("input" + "." + $(tag).attr("type")).val().replace(/\s+/g);
 
-
-
+    //If there was actually an input value left after the cleaning of the data
     if (inputVal.length > 0) {
+      //Set the id to the input val (manually entering id)
         $(tag).attr($(tag).attr("type") + "_id", inputVal);
+        //Remove the moreThanOneId and noCBDBID classes
         $(tag).removeClass("moreThanOneId").removeClass("noCBDBID");
 
+        //Remove or add the noColor class if the text of the button matches the inputValue
         $("#removeModal").find(".well[key='" + key + "']").find("button.switch" + "." + $(tag).attr("type")).each(function() {
             if ($(this).text() == inputVal) {
                 $(this).removeClass("noColor");
@@ -923,11 +985,13 @@ var IdSameTagSave = function(key) {
         });
 
     } else {
+      //Within the well defined by the provided key, for each button swithc with nocolor and matching type, save all the id's
         $("#removeModal").find(".well[key='" + key + "']").find("button.switch.noColor" + "." + $(tag).attr("type")).each(function() {
             var id = $(this).text();
             ids.splice(ids.indexOf(id), 1);
         });
         switch (ids.length) {
+          //Based on the amount of id's remove the moreThanOneId class and add the noCBDBID class
         case 0:
             $(tag).removeClass("moreThanOneId").addClass("noCBDBID");
             break;
@@ -940,14 +1004,16 @@ var IdSameTagSave = function(key) {
         $(tag).attr($(tag).attr("type") + "_id", ids.join("|"));
     }
 
+    //Find the row contained within the well
     var row = $("#removeModal").find(".well[key='" + key + "'] .row");
+    //Disable the glyphicon-trash and make it a .btn-link class with .btn-danger
     $(row).find(".glyphicon-trash").addClass("disabled").addClass("btn-link").removeClass("btn-danger");
+    //Lock the glyphicon-ok-circle by showing the glyphicon-lock and removing the btn-link class, make it a btn-succes
     $(row).find(".glyphicon-ok-circle").addClass("glyphicon-lock").removeClass("btn-link").addClass("btn-success");
 
-
-// $("#removeModal").find(".well[key='"+key+"']").find(".cbdbids input").val("");
-// $(".popover").hide();
-// clickedMarkup = null;
+    // $("#removeModal").find(".well[key='"+key+"']").find(".cbdbids input").val("");
+    // $(".popover").hide();
+    // clickedMarkup = null;
 };
 
 

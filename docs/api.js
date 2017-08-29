@@ -17,6 +17,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "helpInfo.js_anonymous",
         "io.js_anonymous",
         "manualMarkup.js_anonymous",
+        "markupPopup.js_anonymous",
         "navbar.js_anonymous",
         "summary.js_anonymous",
         "switcher.js_anonymous",
@@ -30,6 +31,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "data.js",
         "helpInfo.js",
         "io.js",
+        "markupPopup.js",
         "markus.js",
         "navbar.js",
         "reference.js",
@@ -60,6 +62,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "io.js",
             "name": "io.js",
             "description": "io.js base file."
+        },
+        {
+            "displayName": "markupPopup.js",
+            "name": "markupPopup.js",
+            "description": "markupPopup.js base files"
         },
         {
             "displayName": "markus.js",
