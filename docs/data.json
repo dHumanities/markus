@@ -70,7 +70,8 @@
                 "markupPopup.js": 1
             },
             "classes": {
-                "markupPopup.js_anonymous": 1
+                "markupPopup.js_anonymous": 1,
+                "Popup": 1
             },
             "fors": {},
             "namespaces": {}
@@ -267,13 +268,14 @@
             "submodules": {},
             "elements": {},
             "classes": {
-                "markupPopup.js_anonymous": 1
+                "markupPopup.js_anonymous": 1,
+                "Popup": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "src\\js\\markupPopup.js",
-            "line": 10,
+            "line": 1019,
             "description": "markupPopup.js base files"
         },
         "markus.js": {
@@ -605,6 +607,20 @@
                     "type": "Object"
                 }
             ]
+        },
+        "Popup": {
+            "name": "Popup",
+            "shortname": "Popup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "markupPopup.js",
+            "namespace": "",
+            "file": "src\\js\\markupPopup.js",
+            "line": 1019,
+            "description": "The class that represents `markus.popup`. This holds all the necessary handlers\nand data for the popOver functionality."
         },
         "JQuery": {
             "name": "JQuery",
@@ -1693,43 +1709,43 @@
         },
         {
             "file": "src\\js\\markupPopup.js",
-            "line": 1021,
+            "line": 1026,
             "description": "Holds a reference to the popOver element used to make a floating window\nappear with markup controls in it (remove, search etc.);",
             "type": "{Element}",
-            "class": "markupPopup.js_anonymous",
+            "class": "Popup",
             "module": "markupPopup.js"
         },
         {
             "file": "src\\js\\markupPopup.js",
-            "line": 1028,
+            "line": 1033,
             "description": "Holds a reference to the markup that was just clicked. May be null!",
             "type": "{Markup}",
-            "class": "markupPopup.js_anonymous",
+            "class": "Popup",
             "module": "markupPopup.js"
         },
         {
             "file": "src\\js\\markupPopup.js",
-            "line": 1035,
+            "line": 1040,
             "description": "Function is defined in the markupPopup.js_anonymous class. Function is exposed\nusing this class (`markus.popup`);",
             "itemtype": "method",
             "name": "searchMarkup",
             "type": "{Function}",
-            "class": "markupPopup.js_anonymous",
+            "class": "Popup",
             "module": "markupPopup.js"
         },
         {
             "file": "src\\js\\markupPopup.js",
-            "line": 1044,
+            "line": 1049,
             "description": "Function is defined in the markupPopup.js_anonymous class. Function is exposed\nusing this class (`markus.popup`);",
             "itemtype": "method",
             "name": "showSameMarkup",
             "type": "{Function}",
-            "class": "markupPopup.js_anonymous",
+            "class": "Popup",
             "module": "markupPopup.js"
         },
         {
             "file": "src\\js\\markupPopup.js",
-            "line": 1053,
+            "line": 1058,
             "description": "Registers the popover used for the markup instances. Creates handlers for\nclick, mouseenter and update for the buttons and other content.",
             "itemtype": "method",
             "name": "registMarkupPopup",
@@ -1740,12 +1756,12 @@
                     "type": "Boolean"
                 }
             ],
-            "class": "markupPopup.js_anonymous",
+            "class": "Popup",
             "module": "markupPopup.js"
         },
         {
             "file": "src\\js\\markupPopup.js",
-            "line": 1124,
+            "line": 1129,
             "description": "Sets the reference variable `markus.popup.popover` to the provided element.",
             "itemtype": "method",
             "name": "registPopover",
@@ -1756,12 +1772,12 @@
                     "type": "Element"
                 }
             ],
-            "class": "markupPopup.js_anonymous",
+            "class": "Popup",
             "module": "markupPopup.js"
         },
         {
             "file": "src\\js\\markupPopup.js",
-            "line": 1134,
+            "line": 1139,
             "description": "Defines what happens when you click on an instance of `.markup`. This shows the popOver,\nregisters it, and fills the popOver with content depending on the type of markup, and\nthe markup content. Also checks for nested multitags.",
             "params": [
                 {
@@ -1770,7 +1786,7 @@
                     "type": "Event"
                 }
             ],
-            "class": "markupPopup.js_anonymous",
+            "class": "Popup",
             "module": "markupPopup.js"
         },
         {
@@ -2869,15 +2885,15 @@
         },
         {
             "message": "Missing item type\nHolds a reference to the popOver element used to make a floating window\nappear with markup controls in it (remove, search etc.);",
-            "line": " src\\js\\markupPopup.js:1021"
+            "line": " src\\js\\markupPopup.js:1026"
         },
         {
             "message": "Missing item type\nHolds a reference to the markup that was just clicked. May be null!",
-            "line": " src\\js\\markupPopup.js:1028"
+            "line": " src\\js\\markupPopup.js:1033"
         },
         {
             "message": "Missing item type\nDefines what happens when you click on an instance of `.markup`. This shows the popOver,\nregisters it, and fills the popOver with content depending on the type of markup, and\nthe markup content. Also checks for nested multitags.",
-            "line": " src\\js\\markupPopup.js:1134"
+            "line": " src\\js\\markupPopup.js:1139"
         },
         {
             "message": "Missing item type\nArray that holds data that can be saved. Empty by default.",

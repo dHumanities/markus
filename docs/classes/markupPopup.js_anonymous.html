@@ -51,6 +51,7 @@
                                 <li><a href="../classes/manualMarkup.js_anonymous.html">manualMarkup.js_anonymous</a></li>
                                 <li><a href="../classes/markupPopup.js_anonymous.html">markupPopup.js_anonymous</a></li>
                                 <li><a href="../classes/navbar.js_anonymous.html">navbar.js_anonymous</a></li>
+                                <li><a href="../classes/Popup.html">Popup</a></li>
                                 <li><a href="../classes/Regex.html">Regex</a></li>
                                 <li><a href="../classes/Summary.html">Summary</a></li>
                                 <li><a href="../classes/summary.js_anonymous.html">summary.js_anonymous</a></li>
@@ -237,14 +238,6 @@ The constrcutor of this object is only called once, because it is an anonymous f
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_registMarkupPopup">registMarkupPopup</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_registPopover">registPopover</a>
-
-                            </li>
-                            <li class="index-item method">
                                 <a href="#method_removeAllSameTag">removeAllSameTag</a>
 
                             </li>
@@ -262,14 +255,6 @@ The constrcutor of this object is only called once, because it is an anonymous f
                             </li>
                             <li class="index-item method">
                                 <a href="#method_searchMarkup">searchMarkup</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_searchMarkup">searchMarkup</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_showSameMarkup">showSameMarkup</a>
 
                             </li>
                             <li class="index-item method">
@@ -653,115 +638,6 @@ tells the buttons to fade once they have the <code>.fired</code> class.</p>
 
 
 </div>
-<div id="method_registMarkupPopup" class="method item">
-    <h3 class="name"><code>registMarkupPopup</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>editable</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_markupPopup.js.html#l1053"><code>src\js\markupPopup.js:1053</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Registers the popover used for the markup instances. Creates handlers for
-click, mouseenter and update for the buttons and other content.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">editable</code>
-                        <span class="type">Boolean</span>
-
-
-                    <div class="param-description">
-                        <p>if this markup is editable</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_registPopover" class="method item">
-    <h3 class="name"><code>registPopover</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>popover</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_markupPopup.js.html#l1124"><code>src\js\markupPopup.js:1124</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Sets the reference variable <code>markus.popup.popover</code> to the provided element.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">popover</code>
-                        <span class="type">Element</span>
-
-
-                    <div class="param-description">
-                        <p>the element that is used as the popover</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
 <div id="method_removeAllSameTag" class="method item">
     <h3 class="name"><code>removeAllSameTag</code></h3>
 
@@ -966,70 +842,6 @@ on. Depending on the dictionary type the response varies. Most of the time the
 web-dictionary is just clicked (to show it), but sometimes an <code>&lt;input&gt;</code> on the
 web-dictionary can be set to the value of the clicked markup (or in case of the CBDB to
 a CBDBID)</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_searchMarkup" class="method item">
-    <h3 class="name"><code>searchMarkup</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_markupPopup.js.html#l1035"><code>src\js\markupPopup.js:1035</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Function is defined in the markupPopup.js_anonymous class. Function is exposed
-using this class (<code>markus.popup</code>);</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method_showSameMarkup" class="method item">
-    <h3 class="name"><code>showSameMarkup</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_js_markupPopup.js.html#l1044"><code>src\js\markupPopup.js:1044</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Function is defined in the markupPopup.js_anonymous class. Function is exposed
-using this class (<code>markus.popup</code>);</p>
 
     </div>
 

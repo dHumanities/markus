@@ -8,6 +8,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "IO",
         "JQuery",
         "ManualMarkup",
+        "Popup",
         "Regex",
         "Summary",
         "UI",

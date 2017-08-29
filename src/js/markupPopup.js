@@ -1016,7 +1016,12 @@ var IdSameTagSave = function(key) {
     // clickedMarkup = null;
 };
 
-
+/**
+ * The class that represents `markus.popup`. This holds all the necessary handlers
+ * and data for the popOver functionality.
+ *
+ * @class Popup
+ */
 _m.popup = {
     /**
      * Holds a reference to the popOver element used to make a floating window
