@@ -98,6 +98,20 @@
             },
             "namespaces": {}
         },
+        "src\\js\\summary.js": {
+            "name": "src\\js\\summary.js",
+            "modules": {
+                "summary.js": 1
+            },
+            "classes": {
+                "summary.js_anonymous": 1,
+                "Summary": 1
+            },
+            "fors": {
+                "Global": 1
+            },
+            "namespaces": {}
+        },
         "src\\js\\switcher.js": {
             "name": "src\\js\\switcher.js",
             "modules": {
@@ -279,6 +293,23 @@
             "file": "src\\js\\reference.js",
             "line": 1,
             "description": "reference.js base file."
+        },
+        "summary.js": {
+            "name": "summary.js",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "summary.js_anonymous": 1,
+                "Summary": 1
+            },
+            "fors": {
+                "Global": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\js\\summary.js",
+            "line": 244,
+            "description": "summary.js base file."
         },
         "switcher.js": {
             "name": "switcher.js",
@@ -563,6 +594,42 @@
                     "type": "Object"
                 }
             ]
+        },
+        "summary.js_anonymous": {
+            "name": "summary.js_anonymous",
+            "shortname": "summary.js_anonymous",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "summary.js",
+            "namespace": "",
+            "file": "src\\js\\summary.js",
+            "line": 6,
+            "description": "The class that holds the variables and functions created in the namespace of this file.\nThe constrcutor of this object is only called once, because it is an anonymous function.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "_m",
+                    "description": "a reference to the Markus Configuration Object is passed",
+                    "type": "Object"
+                }
+            ]
+        },
+        "Summary": {
+            "name": "Summary",
+            "shortname": "Summary",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "summary.js",
+            "namespace": "",
+            "file": "src\\js\\summary.js",
+            "line": 244,
+            "description": "Defines the functions and variables availabe to the code outside of this file through\nthe `markus.summary` object. Uses some functions that have been defined in the summary.js_anonymous\nnamespace."
         },
         "switcher.js_anonymous": {
             "name": "switcher.js_anonymous",
@@ -1479,6 +1546,337 @@
             "module": "reference.js"
         },
         {
+            "file": "src\\js\\summary.js",
+            "line": 16,
+            "description": "Converts an array of objects into TSV data to be saved. Shortcut to\n`markus.data.objArrayToTSV`",
+            "itemtype": "method",
+            "name": "markupToTSV",
+            "params": [
+                {
+                    "name": "dataArray",
+                    "description": "the data to be converted",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "the string that contains the converted TSV data",
+                "type": "String"
+            },
+            "class": "summary.js_anonymous",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 29,
+            "description": "Converts an array of objects into CSV data to be saved. Shortcut to\n`markus.data.objArrayToCSV`",
+            "itemtype": "method",
+            "name": "markupToCSV",
+            "params": [
+                {
+                    "name": "dataArray",
+                    "description": "the data to be converted",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "the string that contains the converted CSV data",
+                "type": "String"
+            },
+            "class": "summary.js_anonymous",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 42,
+            "description": "Converts an array of objects into HTML data to be saved. Shortcut to\n`markus.data.objArrayToHTML`",
+            "itemtype": "method",
+            "name": "markupToHTMl",
+            "params": [
+                {
+                    "name": "dataArray",
+                    "description": "the data to be converted",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "the string that contains the converted HTML data",
+                "type": "String"
+            },
+            "class": "summary.js_anonymous",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 54,
+            "description": "This function analyses the provided markupArray. It counts every type\nor tag and saves these statistics in the returned `summary` object. For each\ntype or tag we count the unique and total occurences.",
+            "itemtype": "method",
+            "name": "markupTypeUniqueAndQuantitySummary",
+            "params": [
+                {
+                    "name": "markupArray",
+                    "description": "contains the markup data to be analyzed",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "contains the analysis data ordered by markup type",
+                "type": "Object"
+            },
+            "class": "summary.js_anonymous",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 92,
+            "description": "Exports the provided `dataArray` to a file ending in the provided `fileType`\nextension using the provided `csvFn` function to create the data.",
+            "itemtype": "method",
+            "name": "exportCSV",
+            "params": [
+                {
+                    "name": "csvFn",
+                    "description": "the function that will transform the data to CSV",
+                    "type": "Function"
+                },
+                {
+                    "name": "dataArray",
+                    "description": "the data Array to be converted",
+                    "type": "Array"
+                },
+                {
+                    "name": "fileType",
+                    "description": "the fileType extension of the file to save",
+                    "type": "String"
+                }
+            ],
+            "class": "summary.js_anonymous",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 127,
+            "description": "Writes the provided `dataArray` to a file with the `fileType` extension that\nwas provided using the `bloblFn` function to convert the `dataArray` to a\nbinary blob.",
+            "itemtype": "method",
+            "name": "save",
+            "params": [
+                {
+                    "name": "blobFn",
+                    "description": "the method to convert a dataArray to a Blob",
+                    "type": "Function"
+                },
+                {
+                    "name": "dataArray",
+                    "description": "the array containing the data",
+                    "type": "Array"
+                },
+                {
+                    "name": "fileType",
+                    "description": "the fileType extension for the resulting saved file",
+                    "type": "String"
+                }
+            ],
+            "class": "summary.js_anonymous",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 162,
+            "description": "Generates Microsoft Excel data from the provided `dataArray`.",
+            "itemtype": "method",
+            "name": "genXLSX",
+            "params": [
+                {
+                    "name": "dataArray",
+                    "description": "the array to be converted into XLSX",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "a Blob containing the XLSX data",
+                "type": "Blob"
+            },
+            "class": "summary.js_anonymous",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 211,
+            "description": "Saves the provided `dataArray` to a file with the `fileType` extension using\nthe `csvFn` function.",
+            "itemtype": "method",
+            "name": "saveCSV",
+            "params": [
+                {
+                    "name": "csvFn",
+                    "description": "the funtion to convert array to csv",
+                    "type": "Function"
+                },
+                {
+                    "name": "dataArray",
+                    "description": "the array of data",
+                    "type": "Array"
+                },
+                {
+                    "name": "fileType",
+                    "description": "the extension of the saveFile",
+                    "type": "String"
+                }
+            ],
+            "class": "summary.js_anonymous",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 252,
+            "description": "Saves the data filtered by the provided boolean flags to a XLSX file.\nFirst calls `markus.data.getMarkupsArray` with the provided parameters,\nthen calls the `save` function from the summary.js_anonymous namespace\nusing the generated dataArray",
+            "itemtype": "method",
+            "name": "outputXLSX",
+            "params": [
+                {
+                    "name": "withPassage",
+                    "description": "if we want the passage that contains the markup",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "withSupportText",
+                    "description": "if we want surrounding text",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "noOfChars",
+                    "description": "the number of chars to include",
+                    "type": "Number"
+                }
+            ],
+            "class": "Summary",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 267,
+            "description": "Array that holds data that can be saved. Empty by default.",
+            "type": "{Array}",
+            "class": "Summary",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 274,
+            "description": "Array that holds a summary of all the tag types. Empty by default",
+            "type": "{Array}",
+            "class": "Summary",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 281,
+            "description": "Creates a summary of the document tags in a HTML table. Returns the generated HTML\nupon completion.",
+            "return": {
+                "description": "the generated HTML table containing the document tag summary.",
+                "type": "String"
+            },
+            "class": "Summary",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 305,
+            "description": "Exports the markupsArray that is generated according to the provided parameters\n(i.e. the two boolean flags and the number of characters requirement). Internally\nuses the `markus.data.getMarkupsArray` function and the `exportCSV` function defined\nin the summary.js_anonymous namespace.",
+            "itemtype": "method",
+            "name": "outputCSV",
+            "params": [
+                {
+                    "name": "withPassage",
+                    "description": "Should we include the passage",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "withSupportText",
+                    "description": "Should we include the supporting text",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "noOfChars",
+                    "description": "How many characters should we include",
+                    "type": "Integer"
+                }
+            ],
+            "class": "Summary",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 320,
+            "description": "Exports the markupsArray that is generated according to the provided parameters\n(i.e. the two boolean flags and the number of characters requirement). Internally\nuses the `markus.data.getMarkupsArray` function and the `exportCSV` function defined\nin the summary.js_anonymous namespace.",
+            "itemtype": "method",
+            "name": "outputTSV",
+            "params": [
+                {
+                    "name": "withPassage",
+                    "description": "Should we include the passage",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "withSupportText",
+                    "description": "Should we include the supporting text",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "noOfChars",
+                    "description": "How many characters should we include",
+                    "type": "Integer"
+                }
+            ],
+            "class": "Summary",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 335,
+            "description": "Exports the markupsArray that is generated according to the provided parameters\n(i.e. the two boolean flags and the number of characters requirement). Internally\nuses the `markus.data.getMarkupsArray` function and the `exportCSV` function defined\nin the summary.js_anonymous namespace.",
+            "itemtype": "method",
+            "name": "outputHTML",
+            "params": [
+                {
+                    "name": "withPassage",
+                    "description": "Should we include the passage",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "withSupportText",
+                    "description": "Should we include the supporting text",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "noOfChars",
+                    "description": "How many characters should we include",
+                    "type": "Integer"
+                }
+            ],
+            "class": "Summary",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 355,
+            "description": "Registers the click handlers for the following buttons:\n`#exportDataToCSV`, `#exportDataToTSV`, `#exportDataToHTML` and\n`exportDataToXLSX`.\n\nAlso defines the click behaviour of the show summary button that\nshows a summary of the tag-usage of the document in a modal window.",
+            "itemtype": "method",
+            "name": "registMarkupSummary",
+            "class": "Global",
+            "module": "summary.js"
+        },
+        {
+            "file": "src\\js\\summary.js",
+            "line": 402,
+            "description": "Returns the egdes of the tags in an array.",
+            "itemtype": "method",
+            "name": "tagToEdges",
+            "return": {
+                "description": "array that holds the edges",
+                "type": "Array"
+            },
+            "class": "Global",
+            "module": "summary.js"
+        },
+        {
             "file": "src\\js\\switcher.js",
             "line": 29,
             "description": "Registers what a color switcher does when it is clicked. When you click a\ncolor switcher it switches through the different states of color:\n`.noColor`, `.bordered`, no CSS class and back to `noColor` to complete the loop.",
@@ -2095,6 +2493,18 @@
         {
             "message": "Missing item type",
             "line": " src\\js\\manualMarkup.js:16"
+        },
+        {
+            "message": "Missing item type\nArray that holds data that can be saved. Empty by default.",
+            "line": " src\\js\\summary.js:267"
+        },
+        {
+            "message": "Missing item type\nArray that holds a summary of all the tag types. Empty by default",
+            "line": " src\\js\\summary.js:274"
+        },
+        {
+            "message": "Missing item type\nCreates a summary of the document tags in a HTML table. Returns the generated HTML\nupon completion.",
+            "line": " src\\js\\summary.js:281"
         },
         {
             "message": "Missing item type\nA click handler for the `.doc` class from the document scope. It\nremoves any `.selected` class and hides the `popover`.",

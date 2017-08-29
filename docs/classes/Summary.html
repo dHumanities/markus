@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JQuery</title>
+    <title>Summary</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -111,21 +111,23 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>JQuery Class</h1>
+<h1>Summary Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_js_markus.js.html#l20"><code>src\js\markus.js:20</code></a>
+            Defined in: <a href="../files/src_js_summary.js.html#l244"><code>src\js\summary.js:244</code></a>
         </div>
 
-            Module: <a href="../modules/markus.js.html">markus.js</a>
+            Module: <a href="../modules/summary.js.html">summary.js</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Some JQuery extensions</p>
+    <p>Defines the functions and variables availabe to the code outside of this file through
+the <code>markus.summary</code> object. Uses some functions that have been defined in the summary.js_anonymous
+namespace.</p>
 
 </div>
 
@@ -146,11 +148,19 @@
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_goto">goto</a>
+                                <a href="#method_outputCSV">outputCSV</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_replaceTagName">replaceTagName</a>
+                                <a href="#method_outputHTML">outputHTML</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_outputTSV">outputTSV</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_outputXLSX">outputXLSX</a>
 
                             </li>
                     </ul>
@@ -163,13 +173,19 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_goto" class="method item">
-    <h3 class="name"><code>goto</code></h3>
+<div id="method_outputCSV" class="method item">
+    <h3 class="name"><code>outputCSV</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>element</code>
+                        <code>withPassage</code>
+                </li>
+                <li class="arg">
+                        <code>withSupportText</code>
+                </li>
+                <li class="arg">
+                        <code>noOfChars</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -184,7 +200,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_markus.js.html#l25"><code>src\js\markus.js:25</code></a>
+        <a href="../files/src_js_summary.js.html#l305"><code>src\js\summary.js:305</code></a>
         </p>
 
 
@@ -192,12 +208,10 @@
     </div>
 
     <div class="description">
-        <p>New JQuery function definition. Scrolls to the element that is passed
-as a parameter.
-Example Usage:
-<code>$('#div_element2').goTo();</code>
-<em>Source:</em>
-<a href="https://stackoverflow.com/questions/4801655/how-to-go-to-a-specific-element-on-page">https://stackoverflow.com/questions/4801655/how-to-go-to-a-specific-element-on-page</a></p>
+        <p>Exports the markupsArray that is generated according to the provided parameters
+(i.e. the two boolean flags and the number of characters requirement). Internally
+uses the <code>markus.data.getMarkupsArray</code> function and the <code>exportCSV</code> function defined
+in the summary.js_anonymous namespace.</p>
 
     </div>
 
@@ -206,12 +220,34 @@ Example Usage:
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">element</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">withPassage</code>
+                        <span class="type">Boolean</span>
 
 
                     <div class="param-description">
-                        <p>the element we want to scroll to</p>
+                        <p>Should we include the passage</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">withSupportText</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>Should we include the supporting text</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">noOfChars</code>
+                        <span class="type">Integer</span>
+
+
+                    <div class="param-description">
+                        <p>How many characters should we include</p>
 
                     </div>
 
@@ -222,13 +258,19 @@ Example Usage:
 
 
 </div>
-<div id="method_replaceTagName" class="method item">
-    <h3 class="name"><code>replaceTagName</code></h3>
+<div id="method_outputHTML" class="method item">
+    <h3 class="name"><code>outputHTML</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>replaceWith</code>
+                        <code>withPassage</code>
+                </li>
+                <li class="arg">
+                        <code>withSupportText</code>
+                </li>
+                <li class="arg">
+                        <code>noOfChars</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -243,7 +285,7 @@ Example Usage:
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_markus.js.html#l45"><code>src\js\markus.js:45</code></a>
+        <a href="../files/src_js_summary.js.html#l335"><code>src\js\summary.js:335</code></a>
         </p>
 
 
@@ -251,12 +293,10 @@ Example Usage:
     </div>
 
     <div class="description">
-        <p>New JQuery function definition. Replaces all elements passed to this functions
-with the specified element name.</p>
-<p>Example Usage:
-<code>&#x60;$(&#x27;div&#x27;).replaceTagName(&#x27;span&#x27;);</code></p>
-<p><em>Source:</em>
-<a href="https://stackoverflow.com/questions/2815683/jquery-javascript-replace-tag-type">https://stackoverflow.com/questions/2815683/jquery-javascript-replace-tag-type</a></p>
+        <p>Exports the markupsArray that is generated according to the provided parameters
+(i.e. the two boolean flags and the number of characters requirement). Internally
+uses the <code>markus.data.getMarkupsArray</code> function and the <code>exportCSV</code> function defined
+in the summary.js_anonymous namespace.</p>
 
     </div>
 
@@ -265,12 +305,204 @@ with the specified element name.</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">replaceWith</code>
-                        <span class="type">String</span>
+                        <code class="param-name">withPassage</code>
+                        <span class="type">Boolean</span>
 
 
                     <div class="param-description">
-                        <p>the string you want to replace the element name with</p>
+                        <p>Should we include the passage</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">withSupportText</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>Should we include the supporting text</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">noOfChars</code>
+                        <span class="type">Integer</span>
+
+
+                    <div class="param-description">
+                        <p>How many characters should we include</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_outputTSV" class="method item">
+    <h3 class="name"><code>outputTSV</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>withPassage</code>
+                </li>
+                <li class="arg">
+                        <code>withSupportText</code>
+                </li>
+                <li class="arg">
+                        <code>noOfChars</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_summary.js.html#l320"><code>src\js\summary.js:320</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Exports the markupsArray that is generated according to the provided parameters
+(i.e. the two boolean flags and the number of characters requirement). Internally
+uses the <code>markus.data.getMarkupsArray</code> function and the <code>exportCSV</code> function defined
+in the summary.js_anonymous namespace.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">withPassage</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>Should we include the passage</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">withSupportText</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>Should we include the supporting text</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">noOfChars</code>
+                        <span class="type">Integer</span>
+
+
+                    <div class="param-description">
+                        <p>How many characters should we include</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_outputXLSX" class="method item">
+    <h3 class="name"><code>outputXLSX</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>withPassage</code>
+                </li>
+                <li class="arg">
+                        <code>withSupportText</code>
+                </li>
+                <li class="arg">
+                        <code>noOfChars</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_summary.js.html#l252"><code>src\js\summary.js:252</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Saves the data filtered by the provided boolean flags to a XLSX file.
+First calls <code>markus.data.getMarkupsArray</code> with the provided parameters,
+then calls the <code>save</code> function from the summary.js_anonymous namespace
+using the generated dataArray</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">withPassage</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>if we want the passage that contains the markup</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">withSupportText</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>if we want surrounding text</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">noOfChars</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>the number of chars to include</p>
 
                     </div>
 

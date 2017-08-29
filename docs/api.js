@@ -9,6 +9,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "JQuery",
         "ManualMarkup",
         "Regex",
+        "Summary",
         "UI",
         "Util",
         "WebDictionary",
@@ -17,6 +18,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "io.js_anonymous",
         "manualMarkup.js_anonymous",
         "navbar.js_anonymous",
+        "summary.js_anonymous",
         "switcher.js_anonymous",
         "tagRegex.js_anonymous",
         "ui.js_anonymous",
@@ -31,6 +33,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "markus.js",
         "navbar.js",
         "reference.js",
+        "summary.js",
         "switcher.js",
         "tagRegex.js",
         "ui.js",
@@ -72,6 +75,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "reference.js",
             "name": "reference.js",
             "description": "reference.js base file."
+        },
+        {
+            "displayName": "summary.js",
+            "name": "summary.js",
+            "description": "summary.js base file."
         },
         {
             "displayName": "switcher.js",

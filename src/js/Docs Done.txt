@@ -9,9 +9,11 @@ data.js
 helpInfo.js
 io.js
 manualMarkup.js
+=>markupPopup.js
 markus.js
 navbar.js
 reference.js
+=>summary.js
 switcher.js
 tagRegex.js
 ui.js

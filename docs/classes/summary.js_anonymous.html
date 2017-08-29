@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Data</title>
+    <title>summary.js_anonymous</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -111,31 +111,37 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Data Class</h1>
+<h1>summary.js_anonymous Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_js_data.js.html#l6"><code>src\js\data.js:6</code></a>
+            Defined in: <a href="../files/src_js_summary.js.html#l6"><code>src\js\summary.js:6</code></a>
         </div>
 
-            Module: <a href="../modules/data.js.html">data.js</a>
+            Module: <a href="../modules/summary.js.html">summary.js</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>Here the Markus.Data methods are defined and added to the Global Markus Singleton.
-The Data methods handle mostly data conversion</p>
+    <p>The class that holds the variables and functions created in the namespace of this file.
+The constrcutor of this object is only called once, because it is an anonymous function.</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_Data" class="method item">
-    <h3 class="name"><code>Data</code></h3>
+<div id="method_summary.js_anonymous" class="method item">
+    <h3 class="name"><code>summary.js_anonymous</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>_m</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
 
 
@@ -147,7 +153,7 @@ The Data methods handle mostly data conversion</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_data.js.html#l6"><code>src\js\data.js:6</code></a>
+        <a href="../files/src_js_summary.js.html#l6"><code>src\js\summary.js:6</code></a>
         </p>
 
 
@@ -158,6 +164,23 @@ The Data methods handle mostly data conversion</p>
         
     </div>
 
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">_m</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>a reference to the Markus Configuration Object is passed</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
 
 
 
@@ -180,19 +203,35 @@ The Data methods handle mostly data conversion</p>
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_getMarkupsArray">getMarkupsArray</a>
+                                <a href="#method_exportCSV">exportCSV</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_objArrayToCSV">objArrayToCSV</a>
+                                <a href="#method_genXLSX">genXLSX</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_objArrayToHTML">objArrayToHTML</a>
+                                <a href="#method_markupToCSV">markupToCSV</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_objArrayToTSV">objArrayToTSV</a>
+                                <a href="#method_markupToHTMl">markupToHTMl</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_markupToTSV">markupToTSV</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_markupTypeUniqueAndQuantitySummary">markupTypeUniqueAndQuantitySummary</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_save">save</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_saveCSV">saveCSV</a>
 
                             </li>
                     </ul>
@@ -205,25 +244,102 @@ The Data methods handle mostly data conversion</p>
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_getMarkupsArray" class="method item">
-    <h3 class="name"><code>getMarkupsArray</code></h3>
+<div id="method_exportCSV" class="method item">
+    <h3 class="name"><code>exportCSV</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>withPassage</code>
+                        <code>csvFn</code>
                 </li>
                 <li class="arg">
-                        <code>withSupportText</code>
+                        <code>dataArray</code>
                 </li>
                 <li class="arg">
-                        <code>noOfChars</code>
+                        <code>fileType</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_summary.js.html#l92"><code>src\js\summary.js:92</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Exports the provided <code>dataArray</code> to a file ending in the provided <code>fileType</code>
+extension using the provided <code>csvFn</code> function to create the data.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">csvFn</code>
+                        <span class="type">Function</span>
+
+
+                    <div class="param-description">
+                        <p>the function that will transform the data to CSV</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">dataArray</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>the data Array to be converted</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">fileType</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the fileType extension of the file to save</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_genXLSX" class="method item">
+    <h3 class="name"><code>genXLSX</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>dataArray</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
         <span class="returns-inline">
-            <span class="type">Array</span>
+            <span class="type">Blob</span>
         </span>
 
 
@@ -235,7 +351,7 @@ The Data methods handle mostly data conversion</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_data.js.html#l15"><code>src\js\data.js:15</code></a>
+        <a href="../files/src_js_summary.js.html#l162"><code>src\js\summary.js:162</code></a>
         </p>
 
 
@@ -243,9 +359,7 @@ The Data methods handle mostly data conversion</p>
     </div>
 
     <div class="description">
-        <p>Returns an array that, depending on the provided parameters will return the
-markups in the passage or in the whole document. And depending on the Boolean flag
-withSupportText it returns its surrounding text.</p>
+        <p>Generates Microsoft Excel data from the provided <code>dataArray</code>.</p>
 
     </div>
 
@@ -254,34 +368,12 @@ withSupportText it returns its surrounding text.</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">withPassage</code>
-                        <span class="type">Boolean</span>
+                        <code class="param-name">dataArray</code>
+                        <span class="type">Array</span>
 
 
                     <div class="param-description">
-                        <p>Do we want to include the passage</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">withSupportText</code>
-                        <span class="type">Boolean</span>
-
-
-                    <div class="param-description">
-                        <p>Do we want to include support Text</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">noOfChars</code>
-                        <span class="type">Int</span>
-
-
-                    <div class="param-description">
-                        <p>The number of chars to get</p>
+                        <p>the array to be converted into XLSX</p>
 
                     </div>
 
@@ -293,21 +385,21 @@ withSupportText it returns its surrounding text.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Array</span>:
-                    <p>An Array of markups</p>
+                        <span class="type">Blob</span>:
+                    <p>a Blob containing the XLSX data</p>
 
             </div>
         </div>
 
 
 </div>
-<div id="method_objArrayToCSV" class="method item">
-    <h3 class="name"><code>objArrayToCSV</code></h3>
+<div id="method_markupToCSV" class="method item">
+    <h3 class="name"><code>markupToCSV</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>objArray</code>
+                        <code>dataArray</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -325,7 +417,7 @@ withSupportText it returns its surrounding text.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_data.js.html#l149"><code>src\js\data.js:149</code></a>
+        <a href="../files/src_js_summary.js.html#l29"><code>src\js\summary.js:29</code></a>
         </p>
 
 
@@ -333,7 +425,8 @@ withSupportText it returns its surrounding text.</p>
     </div>
 
     <div class="description">
-        <p>Turns an array of objects into a CSV array.</p>
+        <p>Converts an array of objects into CSV data to be saved. Shortcut to
+<code>markus.data.objArrayToCSV</code></p>
 
     </div>
 
@@ -342,12 +435,12 @@ withSupportText it returns its surrounding text.</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">objArray</code>
+                        <code class="param-name">dataArray</code>
                         <span class="type">Array</span>
 
 
                     <div class="param-description">
-                        <p>the array to turn into a CSV</p>
+                        <p>the data to be converted</p>
 
                     </div>
 
@@ -360,20 +453,20 @@ withSupportText it returns its surrounding text.</p>
 
             <div class="returns-description">
                         <span class="type">String</span>:
-                    <p>The CSV data string</p>
+                    <p>the string that contains the converted CSV data</p>
 
             </div>
         </div>
 
 
 </div>
-<div id="method_objArrayToHTML" class="method item">
-    <h3 class="name"><code>objArrayToHTML</code></h3>
+<div id="method_markupToHTMl" class="method item">
+    <h3 class="name"><code>markupToHTMl</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>objArray</code>
+                        <code>dataArray</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -391,7 +484,7 @@ withSupportText it returns its surrounding text.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_data.js.html#l228"><code>src\js\data.js:228</code></a>
+        <a href="../files/src_js_summary.js.html#l42"><code>src\js\summary.js:42</code></a>
         </p>
 
 
@@ -399,7 +492,8 @@ withSupportText it returns its surrounding text.</p>
     </div>
 
     <div class="description">
-        <p>Returns the provided array as a HTML table.</p>
+        <p>Converts an array of objects into HTML data to be saved. Shortcut to
+<code>markus.data.objArrayToHTML</code></p>
 
     </div>
 
@@ -408,12 +502,12 @@ withSupportText it returns its surrounding text.</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">objArray</code>
+                        <code class="param-name">dataArray</code>
                         <span class="type">Array</span>
 
 
                     <div class="param-description">
-                        <p>the array of objects we want to convert</p>
+                        <p>the data to be converted</p>
 
                     </div>
 
@@ -426,20 +520,20 @@ withSupportText it returns its surrounding text.</p>
 
             <div class="returns-description">
                         <span class="type">String</span>:
-                    <p>the table of the array</p>
+                    <p>the string that contains the converted HTML data</p>
 
             </div>
         </div>
 
 
 </div>
-<div id="method_objArrayToTSV" class="method item">
-    <h3 class="name"><code>objArrayToTSV</code></h3>
+<div id="method_markupToTSV" class="method item">
+    <h3 class="name"><code>markupToTSV</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>objArray</code>
+                        <code>dataArray</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -457,7 +551,7 @@ withSupportText it returns its surrounding text.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_js_data.js.html#l192"><code>src\js\data.js:192</code></a>
+        <a href="../files/src_js_summary.js.html#l16"><code>src\js\summary.js:16</code></a>
         </p>
 
 
@@ -465,7 +559,8 @@ withSupportText it returns its surrounding text.</p>
     </div>
 
     <div class="description">
-        <p>Turns an array of objects into a TSV array.</p>
+        <p>Converts an array of objects into TSV data to be saved. Shortcut to
+<code>markus.data.objArrayToTSV</code></p>
 
     </div>
 
@@ -474,12 +569,12 @@ withSupportText it returns its surrounding text.</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">objArray</code>
+                        <code class="param-name">dataArray</code>
                         <span class="type">Array</span>
 
 
                     <div class="param-description">
-                        <p>the array to turn into a TSV</p>
+                        <p>the data to be converted</p>
 
                     </div>
 
@@ -492,10 +587,245 @@ withSupportText it returns its surrounding text.</p>
 
             <div class="returns-description">
                         <span class="type">String</span>:
-                    <p>The TSV data string</p>
+                    <p>the string that contains the converted TSV data</p>
 
             </div>
         </div>
+
+
+</div>
+<div id="method_markupTypeUniqueAndQuantitySummary" class="method item">
+    <h3 class="name"><code>markupTypeUniqueAndQuantitySummary</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>markupArray</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_summary.js.html#l54"><code>src\js\summary.js:54</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>This function analyses the provided markupArray. It counts every type
+or tag and saves these statistics in the returned <code>summary</code> object. For each
+type or tag we count the unique and total occurences.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">markupArray</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>contains the markup data to be analyzed</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Object</span>:
+                    <p>contains the analysis data ordered by markup type</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_save" class="method item">
+    <h3 class="name"><code>save</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>blobFn</code>
+                </li>
+                <li class="arg">
+                        <code>dataArray</code>
+                </li>
+                <li class="arg">
+                        <code>fileType</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_summary.js.html#l127"><code>src\js\summary.js:127</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Writes the provided <code>dataArray</code> to a file with the <code>fileType</code> extension that
+was provided using the <code>bloblFn</code> function to convert the <code>dataArray</code> to a
+binary blob.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">blobFn</code>
+                        <span class="type">Function</span>
+
+
+                    <div class="param-description">
+                        <p>the method to convert a dataArray to a Blob</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">dataArray</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>the array containing the data</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">fileType</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the fileType extension for the resulting saved file</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_saveCSV" class="method item">
+    <h3 class="name"><code>saveCSV</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>csvFn</code>
+                </li>
+                <li class="arg">
+                        <code>dataArray</code>
+                </li>
+                <li class="arg">
+                        <code>fileType</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_js_summary.js.html#l211"><code>src\js\summary.js:211</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Saves the provided <code>dataArray</code> to a file with the <code>fileType</code> extension using
+the <code>csvFn</code> function.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">csvFn</code>
+                        <span class="type">Function</span>
+
+
+                    <div class="param-description">
+                        <p>the funtion to convert array to csv</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">dataArray</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>the array of data</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">fileType</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the extension of the saveFile</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
 
 
 </div>

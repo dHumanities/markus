@@ -51,6 +51,8 @@
                                 <li><a href="../classes/manualMarkup.js_anonymous.html">manualMarkup.js_anonymous</a></li>
                                 <li><a href="../classes/navbar.js_anonymous.html">navbar.js_anonymous</a></li>
                                 <li><a href="../classes/Regex.html">Regex</a></li>
+                                <li><a href="../classes/Summary.html">Summary</a></li>
+                                <li><a href="../classes/summary.js_anonymous.html">summary.js_anonymous</a></li>
                                 <li><a href="../classes/switcher.js_anonymous.html">switcher.js_anonymous</a></li>
                                 <li><a href="../classes/tagRegex.js_anonymous.html">tagRegex.js_anonymous</a></li>
                                 <li><a href="../classes/UI.html">UI</a></li>
@@ -70,6 +72,7 @@
                                 <li><a href="../modules/markus.js.html">markus.js</a></li>
                                 <li><a href="../modules/navbar.js.html">navbar.js</a></li>
                                 <li><a href="../modules/reference.js.html">reference.js</a></li>
+                                <li><a href="../modules/summary.js.html">summary.js</a></li>
                                 <li><a href="../modules/switcher.js.html">switcher.js</a></li>
                                 <li><a href="../modules/tagRegex.js.html">tagRegex.js</a></li>
                                 <li><a href="../modules/ui.js.html">ui.js</a></li>
@@ -164,6 +167,10 @@
 
                             </li>
                             <li class="index-item method">
+                                <a href="#method_registMarkupSummary">registMarkupSummary</a>
+
+                            </li>
+                            <li class="index-item method">
                                 <a href="#method_registWebDictionary">registWebDictionary</a>
 
                             </li>
@@ -181,6 +188,10 @@
                             </li>
                             <li class="index-item method">
                                 <a href="#method_searchFromID">searchFromID</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_tagToEdges">tagToEdges</a>
 
                             </li>
                     </ul>
@@ -363,6 +374,42 @@ the functions behind the scenes.</p>
     <div class="description">
         <p>Global method that registers the Global Tag Management UI, it also takes care of all its
 event handlers etc.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_registMarkupSummary" class="method item">
+    <h3 class="name"><code>registMarkupSummary</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/summary.js.html">summary.js</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_js_summary.js.html#l355"><code>src\js\summary.js:355</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Registers the click handlers for the following buttons:
+<code>#exportDataToCSV</code>, <code>#exportDataToTSV</code>, <code>#exportDataToHTML</code> and
+<code>exportDataToXLSX</code>.</p>
+<p>Also defines the click behaviour of the show summary button that
+shows a summary of the tag-usage of the document in a modal window.</p>
 
     </div>
 
@@ -639,6 +686,50 @@ given the <code>active</code> class</p>
             </ul>
         </div>
 
+
+
+</div>
+<div id="method_tagToEdges" class="method item">
+    <h3 class="name"><code>tagToEdges</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/summary.js.html">summary.js</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_js_summary.js.html#l402"><code>src\js\summary.js:402</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Returns the egdes of the tags in an array.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Array</span>:
+                    <p>array that holds the edges</p>
+
+            </div>
+        </div>
 
 
 </div>
