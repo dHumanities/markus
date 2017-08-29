@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>comment.js</title>
+    <title>src\js\switcher.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -107,44 +107,113 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>comment.js Module</h1>
-<div class="box clearfix meta">
+<h1 class="file-heading">File: src\js\switcher.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * switcher.js base file.
+ * @module switcher.js
+ */
 
 
-        <div class="foundat">
-            Defined in: <a href="../files/src_js_comment.js.html#l206"><code>src\js\comment.js:206</code></a>
-        </div>
+  /**
+  The class that holds the variables and functions created in the namespace of this file.
+  The constrcutor of this object is only called once, because it is an anonymous function.
 
-</div>
-
-
-<div class="box intro">
-    <p>Comment.js base file.</p>
-
-</div>
-
-
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-            <p>This module provides the following classes:</p>
-
-            <ul class="module-classes">
-                <li class="module-class">
-                    <a href="../classes/Comment.html">
-                        Comment
-                    </a>
-                </li>
-                <li class="module-class">
-                    <a href="../classes/comment.js_anonymous.html">
-                        comment.js_anonymous
-                    </a>
-                </li>
-            </ul>
-    </div>
+  @class switcher.js_anonymous
+  @constructor
+  @param {Object}  _m a reference to the Markus Configuration Object is passed
+  **/
+( function(_m) {
+//If the markus.ui object has not been defined yet, define it here
+if (_m.ui == null) {
+    _m.ui = {};
+}
 
 
-    <div class="yui3-u-1-2">
-    </div>
+/**
+ * Creates the &#x60;markus.ui.colorSwitcher&#x60; class. This class has only one method:
+ * &#x60;regist(target, buttonSelector, doc)&#x60;.
+ *
+ * @class ColorSwitcher
+ */
+_m.ui.colorSwitcher = {
+    /**
+     * Registers what a color switcher does when it is clicked. When you click a
+     * color switcher it switches through the different states of color:
+     * &#x60;.noColor&#x60;, &#x60;.bordered&#x60;, no CSS class and back to &#x60;noColor&#x60; to complete the loop.
+     *
+     * @method regist
+     * @param  {Element} target        the colorSwitcher element
+     * @param  {String} buttonSelector Selector, only triggers color switch if this one is clicked
+     * @param  {Element} doc           Reference to the document to find all other instances of this class
+     */
+    regist: function(target, buttonSelector, doc) {
+      //log the target as a JQuery object
+        console.log($(target));
+        $(target).on(&quot;click&quot;, buttonSelector, function() {
+            var colorSwitchedClass = $(this).attr(&quot;color-switcher-class&quot;);
+
+            //If it was set at al
+            if (colorSwitchedClass) {
+
+                // noColor -&gt; bordered -&gt; no CSS Class -&gt; no Color. ...
+
+                if ($(this).hasClass(&quot;noColor&quot;)) {
+                  //Remove the noColor class and tagReset from the tag clicked
+                    $(this).removeClass(&quot;noColor&quot;).removeClass(&quot;tagReset&quot;);
+                    $(this).addClass(&quot;bordered&quot;);
+                    //Remove the noColor class and TagReset from all the other tags of this type
+                    $(doc).find(&quot;.&quot; + colorSwitchedClass).removeClass(&quot;noColor&quot;).removeClass(&quot;tagReset&quot;);
+                    // $(doc).find(&quot;.&quot; + colorSwitchedClass).removeClass(&quot;tagReset&quot;);
+                    $(doc).find(&quot;.&quot; + colorSwitchedClass).addClass(&quot;bordered&quot;);
+                    //Set its global status to bordered
+                    markus.tag[colorSwitchedClass][&quot;status&quot;] = &quot;bordered&quot;;
+
+                } else if ($(this).hasClass(&quot;bordered&quot;)) {
+                    //Remove the noColor and bordered class from the clicked element
+                    $(this).removeClass(&quot;noColor&quot;);
+                    $(this).removeClass(&quot;bordered&quot;);
+                    $(this).addClass(&quot;tagReset&quot;);
+                    //Remove the noColor and bordered class from all others of same type
+                    $(doc).find(&quot;.&quot; + colorSwitchedClass).removeClass(&quot;noColor&quot;).removeClass(&quot;bordered&quot;);
+                    $(doc).find(&quot;.&quot; + colorSwitchedClass).addClass(&quot;tagReset&quot;);
+                    markus.tag[colorSwitchedClass][&quot;status&quot;] = &quot;tagReset&quot;;
+                } else if ($(this).hasClass(&quot;tagReset&quot;)) {
+                    // $(this).addClass(&quot;noColor&quot;);
+                    $(this).removeClass(&quot;bordered&quot;).removeClass(&quot;tagReset&quot;).removeClass(&quot;noColor&quot;);
+                    $(doc).find(&quot;.&quot; + colorSwitchedClass).removeClass(&quot;bordered&quot;).removeClass(&quot;tagReset&quot;).removeClass(&quot;noColor&quot;);
+                    markus.tag[colorSwitchedClass][&quot;status&quot;] = &quot;&quot;;
+
+                } else {
+                    $(this).addClass(&quot;noColor&quot;);
+                    $(this).removeClass(&quot;bordered&quot;).removeClass(&quot;tagReset&quot;);
+                    $(doc).find(&quot;.&quot; + colorSwitchedClass).removeClass(&quot;bordered&quot;).removeClass(&quot;tagReset&quot;);
+                    $(doc).find(&quot;.&quot; + colorSwitchedClass).addClass(&quot;noColor&quot;);
+                    markus.tag[colorSwitchedClass][&quot;status&quot;] = &quot;noColor&quot;;
+                }
+            }
+        });
+    }
+};
+
+
+
+} )(markus);
+
+
+/**
+ * Global function that registers the base color switcher
+ *
+ * @for Global
+ * @method registColorSwitcher
+ */
+var registColorSwitcher = function() {
+    markus.ui.colorSwitcher.regist(&quot;#buttonsRow&quot;, &quot;button.switcher&quot;, &quot;.doc&quot;);
+}
+
+    </pre>
 </div>
                     </div>
                 </div>

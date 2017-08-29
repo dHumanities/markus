@@ -1,6 +1,7 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "ColorSwitcher",
         "Comment",
         "Data",
         "Global",
@@ -16,6 +17,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "io.js_anonymous",
         "manualMarkup.js_anonymous",
         "navbar.js_anonymous",
+        "switcher.js_anonymous",
         "tagRegex.js_anonymous",
         "ui.js_anonymous",
         "utilities.js_anonymous",
@@ -28,6 +30,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "io.js",
         "markus.js",
         "navbar.js",
+        "switcher.js",
         "tagRegex.js",
         "ui.js",
         "utilities.js",
@@ -63,6 +66,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "navbar.js",
             "name": "navbar.js",
             "description": "navbar.js base file."
+        },
+        {
+            "displayName": "switcher.js",
+            "name": "switcher.js",
+            "description": "switcher.js base file."
         },
         {
             "displayName": "tagRegex.js",

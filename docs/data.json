@@ -87,6 +87,20 @@
             "fors": {},
             "namespaces": {}
         },
+        "src\\js\\switcher.js": {
+            "name": "src\\js\\switcher.js",
+            "modules": {
+                "switcher.js": 1
+            },
+            "classes": {
+                "switcher.js_anonymous": 1,
+                "ColorSwitcher": 1
+            },
+            "fors": {
+                "Global": 1
+            },
+            "namespaces": {}
+        },
         "src\\js\\tagRegex.js": {
             "name": "src\\js\\tagRegex.js",
             "modules": {
@@ -240,6 +254,23 @@
             "file": "src\\js\\navbar.js",
             "line": 6,
             "description": "navbar.js base file."
+        },
+        "switcher.js": {
+            "name": "switcher.js",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "switcher.js_anonymous": 1,
+                "ColorSwitcher": 1
+            },
+            "fors": {
+                "Global": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\js\\switcher.js",
+            "line": 22,
+            "description": "switcher.js base file."
         },
         "tagRegex.js": {
             "name": "tagRegex.js",
@@ -507,6 +538,42 @@
                     "type": "Object"
                 }
             ]
+        },
+        "switcher.js_anonymous": {
+            "name": "switcher.js_anonymous",
+            "shortname": "switcher.js_anonymous",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "switcher.js",
+            "namespace": "",
+            "file": "src\\js\\switcher.js",
+            "line": 7,
+            "description": "The class that holds the variables and functions created in the namespace of this file.\nThe constrcutor of this object is only called once, because it is an anonymous function.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "_m",
+                    "description": "a reference to the Markus Configuration Object is passed",
+                    "type": "Object"
+                }
+            ]
+        },
+        "ColorSwitcher": {
+            "name": "ColorSwitcher",
+            "shortname": "ColorSwitcher",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "switcher.js",
+            "namespace": "",
+            "file": "src\\js\\switcher.js",
+            "line": 22,
+            "description": "Creates the `markus.ui.colorSwitcher` class. This class has only one method:\n`regist(target, buttonSelector, doc)`."
         },
         "tagRegex.js_anonymous": {
             "name": "tagRegex.js_anonymous",
@@ -1307,6 +1374,41 @@
             "name": "loadNavBar",
             "class": "navbar.js_anonymous",
             "module": "navbar.js"
+        },
+        {
+            "file": "src\\js\\switcher.js",
+            "line": 29,
+            "description": "Registers what a color switcher does when it is clicked. When you click a\ncolor switcher it switches through the different states of color:\n`.noColor`, `.bordered`, no CSS class and back to `noColor` to complete the loop.",
+            "itemtype": "method",
+            "name": "regist",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "the colorSwitcher element",
+                    "type": "Element"
+                },
+                {
+                    "name": "buttonSelector",
+                    "description": "Selector, only triggers color switch if this one is clicked",
+                    "type": "String"
+                },
+                {
+                    "name": "doc",
+                    "description": "Reference to the document to find all other instances of this class",
+                    "type": "Element"
+                }
+            ],
+            "class": "ColorSwitcher",
+            "module": "switcher.js"
+        },
+        {
+            "file": "src\\js\\switcher.js",
+            "line": 93,
+            "description": "Global function that registers the base color switcher",
+            "itemtype": "method",
+            "name": "registColorSwitcher",
+            "class": "Global",
+            "module": "switcher.js"
         },
         {
             "file": "src\\js\\tagRegex.js",
