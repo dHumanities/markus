@@ -69,6 +69,7 @@
                                 <li><a href="../modules/io.js.html">io.js</a></li>
                                 <li><a href="../modules/markus.js.html">markus.js</a></li>
                                 <li><a href="../modules/navbar.js.html">navbar.js</a></li>
+                                <li><a href="../modules/reference.js.html">reference.js</a></li>
                                 <li><a href="../modules/switcher.js.html">switcher.js</a></li>
                                 <li><a href="../modules/tagRegex.js.html">tagRegex.js</a></li>
                                 <li><a href="../modules/ui.js.html">ui.js</a></li>
@@ -160,6 +161,26 @@
                             </li>
                             <li class="index-item method">
                                 <a href="#method_registeTagManageUI">registeTagManageUI</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_registWebDictionary">registWebDictionary</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_searchByID">searchByID</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_searchCBDB">searchCBDB</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_searchCBDBID">searchCBDBID</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_searchFromID">searchFromID</a>
 
                             </li>
                     </ul>
@@ -345,6 +366,278 @@ event handlers etc.</p>
 
     </div>
 
+
+
+
+</div>
+<div id="method_registWebDictionary" class="method item">
+    <h3 class="name"><code>registWebDictionary</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/reference.js.html">reference.js</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_js_reference.js.html#l6"><code>src\js\reference.js:6</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Registers the resize handler for the WebDictionary and registers the webDictionary
+afterwards using the <code>markus.webDict.registWebDictionary()</code> function.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_searchByID" class="method item">
+    <h3 class="name"><code>searchByID</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>dictionary</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/reference.js.html">reference.js</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_js_reference.js.html#l64"><code>src\js\reference.js:64</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Looks for a match in the CBDB using the idRef contained in the provided webdictionary.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">dictionary</code>
+                        <span class="type">Element</span>
+
+
+                    <div class="param-description">
+                        <p>reference to the webdictionary, used to grab its <code>&lt;input&gt;</code></p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_searchCBDB" class="method item">
+    <h3 class="name"><code>searchCBDB</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>dictionary</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/reference.js.html">reference.js</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_js_reference.js.html#l21"><code>src\js\reference.js:21</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>This method searches the CBDB using the input value of the provided webdictionary. If
+there are multiple matches, display just one and create switcher buttons for the other matches.
+When you click such a button <code>Global.searchCBDBID</code> is called</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">dictionary</code>
+                        <span class="type">Element</span>
+
+
+                    <div class="param-description">
+                        <p>the dictionary element. Used to grab its <code>&lt;input&gt;</code> element</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_searchCBDBID" class="method item">
+    <h3 class="name"><code>searchCBDBID</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>id</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/reference.js.html">reference.js</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_js_reference.js.html#l137"><code>src\js\reference.js:137</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Searches trough the <code>#cbdbIDRef</code>. Finds matches for the provided id. If found
+matches are given the <code>active</code> class. Then opens the url in the standard cbdb dictionary.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">id</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the id of the cbdbid we're trying to match/find</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_searchFromID" class="method item">
+    <h3 class="name"><code>searchFromID</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>dictionary_name</code>
+                </li>
+                <li class="arg">
+                        <code>id</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                    <p>Provided by the <a href="../modules/reference.js.html">reference.js</a> module.</p>
+                <p>
+                Defined in
+        <a href="../files/src_js_reference.js.html#l105"><code>src\js\reference.js:105</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Opens the provided id in the dictionary referenced by the provided dictionary_name
+as a string. Matches for that ID in the containing dictionary element are
+given the <code>active</code> class</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">dictionary_name</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the name of the dictionary to find</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">id</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the id to look for in the CBDB</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
 
 
 

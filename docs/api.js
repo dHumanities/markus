@@ -30,6 +30,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "io.js",
         "markus.js",
         "navbar.js",
+        "reference.js",
         "switcher.js",
         "tagRegex.js",
         "ui.js",
@@ -66,6 +67,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "navbar.js",
             "name": "navbar.js",
             "description": "navbar.js base file."
+        },
+        {
+            "displayName": "reference.js",
+            "name": "reference.js",
+            "description": "reference.js base file."
         },
         {
             "displayName": "switcher.js",

@@ -87,6 +87,17 @@
             "fors": {},
             "namespaces": {}
         },
+        "src\\js\\reference.js": {
+            "name": "src\\js\\reference.js",
+            "modules": {
+                "reference.js": 1
+            },
+            "classes": {},
+            "fors": {
+                "Global": 1
+            },
+            "namespaces": {}
+        },
         "src\\js\\switcher.js": {
             "name": "src\\js\\switcher.js",
             "modules": {
@@ -254,6 +265,20 @@
             "file": "src\\js\\navbar.js",
             "line": 6,
             "description": "navbar.js base file."
+        },
+        "reference.js": {
+            "name": "reference.js",
+            "submodules": {},
+            "elements": {},
+            "classes": {},
+            "fors": {
+                "Global": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\js\\reference.js",
+            "line": 1,
+            "description": "reference.js base file."
         },
         "switcher.js": {
             "name": "switcher.js",
@@ -1374,6 +1399,84 @@
             "name": "loadNavBar",
             "class": "navbar.js_anonymous",
             "module": "navbar.js"
+        },
+        {
+            "file": "src\\js\\reference.js",
+            "line": 6,
+            "description": "Registers the resize handler for the WebDictionary and registers the webDictionary\nafterwards using the `markus.webDict.registWebDictionary()` function.",
+            "itemtype": "method",
+            "name": "registWebDictionary",
+            "class": "Global",
+            "module": "reference.js"
+        },
+        {
+            "file": "src\\js\\reference.js",
+            "line": 21,
+            "description": "This method searches the CBDB using the input value of the provided webdictionary. If\nthere are multiple matches, display just one and create switcher buttons for the other matches.\nWhen you click such a button `Global.searchCBDBID` is called",
+            "itemtype": "method",
+            "name": "searchCBDB",
+            "params": [
+                {
+                    "name": "dictionary",
+                    "description": "the dictionary element. Used to grab its `<input>` element",
+                    "type": "Element"
+                }
+            ],
+            "class": "Global",
+            "module": "reference.js"
+        },
+        {
+            "file": "src\\js\\reference.js",
+            "line": 64,
+            "description": "Looks for a match in the CBDB using the idRef contained in the provided webdictionary.",
+            "itemtype": "method",
+            "name": "searchByID",
+            "params": [
+                {
+                    "name": "dictionary",
+                    "description": "reference to the webdictionary, used to grab its `<input>`",
+                    "type": "Element"
+                }
+            ],
+            "class": "Global",
+            "module": "reference.js"
+        },
+        {
+            "file": "src\\js\\reference.js",
+            "line": 105,
+            "description": "Opens the provided id in the dictionary referenced by the provided dictionary_name\nas a string. Matches for that ID in the containing dictionary element are\ngiven the `active` class",
+            "itemtype": "method",
+            "name": "searchFromID",
+            "params": [
+                {
+                    "name": "dictionary_name",
+                    "description": "the name of the dictionary to find",
+                    "type": "String"
+                },
+                {
+                    "name": "id",
+                    "description": "the id to look for in the CBDB",
+                    "type": "String"
+                }
+            ],
+            "class": "Global",
+            "module": "reference.js"
+        },
+        {
+            "file": "src\\js\\reference.js",
+            "line": 137,
+            "description": "Searches trough the `#cbdbIDRef`. Finds matches for the provided id. If found\nmatches are given the `active` class. Then opens the url in the standard cbdb dictionary.",
+            "itemtype": "method",
+            "name": "searchCBDBID",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "the id of the cbdbid we're trying to match/find",
+                    "type": "String"
+                }
+            ],
+            "class": "Global",
+            "module": "reference.js"
         },
         {
             "file": "src\\js\\switcher.js",

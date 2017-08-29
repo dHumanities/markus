@@ -11,6 +11,7 @@ io.js
 manualMarkup.js
 markus.js
 navbar.js
+reference.js
 switcher.js
 tagRegex.js
 ui.js
