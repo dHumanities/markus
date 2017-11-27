@@ -2,6 +2,9 @@
 Due to the licensing of various dependencies of MARKUS we are not rehosting their libraries on Github.
 Below you will find a list of the libraries used in the development of MARKUS and their download location.
 
+Using the libraries below you should be able to make a local running copy of MARKUS. The use of CText will not
+work due to their licensing. If you want to make this work you should contact Donald Sturgeon.
+
 ### Libraries:
 #### [Bootstrap](http://blog.getbootstrap.com/2016/07/25/bootstrap-3-3-7-released/) __CSS & JS__
 Bootstrap contains a basic layout template and grid system for webpages.
