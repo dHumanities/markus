@@ -20,7 +20,7 @@
         background-color: #428bca;
     }
     /*.timePeriod:after {
-      content : "<" attr(data-markus-date) ">"; 
+      content : "<" attr(data-markus-date) ">";
     }*/
     /*.checkboxControl{
       text-align: left;
@@ -138,19 +138,89 @@
     <script type="text/javascript" src="js/earlyJoseon.js"></script>
 
     <script>
+    /**
+     * automarkup.html base file
+     * @module automarkup.html
+     */
+
+
+
     // var markupFullName = markupPartialName = markupNianhao = markupofficialTitle = markupPlaceName = false;
 
-    var dynastySelection = {"10":{"first":404,"last":404,"name":"桓楚"},"11":{"first":1122,"last":1123,"name":"北遼"},"12":{"first":338,"last":377,"name":"代"},"13":{"first":1645,"last":1662,"name":"南明"},"14":{"first":304,"last":318,"name":"漢趙"},"15":{"first":1124,"last":1212,"name":"西遼"},"16":{"first":555,"last":587,"name":"西梁"},"17":{"first":384,"last":394,"name":"西燕"},"18":{"first":388,"last":393,"name":"翟魏"},"19":{"first":350,"last":352,"name":"冉魏"},"22":{"first":1616,"last":1636,"name":"後金"},"28":{"first":-221,"last":-207,"name":"秦"},"29":{"first":-208,"last":-202,"name":"楚"},"31":{"first":-207,"last":25,"name":"西漢"},"32":{"first":9,"last":23,"name":"新"},"34":{"first":25,"last":221,"name":"東漢"},"35":{"first":220,"last":266,"name":"曹魏"},"36":{"first":221,"last":264,"name":"蜀漢"},"37":{"first":222,"last":280,"name":"孫吳"},"39":{"first":266,"last":362,"name":"西晉"},"40":{"first":317,"last":420,"name":"東晉"},"41":{"first":318,"last":329,"name":"前趙"},"42":{"first":303,"last":347,"name":"成漢"},"43":{"first":328,"last":351,"name":"後趙"},"44":{"first":301,"last":387,"name":"前涼"},"45":{"first":352,"last":371,"name":"前燕"},"46":{"first":351,"last":394,"name":"前秦"},"47":{"first":384,"last":417,"name":"後秦"},"48":{"first":384,"last":407,"name":"後燕"},"49":{"first":385,"last":431,"name":"西秦"},"50":{"first":386,"last":403,"name":"後涼"},"51":{"first":397,"last":414,"name":"南涼"},"52":{"first":398,"last":410,"name":"南燕"},"53":{"first":400,"last":421,"name":"西涼"},"54":{"first":397,"last":460,"name":"北涼"},"55":{"first":407,"last":431,"name":"胡夏"},"56":{"first":407,"last":436,"name":"北燕"},"57":{"first":420,"last":479,"name":"劉宋"},"58":{"first":479,"last":502,"name":"南齊"},"59":{"first":502,"last":557,"name":"南梁"},"60":{"first":557,"last":589,"name":"陳"},"61":{"first":386,"last":535,"name":"北魏"},"62":{"first":534,"last":550,"name":"東魏"},"63":{"first":535,"last":557,"name":"西魏"},"64":{"first":550,"last":577,"name":"北齊"},"65":{"first":557,"last":581,"name":"北周"},"66":{"first":581,"last":618,"name":"隋"},"67":{"first":618,"last":907,"name":"唐"},"68":{"first":690,"last":705,"name":"武周"},"69":{"first":907,"last":923,"name":"後梁"},"70":{"first":907,"last":937,"name":"後唐"},"71":{"first":936,"last":947,"name":"後晉"},"72":{"first":947,"last":951,"name":"後漢"},"73":{"first":951,"last":960,"name":"後周"},"74":{"first":902,"last":937,"name":"南吳"},"75":{"first":904,"last":925,"name":"前蜀"},"76":{"first":907,"last":978,"name":"吳越"},"78":{"first":917,"last":971,"name":"南漢"},"79":{"first":909,"last":945,"name":"閩"},"81":{"first":934,"last":965,"name":"後蜀"},"82":{"first":937,"last":958,"name":"南唐"},"83":{"first":951,"last":979,"name":"北漢"},"85":{"first":960,"last":1127,"name":"北宋"},"86":{"first":1127,"last":1279,"name":"南宋"},"87":{"first":907,"last":1125,"name":"契丹"},"88":{"first":1115,"last":1234,"name":"大金"},"89":{"first":1271,"last":1370,"name":"大元"},"90":{"first":1032,"last":1227,"name":"西夏"},"91":{"first":1368,"last":1895,"name":"大明"},"92":{"first":1636,"last":1912,"name":"大清"},"93":{"first":1912,"last":1912,"name":"民國"},"96":{"first":-57,"last":935,"name":"駟盧"},"108":{"first":1331,"last":1392,"name":"北朝"},"109":{"first":1336,"last":1392,"name":"南朝"},"114":{"first":-37,"last":668,"name":"高勾麗"},"115":{"first":552,"last":552,"name":"侯漢"},"116":{"first":-18,"last":660,"name":"百濟"},"117":{"first":918,"last":1392,"name":"高麗"},"118":{"first":901,"last":918,"name":"泰封"},"119":{"first":901,"last":936,"name":"後百濟"},"121":{"first":1392,"last":1895,"name":"大朝鮮國"},"122":{"first":1206,"last":1271,"name":"蒙古"}};    
+    /**
+     * Object that defines all the dynasties, their reigning years and names
+     *
+     * @property dynastySelection
+     * @type {Object}
+     * @for Global
+     */
+    var dynastySelection = {"10":{"first":404,"last":404,"name":"桓楚"},"11":{"first":1122,"last":1123,"name":"北遼"},"12":{"first":338,"last":377,"name":"代"},"13":{"first":1645,"last":1662,"name":"南明"},"14":{"first":304,"last":318,"name":"漢趙"},"15":{"first":1124,"last":1212,"name":"西遼"},"16":{"first":555,"last":587,"name":"西梁"},"17":{"first":384,"last":394,"name":"西燕"},"18":{"first":388,"last":393,"name":"翟魏"},"19":{"first":350,"last":352,"name":"冉魏"},"22":{"first":1616,"last":1636,"name":"後金"},"28":{"first":-221,"last":-207,"name":"秦"},"29":{"first":-208,"last":-202,"name":"楚"},"31":{"first":-207,"last":25,"name":"西漢"},"32":{"first":9,"last":23,"name":"新"},"34":{"first":25,"last":221,"name":"東漢"},"35":{"first":220,"last":266,"name":"曹魏"},"36":{"first":221,"last":264,"name":"蜀漢"},"37":{"first":222,"last":280,"name":"孫吳"},"39":{"first":266,"last":362,"name":"西晉"},"40":{"first":317,"last":420,"name":"東晉"},"41":{"first":318,"last":329,"name":"前趙"},"42":{"first":303,"last":347,"name":"成漢"},"43":{"first":328,"last":351,"name":"後趙"},"44":{"first":301,"last":387,"name":"前涼"},"45":{"first":352,"last":371,"name":"前燕"},"46":{"first":351,"last":394,"name":"前秦"},"47":{"first":384,"last":417,"name":"後秦"},"48":{"first":384,"last":407,"name":"後燕"},"49":{"first":385,"last":431,"name":"西秦"},"50":{"first":386,"last":403,"name":"後涼"},"51":{"first":397,"last":414,"name":"南涼"},"52":{"first":398,"last":410,"name":"南燕"},"53":{"first":400,"last":421,"name":"西涼"},"54":{"first":397,"last":460,"name":"北涼"},"55":{"first":407,"last":431,"name":"胡夏"},"56":{"first":407,"last":436,"name":"北燕"},"57":{"first":420,"last":479,"name":"劉宋"},"58":{"first":479,"last":502,"name":"南齊"},"59":{"first":502,"last":557,"name":"南梁"},"60":{"first":557,"last":589,"name":"陳"},"61":{"first":386,"last":535,"name":"北魏"},"62":{"first":534,"last":550,"name":"東魏"},"63":{"first":535,"last":557,"name":"西魏"},"64":{"first":550,"last":577,"name":"北齊"},"65":{"first":557,"last":581,"name":"北周"},"66":{"first":581,"last":618,"name":"隋"},"67":{"first":618,"last":907,"name":"唐"},"68":{"first":690,"last":705,"name":"武周"},"69":{"first":907,"last":923,"name":"後梁"},"70":{"first":907,"last":937,"name":"後唐"},"71":{"first":936,"last":947,"name":"後晉"},"72":{"first":947,"last":951,"name":"後漢"},"73":{"first":951,"last":960,"name":"後周"},"74":{"first":902,"last":937,"name":"南吳"},"75":{"first":904,"last":925,"name":"前蜀"},"76":{"first":907,"last":978,"name":"吳越"},"78":{"first":917,"last":971,"name":"南漢"},"79":{"first":909,"last":945,"name":"閩"},"81":{"first":934,"last":965,"name":"後蜀"},"82":{"first":937,"last":958,"name":"南唐"},"83":{"first":951,"last":979,"name":"北漢"},"85":{"first":960,"last":1127,"name":"北宋"},"86":{"first":1127,"last":1279,"name":"南宋"},"87":{"first":907,"last":1125,"name":"契丹"},"88":{"first":1115,"last":1234,"name":"大金"},"89":{"first":1271,"last":1370,"name":"大元"},"90":{"first":1032,"last":1227,"name":"西夏"},"91":{"first":1368,"last":1895,"name":"大明"},"92":{"first":1636,"last":1912,"name":"大清"},"93":{"first":1912,"last":1912,"name":"民國"},"96":{"first":-57,"last":935,"name":"駟盧"},"108":{"first":1331,"last":1392,"name":"北朝"},"109":{"first":1336,"last":1392,"name":"南朝"},"114":{"first":-37,"last":668,"name":"高勾麗"},"115":{"first":552,"last":552,"name":"侯漢"},"116":{"first":-18,"last":660,"name":"百濟"},"117":{"first":918,"last":1392,"name":"高麗"},"118":{"first":901,"last":918,"name":"泰封"},"119":{"first":901,"last":936,"name":"後百濟"},"121":{"first":1392,"last":1895,"name":"大朝鮮國"},"122":{"first":1206,"last":1271,"name":"蒙古"}};
 
+    /**
+     * Temporary file holder
+     *
+     * @property tempFile
+     * @type {String}
+     * @for Global
+     */
     var tempFile = "";
 
+    /**
+     * Array of regular expressions
+     *
+     * @type {Array}
+     * @property regexs
+     * @for Global
+     */
     var regexs = [];
+    /**
+     * Array of regular expressions for CBDB
+     *
+     * @type {Array}
+     * @property CBDBRegexs
+     * @for Global
+     */
     var CBDBRegexs = [];
+    /**
+     * Number describing the amount found
+     *
+     * @property found
+     * @type {Number}
+     * @for Global
+     */
     var found = 0;
 
+    /**
+     * Maximum number of threads for the unique terms
+     *
+     * @for Global
+     * @type {Number}
+     * @property uniqueTermThreadsMax
+     */
     var uniqueTermThreadsMax = 8; // check
+    /**
+     * Array of the uniqueTerm threads
+     *
+     * @type {Array}
+     * @for Global
+     * @property uniqueTermThreads
+     */
     var uniqueTermThreads = [];
+    /**
+     * Counting the amount of uniqueTermThreads
+     *
+     * @for Global
+     * @type {Number}
+     * @property uniqueTermThreadscount
+     */
     var uniqueTermThreadscount = -1; //check
+    /**
+     * The jobs that need to be done by the threads
+     *
+     * @property uniqueTermJobs
+     * @type {Array}
+     * @for Global
+     */
     var uniqueTermJobs = [];
 
     var uniqueTermRegexsIndex = -1; // check
@@ -244,11 +314,11 @@
         });
 
         $("#autocompleteTimePeriodBtn").on("click",function(){
-            
-            var recent_data_attribute = {dynasty:[],nianhao:"",tinKan:"",leap_month:"",year:"",month:""};    
+
+            var recent_data_attribute = {dynasty:[],nianhao:"",tinKan:"",leap_month:"",year:"",month:""};
             $(".doc .timePeriod").each(function(){
-                
-                
+
+
                 if (!$(this).attr("data-original-data-attribute")){
                     $(this).attr("data-original-data-attribute",$(this).attr("data-attribute"));
                 }
@@ -256,29 +326,29 @@
                 var data_attribute = JSON.parse(markus.util.converBackToUnicode($(this).attr("data-original-data-attribute")));
                 var data_autocomplete_attribute = JSON.parse(markus.util.converBackToUnicode($(this).attr("data-original-data-attribute")));
                 var head = "";
-                
+
                 if (recent_data_attribute.nianhao!="" && data_attribute.nianhao ==""){
                     head +="〈"+recent_data_attribute.nianhao+"〉";
                     data_autocomplete_attribute.dynasty = recent_data_attribute.dynasty;
                     data_autocomplete_attribute.nianhao = recent_data_attribute.nianhao;
                 } else if (data_attribute.nianhao!= ""){
-                    
+
                     recent_data_attribute.dynasty = data_attribute.dynasty;
                     recent_data_attribute.nianhao = data_attribute.nianhao;
                 }
                 if (recent_data_attribute.year!="" && data_attribute.year =="" && data_attribute.nianhao ==""){
-                    
+
                         head += "〈"+recent_data_attribute.year+"年〉";
                      data_autocomplete_attribute.year = recent_data_attribute.year;
-                    
+
                 } else if (data_attribute.year!= ""){
-                    
+
                     recent_data_attribute.year = data_attribute.year;
                 }
-                if (recent_data_attribute.month!="" && data_attribute.month =="" && data_attribute.year =="" && data_attribute.nianhao ==""){                    
-                        head +="〈"+(recent_data_attribute.leap_month?"閏":"")+recent_data_attribute.month+"月〉";                     
+                if (recent_data_attribute.month!="" && data_attribute.month =="" && data_attribute.year =="" && data_attribute.nianhao ==""){
+                        head +="〈"+(recent_data_attribute.leap_month?"閏":"")+recent_data_attribute.month+"月〉";
                     data_autocomplete_attribute.month = recent_data_attribute.month;
-                    
+
                 }else if (data_attribute.month!= ""){
 
                     recent_data_attribute.month = data_attribute.month;
@@ -287,13 +357,13 @@
                 if (head.length > 0 ){
                     if (!$(this).attr("data-orignal-text")){
                         $(this).attr("data-orignal-text",markus.util.convertToEscapeUnicode($(this).text()));
-                    }                                        
+                    }
                     $(this).text(head+ markus.util.converBackToUnicode($(this).attr("data-orignal-text")));
                     $(this).attr("data-attribute",markus.util.convertToEscapeUnicode(
-                                JSON.stringify(data_autocomplete_attribute)));  
+                                JSON.stringify(data_autocomplete_attribute)));
 
                     // rebuilt timerPeriod_id & data-time-period from autoComplete data attribute
-                    
+
 
                     try {
 
@@ -303,9 +373,9 @@
                         var day = data_autocomplete_attribute.day;
                         var leap_month = data_autocomplete_attribute.leap_month;
                         var tinKan = data_autocomplete_attribute.tinKan;
-                        
+
                         var finishedEras = [];
-                        for (var i = 0; i < _eras.length; i++) {                            
+                        for (var i = 0; i < _eras.length; i++) {
                             var _dynasty = "";
                             try {
                                 var __era = _eras[i]
@@ -315,12 +385,12 @@
                                     continue;
                                 }
                                 // console.log(JSON.stringify(_eras[i]));
-                                
-                                
+
+
                             }catch(e){
                                 console.log(e);
                             }
-                            
+
 
                             var _era = erasRecords[_eras[i]["era_id"]];
                             if (finishedEras.indexOf(_eras[i]["era_id"]) > -1) {
@@ -354,7 +424,7 @@
                             console.log("_year " + _y);
 
 
-                            
+
                             var __year = _y;
                             var _m = month;
                             var _d = day;
@@ -370,9 +440,9 @@
                                     console.log(_month);
                                     _month = _month.replace("正", "一").replace("元", "一");
                                     console.log(_month);
-                                    
+
                                     _month = cnNum2ArabNum("" + _month) || 0;
-                                    
+
 
 
 
@@ -385,24 +455,24 @@
                                         if (_month) {
 
                                             _day = _month.start_from + dayDifferenceInTianGan(dateToTianGanDiZi(_month.first), _day);
-                                            
+
                                         }
                                     } else {
                                         console.log(_day);
                                         _day = cnNum2ArabNum("" + _day) || 0;
-                                        
+
                                     }
 
 
-                                    
+
                                     if (_month) {
                                         if (_day >= _month.start_from) {
                                             // console.log(jd_To_date(_month.first + (_day-_month.start_from)));
                                             _date = jd_To_date(_month.first + (_day - _month.start_from));
 
-                                                                                
 
-                                            __date = {first:dateFormat(_date),last:dateFormat(_date),level:3,dynasty:_dynasty} 
+
+                                            __date = {first:dateFormat(_date),last:dateFormat(_date),level:3,dynasty:_dynasty}
                                             _date = "公元" + _date[0] + "年" + _date[1] + "月" + _date[2] + "日";
 
                                         } else {
@@ -473,7 +543,7 @@
                                     } else {
                                         _date = _date + _dateEndLast[0] + "年";
                                     }
-                                } 
+                                }
                                 if (_date.length > 0) {
                                     var oldDate =  "";
                                     if (oldDate == "") {
@@ -482,23 +552,23 @@
                                         oldDate = markus.util.converBackToUnicode(oldDate).split("|");
                                     }
                                     var data_oldDates = "[]";
-                                    data_oldDates = JSON.parse(data_oldDates);  
-                                    
-                                    console.log(_dynasty);                
-                                    
+                                    data_oldDates = JSON.parse(data_oldDates);
+
+                                    console.log(_dynasty);
+
                                     data_oldDates.push(__date);
                                     // $(this).attr("data-markus-date",_date+":"+_eras[i]["dynasty"]+_eras[i]["emperor"]);
                                     oldDate.push(_date + ":" + _eras[i]["dynasty"] + _eras[i]["emperor"]);
-                                    
 
-                                    
+
+
 
                                     $(this).attr("timePeriod_id", markus.util.convertToEscapeUnicode(oldDate.join("|")));
                                     $(this).attr("data-time-period",JSON.stringify(data_oldDates));
-                                    
+
                                 }
 
-                                
+
 
                                 console.log("month ="+month);
 
@@ -527,13 +597,13 @@
 
                         for (var index = 0 ; index < data_time_period.length; index++){
                             if (maxlevel == data_time_period[index].level){
-                                if (dynasty.indexOf((data_time_period[index])["dynasty"]) == -1){                       
-                                dynasty.push((data_time_period[index])["dynasty"]); 
+                                if (dynasty.indexOf((data_time_period[index])["dynasty"]) == -1){
+                                dynasty.push((data_time_period[index])["dynasty"]);
                                 }
                                 valid_data_time_period.push(data_time_period[index]);
                                 valid_timePeriod_id.push(timePeriod_id[index]);
                             }
-                        }            
+                        }
 
                         $(this).attr("timePeriod_id", markus.util.convertToEscapeUnicode(valid_timePeriod_id.join("|")));
                         $(this).attr("data-time-period",JSON.stringify(valid_data_time_period));
@@ -541,7 +611,7 @@
                             $(this).addClass("moreThanOneId");
                         }else {
                             $(this).removeClass("moreThanOneId");
-                        }            
+                        }
 
 
 
@@ -549,7 +619,7 @@
                                 markus.util.convertToEscapeUnicode(
                                     JSON.stringify({dynasty:dynasty ,nianhao:nianhao,tinKan:tinKan,leap_month:leap_month,year:year,month:month,day:day})));
 
-                        
+
 
                         if (nianhao == "" && day == "" && month == "" && year == "") {
                             $(this).find(".number").contents().unwrap();
@@ -558,12 +628,12 @@
 
                         // if (day == "" && month == "" && year == ""){
                         //   $(this).find(".markup").filter(function (){return $(this).attr("type")!="nianhao"}).contents().unwrap();
-                        //   $(this).contents().unwrap();  
+                        //   $(this).contents().unwrap();
                         // }
 
 
                     } catch(err){}
-                    
+
 
 
 
@@ -579,7 +649,7 @@
                 console.log(dynasty);
                 for (var i = 0 ; i < dynasty.length; i++){
                     dynastyMap[""+dynasty[i]] = dynastyMap[""+dynasty[i]] || 0;
-                    dynastyMap[""+dynasty[i]] = dynastyMap[""+dynasty[i]]+1; 
+                    dynastyMap[""+dynasty[i]] = dynastyMap[""+dynasty[i]]+1;
                 }
             });
             var result =[];
@@ -594,8 +664,8 @@
 
             $(".removeDynastyBtn").on("click",function(){
                 var dynasty = parseInt($(this).attr("dynasty"));
-                $(".timePeriodDynasty[dynasty='"+$(this).attr("dynasty")+"']").remove();                
-                
+                $(".timePeriodDynasty[dynasty='"+$(this).attr("dynasty")+"']").remove();
+
                 $(".timePeriod[data-time-period]").each(function(){
                     var data_time_period = JSON.parse($(this).attr("data-time-period"));
                     if (data_time_period.length == 0){
@@ -613,7 +683,7 @@
                             if (_dynasty.indexOf(data_time_period[i].dynasty)== -1){
                                 _dynasty.push(data_time_period[i].dynasty);
                             }
-                        }                        
+                        }
                     }
                     $(this).attr("timePeriod_id", valid_timeperiod_id.join("|"));
                     $(this).attr("data-time-period",JSON.stringify(valid_data_time_period));
@@ -621,7 +691,7 @@
                         $(this).addClass("moreThanOneId");
                     } else {
                         $(this).removeClass("moreThanOneId");
-                    }            
+                    }
                     var data_attribute = JSON.parse(markus.util.converBackToUnicode($(this).attr("data-attribute")));
                     data_attribute.dynasty = _dynasty;
 
@@ -655,7 +725,7 @@
 
             $(".timePeriod[data-time-period]").each(function(){
                 var data_time_period = JSON.parse($(this).attr("data-time-period"));
-                
+
                 var timeperiod_id = $(this).attr("timePeriod_id").split("|");
 
                 var valid_data_time_period = [];
@@ -690,7 +760,7 @@
 
             });
 
-            
+
 
         });
 
@@ -746,12 +816,12 @@
         //     $(".doc pre").attr("contenteditable", "" + editable);
         // });
 
-        // $("#showUploadTermModalBtn").on("click",function(){    
+        // $("#showUploadTermModalBtn").on("click",function(){
         //   // $("#showModalBtn").fadeTo(1000, 0);
         //   $('#uploadTermModal').modal('show');
         // });
 
-        // $("#showUploadRegexModalBtn").on("click",function(){    
+        // $("#showUploadRegexModalBtn").on("click",function(){
         //   // $("#showModalBtn").fadeTo(1000, 0);
         //   $('#uploadRegexModal').modal('show');
         // });
@@ -760,7 +830,7 @@
         $("#markupSelectionModal input:checkbox").on("change", function() {
             var disabled = true;
             /*
-              If there is no automarkup selection checked, startMarkup button is disabled. 
+              If there is no automarkup selection checked, startMarkup button is disabled.
             */
             $("#markupSelectionModal input:checkbox").each(function() {
                 disabled = disabled && !$(this).prop('checked');
@@ -828,7 +898,7 @@
                         count++;
                         $(this).attr("cbdbid", _ids.join("|"));
                         if (_ids.length == 1) {
-                            
+
                             $(this).removeClass("moreThanOneId").removeClass("noCBDBID");
                         } else {
                             $(this).addClass("moreThanOneId");
@@ -853,7 +923,7 @@
                     count++;
                     $(this).attr("cbdbid", _ids.join("|"));
                     if (_ids.length == 1) {
-                        
+
                         $(this).removeClass("moreThanOneId").removeClass("noCBDBID");
                     } else {
                         $(this).addClass("moreThanOneId").removeClass("noCBDBID");
@@ -895,7 +965,7 @@
             cache: false
         });
 
-        
+
 
 
         markus.io.readFile(decodeURIComponent(markus.util.urlParam('file') + ".html"), fileLoaded);
@@ -909,10 +979,10 @@
         // listener.simple_combo("meta '", function() {
         //     $("#editDocBtn").trigger("click");
         // });
-        // listener.simple_combo("meta j", function() {            
-        //     $("#showGotoModalBtn").trigger("click");            
+        // listener.simple_combo("meta j", function() {
+        //     $("#showGotoModalBtn").trigger("click");
         // });
-        // listener.simple_combo("meta d", function() {            
+        // listener.simple_combo("meta d", function() {
         //     if ($('#popover').hasClass('in')){
         //         var countIndex = -1;
         //         var nextIndex = -1;
@@ -926,9 +996,9 @@
         //                 scrollTop: $(obj).offset().top - 100
         //             }, 200);
         //         }
-        //     }           
+        //     }
         // });
-        
+
 
         // $.fn.isOnScreen = function(){
         //     var win = $(window);
@@ -964,8 +1034,8 @@
 
         //   } else if ($(".doc .markup").length > 0){
         //     $($(".doc .markup")[0]).trigger("click");
-        //   } 
-        // }        
+        //   }
+        // }
 
         // function nextMarkup(_sameType){
         //   if ($(".selected").length > 0){
@@ -1028,7 +1098,7 @@
         //     $($(".doc .markup")[0]).trigger("click");
         //   }
         // }
-        
+
 
 
         // listener.register_combo({
@@ -1055,10 +1125,10 @@
         //     "prevent_default"   : true,
         //     "is_exclusive"      : true
         // });
-        
-        
-                
-        
+
+
+
+
 
 
 
@@ -1116,7 +1186,7 @@
 
 
 
-            // $("#buttonsRow").append('<button id="showModalBtn" class="btn btn-sm btn-primary" style="opacity:0">markup selection</button>');    
+            // $("#buttonsRow").append('<button id="showModalBtn" class="btn btn-sm btn-primary" style="opacity:0">markup selection</button>');
             registWebDictionary();
             registColorSwitcher();
             markus.helpInfo.register();
@@ -1503,7 +1573,7 @@
                         _cbdb.regexs = data.regexs;
                         _cbdb = null;
                         console.log((dynastyCodeCount++) + "/" + selectedCBDB.length + " is loaded");
-                        // data = JSON.parse(data);        
+                        // data = JSON.parse(data);
                         console.log(data.dynasty + " assigned");
                         // console.log(data);
                     })
@@ -1650,7 +1720,7 @@
         }
 
         if ($('#timePeriodHelpersCheckbox').prop("checked")) {
-            $("#showTimePeriodHelpersBtn").show();        
+            $("#showTimePeriodHelpersBtn").show();
 
         }else {
             $("#showTimePeriodHelpersBtn").hide();
@@ -1908,7 +1978,7 @@
             console.log(erasRecords);
         });
 
-        
+
 
 
     }
@@ -2049,8 +2119,8 @@
             BC = true;
         }
 
-        for (var i = 0 ; i < 4 - year.length; i++){            
-                year = "0"+year;                            
+        for (var i = 0 ; i < 4 - year.length; i++){
+                year = "0"+year;
         }
         if (BC){
             year = "-"+year;
@@ -2081,8 +2151,8 @@
             var tinKan = "";
             var timePeriodComponent = "";
             var leap_month= false;
-            
-           
+
+
 
             console.log($(this).text());
             console.log($(this)[0].outerHTML);
@@ -2143,12 +2213,12 @@
             //   }
             // }
 
-            
+
 
             console.log(year + " " + month + " " + day);
 
             var _eras = erasMap[nianhao] || [];
-            
+
             var finishedEras = [];
             for (var i = 0; i < _eras.length; i++) {
                 var _dynasty = "";
@@ -2156,11 +2226,11 @@
                     var __era = _eras[i]
                     console.log(JSON.stringify(_eras[i]));
                     _dynasty = __era.dynasty_id;
-                    
+
                 }catch(e){
                     console.log(e);
                 }
-                
+
 
                 var _era = erasRecords[_eras[i]["era_id"]];
                 if (finishedEras.indexOf(_eras[i]["era_id"]) > -1) {
@@ -2194,7 +2264,7 @@
                 console.log("_year " + _y);
 
 
-                
+
                 var __year = _y;
                 var _m = month;
                 var _d = day;
@@ -2210,9 +2280,9 @@
                         console.log(_month);
                         _month = _month.replace("正", "一").replace("元", "一");
                         console.log(_month);
-                        
+
                         _month = cnNum2ArabNum("" + _month) || 0;
-                        
+
 
 
 
@@ -2225,24 +2295,24 @@
                             if (_month) {
 
                                 _day = _month.start_from + dayDifferenceInTianGan(dateToTianGanDiZi(_month.first), _day);
-                                
+
                             }
                         } else {
                             console.log(_day);
                             _day = cnNum2ArabNum("" + _day) || 0;
-                            
+
                         }
 
 
-                        
+
                         if (_month) {
                             if (_day >= _month.start_from) {
                                 // console.log(jd_To_date(_month.first + (_day-_month.start_from)));
                                 _date = jd_To_date(_month.first + (_day - _month.start_from));
 
-                                                                    
 
-                                __date = {first:dateFormat(_date),last:dateFormat(_date),level:3,dynasty:_dynasty} 
+
+                                __date = {first:dateFormat(_date),last:dateFormat(_date),level:3,dynasty:_dynasty}
                                 _date = "公元" + _date[0] + "年" + _date[1] + "月" + _date[2] + "日";
 
                             } else {
@@ -2313,7 +2383,7 @@
                         } else {
                             _date = _date + _dateEndLast[0] + "年";
                         }
-                    } 
+                    }
                     if (_date.length > 0) {
                         var oldDate = $(this).attr("timePeriod_id") || "";
                         if (oldDate == "") {
@@ -2322,23 +2392,23 @@
                             oldDate = markus.util.converBackToUnicode(oldDate).split("|");
                         }
                         var data_oldDates = $(this).attr("data-time-period") || "[]";
-                        data_oldDates = JSON.parse(data_oldDates);  
-                        
-                        console.log(_dynasty);                
-                        
+                        data_oldDates = JSON.parse(data_oldDates);
+
+                        console.log(_dynasty);
+
                         data_oldDates.push(__date);
                         // $(this).attr("data-markus-date",_date+":"+_eras[i]["dynasty"]+_eras[i]["emperor"]);
                         oldDate.push(_date + ":" + _eras[i]["dynasty"] + _eras[i]["emperor"]);
-                        
 
-                        
+
+
 
                         $(this).attr("timePeriod_id", markus.util.convertToEscapeUnicode(oldDate.join("|")));
                         $(this).attr("data-time-period",JSON.stringify(data_oldDates));
-                        
+
                     }
 
-                    
+
 
                     console.log("month ="+month);
 
@@ -2367,13 +2437,13 @@
 
             for (var index = 0 ; index < data_time_period.length; index++){
                 if (maxlevel == data_time_period[index].level){
-                    if (dynasty.indexOf((data_time_period[index])["dynasty"]) == -1){                       
-                       dynasty.push((data_time_period[index])["dynasty"]); 
+                    if (dynasty.indexOf((data_time_period[index])["dynasty"]) == -1){
+                       dynasty.push((data_time_period[index])["dynasty"]);
                     }
                     valid_data_time_period.push(data_time_period[index]);
                     valid_timePeriod_id.push(timePeriod_id[index]);
                 }
-            }            
+            }
 
             $(this).attr("timePeriod_id", markus.util.convertToEscapeUnicode(valid_timePeriod_id.join("|")));
             $(this).attr("data-time-period",JSON.stringify(valid_data_time_period));
@@ -2381,7 +2451,7 @@
                 $(this).addClass("moreThanOneId");
             }else {
                 $(this).removeClass("moreThanOneId");
-            }            
+            }
 
 
 
@@ -2389,7 +2459,7 @@
                      markus.util.convertToEscapeUnicode(
                         JSON.stringify({dynasty:dynasty ,nianhao:nianhao,tinKan:tinKan,leap_month:leap_month,year:year,month:month,day:day})));
 
-            
+
 
             if (nianhao == "" && day == "" && month == "" && year == "") {
                 $(this).find(".number").contents().unwrap();
@@ -2398,19 +2468,19 @@
 
             // if (day == "" && month == "" && year == ""){
             //   $(this).find(".markup").filter(function (){return $(this).attr("type")!="nianhao"}).contents().unwrap();
-            //   $(this).contents().unwrap();  
+            //   $(this).contents().unwrap();
             // }
 
 
         } catch(err){}
         });
-        
-        
+
+
         // $(".timePeriod").filter(function(){return $(this).find(".markup").length ==1}).contents().unwrap();
         $(".doc .timePeriod").find(".number,.timePeriodComponent,.season,.tinKan,.nianhao").contents().unwrap();
         $(".doc .number,.timePeriodComponent,.season,.tinKan").contents().unwrap();
         $(".doc").attr("markupTimePeriod", "true");
-        
+
         updateTimePeriodStatus();
 
     }
@@ -2582,7 +2652,7 @@
             });
             var errorCandidate = {};
 
-            // Checking each text of fullName tag, remove them all if all same tag is nested by another fullname tag. 
+            // Checking each text of fullName tag, remove them all if all same tag is nested by another fullname tag.
 
             $('.doc .fullName .fullName').each(function() {
                 errorCandidate[$(this).text()] = errorCandidate[$(this).text()] || [];
@@ -2636,13 +2706,13 @@
             // console.log(data.txt);
 
             // $('persname .markup').contents().unwrap();
-            // $('name .markup').contents().unwrap();          
+            // $('name .markup').contents().unwrap();
             // $('.fullName').each(function(){
             //   $(this).attr("x_origin",$(this).offset().left).attr("y_origin",$(this).offset().top);
             // });
             $('#stateThreeProgress').css("width", "45%");
             $('#progress').removeClass("progress-striped").removeClass("progress-striped active");
-            // $('#progressBar').html("Fullname markup finsihed, partial name scan ready");      
+            // $('#progressBar').html("Fullname markup finsihed, partial name scan ready");
 
             if (data.callback) {
                 eval(data.callback);
@@ -2793,7 +2863,7 @@
 
     var receivePartialNameMarkupWorker = function(data) {
 
-        // console.log( data.regex+ " "+data.index+ " "+data.txt);  
+        // console.log( data.regex+ " "+data.index+ " "+data.txt);
         $('#stateTwoProgress').css("width", ((partialRegexMax - data.regex.length / partialRegexMax) * 45) + "%");
         $('#progressBar').html(data.index);
         $(".doc").html(data.txt);
@@ -2961,7 +3031,7 @@
 
 
 
-        // cleanPlaceName(); 
+        // cleanPlaceName();
         cleanNiahao();
 
         updatePlaceNameStatus();

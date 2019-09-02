@@ -180,30 +180,42 @@
   </div><!-- /.modal-dialog -->
 </div>
 <script type="text/javascript">
+/**
+ * assist.html base module
+ * @module assist.html
+ */
+
+//When you click the showSplitPassageModalBtn, the splitPassageModal is emptied and refilled, and then shown
   $("#showSplitPassageModalBtn").on("click",function(){
     $("#splitPassageModal .modal-body").contents().remove();
     $("#splitPassageModal .modal-body").append(Object.keys(markus.tag).join("<br/>"));
     $("#splitPassageModal").modal("show");
   });
+  //On click the manageTabModal is shown
   $("#showManageTabModalBtn").on("click",function(){
     $("#manageTabModal").modal("show");
   });
+  //When you click the goto button you goto the place the input specifies and the goto is hidden
   $("#gotoModal button").on("click",function(event){
     $("span[id='passage"+$("#gotoModal input").val()+"']").goto();
     $("#gotoModal").modal("hide");
   });
 
+  //When the gotoModal is show, get input gets focus
   $('#gotoModal').on('shown.bs.modal', function (e) {
     $("#gotoModal input").focus();
   });
 
+  //When you click the showGotoModalBtn the gotoModal is shown
   $("#showGotoModalBtn").on("click",function(){
     $("#gotoModal").modal("show");
   });
 
+  //Specifies what happens when you click the alignmentBtn
   $("#alignmentBtn").on("click",function(){
     direction = $(".doc pre").attr("dir") || "auto";
 
+    //switches direction based on previous direction
     switch (direction){
       case "ltr":
         direction = "auto";
@@ -217,6 +229,7 @@
       default:
         direction = "auto";
     }
+    //set the dir attribute of the doc pre
     $(".doc pre").attr("dir",direction);
 
   });
@@ -227,15 +240,25 @@
   //   $(".doc pre .hiddenChar").contents().unwrap();
   // });
 
-
+/**
+ * Selects the provided element.
+ *
+ * @method SelectText
+ * @param       {Event} event   the event is passed
+ * @param       {Element} element the element that is clicked
+ * @return {boolean} always returns false, to prevent the <a> from firing
+ */
  function SelectText(event, element) {
     // console.log("selectText");
     var range, selection;
+    //focus on the pre in the doc
     $(".doc pre").focus();
+    //If we want to select a span and the createTextRange function exists
     if (document.body.createTextRange && element.nodeName == 'SPAN') {
       range = document.body.createTextRange();
       range.moveToElementText(element);
       range.select();
+      //else if window.getSelection exists
     } else if (window.getSelection) {
       selection = window.getSelection();
       range = document.createRange();
@@ -243,19 +266,30 @@
       selection.removeAllRanges();
       selection.addRange(range);
     }
+
+    //Stop the propagation (i.e. bubbling);
     var evt = (event) ? event : window.event;
     if (evt.stopPropagation) evt.stopPropagation();
     if (evt.cancelBubble != null) evt.cancelBubble = true;
     return false;
   }
 
+  /**
+   * Inserts the provided text at the cursor
+   *
+   * @method insertTextAtCursor
+   * @param  {String} text the text we want to insert
+   */
   function insertTextAtCursor(text) {
       var sel, range, html;
       sel = window.getSelection();
       range = sel.getRangeAt(0);
+      //delete the existing selection contents
       range.deleteContents();
       var textNode = document.createElement('span');
       textNode.textContent = text;
+
+      //Sets the className of the textNode for some specific cases
       switch(text){
         case "·":
           textNode.className = "space hiddenChar";
@@ -268,13 +302,17 @@
            break;
       }
 
+      //Don't allow editing or selecting. Only on click we select this (span)
       textNode.setAttribute("contenteditable",false);
       textNode.setAttribute("unselectable","on");
       textNode.setAttribute("onclick","SelectText(event, this);");
 
-
+      //inserts the generated node into the range
       range.insertNode(textNode);
+      //collapse the range after the textNode
       range.setStartAfter(textNode);
+
+      //Remove all selections
       sel.removeAllRanges();
       sel.addRange(range);
   }
@@ -282,59 +320,64 @@
 
   $("#displayHiddenBtn").on("click",function(){
 
+    //Retrieve if we are currently showing hidden class element
     showHidden = $(this).attr('showHidden') || $(".doc pre .hidden").length === 0;
+    //Cast string to boolean
     showHidden = Boolean(showHidden == 'true');
     // console.log(showHidden);
+    // If we are currently showing hidden elements
     if (showHidden){
           $(".doc pre").contents().filter(function(){
-            return this.nodeType === 3;
+            return this.nodeType === 3; //text
           }).each(function(){
+            //Replace some characters for special characters to show the hidden characters
             this.data = this.data.replace(/ /g,'|·|');
             this.data = this.data.replace(/\t/g,'|—|');
             this.data = this.data.replace(/\n/g,'|¬|');
           });
           $(".doc pre").contents().filter(function(){
-            return this.nodeType !== 3;
+            return this.nodeType !== 3;//Find embedded text no
           }).each(function(){
               $(this).contents().filter(function(){
-              return this.nodeType === 3;
+              return this.nodeType === 3;//find even deeper embedded text
             }).each(function(){
+              //Also at this level replace the special characters with human readable forms
               this.data = this.data.replace(/ /g,'|·|');
               this.data = this.data.replace(/\t/g,'|—|');
               this.data = this.data.replace(/\n/g,'|¬|');
             });
           });
 
+          //Then replace the |-| with <span>-</span>. Replacing the originals symbols with the .hiddenChar spans
           $(".doc pre").html($(".doc pre").html().replace(/\|·\|/g, "<span class='space hiddenChar'>·</span>").replace(/\|—\|/g,"<span class='tab hiddenChar'>\t</span>")
             .replace(/\|¬\|/g,"<span class='hiddenChar EOL'>¬</span>"));
 
+          //When you click a hiddenChar, you select it
           $(".doc pre .hiddenChar").on("click",function(event){
             SelectText(event,$(this).element);
           });
+          //Don'tallow selecting or editing of this element.
           $(".doc pre .hiddenChar").attr("contenteditable","false");
           $(".doc pre .hiddenChar").attr("unselectable","on");
-
-
     } else {
       // console.log("not hidden")
+      // If we don't want to show them, just turn them back into their hidden shape
       $(".doc pre .EOL").text("\n");
       $(".doc pre .space").text(" ");
       $(".doc pre .hiddenChar").contents().unwrap();
-
     }
-
     // console.log($(this).attr('showHidden'))
+    // Toggle the showHidden attribute on click
     $(this).attr('showHidden',!showHidden);
     // console.log($(this).attr('showHidden'))
-
-
-
 });
 
-
+  //When the change event fires on the manageModal
   $('#manageTabModal [data-markus-action="display"]').change(function() {
     console.log($(this).is(":checked"));
+    //get the name of the web-dictionary
     var web_dictionary_name = $(this).attr("web-dictionary-name");
+    //Dow we want to show the content?
     if($(this).is(":checked")) {
       $(".web-dictionary-container li").has("a[web-dictionary-name='"+web_dictionary_name+"']").show();
       $(".web-dictionary-container div.web-dictionary[web-dictionary-name='"+$(this).attr("web-dictionary-name")+"']").show();
@@ -345,8 +388,11 @@
     $($(".web-dictionary-container li a:visible")[0]).trigger("click");
 
   });
+
+  //Trigger a click on all these inputs to make them show up. Initializing
   $('#manageTabModal input[web-dictionary-name="wiki8"],input[web-dictionary-name="ddbcPerson"],input[web-dictionary-name="ddbcPlace"],input[web-dictionary-name="ddbcGlossaries"]').trigger("click");
 
+  //Try to get the profile info, put it in the result object. If we have a name, show the manageModal buttons
   $.getJSON("/auth/profile_info", function(result) {
       if (result["name"]) {
           $("#showManageTabModalBtn").show();
@@ -356,40 +402,50 @@
         $("#showManageTagModalBtn").hide();
       }
 
-
+      //Default to hiding
   }).fail(function() {
       $("#showManageTabModalBtn").hide();
       $("#showManageTagModalBtn").hide();
   });
+
+  //Makes a keyPress listener for the gotoModal
   var gotolistener = new window.keypress.Listener(document.getElementById("gotoModal"));
   gotolistener.simple_combo("enter", function() {
       // console.log("enter");
       $("#gotoModal button").trigger("click");
   });
 
+  //See what method is available for event listeners
   var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+  //Save it in a temp Var
   var eventer = window[eventMethod];
+  //If the eventMethod == attachEvent, the messageEvent is  onMessage.
   var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
 
   // Listen to message from child window
   eventer(messageEvent,function(e) {
+    //Does e.message exist? else try data
       var key = e.message ? "message" : "data";
       var data = e[key];
       console.log(data);
       if ($(".doc .selected").length > 0){
         $(".doc .selected").trigger("click");
         if ($("#cbdbIdPopoverContent input[type='text']").is(':visible')){
+          //Set the cbdbIdPopoverContent to the provided data if it is visible
           $("#cbdbIdPopoverContent input[type='text']").val(data);
         }
       }
       //run function//
   },false);
 
-$("#editDocBtn").on("click",function(){
+  //Handler for the #editDocBtn
+  $("#editDocBtn").on("click",function(){
     console.log("click");
 
+    //Is this editable? Are we currently editing? Derive this by the btn state
     var editable = $("#editDocBtn").hasClass("btn-danger");
 
+    //Based on if we're editing, set the class of the editDocBtn and remove/add the .edit class to the document
     if (editable) {
       $("#editDocBtn").removeClass("btn-danger");
       $(".doc").removeClass("edit");
@@ -400,24 +456,27 @@ $("#editDocBtn").on("click",function(){
       editable = true;
     }
 
-
+    //If we are not editing
     if (!editable){
+      //add a newline before every div or break
       $(".doc pre div,br").prepend("\n");
       // $(".doc pre br").prepend("\n");
+      // unwrap divs or break contained within a doc
       $(".doc div,br").contents().unwrap();
       // $(".doc br").contents().unwrap();
+      // Reset hte HTMl
       $(".doc pre").html($(".doc pre").html());
 
+      //If there arep passages, we want to unwrap them.
       if ($(".doc .passage").length > 0){
         $(".doc .passage").contents().unwrap();
         startParagraphMarkup();
         markus.comment.startAddingCommentHolder();
       }
-
       // texts = $(".doc").text().replace(/(\r*\n)+/g,"\n").split("\n");
       // Clipper.setTexts(texts);
-
     }
+    //If we are editing
     if (editable){
       markus.ui.listener.stop_listening();
     } else {
@@ -425,51 +484,63 @@ $("#editDocBtn").on("click",function(){
     }
     console.log(editable);
 
-
+    //Set the contenteditable state of the pre that is the doc to the editable variable
     $(".doc pre").attr("contenteditable",""+ editable);
   });
 
-$(document).on('keydown',".doc pre", function(event) {
+  //Keydown handler for the document pre.
+  $(document).on('keydown',".doc pre", function(event) {
+    //If we have hiddenChar then we should continue testing.
     showingHidden = $(".doc pre .hiddenChar").length > 0 || !Boolean($("#displayHiddenBtn").attr("showHidden"));
+    //If there are no hidden chars, just return true (allow the charcter to be typed).
     if (!showingHidden) {
       return true;
     }
+    //The div we're working in
       EditableDiv = $(this).element;
       var ignoreKey;
+      //get the keycode
       var key = event.keyCode || event.charCode;
+      //If we haven't selected anything there is nothing to worry (there is no focus)
       if (!window.getSelection) return;
       var selection = window.getSelection();
       var focusNode = selection.focusNode,
         anchorNode = selection.anchorNode;
-        console.log(key);
-        switch(key) {
-            case 9: //Tab
-                insertTextAtCursor('\t');
-                event.preventDefault();
-                return false;
-            case 13: //Enter
-                insertTextAtCursor('¬');
-                event.preventDefault();
-                return false;
-            case 32: //space
-                insertTextAtCursor('·');
-                event.preventDefault();
-                return false;
-        }
+      console.log(key);
+      //Based on the keypressed we insert text at the cursor
+      switch(key) {
+        case 9: //Tab
+            insertTextAtCursor('\t');
+            event.preventDefault();
+            return false;
+        case 13: //Enter
+            insertTextAtCursor('¬');
+            event.preventDefault();
+            return false;
+        case 32: //space
+            insertTextAtCursor('·');
+            event.preventDefault();
+            return false;
+      }
 
-
+      //If there is no starting selection node
       if (!anchorNode) return
 
+      //If the selection doesn't start in a textnode
       if (anchorNode.nodeName.toLowerCase() != '#text') {
        if (anchorOffset < anchorNode.childNodes.length)
          anchorNode = anchorNode.childNodes[anchorOffset]
        else {
+         //Try to find a lonely parent
          while (!anchorNode.nextSibling) anchorNode = anchorNode.parentNode // this might step out of EditableDiv to "justincase" comment node
          anchorNode = anchorNode.nextSibling
        }
        anchorOffset = 0
       }
 
+      /*
+      This function is only defined and created within the listeners scope.
+       */
       function backseek() {
 
        while ((anchorOffset == 0) && (anchorNode != EditableDiv)) {
@@ -477,17 +548,21 @@ $(document).on('keydown',".doc pre", function(event) {
          if (anchorNode.previousSibling) {
            if (anchorNode.previousSibling.nodeName.toLowerCase() == '#text') {
              if (anchorNode.previousSibling.nodeValue.length == 0)
+             //Empty text node
                anchorNode.parentNode.removeChild(anchorNode.previousSibling)
              else {
+               //Redefine the anchorNode and offset
                anchorNode = anchorNode.previousSibling
                anchorOffset = anchorNode.nodeValue.length
              }
            } else if ((anchorNode.previousSibling.offsetWidth == 0) && (anchorNode.previousSibling.offsetHeight == 0))
+           //Remove the sibling if the offsetWidth and hieght is 0
              anchorNode.parentNode.removeChild(anchorNode.previousSibling)
 
            else {
              anchorNode = anchorNode.previousSibling
 
+             //While lastChild is defined, and the anchorNode is of type SPAN
              while ((anchorNode.lastChild) && (anchorNode.nodeName.toUpperCase() != 'SPAN')) {
 
                if ((anchorNode.lastChild.offsetWidth == 0) && (anchorNode.lastChild.offsetHeight == 0))
@@ -499,7 +574,7 @@ $(document).on('keydown',".doc pre", function(event) {
                else if (anchorNode.lastChild.nodeValue.length == 0)
                  anchorNode.removeChild(anchorNode.lastChild)
 
-               else {
+               else {//Its a text node
                  anchorNode = anchorNode.lastChild
                  anchorOffset = anchorNode.nodeValue.length
                    //break              //don't need to break, textnode has no children
@@ -508,17 +583,17 @@ $(document).on('keydown',".doc pre", function(event) {
              break
            }
          } else
+          //seek back through the DOM hierarchy
            while (((anchorNode = anchorNode.parentNode) != EditableDiv) && !anchorNode.previousSibling) {}
        }
       }
 
+      //If we press backspace
       if (key == 8) { //backspace
-         if (!selection.isCollapsed) {
-
+         if (!selection.isCollapsed) {//If we have an actual selection
            try {
              document.createElement("select").size = -1
            } catch (e) { //kludge for IE when 2+ SPANs are back-to-back adjacent
-
              if (anchorNode.nodeName.toUpperCase() == 'SPAN') {
                backseek()
                if (anchorNode.nodeName.toUpperCase() == 'SPAN') {
@@ -528,16 +603,18 @@ $(document).on('keydown',".doc pre", function(event) {
                }
              }
            }
-
-
          } else {
+           //Seek back
            backseek()
 
+           //If the anchorNode is now the EditableDiv, ignore the key press
            if (anchorNode == EditableDiv) {
              ignoreKey = true
            } else if (anchorNode.nodeName.toUpperCase() == 'SPAN') {
-             SelectText(event, anchorNode)
+             //Else if the anchorNode is a span, select the text, ignore the keyPress
+             SelectText(event, anchorNode);
              ignoreKey = true
+             //Else if we are pressing backspace in atext node and the anchorOffset is at the first or secondcharacter
            } else if ((anchorNode.nodeName.toLowerCase() == '#text') && (anchorOffset <= 1)) {
 
              var prev, anchorNodeSave = anchorNode,
@@ -550,7 +627,7 @@ $(document).on('keydown',".doc pre", function(event) {
 
              if (prev) {
                if (anchorOffset == 0)
-                 SelectEvent(prev)
+                 SelectEvent(prev);//Select the previous anchor node
 
                else {
                  var r = document.createRange()
