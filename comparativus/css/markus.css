@@ -1,0 +1,22 @@
+/**
+CSS for the matchmarks from comparativus
+**/
+.matchMarkEnd, .matchMarkStart{
+    opacity: 0.5;
+    background-color: #C00;
+    color: #fff;
+    
+    font-weight: bold;
+    cursor: pointer;
+  
+    border-radius: 4px;
+    
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+  
+  .matchMarkEnd.active, .matchMarkStart.active{
+    opacity: 1;
+  }

@@ -1,0 +1,294 @@
+/**
+HTML DEFAULT
+**/
+
+body{
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+canvas{
+  background-color: #EEE;
+  width: 100%;
+  height: auto;
+}
+
+pre {
+    font-size: 80%;
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+    background-color: #fff;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-top: 0px;
+
+    max-height: 200vh;
+    overflow-y: auto;
+}
+
+/**
+BOOTSTRAP OVERRIDES
+**/
+
+.popover{
+    max-width: 20%; /* Max Width of the popover (depending on the container!) */
+}
+
+.navbar{
+  width: 100%;
+  border-radius: 0px;
+}
+
+.panel{
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.panel-body{
+  padding: 5px;
+}
+
+/**
+CUSTOM CLASSES
+**/
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.pageButtons{
+  text-align: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.btn-page, .btn-page:link, .btn-page:visited, .btn-page:focus{
+  border-color: #555;
+  background-color: #333;
+  color: #ccc;
+}
+
+@media screen and (min-width: 1200px) {
+  .btn-page, .btn-page:link, .btn-page:visited, .btn-page:focus{
+    min-width: 6em;
+  }
+}
+
+.btn-page:hover{
+  background-color: #222;
+  color: #ccc;
+}
+
+.btn-page.active{
+  color: #ccc;
+  background-color: #111;
+}
+
+.rotating {
+  -webkit-animation: rotating 2s linear infinite;
+  -moz-animation: rotating 2s linear infinite;
+  -ms-animation: rotating 2s linear infinite;
+  -o-animation: rotating 2s linear infinite;
+  animation: rotating 2s linear infinite;
+}
+
+.progress{
+  cursor: progress;
+}
+
+.tight{
+  padding: 0px;
+  margin: 0px;
+}
+
+.matchMark, .matchMarkStart, .matchMarkEnd{
+  opacity: 0.5;
+  background-color: #C00;
+  color: #fff;
+  
+  font-weight: bold;
+  cursor: pointer;
+
+  border-radius: 4px;
+  
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.matchMarkStart, .matchMarkEnd{
+  background-color: #0C0;
+}
+
+.matchMark.active{
+  opacity: 1;
+}
+
+.matchMark.selected{
+  background-color: #F00;
+  border: 1px solid #700;
+  opacity: 1;
+}
+
+.selectionSummary{
+  border-top: 1px solid #ccc;
+  padding: 3px;
+}
+
+.border-right{
+  border-right: 1px solid #ccc;
+}
+
+/*
+#resultTable td.active{
+  background-color: rgb(191, 208, 255);
+}*/
+
+#resultTable td.selected{
+  background-color: rgb(149, 178, 255);
+  box-shadow: 1px 1px 1px rgb(0, 0, 0);
+}
+
+#resultTable .small{
+  color: #777;
+}
+
+/**
+ID's
+**/
+#selectionOverview{
+  max-height: 20vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#resetHolder{
+  position: relative;
+  z-index: 5;
+  display: block;
+  top: -0.2em;
+  left: 0em;
+}
+
+#popover, #settingsHolder, #fileSelectionMenu, #uploadMenu{
+  position: absolute;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px #777;
+  z-index: 45;
+  display: block;
+  padding: 8px;
+}
+
+#uploadMenu textarea{
+  width: 100%;
+  height: 10vh;
+}
+
+#blackout{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
+  z-index: 43;
+  display: block;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+#comparisonButton{
+  margin-top: 2px;
+}
+
+#fileTableHolder{
+  max-height: 50vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#fileSelectionBody td{
+  vertical-align: middle;
+  text-align: center;
+  max-height: 2vh;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+#fileSelectionMenu .row{
+  padding-bottom: 8px;
+}
+
+#resultTable{
+  font-size: 80%;
+}
+
+/**
+VISUALISATION
+**/
+text{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;
+}
+
+.textLegend, .textArc{
+  stroke-width: 0px;
+}
+
+.textLegend.active, .textArc.active{
+  stroke-width: 1px;
+}
+
+.matchLine{
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.4);
+  stroke-width: 1px;
+  pointer-events: none;
+}
+.matchLine.active{
+  stroke: rgba(160, 0, 0, 1.0);
+  stroke-width: 3px;
+}
+.matchLine.selected{
+  stroke: rgba(200, 0, 0, 1.0);
+  stroke-width: 4px;
+}
+
+.node.active{
+  stroke-width: 1px;
+  fill-opacity: 0.7;
+}
+.node.selected{
+  stroke-width: 2px;
+  fill-opacity: 1;
+}
