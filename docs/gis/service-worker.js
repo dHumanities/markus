@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.5bfcc90af5fa133c06e1d7b8cab9e542.js"
+  "precache-manifest.e0b5c76eff5ee2b437ad09b6530e53b8.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "markus-gis-ref"});
