@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hucker Dictionary</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module">
+    const params = new URLSearchParams(window.location.search);
+    const ids = params.get('id');
+    const term = params.get('term');
+
+    async function fetchData() {
+      const response = await fetch('huckerDict.json');
+      const data = await response.json();
+      let filteredData = Object.values(data);
+
+      if (ids) {
+        const idArr = ids.split('|');
+        filteredData = filteredData.filter(obj => idArr.includes(obj.id));
+      }
+
+      if (term) {
+        filteredData = filteredData.filter(obj => {
+          const termMatch = obj.term.includes(term);
+          const explanationMatch = obj.explanation.some(exp => exp.includes(term));
+          return termMatch || explanationMatch;
+        });
+      }
+
+      const appDiv = document.getElementById('app');
+      filteredData.forEach(obj => {
+        const div = document.createElement('div');
+        const idLink = document.createElement('a');
+        idLink.textContent = `(${obj.id}) `;
+        idLink.href = '#';
+        idLink.addEventListener('click', () => {
+          window.parent.postMessage(obj.id, '*');
+        });
+        div.appendChild(idLink);
+        div.appendChild(document.createTextNode(`${obj.term} - ${obj.pingYin}`));
+        obj.explanation.forEach(exp => {
+          const p = document.createElement('p');
+          p.textContent = exp;
+          div.appendChild(p);
+        });
+        appDiv.appendChild(div);
+      });
+    }
+
+    fetchData();
+  </script>
+</body>
+</html>
